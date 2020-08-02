@@ -6,6 +6,7 @@ export { default as FormDialog } from './FormDialog';
 export * from './FormDialog';
 
 export * from './utils';
+export * from './Fields';
 
 export { default as Description } from './Description';
 export * from './Description';
