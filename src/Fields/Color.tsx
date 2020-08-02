@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { IFieldComponentProps } from '../utils';
-import { ChromePicker, ColorResult } from 'react-color';
+import { ChromePicker } from 'react-color';
 
 import {
   makeStyles,

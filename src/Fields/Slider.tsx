@@ -75,7 +75,7 @@ export default function Slider({
       control={control}
       name={name}
       render={({ onChange, onBlur, value }) => {
-        const handleChange = (_, value: number | number[]) => {
+        const handleChange = (_: any, value: number | number[]) => {
           onChange(value);
           onBlur();
         };

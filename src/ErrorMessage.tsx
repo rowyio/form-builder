@@ -23,7 +23,7 @@ export default function ErrorMessage({
 
   if (!children) return null;
   return (
-    <FormHelperText error className={clsx(classes.root, className)}>
+    <FormHelperText error className={clsx(classes.root, className)} {...props}>
       {children}
     </FormHelperText>
   );

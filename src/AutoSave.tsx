@@ -7,7 +7,7 @@ import _omitBy from 'lodash/omitBy';
 import _isUndefined from 'lodash/isUndefined';
 import { diffChanges } from 'utils';
 
-import { IFormProps } from '.';
+import { IFormProps } from './Form';
 
 export interface IAutoSaveProps {
   control: UseFormMethods['control'];

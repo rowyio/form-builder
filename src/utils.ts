@@ -1,6 +1,8 @@
 import { UseFormMethods } from 'react-hook-form';
 import * as yup from 'yup';
 import _isFunction from 'lodash/isFunction';
+import _pickBy from 'lodash/pickBy';
+import _isEqual from 'lodash/isEqual';
 import { FIELDS, DEFAULT_VALUES } from './Fields';
 
 export type Values = { [key: string]: any };
@@ -55,7 +57,7 @@ export const getDefaultValues = (
       if (field.type in DEFAULT_VALUES)
         return {
           ...acc,
-          [field.name]: DEFAULT_VALUES[field.type],
+          [field.name]: DEFAULT_VALUES[field.type as FIELDS],
         };
     }
 
@@ -70,3 +72,10 @@ export const getValidationSchema = (fields: Fields) =>
       return { ...acc, [field.name]: field.validation };
     }, {}) as any
   );
+
+export const diffChanges = (
+  current: { [key: string]: any },
+  changed: { [key: string]: any }
+) => {
+  return _pickBy(changed, (val, key) => !_isEqual(val, current[key]));
+};
