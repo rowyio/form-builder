@@ -25,7 +25,10 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "@material-ui/core": "^4.9.0",
+    "@material-ui/icons": "^4.9.0",
+    "@material-ui/lab": "^4.0.0-alpha.51",
+    "react": "^16.8.0"
   },
   "husky": {
     "hooks": {
@@ -41,6 +44,9 @@
   "module": "dist/form-builder.esm.js",
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
     "@storybook/addon-info": "^5.3.19",
@@ -67,9 +73,6 @@
     "@antlerengineering/multiselect": "^0.3.14",
     "@date-io/date-fns": "1.x",
     "@hookform/resolvers": "^0.1.0",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
     "date-fns": "^2.15.0",
     "lodash": "^4.17.19",
