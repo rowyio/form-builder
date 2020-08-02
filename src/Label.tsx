@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import {
   makeStyles,
@@ -7,8 +7,8 @@ import {
   FormLabelProps,
   Tooltip,
   IconButton,
-} from '@material-ui/core'
-import HelpIcon from '@material-ui/icons/HelpOutline'
+} from '@material-ui/core';
+import HelpIcon from '@material-ui/icons/HelpOutline';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -19,11 +19,11 @@ const useStyles = makeStyles(theme =>
       whiteSpace: 'pre-line',
     },
   })
-)
+);
 
 export interface ILabelProps extends FormLabelProps {
-  label?: React.ReactNode
-  hint?: React.ReactNode
+  label?: React.ReactNode;
+  hint?: React.ReactNode;
 }
 
 export default function Label({
@@ -32,7 +32,7 @@ export default function Label({
   hint,
   ...props
 }: ILabelProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <FormLabel className={classes.root} {...props}>
@@ -46,5 +46,5 @@ export default function Label({
         </Tooltip>
       )}
     </FormLabel>
-  )
+  );
 }

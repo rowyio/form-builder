@@ -1,14 +1,14 @@
-import React from 'react'
-import { Typography } from '@material-ui/core'
+import React from 'react';
+import { Typography } from '@material-ui/core';
 
 interface IDescriptionProps {
-  heading?: React.ReactNode
-  title?: React.ReactNode
-  label?: React.ReactNode
+  heading?: React.ReactNode;
+  title?: React.ReactNode;
+  label?: React.ReactNode;
 
-  children?: React.ReactNode
-  description?: React.ReactNode
-  text?: React.ReactNode
+  children?: React.ReactNode;
+  description?: React.ReactNode;
+  text?: React.ReactNode;
 }
 
 export default function Description({
@@ -19,8 +19,8 @@ export default function Description({
   description,
   text,
 }: IDescriptionProps) {
-  const headingComponent = heading ?? title ?? label
-  const descriptionComponent = children ?? description ?? text
+  const headingComponent = heading ?? title ?? label;
+  const descriptionComponent = children ?? description ?? text;
 
   return (
     <div style={{ cursor: 'default', whiteSpace: 'pre-line' }}>
@@ -39,5 +39,5 @@ export default function Description({
         </Typography>
       )}
     </div>
-  )
+  );
 }

@@ -1,9 +1,9 @@
-import React from 'react'
-import { useTheme } from '@material-ui/core'
-import { Skeleton, SkeletonProps } from '@material-ui/lab'
+import React from 'react';
+import { useTheme } from '@material-ui/core';
+import { Skeleton, SkeletonProps } from '@material-ui/lab';
 
 export default function FieldSkeleton(props: SkeletonProps) {
-  const theme = useTheme()
+  const theme = useTheme();
   return (
     <Skeleton
       variant="rect"
@@ -13,5 +13,5 @@ export default function FieldSkeleton(props: SkeletonProps) {
       style={{ borderRadius: theme.shape.borderRadius }}
       {...props}
     />
-  )
+  );
 }

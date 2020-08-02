@@ -1,6 +1,6 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
 import {
   makeStyles,
@@ -11,10 +11,10 @@ import {
   RadioGroupProps,
   Radio as MuiRadio,
   Divider,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
-import Label from '../Label'
-import ErrorMessage from '../ErrorMessage'
+import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -27,12 +27,12 @@ const useStyles = makeStyles(theme =>
 
     divider: { marginLeft: theme.spacing(5) },
   })
-)
+);
 
 export interface IRadioProps
   extends IFieldComponentProps,
     Omit<RadioGroupProps, 'name'> {
-  options: (string | { value: string; label: React.ReactNode })[]
+  options: (string | { value: string; label: React.ReactNode })[];
 }
 
 export default function Radio({
@@ -44,7 +44,7 @@ export default function Radio({
   label,
   ...props
 }: IRadioProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Controller
@@ -64,10 +64,10 @@ export default function Radio({
               let option: { label: React.ReactNode; value: string } = {
                 label: '',
                 value: '',
-              }
-              if (typeof item === 'object') option = item
+              };
+              if (typeof item === 'object') option = item;
               if (typeof item === 'string')
-                option = { label: item, value: item }
+                option = { label: item, value: item };
 
               return (
                 <React.Fragment key={option.value}>
@@ -85,7 +85,7 @@ export default function Radio({
                   />
                   <Divider className={classes.divider} />
                 </React.Fragment>
-              )
+              );
             })}
           </RadioGroup>
 
@@ -93,5 +93,5 @@ export default function Radio({
         </FormControl>
       )}
     />
-  )
+  );
 }

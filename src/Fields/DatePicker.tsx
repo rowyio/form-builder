@@ -1,15 +1,15 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
-import { useTheme } from '@material-ui/core'
+import { useTheme } from '@material-ui/core';
 import {
   KeyboardDatePicker,
   KeyboardDatePickerProps,
-} from '@material-ui/pickers'
+} from '@material-ui/pickers';
 
 export interface IDatePickerProps
   extends IFieldComponentProps,
@@ -21,7 +21,7 @@ export default function DatePicker({
   errorMessage,
   ...props
 }: IDatePickerProps) {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -29,9 +29,9 @@ export default function DatePicker({
         name={name}
         control={control}
         render={({ onChange, onBlur, value }) => {
-          let transformedValue = null
-          if (value && 'toDate' in value) transformedValue = value.toDate()
-          else if (value !== undefined) transformedValue = value
+          let transformedValue = null;
+          if (value && 'toDate' in value) transformedValue = value.toDate();
+          else if (value !== undefined) transformedValue = value;
 
           return (
             <KeyboardDatePicker
@@ -50,9 +50,9 @@ export default function DatePicker({
               onChange={onChange}
               onBlur={onBlur}
             />
-          )
+          );
         }}
       />
     </MuiPickersUtilsProvider>
-  )
+  );
 }

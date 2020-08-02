@@ -1,6 +1,6 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
 import {
   makeStyles,
@@ -10,10 +10,10 @@ import {
   SliderProps,
   Grid,
   Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
-import Label from '../Label'
-import ErrorMessage from '../ErrorMessage'
+import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -45,14 +45,14 @@ const useStyles = makeStyles(theme =>
       '& *': { transform: 'none' },
     },
   })
-)
+);
 
 export interface ISliderProps
   extends IFieldComponentProps,
     Omit<SliderProps, 'name'> {
-  units?: string
-  minLabel?: React.ReactNode
-  maxLabel?: React.ReactNode
+  units?: string;
+  minLabel?: React.ReactNode;
+  maxLabel?: React.ReactNode;
 }
 
 export default function Slider({
@@ -68,7 +68,7 @@ export default function Slider({
   max = 100,
   ...props
 }: ISliderProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Controller
@@ -76,15 +76,15 @@ export default function Slider({
       name={name}
       render={({ onChange, onBlur, value }) => {
         const handleChange = (_, value: number | number[]) => {
-          onChange(value)
-          onBlur()
-        }
+          onChange(value);
+          onBlur();
+        };
 
         const getAriaValueText = (value: number) =>
-          `${value}${units ? ' ' + units : ''}`
+          `${value}${units ? ' ' + units : ''}`;
 
         const getValueLabelFormat = (value: number) =>
-          `${value}${units ? ' ' + units : ''}`
+          `${value}${units ? ' ' + units : ''}`;
 
         return (
           <FormControl className={classes.root}>
@@ -133,8 +133,8 @@ export default function Slider({
 
             <ErrorMessage>{errorMessage}</ErrorMessage>
           </FormControl>
-        )
+        );
       }}
     />
-  )
+  );
 }

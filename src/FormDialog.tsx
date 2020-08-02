@@ -1,7 +1,7 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers'
-import _isEmpty from 'lodash/isEmpty'
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers';
+import _isEmpty from 'lodash/isEmpty';
 
 import {
   useTheme,
@@ -12,36 +12,36 @@ import {
   DialogContent,
   DialogActions,
   Button,
-} from '@material-ui/core'
-import { TransitionProps } from '@material-ui/core/transitions'
+} from '@material-ui/core';
+import { TransitionProps } from '@material-ui/core/transitions';
 
-import FormFields from './FormFields'
+import FormFields from './FormFields';
 import {
   Values,
   Fields,
   CustomComponents,
   getDefaultValues,
   getValidationSchema,
-} from './utils'
+} from './utils';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="up" ref={ref} {...props} />
-})
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export interface IFormDialogProps {
-  fields: Fields
-  values?: Values
-  onSubmit: (values: Values) => void
-  customComponents?: CustomComponents
+  fields: Fields;
+  values?: Values;
+  onSubmit: (values: Values) => void;
+  customComponents?: CustomComponents;
 
-  open: boolean
-  onClose: () => void
-  title: React.ReactNode
-  formHeader?: React.ReactNode
-  formFooter?: React.ReactNode
+  open: boolean;
+  onClose: () => void;
+  title: React.ReactNode;
+  formHeader?: React.ReactNode;
+  formFooter?: React.ReactNode;
 }
 
 export default function FormDialog({
@@ -56,25 +56,25 @@ export default function FormDialog({
   formHeader,
   formFooter,
 }: IFormDialogProps) {
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'))
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   const defaultValues = {
     ...getDefaultValues(fields, customComponents),
     ...(values ?? {}),
-  }
+  };
 
   const { register, handleSubmit, control, errors } = useForm({
     mode: 'onBlur',
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
-  })
+  });
 
   return (
     <form
       onSubmit={handleSubmit(values => {
-        onSubmit(values)
-        onClose()
+        onSubmit(values);
+        onClose();
       })}
     >
       <Dialog
@@ -110,5 +110,5 @@ export default function FormDialog({
         </DialogActions>
       </Dialog>
     </form>
-  )
+  );
 }

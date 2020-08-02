@@ -1,10 +1,10 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
-import MultiSelect_, { MultiSelectProps } from '@antlerengineering/multiselect'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
+import MultiSelect_, { MultiSelectProps } from '@antlerengineering/multiselect';
 
 export type IMultiSelectProps = IFieldComponentProps &
-  Omit<MultiSelectProps<string>, 'value' | 'onChange' | 'options'>
+  Omit<MultiSelectProps<string>, 'value' | 'onChange' | 'options'>;
 
 export default function MultiSelect({
   control,
@@ -17,13 +17,13 @@ export default function MultiSelect({
       control={control}
       name={name}
       render={({ onChange, onBlur, value }) => {
-        let sanitisedValue
+        let sanitisedValue;
         if (props.multiple !== false) {
-          if (!Array.isArray(value)) sanitisedValue = []
-          else sanitisedValue = value
+          if (!Array.isArray(value)) sanitisedValue = [];
+          else sanitisedValue = value;
         } else {
-          if (typeof value === 'string') sanitisedValue = value
-          else sanitisedValue = null
+          if (typeof value === 'string') sanitisedValue = value;
+          else sanitisedValue = null;
         }
 
         return (
@@ -38,8 +38,8 @@ export default function MultiSelect({
               onBlur,
             }}
           />
-        )
+        );
       }}
     />
-  )
+  );
 }

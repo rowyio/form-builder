@@ -1,13 +1,13 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
 import {
   FormControlLabel,
   Checkbox as MuiCheckbox,
   CheckboxProps,
-} from '@material-ui/core'
-import ErrorMessage from '../ErrorMessage'
+} from '@material-ui/core';
+import ErrorMessage from '../ErrorMessage';
 
 export interface ICheckboxProps
   extends IFieldComponentProps,
@@ -43,5 +43,5 @@ export default function Checkbox({
         </>
       )}
     />
-  )
+  );
 }

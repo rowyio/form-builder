@@ -1,13 +1,13 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
-import { TextField, FilledTextFieldProps, MenuItem } from '@material-ui/core'
+import { TextField, FilledTextFieldProps, MenuItem } from '@material-ui/core';
 
 export interface ISingleSelectProps
   extends IFieldComponentProps,
     Omit<FilledTextFieldProps, 'variant' | 'label' | 'name'> {
-  options: (string | { value: string; label: React.ReactNode })[]
+  options: (string | { value: string; label: React.ReactNode })[];
 }
 
 export default function SingleSelect({
@@ -43,15 +43,15 @@ export default function SingleSelect({
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
-              )
+              );
             return (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
-            )
+            );
           })}
         </TextField>
       )}
     />
-  )
+  );
 }

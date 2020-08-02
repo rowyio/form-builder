@@ -1,19 +1,19 @@
-import { useEffect } from 'react'
-import { useWatch, UseFormMethods } from 'react-hook-form'
-import { useDebounce } from 'use-debounce'
-import _isEqual from 'lodash/isEqual'
-import _pick from 'lodash/pick'
-import _omitBy from 'lodash/omitBy'
-import _isUndefined from 'lodash/isUndefined'
-import { diffChanges } from 'utils'
+import { useEffect } from 'react';
+import { useWatch, UseFormMethods } from 'react-hook-form';
+import { useDebounce } from 'use-debounce';
+import _isEqual from 'lodash/isEqual';
+import _pick from 'lodash/pick';
+import _omitBy from 'lodash/omitBy';
+import _isUndefined from 'lodash/isUndefined';
+import { diffChanges } from 'utils';
 
-import { IFormProps } from '.'
+import { IFormProps } from '.';
 
 export interface IAutoSaveProps {
-  control: UseFormMethods['control']
-  defaultValues: NonNullable<IFormProps['values']>
-  errors: UseFormMethods['errors']
-  onSubmit: IFormProps['onSubmit']
+  control: UseFormMethods['control'];
+  defaultValues: NonNullable<IFormProps['values']>;
+  errors: UseFormMethods['errors'];
+  onSubmit: IFormProps['onSubmit'];
 }
 
 export default function AutoSave({
@@ -22,11 +22,11 @@ export default function AutoSave({
   errors,
   onSubmit,
 }: IAutoSaveProps) {
-  const values = useWatch({ control })
+  const values = useWatch({ control });
 
   const [debouncedValues] = useDebounce(values, 1000, {
     equalityFn: _isEqual,
-  })
+  });
 
   useEffect(() => {
     // - Update only fields that changed
@@ -35,13 +35,13 @@ export default function AutoSave({
     const newValues = _omitBy(
       diffChanges(defaultValues, debouncedValues),
       (value, name) => _isUndefined(value) || name in errors
-    )
+    );
 
     if (Object.keys(newValues).length > 0) {
-      console.log('SUBMIT', newValues, errors)
-      onSubmit(newValues)
+      console.log('SUBMIT', newValues, errors);
+      onSubmit(newValues);
     }
-  }, [debouncedValues])
+  }, [debouncedValues]);
 
-  return null
+  return null;
 }

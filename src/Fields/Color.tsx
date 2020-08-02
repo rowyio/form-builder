@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
-import { ChromePicker, ColorResult } from 'react-color'
+import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
+import { ChromePicker, ColorResult } from 'react-color';
 
 import {
   makeStyles,
@@ -11,10 +11,10 @@ import {
   Grid,
   Typography,
   Collapse,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
-import Label from '../Label'
-import ErrorMessage from '../ErrorMessage'
+import Label from '../Label';
+import ErrorMessage from '../ErrorMessage';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme =>
       borderRadius: theme.shape.borderRadius,
     },
   })
-)
+);
 
 export interface IColorProps extends IFieldComponentProps {}
 
@@ -53,10 +53,10 @@ export default function Color({
   errorMessage,
   label,
 }: IColorProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
-  const [showPicker, setShowPicker] = useState(false)
-  const toggleOpen = () => setShowPicker(s => !s)
+  const [showPicker, setShowPicker] = useState(false);
+  const toggleOpen = () => setShowPicker(s => !s);
 
   return (
     <Controller
@@ -100,5 +100,5 @@ export default function Color({
         </FormControl>
       )}
     />
-  )
+  );
 }

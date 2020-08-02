@@ -1,32 +1,36 @@
-import { lazy } from 'react'
+import { lazy } from 'react';
 
-import TextField from './TextField'
-import Heading from '../Heading'
-import Description from '../Description'
+import TextField from './TextField';
+import Heading from '../Heading';
+import Description from '../Description';
 
 const SingleSelect = lazy(() =>
   import('./SingleSelect' /* webpackChunkName: "Form/SingleSelect" */)
-)
+);
 const MultiSelect = lazy(() =>
   import('./MultiSelect' /* webpackChunkName: "Form/MultiSelect" */)
-)
+);
 const DatePicker = lazy(() =>
   import('./DatePicker' /* webpackChunkName: "Form/DatePicker" */)
-)
+);
 const DateTimePicker = lazy(() =>
   import('./DateTimePicker' /* webpackChunkName: "Form/DateTimePicker" */)
-)
+);
 const Checkbox = lazy(() =>
   import('./Checkbox' /* webpackChunkName: "Form/Checkbox" */)
-)
-const Radio = lazy(() => import('./Radio' /* webpackChunkName: "Form/Radio" */))
+);
+const Radio = lazy(() =>
+  import('./Radio' /* webpackChunkName: "Form/Radio" */)
+);
 const Slider = lazy(() =>
   import('./Slider' /* webpackChunkName: "Form/Slider" */)
-)
+);
 const TextMulti = lazy(() =>
   import('./TextMulti' /* webpackChunkName: "Form/TextMulti" */)
-)
-const Color = lazy(() => import('./Color' /* webpackChunkName: "Form/Color" */))
+);
+const Color = lazy(() =>
+  import('./Color' /* webpackChunkName: "Form/Color" */)
+);
 
 export enum FIELDS {
   text = 'text',
@@ -61,7 +65,7 @@ export const FIELD_COMPONENTS: Record<
 
   heading: Heading,
   description: Description,
-}
+};
 
 export const DEFAULT_VALUES: Record<FIELDS, any> = {
   text: '',
@@ -76,4 +80,4 @@ export const DEFAULT_VALUES: Record<FIELDS, any> = {
   color: null,
   heading: undefined,
   description: undefined,
-}
+};

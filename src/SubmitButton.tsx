@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import { makeStyles, Button, ButtonProps } from '@material-ui/core'
+import { makeStyles, Button, ButtonProps } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -8,17 +8,17 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1, 5),
   },
   endIcon: { marginRight: -theme.spacing(3) },
-}))
+}));
 
 export interface ISubmitButtonProps extends ButtonProps {
-  label?: React.ReactNode
+  label?: React.ReactNode;
 }
 
 export default function SubmitButton({
   label,
   ...buttonProps
 }: ISubmitButtonProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <Button
@@ -31,5 +31,5 @@ export default function SubmitButton({
     >
       {label || 'Submit'}
     </Button>
-  )
+  );
 }

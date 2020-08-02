@@ -1,17 +1,17 @@
-import React from 'react'
-import { Controller } from 'react-hook-form'
-import { IFieldComponentProps } from '../utils'
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { IFieldComponentProps } from '../utils';
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
-import { useTheme } from '@material-ui/core'
+import { useTheme } from '@material-ui/core';
 import {
   KeyboardDateTimePicker,
   KeyboardDateTimePickerProps,
-} from '@material-ui/pickers'
+} from '@material-ui/pickers';
 
-import AccessTimeIcon from '@material-ui/icons/AccessTime'
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
 export interface IDateTimePickerProps
   extends IFieldComponentProps,
@@ -23,7 +23,7 @@ export default function DateTimePicker({
   errorMessage,
   ...props
 }: IDateTimePickerProps) {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -31,9 +31,9 @@ export default function DateTimePicker({
         name={name}
         control={control}
         render={({ onChange, onBlur, value }) => {
-          let transformedValue = null
-          if (value && 'toDate' in value) transformedValue = value.toDate()
-          else if (value !== undefined) transformedValue = value
+          let transformedValue = null;
+          if (value && 'toDate' in value) transformedValue = value.toDate();
+          else if (value !== undefined) transformedValue = value;
 
           return (
             <KeyboardDateTimePicker
@@ -53,9 +53,9 @@ export default function DateTimePicker({
               onChange={onChange}
               onBlur={onBlur}
             />
-          )
+          );
         }}
       />
     </MuiPickersUtilsProvider>
-  )
+  );
 }

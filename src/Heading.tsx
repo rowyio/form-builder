@@ -1,12 +1,12 @@
-import React from 'react'
-import clsx from 'clsx'
+import React from 'react';
+import clsx from 'clsx';
 
 import {
   makeStyles,
   createStyles,
   Typography,
   Divider,
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -22,16 +22,16 @@ const useStyles = makeStyles(theme =>
       cursor: 'default',
     },
   })
-)
+);
 
 export interface IHeadingProps {
-  children?: React.ReactNode
-  heading?: React.ReactNode
-  title?: React.ReactNode
-  label?: React.ReactNode
-  text?: React.ReactNode
+  children?: React.ReactNode;
+  heading?: React.ReactNode;
+  title?: React.ReactNode;
+  label?: React.ReactNode;
+  text?: React.ReactNode;
 
-  className?: string
+  className?: string;
 }
 
 export default function Heading({
@@ -42,7 +42,7 @@ export default function Heading({
   text,
   className,
 }: IHeadingProps) {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={clsx(classes.root, className)}>
@@ -51,5 +51,5 @@ export default function Heading({
       </Typography>
       <Divider />
     </div>
-  )
+  );
 }
