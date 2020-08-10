@@ -18,6 +18,7 @@ export interface IDateTimePickerProps
     Omit<KeyboardDateTimePickerProps, 'label' | 'name'> {}
 
 export default function DateTimePicker({
+  register,
   control,
   name,
   errorMessage,
@@ -52,6 +53,8 @@ export default function DateTimePicker({
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}
+              error={!!errorMessage}
+              helperText={errorMessage}
             />
           );
         }}
