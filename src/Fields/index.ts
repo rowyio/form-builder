@@ -28,6 +28,9 @@ const Slider = lazy(() =>
 const TextMulti = lazy(() =>
   import('./TextMulti' /* webpackChunkName: "Form/TextMulti" */)
 );
+const RichText = lazy(() =>
+  import('./RichText' /* webpackChunkName: "Form/RichText" */)
+);
 const Color = lazy(() =>
   import('./Color' /* webpackChunkName: "Form/Color" */)
 );
@@ -42,6 +45,7 @@ export enum FIELDS {
   radio = 'radio',
   slider = 'slider',
   textMulti = 'textMulti',
+  richText = 'richText',
   color = 'color',
 
   heading = 'heading',
@@ -61,6 +65,7 @@ export const FIELD_COMPONENTS: Record<
   radio: Radio,
   slider: Slider,
   textMulti: TextMulti,
+  richText: RichText,
   color: Color,
 
   heading: Heading,
@@ -77,6 +82,7 @@ export const DEFAULT_VALUES: Record<FIELDS, any> = {
   radio: '',
   slider: 0,
   textMulti: [],
+  richText: '',
   color: null,
   heading: undefined,
   description: undefined,
