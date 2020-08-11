@@ -5,7 +5,7 @@ import _isEqual from 'lodash/isEqual';
 import _pick from 'lodash/pick';
 import _omitBy from 'lodash/omitBy';
 import _isUndefined from 'lodash/isUndefined';
-import { diffChanges } from 'utils';
+import { diffChanges } from './utils';
 
 import { IFormProps } from './Form';
 

@@ -13,7 +13,7 @@ import 'tinymce/plugins/image';
 import 'tinymce/plugins/paste';
 import 'tinymce/plugins/help';
 import 'tinymce/plugins/code';
-import { Editor } from '@tinymce/tinymce-react';
+import { Editor, IAllProps } from '@tinymce/tinymce-react';
 
 import { makeStyles, createStyles, FormControl } from '@material-ui/core';
 import clsx from 'clsx';
@@ -94,13 +94,18 @@ const useStyles = makeStyles(theme =>
   })
 );
 
+export interface IRichTextProps
+  extends IFieldComponentProps,
+    Partial<IAllProps> {}
+
 export default function RichText({
   control,
   register,
   name,
   errorMessage,
   label,
-}: IFieldComponentProps) {
+  ...props
+}: IRichTextProps) {
   const classes = useStyles();
   const [focus, setFocus] = useState(false);
 
@@ -113,6 +118,7 @@ export default function RichText({
           <Label error={!!errorMessage}>{label}</Label>
 
           <Editor
+            {...props}
             init={{
               minHeight: 300,
               menubar: false,
@@ -124,7 +130,7 @@ export default function RichText({
               content_css: [
                 'https://use.typekit.net/ngg8buf.css',
                 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap',
-                '/static/tinymce_content.css',
+                'https://raw.githubusercontent.com/AntlerVC/form-builder/master/src/Fields/tinymce_content.css',
               ],
             }}
             value={value}
