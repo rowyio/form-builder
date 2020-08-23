@@ -11,6 +11,7 @@ export type FieldType = {
   type: FIELDS | string;
   name?: string;
   label?: React.ReactNode;
+  defaultValue?: any;
   [key: string]: any;
 };
 export type Fields = (
@@ -48,17 +49,22 @@ export const getDefaultValues = (
     const field = _isFunction(_field) ? _field({}) : _field;
 
     if (!!field && field.name && field.type) {
-      if (!!customComponents && field.type in customComponents)
-        return {
-          ...acc,
-          [field.name]: customComponents[field.type].defaultValue,
-        };
+      let defaultValue: any;
 
-      if (field.type in DEFAULT_VALUES)
-        return {
-          ...acc,
-          [field.name]: DEFAULT_VALUES[field.type as FIELDS],
-        };
+      // Get default value if specified in field declaration
+      if (field.defaultValue !== undefined) {
+        defaultValue = field.defaultValue;
+      }
+      // Get default value from customComponents
+      else if (!!customComponents && field.type in customComponents) {
+        defaultValue = customComponents[field.type].defaultValue;
+      }
+      // Get default value from built-in components
+      else if (field.type in DEFAULT_VALUES) {
+        defaultValue = DEFAULT_VALUES[field.type as FIELDS];
+      }
+
+      return { ...acc, [field.name]: defaultValue };
     }
 
     return acc;

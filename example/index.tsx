@@ -12,6 +12,7 @@ const App = () => {
           name: 'desc',
           label: 'Description',
           // disabled: true,
+          defaultValue: 'something',
         },
       ]}
       onSubmit={data => console.log(data)}
