@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import { makeStyles, Button, ButtonProps } from '@material-ui/core';
 
@@ -25,9 +26,12 @@ export default function SubmitButton({
       variant="contained"
       color="primary"
       size="large"
-      classes={{ root: classes.root }}
       type="submit"
       {...buttonProps}
+      classes={{
+        ...buttonProps?.classes,
+        root: clsx(classes.root, buttonProps?.classes?.root),
+      }}
     >
       {label || 'Submit'}
     </Button>

@@ -5,7 +5,7 @@ import _isEmpty from 'lodash/isEmpty';
 
 import FormFields from './FormFields';
 import AutoSave from './AutoSave';
-import SubmitButton from './SubmitButton';
+import SubmitButton, { ISubmitButtonProps } from './SubmitButton';
 
 import {
   Values,
@@ -23,6 +23,10 @@ export interface IFormProps {
 
   autoSave?: boolean;
   hideSubmit?: boolean;
+  SubmitButtonProps?: Partial<ISubmitButtonProps>;
+
+  formHeader?: React.ReactNode;
+  formFooter?: React.ReactNode;
 }
 
 export default function Form({
@@ -33,6 +37,10 @@ export default function Form({
 
   autoSave = false,
   hideSubmit = autoSave,
+  SubmitButtonProps = {},
+
+  formHeader,
+  formFooter,
 }: IFormProps) {
   const defaultValues = {
     ...getDefaultValues(fields, customComponents),
@@ -61,6 +69,8 @@ export default function Form({
         />
       )}
 
+      {formHeader}
+
       <FormFields
         fields={fields}
         register={register}
@@ -69,11 +79,10 @@ export default function Form({
         customComponents={customComponents}
       />
 
+      {formFooter}
+
       {!hideSubmit && (
-        <SubmitButton
-          // label={nextButtonLabel}
-          disabled={isSubmitDisabled}
-        />
+        <SubmitButton disabled={isSubmitDisabled} {...SubmitButtonProps} />
       )}
     </form>
   );
