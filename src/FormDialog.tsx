@@ -6,7 +6,7 @@ import _isEmpty from 'lodash/isEmpty';
 import {
   useTheme,
   useMediaQuery,
-  Slide,
+  Grow,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -28,7 +28,7 @@ const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Grow ref={ref} {...props} />;
 });
 
 export interface IFormDialogProps {
