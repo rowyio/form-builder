@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  ButtonProps,
 } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 
@@ -42,6 +43,9 @@ export interface IFormDialogProps {
   title: React.ReactNode;
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
+
+  customActions?: React.ReactNode;
+  SubmitButtonProps?: Partial<ButtonProps>;
 }
 
 export default function FormDialog({
@@ -55,6 +59,9 @@ export default function FormDialog({
   title,
   formHeader,
   formFooter,
+
+  customActions,
+  SubmitButtonProps,
 }: IFormDialogProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -101,12 +108,20 @@ export default function FormDialog({
         </DialogContent>
 
         <DialogActions>
-          <Button color="primary" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button color="primary" type="submit">
-            Submit
-          </Button>
+          {customActions ?? (
+            <>
+              <Button color="primary" onClick={onClose}>
+                Cancel
+              </Button>
+              <Button
+                color="primary"
+                type="submit"
+                {...(SubmitButtonProps ?? {})}
+              >
+                {SubmitButtonProps?.children ?? 'Submit'}
+              </Button>
+            </>
+          )}
         </DialogActions>
       </Dialog>
     </form>
