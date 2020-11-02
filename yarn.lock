@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@antlerengineering/multiselect@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@antlerengineering/multiselect/-/multiselect-0.7.1.tgz#1f58baa47d2d8a60b62057c0bce221e74e00b71b"
-  integrity sha512-WDYMY5tKaEzrHFQhGwTLsGwrPF5F4YdJGV7aGVRQf/6UFUWBW3C0oiJvQPVSAB4Y6JD4y1GY+pjHGMueMzQfuw==
+"@antlerengineering/multiselect@0.7.8":
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/@antlerengineering/multiselect/-/multiselect-0.7.8.tgz#6925dddb94f9b01175dd8e3d3179e44cce7f295a"
+  integrity sha512-ACGE0e46J0QGhylx+jIRLxtV7pAO9ODLbAQ2oVnPwiZ6k2/eySBJI3VMj/x0tmunCQfUIwCieMKPhaOWCfa9Fg==
 
 "@babel/code-frame@7.5.5":
   version "7.5.5"
