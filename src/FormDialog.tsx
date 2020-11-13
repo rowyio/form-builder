@@ -1,13 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-//import _isEmpty from 'lodash/isEmpty';
+import _isEmpty from 'lodash/isEmpty';
 
 import {
   useTheme,
   useMediaQuery,
   Grow,
   Dialog,
+  DialogProps as MuiDialogProps,
   DialogTitle,
   DialogContent,
   DialogActions,
@@ -46,6 +47,7 @@ export interface IFormDialogProps {
 
   customActions?: React.ReactNode;
   SubmitButtonProps?: Partial<ButtonProps>;
+  DialogProps?: Partial<MuiDialogProps>;
 }
 
 export default function FormDialog({
@@ -62,6 +64,7 @@ export default function FormDialog({
 
   customActions,
   SubmitButtonProps,
+  DialogProps,
 }: IFormDialogProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -92,6 +95,7 @@ export default function FormDialog({
         TransitionComponent={Transition as any}
         // Must disablePortal so the dialog can be wrapped in FormikForm
         disablePortal
+        {...DialogProps}
       >
         <DialogTitle>{title}</DialogTitle>
 
