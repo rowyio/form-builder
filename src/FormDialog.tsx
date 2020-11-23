@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -74,60 +74,63 @@ export default function FormDialog({
     ...(values ?? {}),
   };
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const methods = useForm({
     mode: 'onBlur',
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
+  const { register, handleSubmit, control, errors } = methods;
 
   return (
-    <form
-      onSubmit={handleSubmit(values => {
-        onSubmit(values);
-        onClose();
-      })}
-    >
-      <Dialog
-        open={open}
-        onClose={onClose}
-        fullScreen={isMobile}
-        fullWidth
-        TransitionComponent={Transition as any}
-        // Must disablePortal so the dialog can be wrapped in FormikForm
-        disablePortal
-        {...DialogProps}
+    <FormProvider {...methods}>
+      <form
+        onSubmit={handleSubmit(values => {
+          onSubmit(values);
+          onClose();
+        })}
       >
-        <DialogTitle>{title}</DialogTitle>
+        <Dialog
+          open={open}
+          onClose={onClose}
+          fullScreen={isMobile}
+          fullWidth
+          TransitionComponent={Transition as any}
+          // Must disablePortal so the dialog can be wrapped in FormikForm
+          disablePortal
+          {...DialogProps}
+        >
+          <DialogTitle>{title}</DialogTitle>
 
-        <DialogContent>
-          {formHeader}
-          <FormFields
-            fields={fields}
-            register={register}
-            control={control}
-            errors={errors}
-            customComponents={customComponents}
-          />
-          {formFooter}
-        </DialogContent>
+          <DialogContent>
+            {formHeader}
+            <FormFields
+              fields={fields}
+              register={register}
+              control={control}
+              errors={errors}
+              customComponents={customComponents}
+            />
+            {formFooter}
+          </DialogContent>
 
-        <DialogActions>
-          {customActions ?? (
-            <>
-              <Button color="primary" onClick={onClose}>
-                Cancel
-              </Button>
-              <Button
-                color="primary"
-                type="submit"
-                {...(SubmitButtonProps ?? {})}
-              >
-                {SubmitButtonProps?.children ?? 'Submit'}
-              </Button>
-            </>
-          )}
-        </DialogActions>
-      </Dialog>
-    </form>
+          <DialogActions>
+            {customActions ?? (
+              <>
+                <Button color="primary" onClick={onClose}>
+                  Cancel
+                </Button>
+                <Button
+                  color="primary"
+                  type="submit"
+                  {...(SubmitButtonProps ?? {})}
+                >
+                  {SubmitButtonProps?.children ?? 'Submit'}
+                </Button>
+              </>
+            )}
+          </DialogActions>
+        </Dialog>
+      </form>
+    </FormProvider>
   );
 }
