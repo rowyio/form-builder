@@ -22,6 +22,7 @@ interface ICommonProps {
   control: UseFormMethods['control'];
   errors: UseFormMethods['errors'];
   customComponents?: CustomComponents;
+  useFormMethods: UseFormMethods;
 }
 
 export interface IFormFieldsProps extends ICommonProps {
@@ -45,7 +46,7 @@ export default function FormFields({ fields, ...props }: IFormFieldsProps) {
   );
 }
 
-interface IFieldComponent extends FieldType, ICommonProps {}
+interface IFieldComponentProps extends FieldType, ICommonProps {}
 function FieldComponent({
   register,
   control,
@@ -53,7 +54,7 @@ function FieldComponent({
   type,
   customComponents,
   ...fieldProps
-}: IFieldComponent) {
+}: IFieldComponentProps) {
   let renderedField: React.ReactNode = null;
 
   switch (type) {

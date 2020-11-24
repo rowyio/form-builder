@@ -26,6 +26,7 @@ export type IFieldComponentProps = {
   control: UseFormMethods['control'];
   errorMessage?: string;
   label: React.ReactNode;
+  useFormMethods: UseFormMethods;
 };
 
 export type CustomComponent<

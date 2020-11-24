@@ -74,11 +74,12 @@ export default function FormDialog({
     ...(values ?? {}),
   };
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const methods = useForm({
     mode: 'onBlur',
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
+  const { register, handleSubmit, control, errors } = methods;
 
   return (
     <form
@@ -107,6 +108,7 @@ export default function FormDialog({
             control={control}
             errors={errors}
             customComponents={customComponents}
+            useFormMethods={methods}
           />
           {formFooter}
         </DialogContent>

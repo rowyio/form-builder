@@ -47,11 +47,12 @@ export default function Form({
     ...(values ?? {}),
   };
 
-  const { register, handleSubmit, control, errors } = useForm({
+  const methods = useForm({
     mode: autoSave ? 'all' : 'onBlur',
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
+  const { register, handleSubmit, control, errors } = methods;
 
   const hasErrors = errors
     ? Object.values(errors).reduce((a, c) => !!(a || !_isEmpty(c)), false)
@@ -77,6 +78,7 @@ export default function Form({
         control={control}
         errors={errors}
         customComponents={customComponents}
+        useFormMethods={methods}
       />
 
       {formFooter}

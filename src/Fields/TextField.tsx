@@ -17,6 +17,8 @@ export default function TextField({
   errorMessage,
   fieldVariant = 'short',
   hiddenLabel = false,
+  control,
+  useFormMethods,
   ...props
 }: ITextProps) {
   let variantProps: any = {};

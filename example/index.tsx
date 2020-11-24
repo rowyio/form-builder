@@ -3,11 +3,14 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as yup from 'yup';
 
-import Form from '../src/Form';
+import FormDialog from '../src/FormDialog';
 
 const App = () => {
   return (
-    <Form
+    <FormDialog
+      open
+      onClose={() => {}}
+      title="Form Dialog"
       fields={[
         {
           type: 'richText',
@@ -33,6 +36,11 @@ const App = () => {
             : null,
       ]}
       onSubmit={data => console.log(data)}
+      customActions={
+        <>
+          <button type="submit">SUBMIT</button>
+        </>
+      }
     />
   );
 };
