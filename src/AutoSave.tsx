@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useWatch, UseFormMethods } from 'react-hook-form';
 import { useDebounce } from 'use-debounce';
 import _isEqual from 'lodash/isEqual';
-import _pick from 'lodash/pick';
 import _omitBy from 'lodash/omitBy';
 import _isUndefined from 'lodash/isUndefined';
 import { diffChanges } from './utils';

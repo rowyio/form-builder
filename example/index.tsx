@@ -9,7 +9,7 @@ const App = () => {
   return (
     <FormDialog
       open
-      onClose={() => {}}
+      onClose={() => alert('CLOSE')}
       title="Form Dialog"
       fields={[
         {
@@ -36,11 +36,11 @@ const App = () => {
             : null,
       ]}
       onSubmit={data => console.log(data)}
-      customActions={
-        <>
-          <button type="submit">SUBMIT</button>
-        </>
-      }
+      // customActions={
+      //   <>
+      //     <button type="submit">SUBMIT</button>
+      //   </>
+      // }
     />
   );
 };

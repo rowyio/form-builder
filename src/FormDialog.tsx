@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import _isEmpty from 'lodash/isEmpty';
 
 import {
+  makeStyles,
+  createStyles,
   useTheme,
   useMediaQuery,
-  Grow,
   Dialog,
   DialogProps as MuiDialogProps,
+  Grid,
+  IconButton,
   DialogTitle,
+  Divider,
   DialogContent,
+  DialogContentText,
   DialogActions,
   Button,
   ButtonProps,
 } from '@material-ui/core';
-import { TransitionProps } from '@material-ui/core/transitions';
+import CloseIcon from '@material-ui/icons/Close';
 
 import FormFields from './FormFields';
 import {
@@ -25,13 +29,49 @@ import {
   getDefaultValues,
   getValidationSchema,
 } from './utils';
+import { TransitionGrow, TransitionSlide } from './Transition';
 
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & { children?: React.ReactElement<any, any> },
-  ref: React.Ref<unknown>
-) {
-  return <Grow ref={ref} {...props} />;
-});
+const useStyles = makeStyles(theme =>
+  createStyles({
+    paperFullScreen: {
+      marginTop: theme.spacing(2),
+      height: `calc(100% - ${theme.spacing(2)}px)`,
+      borderTopLeftRadius: theme.shape.borderRadius * 2,
+      borderTopRightRadius: theme.shape.borderRadius * 2,
+    },
+
+    closeButton: {
+      margin: theme.spacing(0.5),
+      marginLeft: 'auto',
+      marginBottom: 0,
+      display: 'flex',
+    },
+
+    title: {
+      paddingTop: theme.spacing(8),
+      paddingLeft: theme.spacing(8),
+      color: theme.palette.text.secondary,
+
+      [theme.breakpoints.down('xs')]: {
+        paddingTop: theme.spacing(2),
+        paddingLeft: theme.spacing(2),
+      },
+    },
+    divider: {
+      margin: theme.spacing(0, 8),
+      [theme.breakpoints.down('xs')]: { margin: theme.spacing(0, 2) },
+    },
+
+    content: {
+      padding: theme.spacing(3, 8, 0),
+      [theme.breakpoints.down('xs')]: { padding: theme.spacing(3, 2, 0) },
+    },
+    actions: {
+      padding: theme.spacing(5, 8, 8),
+      [theme.breakpoints.down('xs')]: { padding: theme.spacing(3, 2) },
+    },
+  })
+);
 
 export interface IFormDialogProps {
   fields: Fields;
@@ -66,6 +106,7 @@ export default function FormDialog({
   SubmitButtonProps,
   DialogProps,
 }: IFormDialogProps) {
+  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
@@ -79,7 +120,13 @@ export default function FormDialog({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
-  const { register, handleSubmit, control, errors } = methods;
+  const { register, handleSubmit, control, errors, formState } = methods;
+
+  const [closeConfirmation, setCloseConfirmation] = useState(false);
+  const handleClose = () => {
+    if (formState.isDirty) setCloseConfirmation(true);
+    else onClose();
+  };
 
   return (
     <form
@@ -90,17 +137,39 @@ export default function FormDialog({
     >
       <Dialog
         open={open}
-        onClose={onClose}
+        onClose={handleClose}
         fullScreen={isMobile}
         fullWidth
-        TransitionComponent={Transition as any}
+        TransitionComponent={isMobile ? TransitionSlide : TransitionGrow}
         // Must disablePortal so the dialog can be wrapped in FormikForm
         disablePortal
+        aria-labelledby="form-dialog-title"
+        classes={{
+          paperFullScreen: classes.paperFullScreen,
+          ...DialogProps?.classes,
+        }}
         {...DialogProps}
       >
-        <DialogTitle>{title}</DialogTitle>
+        <Grid container>
+          <Grid item xs>
+            <DialogTitle id="sub-modal-title" className={classes.title}>
+              {title}
+            </DialogTitle>
+          </Grid>
+          <Grid item>
+            <IconButton
+              onClick={handleClose}
+              className={classes.closeButton}
+              aria-label="Close Form"
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
 
-        <DialogContent>
+        <Divider className={classes.divider} />
+
+        <DialogContent className={classes.content}>
           {formHeader}
           <FormFields
             fields={fields}
@@ -113,14 +182,16 @@ export default function FormDialog({
           {formFooter}
         </DialogContent>
 
-        <DialogActions>
+        <DialogActions className={classes.actions}>
           {customActions ?? (
             <>
-              <Button color="primary" onClick={onClose}>
+              <Button color="primary" size="large" onClick={handleClose}>
                 Cancel
               </Button>
               <Button
                 color="primary"
+                size="large"
+                variant="contained"
                 type="submit"
                 {...(SubmitButtonProps ?? {})}
               >
@@ -128,6 +199,32 @@ export default function FormDialog({
               </Button>
             </>
           )}
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={closeConfirmation}
+        disableBackdropClick
+        disableEscapeKeyDown
+        TransitionComponent={TransitionGrow}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Close form?</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You entered data in this form that will be lost.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={() => setCloseConfirmation(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={onClose} color="primary" autoFocus>
+            Close
+          </Button>
         </DialogActions>
       </Dialog>
     </form>
