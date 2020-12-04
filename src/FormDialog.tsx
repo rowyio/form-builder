@@ -120,28 +120,29 @@ export default function FormDialog({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
-  const { register, handleSubmit, control, errors, formState } = methods;
+  const { register, handleSubmit, control, errors, formState, reset } = methods;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
+    onClose();
+    setCloseConfirmation(false);
+    reset();
+  };
+  const confirmClose = () => {
     if (formState.isDirty) setCloseConfirmation(true);
-    else {
-      onClose();
-      setCloseConfirmation(false);
-    }
+    else handleClose();
   };
 
   return (
     <form
       onSubmit={handleSubmit(values => {
         onSubmit(values);
-        onClose();
-        setCloseConfirmation(false);
+        handleClose();
       })}
     >
       <Dialog
         open={open}
-        onClose={handleClose}
+        onClose={confirmClose}
         fullScreen={isMobile}
         fullWidth
         TransitionComponent={isMobile ? TransitionSlide : TransitionGrow}
@@ -162,7 +163,7 @@ export default function FormDialog({
           </Grid>
           <Grid item>
             <IconButton
-              onClick={handleClose}
+              onClick={confirmClose}
               className={classes.closeButton}
               aria-label="Close Form"
             >
@@ -189,7 +190,7 @@ export default function FormDialog({
         <DialogActions className={classes.actions}>
           {customActions ?? (
             <>
-              <Button color="primary" size="large" onClick={handleClose}>
+              <Button color="primary" size="large" onClick={confirmClose}>
                 Cancel
               </Button>
               <Button
@@ -226,14 +227,7 @@ export default function FormDialog({
           <Button onClick={() => setCloseConfirmation(false)} color="primary">
             Cancel
           </Button>
-          <Button
-            onClick={() => {
-              onClose();
-              setCloseConfirmation(false);
-            }}
-            color="primary"
-            autoFocus
-          >
+          <Button onClick={handleClose} color="primary" autoFocus>
             Close
           </Button>
         </DialogActions>
