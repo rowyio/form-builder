@@ -125,7 +125,10 @@ export default function FormDialog({
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
     if (formState.isDirty) setCloseConfirmation(true);
-    else onClose();
+    else {
+      onClose();
+      setCloseConfirmation(false);
+    }
   };
 
   return (
@@ -133,6 +136,7 @@ export default function FormDialog({
       onSubmit={handleSubmit(values => {
         onSubmit(values);
         onClose();
+        setCloseConfirmation(false);
       })}
     >
       <Dialog
@@ -222,7 +226,14 @@ export default function FormDialog({
           <Button onClick={() => setCloseConfirmation(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={onClose} color="primary" autoFocus>
+          <Button
+            onClick={() => {
+              onClose();
+              setCloseConfirmation(false);
+            }}
+            color="primary"
+            autoFocus
+          >
             Close
           </Button>
         </DialogActions>
