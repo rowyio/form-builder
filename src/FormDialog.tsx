@@ -203,7 +203,7 @@ export default function FormDialog({
       </Dialog>
 
       <Dialog
-        open={closeConfirmation}
+        open={open && closeConfirmation}
         disableBackdropClick
         disableEscapeKeyDown
         TransitionComponent={TransitionGrow}
