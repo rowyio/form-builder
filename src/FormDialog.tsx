@@ -67,8 +67,8 @@ const useStyles = makeStyles(theme =>
       [theme.breakpoints.down('xs')]: { padding: theme.spacing(3, 2, 0) },
     },
     actions: {
-      padding: theme.spacing(5, 8, 8),
-      [theme.breakpoints.down('xs')]: { padding: theme.spacing(3, 2) },
+      padding: theme.spacing(2, 8, 4),
+      [theme.breakpoints.down('xs')]: { padding: theme.spacing(2) },
     },
   })
 );
