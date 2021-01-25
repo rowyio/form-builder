@@ -204,7 +204,13 @@ export default function FormDialog({
           {formFooter}
         </DialogContent>
 
-        <DialogActions className={classes.actions}>
+        <Grid
+          container
+          spacing={isMobile ? 1 : 4}
+          justify="center"
+          alignItems="center"
+          className={classes.actions}
+        >
           {customActions ?? (
             <>
               <Grid item>
@@ -228,7 +234,7 @@ export default function FormDialog({
               </Grid>
             </>
           )}
-        </DialogActions>
+        </Grid>
       </Dialog>
 
       <Dialog
