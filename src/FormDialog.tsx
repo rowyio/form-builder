@@ -33,6 +33,11 @@ import { TransitionGrow, TransitionSlide } from './Transition';
 
 const useStyles = makeStyles(theme =>
   createStyles({
+    paper: {
+      userSelect: 'none',
+      overflowX: 'hidden',
+    },
+
     paperFullScreen: {
       marginTop: theme.spacing(2),
       height: `calc(100% - ${theme.spacing(2)}px)`,
@@ -63,12 +68,21 @@ const useStyles = makeStyles(theme =>
     },
 
     content: {
-      padding: theme.spacing(3, 8, 0),
-      [theme.breakpoints.down('xs')]: { padding: theme.spacing(3, 2, 0) },
+      padding: theme.spacing(3, 8, 6),
+      [theme.breakpoints.down('xs')]: { padding: theme.spacing(1, 2, 2) },
     },
+
     actions: {
-      padding: theme.spacing(2, 8, 4),
-      [theme.breakpoints.down('xs')]: { padding: theme.spacing(2) },
+      margin: theme.spacing(0, -2),
+      padding: theme.spacing(0, 8, 2),
+
+      [theme.breakpoints.down('xs')]: {
+        margin: theme.spacing(0, -0.5),
+        padding: theme.spacing(1, 0),
+        marginTop: 'auto',
+      },
+
+      '& button': { minWidth: 142 },
     },
   })
 );
@@ -87,6 +101,7 @@ export interface IFormDialogProps {
 
   customActions?: React.ReactNode;
   SubmitButtonProps?: Partial<ButtonProps>;
+  CancelButtonProps?: Partial<ButtonProps>;
   DialogProps?: Partial<MuiDialogProps>;
 }
 
@@ -104,6 +119,7 @@ export default function FormDialog({
 
   customActions,
   SubmitButtonProps,
+  CancelButtonProps,
   DialogProps,
 }: IFormDialogProps) {
   const classes = useStyles();
@@ -150,6 +166,7 @@ export default function FormDialog({
         disablePortal
         aria-labelledby="form-dialog-title"
         classes={{
+          paper: classes.paper,
           paperFullScreen: classes.paperFullScreen,
           ...DialogProps?.classes,
         }}
@@ -190,18 +207,25 @@ export default function FormDialog({
         <DialogActions className={classes.actions}>
           {customActions ?? (
             <>
-              <Button color="primary" size="large" onClick={confirmClose}>
-                Cancel
-              </Button>
-              <Button
-                color="primary"
-                size="large"
-                variant="contained"
-                type="submit"
-                {...(SubmitButtonProps ?? {})}
-              >
-                {SubmitButtonProps?.children ?? 'Submit'}
-              </Button>
+              <Grid item>
+                <Button
+                  color="primary"
+                  size="large"
+                  onClick={confirmClose}
+                  {...(CancelButtonProps ?? {})}
+                  children={CancelButtonProps?.children || 'Cancel'}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  color="primary"
+                  size="large"
+                  variant="contained"
+                  type="submit"
+                  {...(SubmitButtonProps ?? {})}
+                  children={SubmitButtonProps?.children || 'Cancel'}
+                />
+              </Grid>
             </>
           )}
         </DialogActions>
