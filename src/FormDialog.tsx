@@ -217,6 +217,7 @@ export default function FormDialog({
                 <Button
                   color="primary"
                   size="large"
+                  variant="outlined"
                   onClick={confirmClose}
                   {...(CancelButtonProps ?? {})}
                   children={CancelButtonProps?.children || 'Cancel'}
