@@ -34,7 +34,7 @@ import { TransitionGrow, TransitionSlide } from './Transition';
 const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      zIndex: theme.zIndex.modal + 50,
+      zIndex: (theme.zIndex.modal + 50 + ' !important') as any,
     },
 
     paper: {
