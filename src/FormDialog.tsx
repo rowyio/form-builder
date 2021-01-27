@@ -33,6 +33,10 @@ import { TransitionGrow, TransitionSlide } from './Transition';
 
 const useStyles = makeStyles(theme =>
   createStyles({
+    root: {
+      zIndex: theme.zIndex.modal + 50,
+    },
+
     paper: {
       userSelect: 'none',
       overflowX: 'hidden',
@@ -166,6 +170,7 @@ export default function FormDialog({
         disablePortal
         aria-labelledby="form-dialog-title"
         classes={{
+          root: classes.root,
           paper: classes.paper,
           paperFullScreen: classes.paperFullScreen,
           ...DialogProps?.classes,
