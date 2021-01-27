@@ -230,7 +230,7 @@ export default function FormDialog({
                   variant="contained"
                   type="submit"
                   {...(SubmitButtonProps ?? {})}
-                  children={SubmitButtonProps?.children || 'Cancel'}
+                  children={SubmitButtonProps?.children || 'Submit'}
                 />
               </Grid>
             </>
