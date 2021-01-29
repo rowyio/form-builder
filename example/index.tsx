@@ -49,14 +49,64 @@ const App = () => {
         },
         {
           type: FIELDS.text,
-          // multiline: true,
-          // rows: 4,
-          name: 'description',
-          label: 'Short Description (optional, max. 300 characters)',
-          placeholder:
-            'You may choose to add a description, to the portfolio page generated. ',
-          // inputProps: { maxLength: 300 },
-          validation: yup.string().max(300),
+          name: 'textarea',
+          fieldVariant: 'long',
+          label: 'Tell me more',
+        },
+        {
+          type: FIELDS.singleSelect,
+          name: 'singleSelect',
+          label: 'Who is the CEO of Antler?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+        {
+          type: FIELDS.multiSelect,
+          name: 'multiSelect',
+          label: 'Who are Antler Engineering team members?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+        {
+          type: FIELDS.multiSelect,
+          name: 'multiSelect',
+          label: 'Who is CEO of Facebook?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+          multiple: false
+        },
+        {
+          type: FIELDS.checkbox,
+          name: 'checkbox',
+          label: 'I am not a robot',
+        },
+        {
+          type: FIELDS.radio,
+          name: 'radio',
+          label: 'Highest education level?',
+          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+        },
+        {
+          type: FIELDS.slider,
+          name: 'slider',
+          label: 'Your age',
+        },
+        {
+          type: FIELDS.textMulti,
+          name: 'textMulti',
+          label: 'Previous employers',
+        },
+        {
+          type: FIELDS.color,
+          name: 'color',
+          label: 'Preferred color for your Antler shirt?',
+        },
+        {
+          type: FIELDS.date,
+          name: 'date',
+          label: 'Your birthday',
+        },
+        {
+          type: FIELDS.dateTime,
+          name: 'dateTime',
+          label: 'Book a time',
         },
       ]}
       onSubmit={data => console.log(data)}

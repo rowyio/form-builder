@@ -74,6 +74,8 @@ export default function Color({
             onClick={toggleOpen}
             component={ButtonBase}
             focusRipple
+            data-type="color"
+            data-label={label ?? ''}
           >
             <Grid item>
               <div
@@ -92,7 +94,7 @@ export default function Color({
             </Grid>
           </Grid>
 
-          <Collapse in={showPicker}>
+          <Collapse in={showPicker} data-type="color-picker">
             <ChromePicker color={value?.rgb} onChangeComplete={onChange} />
           </Collapse>
 

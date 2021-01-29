@@ -36,6 +36,8 @@ export default function SingleSelect({
           // Convert string[] value to string
           // And remove MUI error when `undefined` or `null` is passed
           value={(Array.isArray(value) ? value[0] : value) ?? ''}
+          data-label={props.label ?? ''}
+          data-type={'single-select'}
         >
           {options.map(option => {
             if (typeof option === 'object')

@@ -27,17 +27,24 @@ export default function MultiSelect({
         }
 
         return (
-          <MultiSelect_
-            {...(props as any)}
-            value={sanitisedValue}
-            onChange={onChange}
-            onBlur={onBlur}
-            TextFieldProps={{
-              error: !!errorMessage,
-              helperText: errorMessage,
-              onBlur,
-            }}
-          />
+          <div
+            data-label={props.label ?? ''}
+            data-type={
+              props.multiple ?? true ? 'multi-select' : 'multi-select-single'
+            }
+          >
+            <MultiSelect_
+              {...(props as any)}
+              value={sanitisedValue}
+              onChange={onChange}
+              onBlur={onBlur}
+              TextFieldProps={{
+                error: !!errorMessage,
+                helperText: errorMessage,
+                onBlur,
+              }}
+            />
+          </div>
         );
       }}
     />

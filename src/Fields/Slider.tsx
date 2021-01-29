@@ -117,6 +117,8 @@ export default function Slider({
                     thumb: classes.thumb,
                     valueLabel: classes.valueLabel,
                   }}
+                  data-type="slider"
+                  data-label={label ?? ''}
                 />
               </Grid>
 

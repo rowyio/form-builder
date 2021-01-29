@@ -33,6 +33,8 @@ export default function Checkbox({
                 {...props}
                 checked={value}
                 onChange={e => onChange(e.target.checked)}
+                data-type="checkbox"
+                data-label={label ?? ''}
               />
             }
             onBlur={onBlur}
