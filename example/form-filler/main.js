@@ -59,9 +59,13 @@ const formData = [
   },
   {
     // date selector
-    type: 'date',
     label: 'Your birthday',
     value: '19701025', // format: "YYYYMMDD"
+  },
+  {
+    // error
+    label: 'None existing label',
+    value: '',
   },
 ];
 

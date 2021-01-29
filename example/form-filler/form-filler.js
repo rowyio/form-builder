@@ -80,17 +80,22 @@ await formFiller(page, formData);
 */
 
 async function formFiller(page, data) {
-  for ({ type, label, value } of data) {
-    // e.g. if the acutual label on the page is 'Unique page header (max. 100 characters)'
-    //      then passing 'unique page header' will work
+  for (const { label, value } of data) {
+    // if the acutual label on the page is 'Unique page header (max. 100 characters)'
+    // then passing 'unique page header' will work
     const xPathContainsFragment = xPathContainsIgnoreCase('data-label', label);
     const dataPath = `//*[${xPathContainsFragment}]`;
     const pathExists = await page.$(dataPath);
 
-    // try to identify type
-    if (pathExists) {
-      type = await page.$eval(dataPath, el => el.getAttribute('data-type'));
+    if (!pathExists) {
+      console.error(
+        `Label does not exist. Make sure label exists and is unique:`,
+        label
+      );
+      continue;
     }
+
+    const type = await page.$eval(dataPath, el => el.getAttribute('data-type'));
 
     switch (type) {
       case 'text':
