@@ -201,6 +201,8 @@ async function formFiller(page, data) {
       case 'color':
         // triple click to select current text then type to overwrite
         await page.click(dataPath);
+        // wait for color picker open animation
+        await page.waitForTimeout(300);
         await page.click(`//*[@data-type="color-picker"]//input`, {
           clickCount: 3,
           delay: 50,
