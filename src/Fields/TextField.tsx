@@ -69,6 +69,7 @@ export default function TextField({
           margin="none"
           error={!!errorMessage}
           helperText={errorMessage}
+          name={name}
           {...variantProps}
           {...props}
           {...overrideProps}
