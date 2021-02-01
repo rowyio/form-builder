@@ -67,10 +67,10 @@ const App = () => {
         },
         {
           type: FIELDS.multiSelect,
-          name: 'multiSelect',
+          name: 'multiSelect single',
           label: 'Who is CEO of Facebook?',
           options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-          multiple: false
+          multiple: false,
         },
         {
           type: FIELDS.checkbox,

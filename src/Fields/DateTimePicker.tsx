@@ -42,8 +42,8 @@ export default function DateTimePicker({
               inputVariant="filled"
               fullWidth
               margin="none"
-              format="yyyy/MM/dd h:mm aaaa"
-              placeholder="yyyy/MM/dd h:mm aaaa"
+              format="yyyy/MM/dd hh:mm a"
+              placeholder="yyyy/MM/dd h:mm a"
               InputAdornmentProps={{
                 style: { marginRight: theme.spacing(-1) },
               }}
@@ -55,6 +55,8 @@ export default function DateTimePicker({
               onBlur={onBlur}
               error={!!errorMessage}
               helperText={errorMessage}
+              data-type="datetime"
+              data-label={props.label ?? ''}
             />
           );
         }}
