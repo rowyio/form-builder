@@ -52,6 +52,8 @@ export default function DatePicker({
               onBlur={onBlur}
               error={!!errorMessage}
               helperText={errorMessage}
+              data-type="date"
+              data-label={props.label ?? ''}
             />
           );
         }}

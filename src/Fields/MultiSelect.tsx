@@ -36,6 +36,9 @@ export default function MultiSelect({
               error: !!errorMessage,
               helperText: errorMessage,
               onBlur,
+              'data-type':
+                props.multiple ?? true ? 'multi-select' : 'multi-select-single',
+              'data-label': props.label ?? '',
             }}
           />
         );

@@ -77,7 +77,14 @@ export default function Radio({
                     label={option.label}
                     control={
                       <MuiRadio
-                      //disabled={isSubmitting}
+                        //disabled={isSubmitting}
+                        inputProps={
+                          {
+                            'data-type': 'radio',
+                            'data-label': label ?? '',
+                            'data-label-option': option.label ?? '',
+                          } as any
+                        }
                       />
                     }
                     classes={{ label: classes.formControlLabel }}

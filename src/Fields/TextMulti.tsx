@@ -61,7 +61,11 @@ export function ControlledTextMulti({
   };
 
   return (
-    <FormControl className={classes.root}>
+    <FormControl
+      className={classes.root}
+      data-type="text-multi"
+      data-label={label ?? ''}
+    >
       <Label error={!!errorMessage}>{label}</Label>
 
       <List className={classes.list} disablePadding>

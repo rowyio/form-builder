@@ -116,7 +116,11 @@ export default function RichText({
       control={control}
       name={name}
       render={({ onChange, onBlur, value }) => (
-        <FormControl className={clsx(classes.root, focus && classes.focus)}>
+        <FormControl
+          className={clsx(classes.root, focus && classes.focus)}
+          data-type="rich-text"
+          data-label={label ?? ''}
+        >
           <Label error={!!errorMessage}>{label}</Label>
 
           <Editor

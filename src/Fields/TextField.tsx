@@ -66,6 +66,10 @@ export default function TextField({
       {...props}
       {...overrideProps}
       inputRef={register}
+      inputProps={{
+        'data-type': fieldVariant === 'long' ? 'textarea' : 'text',
+        'data-label': props.label ?? '',
+      }}
     />
   );
 }
