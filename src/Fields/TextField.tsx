@@ -1,5 +1,6 @@
 import React from 'react';
 import { IFieldComponentProps } from '../utils';
+import { Controller } from 'react-hook-form';
 
 import {
   TextField as MuiTextField,
@@ -18,6 +19,7 @@ export default function TextField({
   fieldVariant = 'short',
   hiddenLabel = false,
   control,
+  name,
   useFormMethods,
   ...props
 }: ITextProps) {
@@ -56,20 +58,27 @@ export default function TextField({
     : {};
 
   return (
-    <MuiTextField
-      variant="filled"
-      fullWidth
-      margin="none"
-      error={!!errorMessage}
-      helperText={errorMessage}
-      {...variantProps}
-      {...props}
-      {...overrideProps}
-      inputRef={register}
-      inputProps={{
-        'data-type': fieldVariant === 'long' ? 'textarea' : 'text',
-        'data-label': props.label ?? '',
-      }}
-    />
+    <Controller
+      control={control}
+      name={name}
+      render={({ onChange, onBlur, value }) => (
+        <MuiTextField
+          onChange={onChange}
+          variant="filled"
+          fullWidth
+          margin="none"
+          error={!!errorMessage}
+          helperText={errorMessage}
+          {...variantProps}
+          {...props}
+          {...overrideProps}
+          inputRef={register}
+          inputProps={{
+            'data-type': fieldVariant === 'long' ? 'textarea' : 'text',
+            'data-label': props.label ?? '',
+          }}
+        />
+      )}
+    ></Controller>
   );
 }
