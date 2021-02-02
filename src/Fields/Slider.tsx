@@ -86,6 +86,8 @@ export default function Slider({
         const getValueLabelFormat = (value: number) =>
           `${value}${units ? ' ' + units : ''}`;
 
+        const { useFormMethods, ...otherProps } = props;
+
         return (
           <FormControl className={classes.root}>
             <Label error={!!errorMessage}>{label}</Label>
@@ -108,7 +110,7 @@ export default function Slider({
                   max={max}
                   getAriaValueText={getAriaValueText}
                   valueLabelFormat={getValueLabelFormat}
-                  {...props}
+                  {...otherProps}
                   value={value ?? min}
                   onClick={onBlur}
                   onChange={handleChange}

@@ -34,6 +34,8 @@ export default function DatePicker({
           if (value && 'toDate' in value) transformedValue = value.toDate();
           else if (value !== undefined) transformedValue = value;
 
+          const { useFormMethods, ...otherProps } = props;
+
           return (
             <KeyboardDatePicker
               variant="inline"
@@ -46,7 +48,7 @@ export default function DatePicker({
                 style: { marginRight: theme.spacing(-1) },
               }}
               InputLabelProps={{ shrink: transformedValue !== null }}
-              {...props}
+              {...otherProps}
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}

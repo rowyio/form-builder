@@ -45,6 +45,7 @@ export default function Radio({
   ...props
 }: IRadioProps) {
   const classes = useStyles();
+  const { useFormMethods, ...otherProps } = props;
 
   return (
     <Controller
@@ -55,7 +56,7 @@ export default function Radio({
           <Label error={!!errorMessage}>{label}</Label>
 
           <RadioGroup
-            {...props}
+            {...otherProps}
             onChange={onChange}
             onBlur={onBlur}
             value={value}

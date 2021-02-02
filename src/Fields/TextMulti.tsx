@@ -145,9 +145,10 @@ export default function TextMulti({
     <Controller
       control={control}
       name={name}
-      render={renderProps => (
-        <ControlledTextMulti {...props} {...renderProps} />
-      )}
+      render={renderProps => {
+        const { ref, ...otherRenderProps } = renderProps;
+        return <ControlledTextMulti {...props} {...otherRenderProps} />;
+      }}
     />
   );
 }
