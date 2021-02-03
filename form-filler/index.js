@@ -88,7 +88,7 @@ async function formFiller(page, data) {
   for (const { label, value } of data) {
     // if the acutual label on the page is 'Unique page header (max. 100 characters)'
     // then passing 'unique page header' will work
-    const xPathContainsFragment = xPathContainsIgnoreCase("data-label", label);
+    const xPathContainsFragment = xPathContainsIgnoreCase('data-label', label);
     const dataPath = `//*[${xPathContainsFragment}]`;
     const pathExists = await page.$(dataPath);
 
@@ -100,16 +100,14 @@ async function formFiller(page, data) {
       continue;
     }
 
-    const type = await page.$eval(dataPath, (el) =>
-      el.getAttribute("data-type")
-    );
+    const type = await page.$eval(dataPath, el => el.getAttribute('data-type'));
 
     switch (type) {
-      case "text":
-      case "textarea":
+      case 'text':
+      case 'textarea':
         await page.fill(dataPath, value);
         break;
-      case "rich-text":
+      case 'rich-text':
         // triple click to select all current text then overwrite using keyboard
         await page.click(`${dataPath}//iframe`, {
           clickCount: 3,
@@ -117,23 +115,23 @@ async function formFiller(page, data) {
         });
         await page.keyboard.type(value);
         break;
-      case "radio":
+      case 'radio':
         await page.check(
-          `${dataPath}[${xPathContainsIgnoreCase("data-label-option", value)}]`
+          `${dataPath}[${xPathContainsIgnoreCase('data-label-option', value)}]`
         );
         break;
-      case "checkbox":
+      case 'checkbox':
         value ? await page.check(dataPath) : await page.uncheck(dataPath);
         break;
-      case "single-select":
+      case 'single-select':
         // open dropdown
         await page.click(dataPath);
         // select dropdown with value
         await page.click(
-          `//li[${xPathContainsIgnoreCase("data-value", value)}]`
+          `//li[${xPathContainsIgnoreCase('data-value', value)}]`
         );
         break;
-      case "multi-select-single":
+      case 'multi-select-single':
         // this is the case of MultiSelect with a multiple=false prop
         const isSelected = await page.$(
           `${dataPath}/..//div[normalize-space(.)='${value}']`
@@ -145,18 +143,18 @@ async function formFiller(page, data) {
           await page.click(`//li[normalize-space(.)='${value}']`);
         }
         break;
-      case "multi-select":
+      case 'multi-select':
         // open dropdown
         await page.click(dataPath);
         // select options
         await page.$$eval(
-          ".MuiAutocomplete-listbox li",
+          '.MuiAutocomplete-listbox li',
           (options, value) => {
             const valueSet = new Set(value);
             for (const option of options) {
               // toggle the options that should be toggled
               const shouldBeChecked = valueSet.has(option.innerText);
-              const isChecked = option.getAttribute("aria-selected") === "true";
+              const isChecked = option.getAttribute('aria-selected') === 'true';
               shouldBeChecked !== isChecked && option.click();
             }
           },
@@ -168,7 +166,7 @@ async function formFiller(page, data) {
           await page.waitForTimeout(50);
         }
         break;
-      case "text-multi":
+      case 'text-multi':
         // remove all current values
         const removeButtonSelector = `${dataPath}//button[@aria-label="Remove"]`;
         while (await page.$(removeButtonSelector)) {
@@ -180,28 +178,28 @@ async function formFiller(page, data) {
           await page.click(`${dataPath}//button[@aria-label="Add item"]`);
         }
         break;
-      case "slider":
+      case 'slider':
         // focus on slider and get current selected value
         await page.click(`${dataPath}//span[@role="slider"]`);
         const currentValue = await page.$eval(
           `${dataPath}//input[@type="hidden"]`,
-          (el) => parseInt(el.value)
+          el => parseInt(el.value)
         );
         // calculate difference and simulate keyboard event to move slider
         let operation;
         let count = 0;
         if (currentValue > value) {
           count = currentValue - value;
-          operation = "ArrowLeft";
+          operation = 'ArrowLeft';
         } else if (currentValue < value) {
           count = value - currentValue;
-          operation = "ArrowRight";
+          operation = 'ArrowRight';
         }
-        for (const _ of Array(count).fill()) {
+        for (let i = 0; i < count; ++i) {
           await page.press('span[role="slider"]', operation);
         }
         break;
-      case "color":
+      case 'color':
         // triple click to select current text then type to overwrite
         await page.click(dataPath);
         // wait for color picker open animation
@@ -211,15 +209,15 @@ async function formFiller(page, data) {
           delay: 50,
         });
         await page.keyboard.type(value);
-        await page.keyboard.press("Enter");
+        await page.keyboard.press('Enter');
         await page.click(dataPath);
         break;
-      case "date":
+      case 'date':
         // triple click to select current text then type to overwrite
         await page.click(dataPath);
         await page.keyboard.type(value);
         break;
-      case "datetime":
+      case 'datetime':
         // triple click to select current text then type to overwrite
         await page.click(dataPath);
         await page.keyboard.type(value);
