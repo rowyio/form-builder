@@ -22,6 +22,7 @@ export default function DateTimePicker({
   control,
   name,
   errorMessage,
+  useFormMethods,
   ...props
 }: IDateTimePickerProps) {
   const theme = useTheme();
@@ -36,8 +37,6 @@ export default function DateTimePicker({
           if (value && 'toDate' in value) transformedValue = value.toDate();
           else if (value !== undefined) transformedValue = value;
 
-          const { useFormMethods, ...otherProps } = props;
-
           return (
             <KeyboardDateTimePicker
               variant="inline"
@@ -51,7 +50,7 @@ export default function DateTimePicker({
               }}
               keyboardIcon={<AccessTimeIcon />}
               InputLabelProps={{ shrink: transformedValue !== null }}
-              {...otherProps}
+              {...props}
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}

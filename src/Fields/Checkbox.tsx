@@ -19,9 +19,9 @@ export default function Checkbox({
   name,
   errorMessage,
   label,
+  useFormMethods,
   ...props
 }: ICheckboxProps) {
-  const { useFormMethods, ...otherProps } = props;
   return (
     <Controller
       control={control}
@@ -31,7 +31,7 @@ export default function Checkbox({
           <FormControlLabel
             control={
               <MuiCheckbox
-                {...otherProps}
+                {...props}
                 checked={value}
                 onChange={e => onChange(e.target.checked)}
                 inputProps={

@@ -66,6 +66,7 @@ export default function Slider({
   maxLabel,
   min = 0,
   max = 100,
+  useFormMethods,
   ...props
 }: ISliderProps) {
   const classes = useStyles();
@@ -85,8 +86,6 @@ export default function Slider({
 
         const getValueLabelFormat = (value: number) =>
           `${value}${units ? ' ' + units : ''}`;
-
-        const { useFormMethods, ...otherProps } = props;
 
         return (
           <FormControl className={classes.root}>
@@ -110,7 +109,7 @@ export default function Slider({
                   max={max}
                   getAriaValueText={getAriaValueText}
                   valueLabelFormat={getValueLabelFormat}
-                  {...otherProps}
+                  {...props}
                   value={value ?? min}
                   onClick={onBlur}
                   onChange={handleChange}

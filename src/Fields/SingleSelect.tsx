@@ -16,9 +16,9 @@ export default function SingleSelect({
   name,
   errorMessage,
   options = [],
+  useFormMethods,
   ...props
 }: ISingleSelectProps) {
-  const { useFormMethods, ...otherProps } = props;
   return (
     <Controller
       control={control}
@@ -31,7 +31,7 @@ export default function SingleSelect({
           variant="filled"
           error={!!errorMessage}
           helperText={errorMessage}
-          {...otherProps}
+          {...props}
           onChange={onChange}
           onBlur={onBlur}
           // Convert string[] value to string
