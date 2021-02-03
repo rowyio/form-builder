@@ -42,6 +42,7 @@ export default function Radio({
   errorMessage,
   options,
   label,
+  useFormMethods,
   ...props
 }: IRadioProps) {
   const classes = useStyles();

@@ -16,6 +16,7 @@ export default function SingleSelect({
   name,
   errorMessage,
   options = [],
+  useFormMethods,
   ...props
 }: ISingleSelectProps) {
   return (

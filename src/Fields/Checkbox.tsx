@@ -19,6 +19,7 @@ export default function Checkbox({
   name,
   errorMessage,
   label,
+  useFormMethods,
   ...props
 }: ICheckboxProps) {
   return (

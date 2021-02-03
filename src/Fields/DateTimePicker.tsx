@@ -22,6 +22,7 @@ export default function DateTimePicker({
   control,
   name,
   errorMessage,
+  useFormMethods,
   ...props
 }: IDateTimePickerProps) {
   const theme = useTheme();

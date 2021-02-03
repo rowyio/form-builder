@@ -20,6 +20,7 @@ export default function DatePicker({
   control,
   name,
   errorMessage,
+  useFormMethods,
   ...props
 }: IDatePickerProps) {
   const theme = useTheme();

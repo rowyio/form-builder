@@ -66,6 +66,7 @@ export default function Slider({
   maxLabel,
   min = 0,
   max = 100,
+  useFormMethods,
   ...props
 }: ISliderProps) {
   const classes = useStyles();
