@@ -88,7 +88,7 @@ async function formFiller(page, data) {
   for (const { label, value } of data) {
     // if the acutual label on the page is 'Unique page header (max. 100 characters)'
     // then passing 'unique page header' will work
-    const xPathContainsFragment = xPathContainsIgnoreCase('data-label', label);
+    const xPathContainsFragment = xPathContainsIgnoreCase('@data-label', label);
     const dataPath = `//*[${xPathContainsFragment}]`;
     const pathExists = await page.$(dataPath);
 
@@ -117,7 +117,7 @@ async function formFiller(page, data) {
         break;
       case 'radio':
         await page.check(
-          `${dataPath}[${xPathContainsIgnoreCase('data-label-option', value)}]`
+          `${dataPath}[${xPathContainsIgnoreCase('@data-label-option', value)}]`
         );
         break;
       case 'checkbox':
@@ -127,9 +127,7 @@ async function formFiller(page, data) {
         // open dropdown
         await page.click(dataPath);
         // select dropdown with value
-        await page.click(
-          `//li[${xPathContainsIgnoreCase('data-value', value)}]`
-        );
+        await page.click(`//li[${xPathContainsIgnoreCase('text()', value)}]`);
         break;
       case 'multi-select-single':
         // this is the case of MultiSelect with a multiple=false prop
@@ -231,7 +229,7 @@ async function formFiller(page, data) {
 // case insensitive substring match the data-label
 // source: https://stackoverflow.com/a/8474109
 const xPathContainsIgnoreCase = (attribute, label) =>
-  `contains(translate(@${attribute}, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'${label
+  `contains(translate(${attribute}, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'${label
     .toLowerCase()
     .trim()}')`;
 
