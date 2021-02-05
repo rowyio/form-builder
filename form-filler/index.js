@@ -59,12 +59,18 @@ const formData = {
 await formFiller(page, formData);
 */
 
-async function formFiller(page, data) {
+async function formFiller(page, data, config = { wait: false }) {
   for (const [label, value] of Object.entries(data)) {
     // if the acutual label on the page is 'Unique page header (max. 100 characters)'
     // then passing 'unique page header' will work
     const xPathContainsFragment = xPathContainsIgnoreCase('@data-label', label);
     const dataPath = `//*[${xPathContainsFragment}]`;
+
+    // Wait for selector to appear if specified
+    if (config.wait) {
+      await page.waitForSelector(dataPath, { timeOut: 3000 });
+    }
+
     const pathExists = await page.$(dataPath);
 
     if (!pathExists) {
@@ -154,8 +160,6 @@ async function formFiller(page, data) {
         }
         break;
       case 'slider':
-        // focus on slider and get current selected value
-        await page.click(`${dataPath}//span[@role="slider"]`);
         const currentValue = await page.$eval(
           `${dataPath}//input[@type="hidden"]`,
           el => parseInt(el.value)
@@ -171,8 +175,9 @@ async function formFiller(page, data) {
           operation = 'ArrowRight';
         }
         for (let i = 0; i < count; ++i) {
-          await page.press('span[role="slider"]', operation);
+          await page.press(`${dataPath}//span[@role="slider"]`, operation);
         }
+        await page.waitForTimeout(100);
         break;
       case 'color':
         // triple click to select current text then type to overwrite
