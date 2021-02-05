@@ -148,10 +148,12 @@ async function formFiller(page, data) {
         await page.$$eval(
           '.MuiAutocomplete-listbox li',
           (options, value) => {
-            const valueSet = new Set(value);
+            const valueSet = new Set(value.map(item => item.toLowerCase()));
             for (const option of options) {
               // toggle the options that should be toggled
-              const shouldBeChecked = valueSet.has(option.innerText);
+              const shouldBeChecked = valueSet.has(
+                option.innerText.toLowerCase()
+              );
               const isChecked = option.getAttribute('aria-selected') === 'true';
               shouldBeChecked !== isChecked && option.click();
             }
