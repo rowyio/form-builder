@@ -5,87 +5,62 @@ To run the script, make sure node>14 and main /example project is running, and r
 
 Below are the sample data that can be used.
 formFiller function accepts two params. The first is the page object from playwright, and must be active,
-and the second param is the form data to be filled, it is an array of object, each object should have
-a label and a value. Label should be the unique identifier of the input and value is the value to be filled.
+and the second param is the form data to be filled, it is a dictionary object, each object should have
+a key as label and a value value to be filled. Label should be unique and value is the value to be filled.
 Label is case insensitive andcan ignore some leading or trailing text however must be unique. 
 For example, if the label in the DOM is "Unique page header (max. 100 characters)", a shortened "page header"
 is accepted. Each type of input has a different value type, for example, rich text should have a value type 
 of string and multiple selector should have a type of array of strings.
 
-const formData = [
-  {
-    // rich text
-    label: 'description',
-    value: 'a random description',
-  },
-  {
-    // text
-    label: 'Unique page header (max. 100 characters)',
-    value: 'a random page header',
-  },
-  {
-    // text field (long text)
-    label: 'Tell me more',
-    value: 'bla bla blablabla',
-  },
-  {
-    // single selector
-    label: 'Who is the CEO of Antler?',
-    value: 'Option 2',
-  },
-  {
-    // multiple selector
-    label: 'Who are Antler Engineering team members?',
-    value: ['Option 2', 'Option 3'],
-  },
-  {
-    // single selector with MultiSelect component
-    label: 'ceo of facebook',
-    value: 'Option 2',
-  },
-  {
-    // checkbox
-    label: 'I am not a robot',
-    value: true,
-  },
-  {
-    // radio
-    label: 'Highest education level?',
-    value: 'Option 4',
-  },
-  {
-    // slider
-    label: 'Your age',
-    value: 5,
-  },
-  {
-    // multiple text
-    label: 'Previous employers',
-    value: ['Antler', 'Antler Sydney', 'Antler Australia'],
-  },
-  {
-    // color picker
-    label: 'Preferred color for your Antler shirt?',
-    value: '#ff00ff',
-  },
-  {
-    // date selector
-    type: 'date',
-    label: 'Your birthday',
-    value: '19701025', // format: "YYYYMMDD"
-  },
-  {
-    // datetime selector
-    label: "book a time",
-    value: "199010201050a", // format: "YYYYMMDDHHMM[a/p]"
-  },
-];
+const formData = {
+  // rich text
+  description: 'a random description',
+
+  // text
+  'Unique page header (max. 100 characters)': 'a random page header',
+
+  // text field (long text)
+  'Tell me more': 'bla bla blablabla',
+
+  // single selector
+  'Who is the CEO of Antler?': 'Option 2',
+
+  // multiple selector
+  'Who are Antler Engineering team members?': ['Option 2', 'Option 3'],
+
+  // single selector with MultiSelect component
+  'ceo of facebook': 'Option 2',
+
+  // checkbox
+  'I am not a robot': true,
+
+  // radio
+  'Highest education level?': 'Option 4',
+
+  // slider
+  'Your age': 5,
+
+  // multiple text
+  'Previous employers': ['Antler', 'Antler Sydney', 'Antler Australia'],
+
+  // color picker
+  'Preferred color for your Antler shirt?': '#ff00ff',
+
+  // date selector
+  'Your birthday': '19701025', // format: "YYYYMMDD"
+
+  // datetime selector
+  'book a time': '199010201050a', // format: "YYYYMMDDHHMM[a/p]"
+
+  // error
+  'None existing label': '',
+};
 
 await formFiller(page, formData);
 */
 
 async function formFiller(page, data) {
-  for (const { label, value } of data) {
+  for (const [label, value] of Object.entries(data)) {
     // if the acutual label on the page is 'Unique page header (max. 100 characters)'
     // then passing 'unique page header' will work
     const xPathContainsFragment = xPathContainsIgnoreCase('@data-label', label);
