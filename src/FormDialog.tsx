@@ -9,13 +9,13 @@ import {
   useMediaQuery,
   Dialog,
   DialogProps as MuiDialogProps,
-  Grid,
-  IconButton,
   DialogTitle,
-  Divider,
+  Typography,
+  IconButton,
   DialogContent,
   DialogContentText,
   DialogActions,
+  Grid,
   Button,
   ButtonProps,
 } from '@material-ui/core';
@@ -33,60 +33,47 @@ import { TransitionGrow, TransitionSlide } from './Transition';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    // root: {
-    // zIndex: (theme.zIndex.modal + 50 + ' !important') as any,
-    // },
+    root: {
+      '--spacing-modal': theme.spacing(3) + 'px',
+      '--spacing-modal-contents': theme.spacing(3) + 'px',
+
+      [theme.breakpoints.down('xs')]: {
+        '--spacing-modal': theme.spacing(2) + 'px',
+      },
+    },
 
     paper: {
       userSelect: 'none',
       overflowX: 'hidden',
+
+      padding: 'var(--spacing-modal)',
+      paddingBottom: 'var(--spacing-modal-contents)',
     },
 
-    paperFullScreen: {
-      marginTop: theme.spacing(2),
-      height: `calc(100% - ${theme.spacing(2)}px)`,
-      borderTopLeftRadius: theme.shape.borderRadius * 2,
-      borderTopRightRadius: theme.shape.borderRadius * 2,
-    },
+    titleRow: {
+      padding: 0,
+      paddingBottom: 'var(--spacing-modal)',
 
-    closeButton: {
-      margin: theme.spacing(0.5),
-      marginLeft: 'auto',
-      marginBottom: 0,
       display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
     },
-
     title: {
-      paddingTop: theme.spacing(8),
-      paddingLeft: theme.spacing(8),
-      color: theme.palette.text.secondary,
-
-      [theme.breakpoints.down('xs')]: {
-        paddingTop: theme.spacing(2),
-        paddingLeft: theme.spacing(2),
-      },
+      ...theme.typography.h5,
+      [theme.breakpoints.down('sm')]: theme.typography.h6,
     },
-    divider: {
-      margin: theme.spacing(0, 8),
-      [theme.breakpoints.down('xs')]: { margin: theme.spacing(0, 2) },
+    closeButton: {
+      margin: theme.spacing(-1.5),
+      marginLeft: 'var(--spacing-modal)',
     },
 
     content: {
-      padding: theme.spacing(3, 8, 6),
-      [theme.breakpoints.down('xs')]: { padding: theme.spacing(2) },
+      padding: 0,
     },
 
     actions: {
-      margin: theme.spacing(0, -2),
-      padding: theme.spacing(0, 8, 2),
-
-      [theme.breakpoints.down('xs')]: {
-        margin: theme.spacing(0, -0.5),
-        padding: theme.spacing(1, 0),
-        marginTop: 'auto',
-      },
-
-      '& button': { minWidth: 142 },
+      paddingTop: 'var(--spacing-modal-contents)',
+      '& button': { minWidth: 100 },
     },
   })
 );
@@ -169,32 +156,35 @@ export default function FormDialog({
         // Must disablePortal so the dialog can be wrapped in FormikForm
         disablePortal
         aria-labelledby="form-dialog-title"
+        {...DialogProps}
         classes={{
-          // root: classes.root,
+          root: classes.root,
           paper: classes.paper,
-          paperFullScreen: classes.paperFullScreen,
           ...DialogProps?.classes,
         }}
-        {...DialogProps}
       >
-        <Grid container>
-          <Grid item xs>
-            <DialogTitle id="sub-modal-title" className={classes.title}>
-              {title}
-            </DialogTitle>
-          </Grid>
-          <Grid item>
-            <IconButton
-              onClick={confirmClose}
-              className={classes.closeButton}
-              aria-label="Close Form"
-            >
-              <CloseIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
+        <DialogTitle
+          id="modal-title"
+          className={classes.titleRow}
+          disableTypography
+        >
+          <Typography
+            className={classes.title}
+            component="h2"
+            color="textPrimary"
+          >
+            {title}
+          </Typography>
 
-        <Divider className={classes.divider} />
+          <IconButton
+            onClick={handleClose}
+            className={classes.closeButton}
+            aria-label="Close"
+            color="secondary"
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
 
         <DialogContent className={classes.content}>
           {formHeader}
@@ -211,7 +201,7 @@ export default function FormDialog({
 
         <Grid
           container
-          spacing={isMobile ? 1 : 4}
+          spacing={2}
           justify="center"
           alignItems="center"
           className={classes.actions}
@@ -221,8 +211,6 @@ export default function FormDialog({
               <Grid item>
                 <Button
                   color="primary"
-                  size="large"
-                  variant="outlined"
                   onClick={confirmClose}
                   {...(CancelButtonProps ?? {})}
                   children={CancelButtonProps?.children || 'Cancel'}
@@ -231,7 +219,6 @@ export default function FormDialog({
               <Grid item>
                 <Button
                   color="primary"
-                  size="large"
                   variant="contained"
                   type="submit"
                   {...(SubmitButtonProps ?? {})}
