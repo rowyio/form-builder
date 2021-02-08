@@ -177,7 +177,7 @@ export default function FormDialog({
           </Typography>
 
           <IconButton
-            onClick={handleClose}
+            onClick={confirmClose}
             className={classes.closeButton}
             aria-label="Close"
             color="secondary"
