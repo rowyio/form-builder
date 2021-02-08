@@ -113,13 +113,18 @@ async function formFiller(page, data, config = { wait: false }) {
       case 'multi-select-single':
         // this is the case of MultiSelect with a multiple=false prop
         const isSelected = await page.$(
-          `${dataPath}/..//div[normalize-space(.)='${value}']`
+          `${dataPath}/..//div[${xPathContainsIgnoreCase(
+            'normalize-space(.)',
+            value
+          )}]`
         );
         if (!isSelected) {
           // open dropdown
           await page.click(dataPath);
           // select option
-          await page.click(`//li[normalize-space(.)='${value}']`);
+          await page.click(
+            `//li[${xPathContainsIgnoreCase('normalize-space(.)', value)}]`
+          );
         }
         break;
       case 'multi-select':
