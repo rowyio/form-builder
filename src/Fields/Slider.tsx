@@ -19,31 +19,6 @@ const useStyles = makeStyles(theme =>
   createStyles({
     root: { display: 'flex' },
     slider: { display: 'block' },
-
-    thumb: {
-      width: 16,
-      height: 16,
-      marginTop: -7,
-      marginLeft: -8,
-    },
-
-    valueLabel: {
-      top: -22,
-      ...theme.typography.overline,
-      color: theme.palette.primary.main,
-
-      '& > *': {
-        width: 'auto',
-        minWidth: 24,
-        height: 24,
-
-        whiteSpace: 'nowrap',
-        borderRadius: 500,
-
-        padding: theme.spacing(0, 0.75, 0, 1),
-      },
-      '& *': { transform: 'none' },
-    },
   })
 );
 
@@ -113,11 +88,7 @@ export default function Slider({
                   value={value ?? min}
                   onClick={onBlur}
                   onChange={handleChange}
-                  classes={{
-                    root: classes.slider,
-                    thumb: classes.thumb,
-                    valueLabel: classes.valueLabel,
-                  }}
+                  classes={{ root: classes.slider }}
                   data-type="slider"
                   data-label={label ?? ''}
                 />
