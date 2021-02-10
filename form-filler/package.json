@@ -1,6 +1,6 @@
 {
   "name": "@antlerengineering/form-filler",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "index.js",
   "license": "MIT",
   "peerDependencies": {
