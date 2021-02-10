@@ -59,12 +59,15 @@ const formData = {
 await formFiller(page, formData);
 */
 
-async function formFiller(page, data, config = { wait: false }) {
+async function formFiller(page, data, config = { wait: false, exact: false }) {
   for (const [label, value] of Object.entries(data)) {
     // if the acutual label on the page is 'Unique page header (max. 100 characters)'
     // then passing 'unique page header' will work
+    // pass config.exact=true to disable this default behaviour
     const xPathContainsFragment = xPathContainsIgnoreCase('@data-label', label);
-    const dataPath = `//*[${xPathContainsFragment}]`;
+    const dataPath = config.exact
+      ? `//*[@data-label="${label}"]`
+      : `//*[${xPathContainsFragment}]`;
 
     // Wait for selector to appear if specified
     if (config.wait) {
@@ -81,7 +84,9 @@ async function formFiller(page, data, config = { wait: false }) {
       continue;
     }
 
-    const type = await page.$eval(dataPath, el => el.getAttribute('data-type'));
+    const type = await page.$eval(dataPath, (el) =>
+      el.getAttribute('data-type')
+    );
 
     switch (type) {
       case 'text':
@@ -134,7 +139,7 @@ async function formFiller(page, data, config = { wait: false }) {
         await page.$$eval(
           '.MuiAutocomplete-listbox li',
           (options, value) => {
-            const valueSet = new Set(value.map(item => item.toLowerCase()));
+            const valueSet = new Set(value.map((item) => item.toLowerCase()));
             for (const option of options) {
               // toggle the options that should be toggled
               const shouldBeChecked = valueSet.has(
@@ -167,7 +172,7 @@ async function formFiller(page, data, config = { wait: false }) {
       case 'slider':
         const currentValue = await page.$eval(
           `${dataPath}//input[@type="hidden"]`,
-          el => parseInt(el.value)
+          (el) => parseInt(el.value)
         );
         // calculate difference and simulate keyboard event to move slider
         let operation;
