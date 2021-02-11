@@ -118,7 +118,7 @@ async function formFiller(page, data, config = { wait: false, exact: false }) {
       case 'multi-select-single':
         // this is the case of MultiSelect with a multiple=false prop
         const isSelected = await page.$(
-          `${dataPath}/..//div[${xPathContainsIgnoreCase(
+          `${dataPath}/../div/div/div[${xPathContainsIgnoreCase(
             'normalize-space(.)',
             value
           )}]`
