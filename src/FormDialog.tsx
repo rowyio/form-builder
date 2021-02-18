@@ -69,6 +69,7 @@ const useStyles = makeStyles(theme =>
 
     content: {
       padding: 0,
+      overflowX: 'hidden',
     },
 
     actions: {
