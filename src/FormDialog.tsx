@@ -37,8 +37,9 @@ const useStyles = makeStyles(theme =>
     root: {
       '--spacing-modal': theme.spacing(3) + 'px',
       '--spacing-modal-contents': theme.spacing(3) + 'px',
+      '--spacing-card': 'var(--spacing-modal-contents)',
 
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         '--spacing-modal': theme.spacing(2) + 'px',
       },
     },
