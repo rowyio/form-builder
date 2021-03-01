@@ -15,9 +15,6 @@ const useStyles = makeStyles(theme =>
       marginBottom: -theme.spacing(2),
       width: '100%',
 
-      textTransform: 'uppercase',
-      letterSpacing: 1,
-
       whiteSpace: 'pre-line',
       cursor: 'default',
     },
@@ -46,7 +43,7 @@ export default function Heading({
 
   return (
     <div className={clsx(classes.root, className)}>
-      <Typography variant="h6" color="textSecondary">
+      <Typography variant="h6" color="textPrimary">
         {children ?? heading ?? title ?? label ?? text}
       </Typography>
       <Divider />
