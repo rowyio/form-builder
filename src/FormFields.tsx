@@ -30,7 +30,13 @@ export interface IFormFieldsProps extends ICommonProps {
 }
 export default function FormFields({ fields, ...props }: IFormFieldsProps) {
   return (
-    <Grid container spacing={3} direction="column" wrap="nowrap">
+    <Grid
+      container
+      spacing={3}
+      direction="column"
+      wrap="nowrap"
+      style={{ marginBottom: 0 }}
+    >
       {fields.map((field, i) => {
         // Call the field function with values if necessary
         if (_isFunction(field))
