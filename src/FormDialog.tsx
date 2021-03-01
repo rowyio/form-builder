@@ -19,6 +19,7 @@ import {
   Button,
   ButtonProps,
 } from '@material-ui/core';
+import { fade } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 
 import FormFields from './FormFields';
@@ -68,8 +69,34 @@ const useStyles = makeStyles(theme =>
     },
 
     content: {
-      padding: 0,
       overflowX: 'hidden',
+
+      padding: '0 var(--spacing-modal)',
+      margin: '0 calc(var(--spacing-modal) * -1)',
+
+      ...theme.typography.body1,
+
+      // https://codepen.io/evank/pen/wWbRNO
+      background: `
+        linear-gradient(${theme.palette.background.paper} 50%, ${fade(
+        theme.palette.background.paper,
+        0
+      )}),
+        linear-gradient(${fade(theme.palette.background.paper, 0)}, ${
+        theme.palette.background.paper
+      } 50%) 0 100%,
+        linear-gradient(to top, ${theme.palette.divider} 1px, ${fade(
+        theme.palette.divider,
+        0
+      )}),
+        linear-gradient(to top, ${theme.palette.divider} 1px, ${fade(
+        theme.palette.divider,
+        0
+      )}) 0 calc(100% - 0.5px)`,
+      backgroundRepeat: 'no-repeat',
+      backgroundColor: 'white',
+      backgroundSize: '100% 2px, 100% 3px, 100% 1px, 100% 1px',
+      backgroundAttachment: 'local, local, scroll, scroll',
     },
 
     actions: {
