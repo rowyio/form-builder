@@ -77,6 +77,7 @@ export default function TextField({
           inputProps={{
             'data-type': fieldVariant === 'long' ? 'textarea' : 'text',
             'data-label': props.label ?? '',
+            ...variantProps.inputProps,
           }}
         />
       )}
