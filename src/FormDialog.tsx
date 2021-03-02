@@ -30,7 +30,7 @@ import {
   getDefaultValues,
   getValidationSchema,
 } from './utils';
-import { TransitionGrow, TransitionSlide } from './Transition';
+import { SlideTransitionMui } from './SlideTransition';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -181,7 +181,7 @@ export default function FormDialog({
         onClose={confirmClose}
         fullScreen={isMobile}
         fullWidth
-        TransitionComponent={isMobile ? TransitionSlide : TransitionGrow}
+        TransitionComponent={SlideTransitionMui}
         // Must disablePortal so the dialog can be wrapped in FormikForm
         disablePortal
         aria-labelledby="form-dialog-title"
