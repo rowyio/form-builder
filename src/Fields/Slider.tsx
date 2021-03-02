@@ -18,6 +18,7 @@ import ErrorMessage from '../ErrorMessage';
 const useStyles = makeStyles(theme =>
   createStyles({
     root: { display: 'flex' },
+    sliderGrid: { marginTop: theme.spacing(3) },
     slider: { display: 'block' },
   })
 );
@@ -66,10 +67,15 @@ export default function Slider({
           <FormControl className={classes.root}>
             <Label error={!!errorMessage}>{label}</Label>
 
-            <Grid container spacing={2} alignItems="center">
+            <Grid
+              container
+              spacing={2}
+              alignItems="center"
+              className={classes.sliderGrid}
+            >
               <Grid item>
                 <Typography
-                  variant="overline"
+                  variant="caption"
                   component="span"
                   color="textSecondary"
                 >
@@ -79,7 +85,7 @@ export default function Slider({
 
               <Grid item xs>
                 <MuiSlider
-                  valueLabelDisplay="auto"
+                  valueLabelDisplay="on"
                   min={min}
                   max={max}
                   getAriaValueText={getAriaValueText}
@@ -96,7 +102,7 @@ export default function Slider({
 
               <Grid item>
                 <Typography
-                  variant="overline"
+                  variant="caption"
                   component="span"
                   color="textSecondary"
                 >
