@@ -160,8 +160,8 @@ export default function FormDialog({
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
-    onClose();
     setCloseConfirmation(false);
+    onClose();
     reset();
   };
   const confirmClose = () => {
@@ -263,7 +263,7 @@ export default function FormDialog({
         open={open && closeConfirmation}
         disableBackdropClick
         disableEscapeKeyDown
-        TransitionComponent={TransitionGrow}
+        TransitionComponent={SlideTransitionMui}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
