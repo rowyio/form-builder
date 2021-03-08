@@ -5,8 +5,8 @@ import {
   makeStyles,
   createStyles,
   Typography,
+  TypographyProps,
   Divider,
-  Variant
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme =>
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export interface IHeadingProps {
+export interface IHeadingProps extends Partial<Omit<TypographyProps, 'title'>> {
   children?: React.ReactNode;
   heading?: React.ReactNode;
   title?: React.ReactNode;
@@ -33,15 +33,6 @@ export interface IHeadingProps {
   text?: React.ReactNode;
 
   className?: string;
-  variant?:Variant;
-  color?:
-  | 'initial'
-  | 'inherit'
-  | 'primary'
-  | 'secondary'
-  | 'textPrimary'
-  | 'textSecondary'
-  | 'error';
 }
 
 export default function Heading({
@@ -51,14 +42,13 @@ export default function Heading({
   label,
   text,
   className,
-  variant="h6",
-  color="textSecondary"
+  ...props
 }: IHeadingProps) {
   const classes = useStyles();
 
   return (
     <div className={clsx(classes.root, className)}>
-      <Typography variant={variant} color={color}>
+      <Typography variant="h6" color="textPrimary" {...props}>
         {children ?? heading ?? title ?? label ?? text}
       </Typography>
       <Divider />
