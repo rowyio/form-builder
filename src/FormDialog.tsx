@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme =>
       '--spacing-modal': theme.spacing(3) + 'px',
       '--spacing-modal-contents': theme.spacing(3) + 'px',
       '--spacing-card': 'var(--spacing-modal-contents)',
+      '--bg-paper': theme.palette.background.paper,
 
       [theme.breakpoints.down('sm')]: {
         '--spacing-modal': theme.spacing(2) + 'px',
@@ -50,6 +51,8 @@ const useStyles = makeStyles(theme =>
 
       padding: 'var(--spacing-modal)',
       paddingBottom: 'var(--spacing-modal-contents)',
+
+      backgroundColor: 'var(--bg-paper)',
     },
 
     titleRow: {
@@ -79,23 +82,24 @@ const useStyles = makeStyles(theme =>
 
       // https://codepen.io/evank/pen/wWbRNO
       background: `
-        linear-gradient(${theme.palette.background.paper} 50%, ${fade(
-        theme.palette.background.paper,
-        0
-      )}),
-        linear-gradient(${fade(theme.palette.background.paper, 0)}, ${
-        theme.palette.background.paper
-      } 50%) 0 100%,
-        linear-gradient(to top, ${theme.palette.divider} 1px, ${fade(
-        theme.palette.divider,
-        0
-      )}),
-        linear-gradient(to top, ${theme.palette.divider} 1px, ${fade(
-        theme.palette.divider,
-        0
-      )}) 0 calc(100% - 0.5px)`,
+        linear-gradient(
+          var(--bg-paper) 50%,
+          ${fade(theme.palette.background.paper, 0)}
+        ),
+        linear-gradient(
+          ${fade(theme.palette.background.paper, 0)},
+          var(--bg-paper) 50%
+        ) 0 100%,
+        linear-gradient(
+          to top, ${theme.palette.divider} 1px,
+          ${fade(theme.palette.divider, 0)}
+        ),
+        linear-gradient(to top,
+          ${theme.palette.divider} 1px,
+          ${fade(theme.palette.divider, 0)}
+        ) 0 calc(100% - 0.5px)`,
       backgroundRepeat: 'no-repeat',
-      backgroundColor: 'white',
+      backgroundColor: 'var(--bg-paper)',
       backgroundSize: '100% 2px, 100% 3px, 100% 1px, 100% 1px',
       backgroundAttachment: 'local, local, scroll, scroll',
     },
