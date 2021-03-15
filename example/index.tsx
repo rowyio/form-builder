@@ -57,6 +57,11 @@ const App = () => {
             label: 'Tell me more',
           },
           {
+            type: FIELDS.richText,
+            name: 'richText',
+            label: 'Tell me more, but with rich text',
+          },
+          {
             type: FIELDS.singleSelect,
             name: 'singleSelect',
             label: 'Who is the CEO of Antler?',
