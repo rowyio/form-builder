@@ -1,11 +1,11 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { IFieldComponentProps } from '../utils';
+import { IFieldComponentProps } from '../../types';
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { useTheme } from '@material-ui/core';
+import { FormHelperText } from '@material-ui/core';
 import {
   KeyboardDateTimePicker,
   KeyboardDateTimePickerProps,
@@ -13,20 +13,22 @@ import {
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
-export interface IDateTimePickerProps
+export interface IDateTimeComponentProps
   extends IFieldComponentProps,
-    Omit<KeyboardDateTimePickerProps, 'label' | 'name'> {}
+    Omit<
+      KeyboardDateTimePickerProps,
+      'label' | 'name' | 'onChange' | 'value'
+    > {}
 
-export default function DateTimePicker({
-  register,
+export default function DateTimeComponent({
   control,
   name,
-  errorMessage,
   useFormMethods,
-  ...props
-}: IDateTimePickerProps) {
-  const theme = useTheme();
 
+  errorMessage,
+  assistiveText,
+  ...props
+}: IDateTimeComponentProps) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Controller
@@ -40,14 +42,9 @@ export default function DateTimePicker({
           return (
             <KeyboardDateTimePicker
               variant="inline"
-              inputVariant="filled"
               fullWidth
-              margin="none"
               format="yyyy/MM/dd hh:mm a"
               placeholder="yyyy/MM/dd h:mm a"
-              InputAdornmentProps={{
-                style: { marginRight: theme.spacing(-1) },
-              }}
               keyboardIcon={<AccessTimeIcon />}
               InputLabelProps={{ shrink: transformedValue !== null }}
               {...props}
@@ -55,8 +52,22 @@ export default function DateTimePicker({
               onChange={onChange}
               onBlur={onBlur}
               error={!!errorMessage}
-              helperText={errorMessage}
-              data-type="datetime"
+              FormHelperTextProps={{ component: 'div' } as any}
+              helperText={
+                (errorMessage || assistiveText) && (
+                  <>
+                    {errorMessage}
+
+                    <FormHelperText
+                      style={{ margin: 0, whiteSpace: 'pre-line' }}
+                      error={false}
+                    >
+                      {assistiveText}
+                    </FormHelperText>
+                  </>
+                )
+              }
+              data-type="date"
               data-label={props.label ?? ''}
             />
           );

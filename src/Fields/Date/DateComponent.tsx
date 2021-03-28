@@ -1,30 +1,29 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { IFieldComponentProps } from '../utils';
+import { IFieldComponentProps } from '../../types';
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { useTheme } from '@material-ui/core';
+import { FormHelperText } from '@material-ui/core';
 import {
   KeyboardDatePicker,
   KeyboardDatePickerProps,
 } from '@material-ui/pickers';
 
-export interface IDatePickerProps
+export interface IDateComponentProps
   extends IFieldComponentProps,
-    Omit<KeyboardDatePickerProps, 'label' | 'name'> {}
+    Omit<KeyboardDatePickerProps, 'label' | 'name' | 'onChange' | 'value'> {}
 
-export default function DatePicker({
-  register,
+export default function DateComponent({
   control,
   name,
-  errorMessage,
   useFormMethods,
-  ...props
-}: IDatePickerProps) {
-  const theme = useTheme();
 
+  errorMessage,
+  assistiveText,
+  ...props
+}: IDateComponentProps) {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Controller
@@ -38,21 +37,30 @@ export default function DatePicker({
           return (
             <KeyboardDatePicker
               variant="inline"
-              inputVariant="filled"
               fullWidth
-              margin="none"
               format="yyyy/MM/dd"
               placeholder="yyyy/MM/dd"
-              InputAdornmentProps={{
-                style: { marginRight: theme.spacing(-1) },
-              }}
               InputLabelProps={{ shrink: transformedValue !== null }}
               {...props}
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}
               error={!!errorMessage}
-              helperText={errorMessage}
+              FormHelperTextProps={{ component: 'div' } as any}
+              helperText={
+                (errorMessage || assistiveText) && (
+                  <>
+                    {errorMessage}
+
+                    <FormHelperText
+                      style={{ margin: 0, whiteSpace: 'pre-line' }}
+                      error={false}
+                    >
+                      {assistiveText}
+                    </FormHelperText>
+                  </>
+                )
+              }
               data-type="date"
               data-label={props.label ?? ''}
             />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { IFieldComponentProps } from '../utils';
+import { IFieldComponentProps } from '../../types';
 
 import {
   makeStyles,
@@ -9,12 +9,13 @@ import {
   FormControlLabel,
   RadioGroup,
   RadioGroupProps,
-  Radio as MuiRadio,
+  Radio,
   Divider,
 } from '@material-ui/core';
 
-import Label from '../Label';
-import ErrorMessage from '../ErrorMessage';
+import FieldLabel from '../../FieldLabel';
+import FieldErrorMessage from '../../FieldErrorMessage';
+import FieldAssistiveText from '../../FieldAssistiveText';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -25,26 +26,29 @@ const useStyles = makeStyles(theme =>
       marginLeft: theme.spacing(1),
     },
 
-    divider: { marginLeft: theme.spacing(5) },
+    divider: { marginLeft: theme.spacing(3 + 2) },
+    assistiveText: { margin: theme.spacing(1, 0, 0, 3 + 2) },
   })
 );
 
-export interface IRadioProps
+export interface IRadioComponentProps
   extends IFieldComponentProps,
-    Omit<RadioGroupProps, 'name'> {
+    Omit<RadioGroupProps, 'name' | 'onChange' | 'value'> {
   options: (string | { value: string; label: React.ReactNode })[];
 }
 
-export default function Radio({
+export default function RadioComponent({
   control,
-  register,
   name,
-  errorMessage,
-  options,
-  label,
   useFormMethods,
+
+  label,
+  errorMessage,
+  assistiveText,
+
+  options,
   ...props
-}: IRadioProps) {
+}: IRadioComponentProps) {
   const classes = useStyles();
 
   return (
@@ -52,8 +56,19 @@ export default function Radio({
       control={control}
       name={name}
       render={({ onChange, onBlur, value }) => (
-        <FormControl component="fieldset" className={classes.root}>
-          <Label error={!!errorMessage}>{label}</Label>
+        <FormControl
+          component="fieldset"
+          error={!!errorMessage}
+          disabled={props.disabled}
+          className={classes.root}
+        >
+          <FieldLabel
+            {...({ component: 'legend' } as any)}
+            error={!!errorMessage}
+            disabled={!!props.disabled}
+          >
+            {label}
+          </FieldLabel>
 
           <RadioGroup
             {...props}
@@ -77,7 +92,7 @@ export default function Radio({
                     value={option.value}
                     label={option.label}
                     control={
-                      <MuiRadio
+                      <Radio
                         //disabled={isSubmitting}
                         inputProps={
                           {
@@ -97,7 +112,12 @@ export default function Radio({
             })}
           </RadioGroup>
 
-          <ErrorMessage>{errorMessage}</ErrorMessage>
+          <div className={classes.assistiveText}>
+            <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+            <FieldAssistiveText disabled={!!props.disabled}>
+              {assistiveText}
+            </FieldAssistiveText>
+          </div>
         </FormControl>
       )}
     />

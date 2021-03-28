@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { CssBaseline } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
-import { FIELDS } from '../src';
+import { FieldType } from '../src';
 
 const App = () => {
   return (
@@ -17,7 +17,7 @@ const App = () => {
         title="Form Dialog"
         fields={[
           {
-            type: 'richText',
+            type: FieldType.richText,
             name: 'desc',
             label: 'Description',
             // disabled: true,
@@ -26,7 +26,7 @@ const App = () => {
           (values: any) =>
             values.desc !== 'something'
               ? {
-                  type: 'text',
+                  type: FieldType.shortText,
                   fieldVariant: 'url',
                   name: 'link',
                   label: 'Link',
@@ -40,7 +40,7 @@ const App = () => {
               : null,
 
           {
-            type: FIELDS.text,
+            type: FieldType.shortText,
             name: 'header',
             label: 'Unique page header (max. 100 characters)',
             placeholder: 'Selected startups for...',
@@ -51,63 +51,63 @@ const App = () => {
               .required('Required'),
           },
           {
-            type: FIELDS.text,
+            type: FieldType.shortText,
             name: 'textarea',
             fieldVariant: 'long',
             label: 'Tell me more',
           },
           {
-            type: FIELDS.singleSelect,
+            type: FieldType.singleSelect,
             name: 'singleSelect',
             label: 'Who is the CEO of Antler?',
             options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
           },
           {
-            type: FIELDS.multiSelect,
+            type: FieldType.multiSelect,
             name: 'multiSelect',
             label: 'Who are Antler Engineering team members?',
             options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
           },
           {
-            type: FIELDS.multiSelect,
+            type: FieldType.multiSelect,
             name: 'multiSelect single',
             label: 'Who is CEO of Facebook?',
             options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
             multiple: false,
           },
           {
-            type: FIELDS.checkbox,
+            type: FieldType.checkbox,
             name: 'checkbox',
             label: 'I am not a robot',
           },
           {
-            type: FIELDS.radio,
+            type: FieldType.radio,
             name: 'radio',
             label: 'Highest education level?',
             options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
           },
           {
-            type: FIELDS.slider,
+            type: FieldType.slider,
             name: 'slider',
             label: 'Your age',
           },
           {
-            type: FIELDS.textMulti,
+            type: FieldType.list,
             name: 'textMulti',
             label: 'Previous employers',
           },
           {
-            type: FIELDS.color,
+            type: FieldType.color,
             name: 'color',
             label: 'Preferred color for your Antler shirt?',
           },
           {
-            type: FIELDS.date,
+            type: FieldType.date,
             name: 'date',
             label: 'Your birthday',
           },
           {
-            type: FIELDS.dateTime,
+            type: FieldType.dateTime,
             name: 'dateTime',
             label: 'Book a time',
           },

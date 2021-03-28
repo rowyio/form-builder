@@ -1,19 +1,20 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { IFieldComponentProps } from '../utils';
+import { IFieldComponentProps } from '../../types';
 
 import {
   makeStyles,
   createStyles,
   FormControl,
-  Slider as MuiSlider,
+  Slider,
   SliderProps,
   Grid,
   Typography,
 } from '@material-ui/core';
 
-import Label from '../Label';
-import ErrorMessage from '../ErrorMessage';
+import FieldLabel from '../../FieldLabel';
+import FieldErrorMessage from '../../FieldErrorMessage';
+import FieldAssistiveText from '../../FieldAssistiveText';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -23,28 +24,35 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export interface ISliderProps
+export interface ISliderComponentProps
   extends IFieldComponentProps,
     Omit<SliderProps, 'name'> {
   units?: string;
+  unitsPlural?: string;
   minLabel?: React.ReactNode;
   maxLabel?: React.ReactNode;
 }
 
-export default function Slider({
+const valueWithUnits = (value: number, units?: string, unitsPlural?: string) =>
+  `${value} ${(value !== 1 ? unitsPlural || '' : units) || ''}`.trim();
+
+export default function SliderComponent({
   control,
-  register,
   name,
-  errorMessage,
+  useFormMethods,
+
   label,
+  errorMessage,
+  assistiveText,
+
   units,
+  unitsPlural,
   minLabel,
   maxLabel,
   min = 0,
   max = 100,
-  useFormMethods,
   ...props
-}: ISliderProps) {
+}: ISliderComponentProps) {
   const classes = useStyles();
 
   return (
@@ -58,14 +66,18 @@ export default function Slider({
         };
 
         const getAriaValueText = (value: number) =>
-          `${value}${units ? ' ' + units : ''}`;
-
-        const getValueLabelFormat = (value: number) =>
-          `${value}${units ? ' ' + units : ''}`;
+          valueWithUnits(value, units, unitsPlural);
+        const getValueLabelFormat = getAriaValueText;
 
         return (
-          <FormControl className={classes.root}>
-            <Label error={!!errorMessage}>{label}</Label>
+          <FormControl
+            className={classes.root}
+            error={!!errorMessage}
+            disabled={props.disabled}
+          >
+            <FieldLabel error={!!errorMessage} disabled={!!props.disabled}>
+              {label}
+            </FieldLabel>
 
             <Grid
               container
@@ -79,12 +91,12 @@ export default function Slider({
                   component="span"
                   color="textSecondary"
                 >
-                  {minLabel ?? `${min}${units ? ' ' + units : ''}`}
+                  {minLabel || valueWithUnits(min, units, unitsPlural)}
                 </Typography>
               </Grid>
 
               <Grid item xs>
-                <MuiSlider
+                <Slider
                   valueLabelDisplay="on"
                   min={min}
                   max={max}
@@ -106,12 +118,15 @@ export default function Slider({
                   component="span"
                   color="textSecondary"
                 >
-                  {maxLabel ?? `${max}${units ? ' ' + units : ''}`}
+                  {maxLabel || valueWithUnits(max, units, unitsPlural)}
                 </Typography>
               </Grid>
             </Grid>
 
-            <ErrorMessage>{errorMessage}</ErrorMessage>
+            <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+            <FieldAssistiveText disabled={!!props.disabled}>
+              {assistiveText}
+            </FieldAssistiveText>
           </FormControl>
         );
       }}

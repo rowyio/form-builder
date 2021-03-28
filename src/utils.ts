@@ -1,54 +1,16 @@
-import { UseFormMethods } from 'react-hook-form';
 import * as yup from 'yup';
 import _isFunction from 'lodash/isFunction';
 import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
-import { FIELDS, DEFAULT_VALUES } from './Fields';
+import { getFieldProp } from './fields';
 
-export type Values = { [key: string]: any };
-
-export type FieldType = {
-  type: FIELDS | string;
-  name?: string;
-  label?: React.ReactNode;
-  defaultValue?: any;
-  [key: string]: any;
-};
-export type Fields = (
-  | FieldType
-  | null
-  | ((values: Values) => FieldType | null)
-)[];
-
-export type IFieldComponentProps = {
-  name: string;
-  register: UseFormMethods['register'];
-  control: UseFormMethods['control'];
-  errorMessage?: string;
-  label: React.ReactNode;
-  useFormMethods: UseFormMethods;
-};
-
-export type CustomComponent<
-  P extends IFieldComponentProps = IFieldComponentProps
-> = React.ComponentType<P> | React.LazyExoticComponent<React.ComponentType<P>>;
-
-export type CustomComponents<
-  P extends IFieldComponentProps = IFieldComponentProps
-> = {
-  [type: string]: {
-    component: CustomComponent<P>;
-    defaultValue?: any;
-  };
-};
+import { Fields, CustomComponents, Values } from './types';
 
 export const getDefaultValues = (
   fields: Fields,
   customComponents?: CustomComponents
 ): Values =>
-  fields.reduce((acc, _field) => {
-    const field = _isFunction(_field) ? _field({}) : _field;
-
+  fields.reduce((acc, field) => {
     if (!!field && field.name && field.type) {
       let defaultValue: any;
 
@@ -61,8 +23,8 @@ export const getDefaultValues = (
         defaultValue = customComponents[field.type].defaultValue;
       }
       // Get default value from built-in components
-      else if (field.type in DEFAULT_VALUES) {
-        defaultValue = DEFAULT_VALUES[field.type as FIELDS];
+      else {
+        defaultValue = getFieldProp('defaultValue', field.type);
       }
 
       return { ...acc, [field.name]: defaultValue };

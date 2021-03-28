@@ -7,13 +7,8 @@ import FormFields from './FormFields';
 import AutoSave from './AutoSave';
 import SubmitButton, { ISubmitButtonProps } from './SubmitButton';
 
-import {
-  Values,
-  Fields,
-  CustomComponents,
-  getDefaultValues,
-  getValidationSchema,
-} from './utils';
+import { getDefaultValues, getValidationSchema } from './utils';
+import { Values, Fields, CustomComponents } from './types';
 
 export interface IFormProps {
   fields: Fields;
@@ -52,7 +47,7 @@ export default function Form({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields)),
   });
-  const { register, handleSubmit, control, errors } = methods;
+  const { handleSubmit, control, errors } = methods;
 
   const hasErrors = errors
     ? Object.values(errors).reduce((a, c) => !!(a || !_isEmpty(c)), false)
@@ -74,7 +69,6 @@ export default function Form({
 
       <FormFields
         fields={fields}
-        register={register}
         control={control}
         errors={errors}
         customComponents={customComponents}
