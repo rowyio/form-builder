@@ -13,7 +13,7 @@ const Component = lazy(
     ) /* webpackChunkName: FormBuilder-SingleSelect */
 );
 
-export const config: IFieldConfig = {
+export const SingleSelectConfig: IFieldConfig = {
   type: FieldType.singleSelect,
   name: 'Single Select',
   group: 'input',
@@ -26,4 +26,4 @@ export const config: IFieldConfig = {
   component: Component as any,
   settings: Settings,
 };
-export default config;
+export default SingleSelectConfig;

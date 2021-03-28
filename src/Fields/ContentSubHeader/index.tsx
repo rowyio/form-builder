@@ -13,7 +13,7 @@ const Component = lazy(
     ) /* webpackChunkName: FormBuilder-ContentSubHeader */
 );
 
-export const config: IFieldConfig = {
+export const ContentSubHeaderConfig: IFieldConfig = {
   type: FieldType.contentSubHeader,
   name: 'Sub Header',
   group: 'content',
@@ -26,4 +26,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ContentSubHeaderConfig;

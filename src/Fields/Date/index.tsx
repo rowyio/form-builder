@@ -9,7 +9,7 @@ const Component = lazy(
   () => import('./DateComponent') /* webpackChunkName: FormBuilder-Date */
 );
 
-export const config: IFieldConfig = {
+export const DateConfig: IFieldConfig = {
   type: FieldType.date,
   name: 'Date',
   group: 'input',
@@ -22,4 +22,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: [],
 };
-export default config;
+export default DateConfig;

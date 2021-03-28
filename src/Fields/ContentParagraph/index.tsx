@@ -13,7 +13,7 @@ const Component = lazy(
     ) /* webpackChunkName: FormBuilder-ContentParagraph */
 );
 
-export const config: IFieldConfig = {
+export const ContentParagraphConfig: IFieldConfig = {
   type: FieldType.contentParagraph,
   name: 'Paragraph',
   group: 'content',
@@ -26,4 +26,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ContentParagraphConfig;

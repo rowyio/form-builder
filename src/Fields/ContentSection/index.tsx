@@ -13,7 +13,7 @@ const Component = lazy(
     ) /* webpackChunkName: FormBuilder-ContentSection */
 );
 
-export const config: IFieldConfig = {
+export const ContentSectionConfig: IFieldConfig = {
   type: FieldType.contentSection,
   name: 'Section',
   group: 'content',
@@ -26,4 +26,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ContentSectionConfig;

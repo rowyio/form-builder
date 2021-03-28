@@ -10,7 +10,7 @@ const Component = lazy(
   () => import('./SliderComponent') /* webpackChunkName: FormBuilder-Slider */
 );
 
-export const config: IFieldConfig = {
+export const SliderConfig: IFieldConfig = {
   type: FieldType.slider,
   name: 'Slider',
   group: 'input',
@@ -23,4 +23,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default SliderConfig;

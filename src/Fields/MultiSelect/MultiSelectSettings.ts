@@ -1,7 +1,7 @@
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-export const SingleSelectSettings: IFieldConfig['settings'] = [
+export const MultiSelectSettings: IFieldConfig['settings'] = [
   {
     type: FieldType.list,
     name: 'options',
@@ -36,4 +36,4 @@ export const SingleSelectSettings: IFieldConfig['settings'] = [
   },
 ];
 
-export default SingleSelectSettings;
+export default MultiSelectSettings;

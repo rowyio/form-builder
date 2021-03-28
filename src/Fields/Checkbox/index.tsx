@@ -10,7 +10,7 @@ const Component = lazy(
     import('./CheckboxComponent') /* webpackChunkName: FormBuilder-Checkbox */
 );
 
-export const config: IFieldConfig = {
+export const CheckboxConfig: IFieldConfig = {
   type: FieldType.checkbox,
   name: 'Checkbox',
   group: 'input',
@@ -23,4 +23,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: [],
 };
-export default config;
+export default CheckboxConfig;

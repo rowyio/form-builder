@@ -10,7 +10,7 @@ const Component = lazy(
   () => import('./ListComponent') /* webpackChunkName: FormBuilder-List */
 );
 
-export const config: IFieldConfig = {
+export const ListConfig: IFieldConfig = {
   type: FieldType.list,
   name: 'List',
   group: 'input',
@@ -23,4 +23,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ListConfig;

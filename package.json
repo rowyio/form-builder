@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "node generate-exports && git add src/index.ts && tsdx build",
+    "prepublishOnly": "node generate-exports && git add src/index.ts && tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",

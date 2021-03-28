@@ -11,7 +11,7 @@ const Component = lazy(
     import('./ParagraphComponent') /* webpackChunkName: FormBuilder-Paragraph */
 );
 
-export const config: IFieldConfig = {
+export const ParagraphConfig: IFieldConfig = {
   type: FieldType.paragraph,
   name: 'Paragraph',
   group: 'input',
@@ -24,4 +24,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ParagraphConfig;

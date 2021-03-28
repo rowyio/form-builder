@@ -11,7 +11,7 @@ const Component = lazy(
     import('./RichTextComponent') /* webpackChunkName: FormBuilder-RichText */
 );
 
-export const config: IFieldConfig = {
+export const RichTextConfig: IFieldConfig = {
   type: FieldType.richText,
   name: 'Rich Text',
   group: 'input',
@@ -24,4 +24,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default RichTextConfig;

@@ -17,3 +17,5 @@ export enum FieldType {
   contentParagraph = 'contentParagraph',
   contentImage = 'contentImage',
 }
+
+export default FieldType;

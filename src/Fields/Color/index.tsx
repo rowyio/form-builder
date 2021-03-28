@@ -10,7 +10,7 @@ const Component = lazy(
   () => import('./ColorComponent') /* webpackChunkName: FormBuilder-Color */
 );
 
-export const config: IFieldConfig = {
+export const ColorConfig: IFieldConfig = {
   type: FieldType.color,
   name: 'Color',
   group: 'input',
@@ -23,4 +23,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ColorConfig;

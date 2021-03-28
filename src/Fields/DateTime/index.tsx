@@ -10,7 +10,7 @@ const Component = lazy(
     import('./DateTimeComponent') /* webpackChunkName: FormBuilder-DateTime */
 );
 
-export const config: IFieldConfig = {
+export const DateTimeConfig: IFieldConfig = {
   type: FieldType.dateTime,
   name: 'Time & Date',
   group: 'input',
@@ -23,4 +23,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: [],
 };
-export default config;
+export default DateTimeConfig;

@@ -11,7 +11,7 @@ const Component = lazy(
     import('./ShortTextComponent') /* webpackChunkName: FormBuilder-ShortText */
 );
 
-export const config: IFieldConfig = {
+export const ShortTextConfig: IFieldConfig = {
   type: FieldType.shortText,
   name: 'Short Text',
   group: 'input',
@@ -24,4 +24,4 @@ export const config: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default config;
+export default ShortTextConfig;

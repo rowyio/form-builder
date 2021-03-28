@@ -13,7 +13,7 @@ const Component = lazy(
     ) /* webpackChunkName: FormBuilder-MultiSelect */
 );
 
-export const config: IFieldConfig = {
+export const MultiSelectConfig: IFieldConfig = {
   type: FieldType.multiSelect,
   name: 'Multi Select',
   group: 'input',
@@ -26,4 +26,4 @@ export const config: IFieldConfig = {
   component: Component as any,
   settings: Settings,
 };
-export default config;
+export default MultiSelectConfig;
