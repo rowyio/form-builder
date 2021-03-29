@@ -74,6 +74,7 @@ export default function SingleSelectComponent({
                 'data-type': 'multi-select-single',
                 'data-label': props.label ?? '',
               }}
+              clearable={props.clearable === true}
             />
           );
 

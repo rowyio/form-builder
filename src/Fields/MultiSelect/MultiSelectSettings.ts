@@ -34,6 +34,12 @@ export const MultiSelectSettings: IFieldConfig['settings'] = [
     label: 'User can clear selection',
     defaultValue: true,
   },
+  {
+    type: FieldType.checkbox,
+    name: 'selectAll',
+    label: 'User can select all options',
+    defaultValue: true,
+  },
 ];
 
 export default MultiSelectSettings;
