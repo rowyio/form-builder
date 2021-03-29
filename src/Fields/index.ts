@@ -15,7 +15,7 @@ import Slider from './Slider';
 import List from './List';
 import Color from './Color';
 
-import ContentSection from './ContentSection';
+import ContentHeader from './ContentHeader';
 import ContentSubHeader from './ContentSubHeader';
 import ContentParagraph from './ContentParagraph';
 
@@ -33,7 +33,7 @@ export const FieldConfigs = [
   List,
   Color,
 
-  ContentSection,
+  ContentHeader,
   ContentSubHeader,
   ContentParagraph,
 ];

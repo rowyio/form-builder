@@ -5,17 +5,17 @@ import { FieldType } from '../../constants/fields';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { mdiFormatPageBreak } from '@mdi/js';
 
-import Settings from './ContentSectionSettings';
+import Settings from './ContentHeaderSettings';
 const Component = lazy(
   () =>
     import(
-      './ContentSectionComponent'
-    ) /* webpackChunkName: FormBuilder-ContentSection */
+      './ContentHeaderComponent'
+    ) /* webpackChunkName: FormBuilder-ContentHeader */
 );
 
-export const ContentSectionConfig: IFieldConfig = {
-  type: FieldType.contentSection,
-  name: 'Section',
+export const ContentHeaderConfig: IFieldConfig = {
+  type: FieldType.contentHeader,
+  name: 'Header',
   group: 'content',
   icon: (
     <SvgIcon>
@@ -26,4 +26,4 @@ export const ContentSectionConfig: IFieldConfig = {
   component: Component,
   settings: Settings,
 };
-export default ContentSectionConfig;
+export default ContentHeaderConfig;

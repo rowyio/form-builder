@@ -27,11 +27,11 @@ const useStyles = makeStyles(theme =>
   })
 );
 
-export interface IContentSectionComponentProps
+export interface IContentHeaderComponentProps
   extends IFieldComponentProps,
     Partial<Omit<TypographyProps, 'title'>> {}
 
-export default function ContentSectionComponent({
+export default function ContentHeaderComponent({
   index,
   label,
   children,
@@ -43,7 +43,7 @@ export default function ContentSectionComponent({
   name,
   useFormMethods,
   ...props
-}: IContentSectionComponentProps) {
+}: IContentHeaderComponentProps) {
   const classes = useStyles();
 
   return (

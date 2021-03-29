@@ -12,7 +12,7 @@ export enum FieldType {
   list = 'list',
   color = 'color',
 
-  contentSection = 'contentSection',
+  contentHeader = 'contentHeader',
   contentSubHeader = 'contentSubHeader',
   contentParagraph = 'contentParagraph',
   contentImage = 'contentImage',

@@ -55,13 +55,13 @@ export * from './fields/ContentParagraph/ContentParagraphSettings';
 
 export * from './fields/ContentParagraph';
 
-export { default as ContentSectionComponent } from './fields/ContentSection/ContentSectionComponent';
-export * from './fields/ContentSection/ContentSectionComponent';
+export { default as ContentSectionComponent } from './fields/ContentHeader/ContentHeaderComponent';
+export * from './fields/ContentHeader/ContentHeaderComponent';
 
-export { default as ContentSectionSettings } from './fields/ContentSection/ContentSectionSettings';
-export * from './fields/ContentSection/ContentSectionSettings';
+export { default as ContentSectionSettings } from './fields/ContentHeader/ContentHeaderSettings';
+export * from './fields/ContentHeader/ContentHeaderSettings';
 
-export * from './fields/ContentSection';
+export * from './fields/ContentHeader';
 
 export { default as ContentSubHeaderComponent } from './fields/ContentSubHeader/ContentSubHeaderComponent';
 export * from './fields/ContentSubHeader/ContentSubHeaderComponent';
