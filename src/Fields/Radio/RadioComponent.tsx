@@ -21,6 +21,18 @@ const useStyles = makeStyles(theme =>
   createStyles({
     root: { display: 'flex' },
 
+    formControl: {
+      marginLeft: 0,
+      marginRight: 0,
+    },
+
+    radio: {
+      padding: theme.spacing(1.5),
+      margin: theme.spacing(0, -0.5, 0, -1.5),
+
+      '$formControl:hover &': { backgroundColor: theme.palette.action.hover },
+    },
+
     formControlLabel: {
       padding: theme.spacing(1.25, 0),
       marginLeft: theme.spacing(1),
@@ -46,6 +58,8 @@ export default function RadioComponent({
   errorMessage,
   assistiveText,
 
+  required,
+
   options,
   ...props
 }: IRadioComponentProps) {
@@ -66,6 +80,7 @@ export default function RadioComponent({
             {...({ component: 'legend' } as any)}
             error={!!errorMessage}
             disabled={!!props.disabled}
+            required={!!required}
           >
             {label}
           </FieldLabel>
@@ -101,9 +116,13 @@ export default function RadioComponent({
                             'data-label-option': option.label ?? '',
                           } as any
                         }
+                        className={classes.radio}
                       />
                     }
-                    classes={{ label: classes.formControlLabel }}
+                    classes={{
+                      root: classes.formControl,
+                      label: classes.formControlLabel,
+                    }}
                     //disabled={isSubmitting}
                   />
                   <Divider className={classes.divider} />

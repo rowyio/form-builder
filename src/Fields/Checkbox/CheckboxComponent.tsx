@@ -44,6 +44,8 @@ export default function CheckboxComponent({
   errorMessage,
   assistiveText,
 
+  required,
+
   ...props
 }: ICheckboxComponentProps) {
   const classes = useStyles();
@@ -73,6 +75,7 @@ export default function CheckboxComponent({
             label={
               <>
                 {label}
+                {required && <>&nbsp;*</>}
 
                 <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
                 <FieldAssistiveText disabled={!!props.disabled}>

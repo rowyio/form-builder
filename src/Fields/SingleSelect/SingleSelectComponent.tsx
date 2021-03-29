@@ -56,6 +56,7 @@ export default function SingleSelectComponent({
               onBlur={onBlur}
               TextFieldProps={{
                 error: !!errorMessage,
+                required: props.required,
                 FormHelperTextProps: { component: 'div' },
                 helperText: (errorMessage || assistiveText) && (
                   <>

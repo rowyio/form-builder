@@ -45,6 +45,7 @@ export default function ListComponent({
   errorMessage,
   assistiveText,
 
+  required,
   disabled,
 
   itemLabel = 'Item',
@@ -90,7 +91,11 @@ export default function ListComponent({
             error={!!errorMessage}
             disabled={disabled}
           >
-            <FieldLabel error={!!errorMessage} disabled={!!disabled}>
+            <FieldLabel
+              error={!!errorMessage}
+              disabled={!!disabled}
+              required={!!required}
+            >
               {label}
             </FieldLabel>
 

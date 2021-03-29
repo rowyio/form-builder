@@ -75,6 +75,7 @@ export default function ColorComponent({
   errorMessage,
   assistiveText,
 
+  required,
   disabled,
 
   enableAlpha,
@@ -126,6 +127,7 @@ export default function ColorComponent({
                 className={classes.label}
                 error={!!errorMessage}
                 disabled={disabled}
+                required={required}
               >
                 {label}
               </InputLabel>

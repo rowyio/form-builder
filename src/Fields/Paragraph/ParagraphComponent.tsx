@@ -23,8 +23,6 @@ export default function ParagraphComponent({
   errorMessage,
   assistiveText,
 
-  required,
-
   hiddenLabel = false,
   maxCharacters,
   ...props
@@ -79,7 +77,6 @@ export default function ParagraphComponent({
           {...props}
           inputProps={{
             rowsMin: 5,
-            required,
             maxLength: maxCharacters ?? undefined,
             // Required for form-filler
             'data-type': 'textarea',

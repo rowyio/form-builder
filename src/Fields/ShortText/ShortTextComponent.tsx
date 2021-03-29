@@ -24,8 +24,6 @@ export default function ShortTextComponent({
   errorMessage,
   assistiveText,
 
-  required,
-
   format,
   hiddenLabel = false,
   maxCharacters,
@@ -113,7 +111,6 @@ export default function ShortTextComponent({
             {...props}
             {...hiddenLabelOverrideProps}
             inputProps={{
-              required,
               maxLength: maxCharacters ?? undefined,
               ...variantProps.inputProps,
               // Required for form-filler

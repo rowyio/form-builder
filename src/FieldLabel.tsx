@@ -26,6 +26,7 @@ export interface IFieldLabelProps
   extends Omit<FormLabelProps, 'error' | 'disabled'> {
   error: boolean;
   disabled: boolean;
+  required: boolean;
 }
 
 export default function FieldLabel(props: IFieldLabelProps) {

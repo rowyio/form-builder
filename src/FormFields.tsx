@@ -1,11 +1,16 @@
 import React from 'react';
+import _isFunction from 'lodash/isFunction';
 import { UseFormMethods, useWatch } from 'react-hook-form';
 
 import { Grid } from '@material-ui/core';
 
-import { Fields, Field, Values, CustomComponents } from './types';
+import {
+  Fields,
+  // Field, Values,
+  CustomComponents,
+} from './types';
 
-import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';
+import FieldWrapper from './FieldWrapper';
 
 export interface IFormFieldsProps {
   fields: Fields;
@@ -21,8 +26,15 @@ export default function FormFields({ fields, ...props }: IFormFieldsProps) {
     <Grid container spacing={3} style={{ marginBottom: 0 }}>
       {fields.map((field, i) => {
         // Call the field function with values if necessary
-        // if (_isFunction(field))
-        //   return <DependentField key={i} fieldFunction={field} {...props} />
+        if (_isFunction(field))
+          return (
+            <DependentField
+              key={i}
+              index={i}
+              fieldFunction={field}
+              {...props}
+            />
+          );
 
         // Otherwise, just use the field object
         // If we intentionally hide this field due to form values, don’t render
@@ -36,10 +48,10 @@ export default function FormFields({ fields, ...props }: IFormFieldsProps) {
   );
 }
 
-interface IDependentField extends IFieldWrapperProps {
-  fieldFunction: (values: Values) => Field | null;
-}
-export function DependentField({ fieldFunction, ...props }: IDependentField) {
+// interface IDependentField extends Omit<IFieldWrapperProps, 'type'> {
+//   fieldFunction: (values: Values) => Field | null;
+// }
+function DependentField({ fieldFunction, ...props }: any) {
   const values = useWatch({ control: props.control });
 
   const field = fieldFunction(values);

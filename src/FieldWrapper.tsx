@@ -27,26 +27,11 @@ export default function FieldWrapper({
   const [conditionalState, setConditionalState] = useState(false);
 
   if (!type) {
-    console.error(`Invalid field type: ${type}`);
+    console.error(`Invalid field type: ${type}`, props);
     return null;
   }
 
   let renderedField: React.ReactNode = null;
-
-  // switch (type) {
-  //   // case FieldType.heading:
-  //   //   renderedField = <Heading {...props} />
-  //   //   break
-
-  //   // case FieldType.description:
-  //   //   renderedField = <Description {...props} />
-  //   //   break
-
-  //   case undefined:
-  //     console.error('undefined field type')
-  //     return null
-
-  //   default:
   let fieldComponent: CustomComponent;
 
   // Try to get fieldComponent from customComponents list
@@ -63,8 +48,7 @@ export default function FieldWrapper({
 
     // If not found in either, don’t display anything
     if (!fieldComponent) {
-      // TODO: ENABLE
-      // console.error(`No matching field component for \`${type}\``)
+      console.error(`No matching field component for \`${type}\``);
       return null;
     }
   }
@@ -74,7 +58,7 @@ export default function FieldWrapper({
   renderedField = React.createElement(fieldComponent, {
     ...props,
     name: props.name!,
-    label: props.label! + (props.required ? '*' : ''),
+    label: props.label!,
     control,
     errorMessage: errors[props.name!]?.message,
     disabled: conditional ? !conditionalState : props.disabled,

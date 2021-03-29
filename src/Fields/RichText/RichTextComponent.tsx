@@ -127,6 +127,8 @@ export default function RichText({
   errorMessage,
   assistiveText,
 
+  required,
+
   init,
   placeholder,
   maxCharacters,
@@ -139,7 +141,7 @@ export default function RichText({
     <Controller
       control={control}
       name={name}
-      render={({ onChange, onBlur, value }) => {
+      render={({ onChange, onBlur, value = '' }) => {
         const length = stripHtml(value).result.length;
 
         return (
@@ -154,7 +156,11 @@ export default function RichText({
             error={!!errorMessage}
             disabled={props.disabled}
           >
-            <FieldLabel error={!!errorMessage} disabled={!!props.disabled}>
+            <FieldLabel
+              error={!!errorMessage}
+              disabled={!!props.disabled}
+              required={!!required}
+            >
               {label}
             </FieldLabel>
             <Editor
