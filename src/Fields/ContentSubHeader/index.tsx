@@ -15,7 +15,7 @@ const Component = lazy(
 
 export const ContentSubHeaderConfig: IFieldConfig = {
   type: FieldType.contentSubHeader,
-  name: 'Sub Header',
+  name: 'Sub-Header',
   group: 'content',
   icon: (
     <SvgIcon>

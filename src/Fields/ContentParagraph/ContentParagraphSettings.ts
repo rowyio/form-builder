@@ -6,7 +6,8 @@ export const ContentParagraphSettings: IFieldConfig['settings'] = [
     name: 'label',
     label: 'Paragraph',
     type: FieldType.paragraph,
-    defaultValue: 'Paragraph',
+    required: true,
+    defaultValue: '',
   },
 ];
 

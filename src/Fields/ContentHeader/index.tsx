@@ -3,7 +3,7 @@ import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { mdiFormatPageBreak } from '@mdi/js';
+import { mdiFormatHeader1 } from '@mdi/js';
 
 import Settings from './ContentHeaderSettings';
 const Component = lazy(
@@ -19,7 +19,7 @@ export const ContentHeaderConfig: IFieldConfig = {
   group: 'content',
   icon: (
     <SvgIcon>
-      <path d={mdiFormatPageBreak} />
+      <path d={mdiFormatHeader1} />
     </SvgIcon>
   ),
   defaultValue: undefined,

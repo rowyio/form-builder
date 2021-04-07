@@ -12,9 +12,7 @@ import {
 const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      // marginTop: theme.spacing(2),
-      // marginBottom: -theme.spacing(1.5),
-      // width: '100%',
+      marginBottom: -theme.spacing(1.5),
 
       whiteSpace: 'pre-line',
       cursor: 'default',

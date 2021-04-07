@@ -6,7 +6,8 @@ export const ContentHeaderSettings: IFieldConfig['settings'] = [
     name: 'label',
     label: 'Header',
     type: FieldType.shortText,
-    defaultValue: 'Header',
+    required: true,
+    defaultValue: '',
   },
 ];
 
