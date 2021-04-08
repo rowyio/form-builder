@@ -31,6 +31,8 @@ const useStyles = makeStyles(theme =>
       margin: 0,
       width: '100%',
       padding: theme.spacing(0, 1),
+
+      cursor: 'pointer',
     },
 
     label: {
@@ -93,7 +95,6 @@ export default function ColorComponent({
       render={({ onChange, onBlur, value }) => (
         <FormControl
           className={classes.wrapper}
-          onClick={onBlur}
           error={!!errorMessage}
           disabled={disabled}
         >
@@ -104,6 +105,7 @@ export default function ColorComponent({
             spacing={2}
             className={clsx(
               classes.root,
+              'MuiInputBase-root',
               'MuiFilledInput-root',
               errorMessage && 'Mui-error'
             )}
@@ -133,9 +135,7 @@ export default function ColorComponent({
               </InputLabel>
               <Typography
                 variant="body1"
-                className={clsx(
-                  !value || disabled ? classes.placeholder : classes.value
-                )}
+                className={clsx(!value || disabled ? classes.placeholder : '')}
               >
                 {value?.hex ?? 'Choose a color…'}
               </Typography>
@@ -162,7 +162,10 @@ export default function ColorComponent({
             <Popover
               open={open}
               anchorEl={anchorEl.current}
-              onClose={() => setOpen(false)}
+              onClose={() => {
+                setOpen(false);
+                onBlur();
+              }}
               PaperProps={
                 { 'data-type': 'color-picker', variant: 'outlined' } as any
               }
