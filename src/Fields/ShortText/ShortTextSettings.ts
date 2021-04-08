@@ -29,6 +29,25 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
       { value: 'linkedin', label: 'LinkedIn URL' },
     ],
   },
+  {
+    type: FieldType.singleSelect,
+    name: 'autoComplete',
+    label: 'Autocomplete Suggestion',
+    defaultValue: '',
+    options: [
+      { value: 'name', label: 'Name' },
+      { value: 'email', label: 'Email' },
+      { value: 'organization', label: 'Organisation' },
+      { value: 'organization-title', label: 'Organisation title' },
+      { value: 'street-address', label: 'Street address' },
+      { value: 'country-name', label: 'Country name' },
+      { value: 'bday', label: 'Birthday' },
+      { value: 'tel', label: 'Phone number' },
+      { value: 'url', label: 'URL' },
+    ],
+    assistiveText:
+      'Phones will suggest this value when the user clicks on this field',
+  },
 ];
 
 export default ShortTextSettings;

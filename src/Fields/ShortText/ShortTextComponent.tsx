@@ -12,7 +12,14 @@ import {
 export interface IShortTextComponentProps
   extends IFieldComponentProps,
     Omit<TextFieldProps, 'variant' | 'name' | 'label'> {
-  format?: 'email' | 'phone' | 'number' | 'url';
+  format?:
+    | 'email'
+    | 'emailWithName'
+    | 'phone'
+    | 'number'
+    | 'url'
+    | 'twitter'
+    | 'linkedin';
   maxCharacters?: number;
 }
 
@@ -32,19 +39,57 @@ export default function ShortTextComponent({
   let variantProps: any = {};
   switch (format) {
     case 'email':
-      variantProps = { type: 'email', inputProps: { autoComplete: 'email' } };
+      variantProps = {
+        type: 'email',
+        placeholder: 'mail@domain.com',
+        autoComplete: 'email',
+      };
+      break;
+
+    case 'emailWithName':
+      variantProps = {
+        type: 'email',
+        placeholder: 'Name <mail@domain.com>',
+        autoComplete: 'email',
+      };
       break;
 
     case 'phone':
-      variantProps = { type: 'tel', inputProps: { autoComplete: 'tel' } };
+      variantProps = {
+        type: 'tel',
+        placeholder: '+1234567890',
+        autoComplete: 'tel',
+      };
       break;
 
     case 'number':
-      variantProps = { type: 'number' };
+      variantProps = {
+        inputProps: {
+          inputMode: 'numeric',
+          pattern: '\\d*',
+          placeholder: '1234567890',
+        },
+      };
       break;
 
     case 'url':
-      variantProps = { type: 'url', inputProps: { autoComplete: 'url' } };
+      variantProps = {
+        type: 'url',
+        placeholder: 'https://antler.co',
+        autoComplete: 'url',
+      };
+      break;
+
+    case 'twitter':
+      variantProps = { placeholder: '@AntlerGlobal' };
+      break;
+
+    case 'linkedin':
+      variantProps = {
+        type: 'url',
+        placeholder: 'https://linkedin.com/in/your-name',
+        autoComplete: 'url',
+      };
       break;
 
     default:
