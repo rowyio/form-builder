@@ -20,7 +20,7 @@ export const SingleSelectSettings: IFieldConfig['settings'] = [
     name: 'labelPlural',
     label: 'Plural Label (if searchable)',
     defaultValue: undefined,
-    // TODO: MAKE CONDITIONAL
+    displayCondition: 'return values.searchable === true',
   },
   {
     type: FieldType.checkbox,

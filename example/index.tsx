@@ -24,9 +24,6 @@ const fields = [
     required: true,
     maxCharacters: 20,
   },
-  // (values: any) =>
-  //   values.desc !== 'something'
-  //     ?
   {
     type: FieldType.shortText,
     format: 'url',
@@ -34,6 +31,7 @@ const fields = [
     label: 'Link',
     defaultValue: 'https://',
     required: true,
+    displayCondition: 'return values.desc.length > 0',
   },
   {
     type: FieldType.shortText,
