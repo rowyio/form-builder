@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme =>
           },
         },
 
-        '& .tox-toolbar-overlord, & .tox-edit-area__iframe, & .tox-toolbar__primary': {
+        '& .tox-toolbar, & .tox-toolbar-overlord, & .tox-edit-area__iframe, & .tox-toolbar__primary, & .tox-toolbar__overflow': {
           background: 'transparent',
         },
 
