@@ -21,5 +21,6 @@ export const DateConfig: IFieldConfig = {
   defaultValue: null,
   component: Component,
   settings: [],
+  validation: () => [['date'], ['nullable']],
 };
 export default DateConfig;

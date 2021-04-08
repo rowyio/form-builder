@@ -8,7 +8,11 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
 import { FieldType } from '../src';
 
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/ui/oxide/content.min.css';
+
 const theme = createMuiTheme({
+  typography: { fontFamily: 'system-ui' },
   props: { MuiTextField: { variant: 'filled' } },
 });
 
@@ -18,6 +22,7 @@ const fields = [
     name: 'desc',
     label: 'Description',
     required: true,
+    maxCharacters: 20,
   },
   // (values: any) =>
   //   values.desc !== 'something'
@@ -30,17 +35,54 @@ const fields = [
     defaultValue: 'https://',
     required: true,
   },
+  {
+    type: FieldType.shortText,
+    format: 'email',
+    name: 'email',
+    label: 'Email',
+    gridCols: 6,
+  },
+  {
+    type: FieldType.shortText,
+    format: 'emailWithName',
+    name: 'emailWithName',
+    label: 'Email with Name',
+    gridCols: 6,
+  },
+  {
+    type: FieldType.shortText,
+    format: 'phone',
+    name: 'phone',
+    label: 'Phone Number',
+    gridCols: 6,
+  },
+  {
+    type: FieldType.shortText,
+    format: 'twitter',
+    name: 'twitter',
+    label: 'Twitter',
+    gridCols: 6,
+  },
+  {
+    type: FieldType.shortText,
+    format: 'linkedin',
+    name: 'linkedin',
+    label: 'LinkedIn',
+  },
+  {
+    type: FieldType.shortText,
+    format: 'number',
+    name: 'number',
+    label: 'Number',
+  },
   // : null,
   {
     type: FieldType.shortText,
     name: 'header',
-    label: 'Unique page header (max. 100 characters)',
+    label: 'Unique page header',
     placeholder: 'Selected startups for...',
-    // inputProps: { maxLength: 100 },
-    validation: yup
-      .string()
-      .max(100)
-      .required('Required'),
+    maxCharacters: 100,
+    required: true,
   },
   {
     type: FieldType.paragraph,
@@ -104,15 +146,13 @@ const fields = [
   },
 ];
 
-console.log(fields);
-
 const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <FormDialog
         open
-        onClose={() => alert('CLOSE')}
+        onClose={() => alert('Check console for values')}
         title="Form Dialog"
         fields={fields}
         onSubmit={data => console.log(data)}

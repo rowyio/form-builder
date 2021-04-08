@@ -25,5 +25,6 @@ export const SingleSelectConfig: IFieldConfig = {
   defaultValue: '',
   component: Component as any,
   settings: Settings,
+  validation: () => [['string'], ['trim']],
 };
 export default SingleSelectConfig;

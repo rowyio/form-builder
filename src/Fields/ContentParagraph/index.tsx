@@ -25,5 +25,6 @@ export const ContentParagraphConfig: IFieldConfig = {
   defaultValue: undefined,
   component: Component,
   settings: Settings,
+  validation: () => [],
 };
 export default ContentParagraphConfig;

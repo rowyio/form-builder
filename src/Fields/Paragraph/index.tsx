@@ -23,5 +23,17 @@ export const ParagraphConfig: IFieldConfig = {
   defaultValue: '',
   component: Component,
   settings: Settings,
+  validation: config => {
+    const validation: any[][] = [['string'], ['trim']];
+
+    if (typeof config.maxCharacters === 'number')
+      validation.push([
+        'max',
+        config.maxCharacters,
+        'You have reached the character limit',
+      ]);
+
+    return validation;
+  },
 };
 export default ParagraphConfig;

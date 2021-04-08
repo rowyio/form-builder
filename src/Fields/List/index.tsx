@@ -1,6 +1,7 @@
 import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
+import * as yup from 'yup';
 
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { mdiFormatListNumbered } from '@mdi/js';
@@ -22,5 +23,18 @@ export const ListConfig: IFieldConfig = {
   defaultValue: [],
   component: Component,
   settings: Settings,
+  validation: (config: Record<string, any>) => {
+    const validation: any[][] = [
+      ['array'],
+      ['of', yup.string().trim()],
+      ['ensure'],
+      ['compact'],
+    ];
+
+    if (config.required === true)
+      validation.push(['min', 1, `${config.label || config.name} is required`]);
+
+    return validation;
+  },
 };
 export default ListConfig;

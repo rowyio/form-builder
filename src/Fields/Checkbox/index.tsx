@@ -22,5 +22,17 @@ export const CheckboxConfig: IFieldConfig = {
   defaultValue: false,
   component: Component,
   settings: [],
+  validation: (config: Record<string, any>) => {
+    const validation: any[][] = [['boolean']];
+
+    if (config.required === true)
+      validation.push([
+        'oneOf',
+        [true],
+        `${config.label || config.name} is required`,
+      ]);
+
+    return validation;
+  },
 };
 export default CheckboxConfig;

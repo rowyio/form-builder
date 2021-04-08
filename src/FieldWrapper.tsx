@@ -62,6 +62,7 @@ export default function FieldWrapper({
     control,
     errorMessage: errors[props.name!]?.message,
     disabled: conditional ? !conditionalState : props.disabled,
+    defaultValue: undefined, // Prevent field being both controlled and uncontrolled
   });
 
   if (conditional === 'check')

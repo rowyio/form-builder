@@ -6,6 +6,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { mdiFormTextbox } from '@mdi/js';
 
 import Settings from './ShortTextSettings';
+import validation from './ShortTextValidation';
 const Component = lazy(
   () =>
     import('./ShortTextComponent') /* webpackChunkName: FormBuilder-ShortText */
@@ -23,5 +24,6 @@ export const ShortTextConfig: IFieldConfig = {
   defaultValue: '',
   component: Component,
   settings: Settings,
+  validation,
 };
 export default ShortTextConfig;

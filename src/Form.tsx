@@ -45,7 +45,7 @@ export default function Form({
   const methods = useForm({
     mode: autoSave ? 'all' : 'onBlur',
     defaultValues,
-    resolver: yupResolver(getValidationSchema(fields)),
+    resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
   const { handleSubmit, control, errors } = methods;
 

@@ -22,5 +22,6 @@ export const RadioConfig: IFieldConfig = {
   defaultValue: '',
   component: Component as any,
   settings: Settings,
+  validation: () => [['string'], ['trim']],
 };
 export default RadioConfig;

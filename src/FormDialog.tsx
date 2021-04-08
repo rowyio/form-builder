@@ -153,7 +153,7 @@ export default function FormDialog({
   const methods = useForm({
     mode: 'onBlur',
     defaultValues,
-    resolver: yupResolver(getValidationSchema(fields)),
+    resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
   const { handleSubmit, control, errors, formState, reset } = methods;
 

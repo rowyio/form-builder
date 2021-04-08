@@ -22,5 +22,6 @@ export const ColorConfig: IFieldConfig = {
   defaultValue: null,
   component: Component,
   settings: Settings,
+  validation: () => [['object'], ['nullable']],
 };
 export default ColorConfig;

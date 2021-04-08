@@ -15,7 +15,7 @@ export type Field = {
   displayCondition?: string;
   required?: boolean;
   disabled?: boolean;
-  validation?: string[];
+  validation?: any[][];
 
   defaultValue?: any;
   gridCols?: GridProps['xs'];
@@ -61,4 +61,5 @@ export interface IFieldConfig {
   defaultValue: any;
   component: CustomComponent;
   settings: Fields;
+  validation: (config: Record<string, any>) => any[][];
 }
