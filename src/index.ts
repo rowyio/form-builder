@@ -47,6 +47,14 @@ export * from './fields/Color/ColorSettings';
 
 export * from './fields/Color';
 
+export { default as ContentHeaderComponent } from './fields/ContentHeader/ContentHeaderComponent';
+export * from './fields/ContentHeader/ContentHeaderComponent';
+
+export { default as ContentHeaderSettings } from './fields/ContentHeader/ContentHeaderSettings';
+export * from './fields/ContentHeader/ContentHeaderSettings';
+
+export * from './fields/ContentHeader';
+
 export { default as ContentParagraphComponent } from './fields/ContentParagraph/ContentParagraphComponent';
 export * from './fields/ContentParagraph/ContentParagraphComponent';
 
@@ -54,14 +62,6 @@ export { default as ContentParagraphSettings } from './fields/ContentParagraph/C
 export * from './fields/ContentParagraph/ContentParagraphSettings';
 
 export * from './fields/ContentParagraph';
-
-export { default as ContentSectionComponent } from './fields/ContentHeader/ContentHeaderComponent';
-export * from './fields/ContentHeader/ContentHeaderComponent';
-
-export { default as ContentSectionSettings } from './fields/ContentHeader/ContentHeaderSettings';
-export * from './fields/ContentHeader/ContentHeaderSettings';
-
-export * from './fields/ContentHeader';
 
 export { default as ContentSubHeaderComponent } from './fields/ContentSubHeader/ContentSubHeaderComponent';
 export * from './fields/ContentSubHeader/ContentSubHeaderComponent';
@@ -129,6 +129,9 @@ export * from './fields/ShortText/ShortTextComponent';
 
 export { default as ShortTextSettings } from './fields/ShortText/ShortTextSettings';
 export * from './fields/ShortText/ShortTextSettings';
+
+export { default as ShortTextValidation } from './fields/ShortText/ShortTextValidation';
+export * from './fields/ShortText/ShortTextValidation';
 
 export * from './fields/ShortText';
 
