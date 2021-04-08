@@ -21,6 +21,10 @@ export const DateConfig: IFieldConfig = {
   defaultValue: null,
   component: Component,
   settings: [],
-  validation: () => [['date'], ['nullable']],
+  validation: () => [
+    ['date'],
+    ['typeError', 'Please enter a valid date'],
+    ['nullable'],
+  ],
 };
 export default DateConfig;
