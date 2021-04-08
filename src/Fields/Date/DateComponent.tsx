@@ -45,6 +45,7 @@ export default function DateComponent({
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}
+              onClose={onBlur}
               error={!!errorMessage}
               FormHelperTextProps={{ component: 'div' } as any}
               helperText={

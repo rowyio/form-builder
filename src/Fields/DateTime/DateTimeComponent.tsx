@@ -51,6 +51,7 @@ export default function DateTimeComponent({
               value={transformedValue}
               onChange={onChange}
               onBlur={onBlur}
+              onClose={onBlur}
               error={!!errorMessage}
               FormHelperTextProps={{ component: 'div' } as any}
               helperText={
