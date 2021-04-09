@@ -26,11 +26,7 @@ export const CheckboxConfig: IFieldConfig = {
     const validation: any[][] = [['boolean']];
 
     if (config.required === true)
-      validation.push([
-        'oneOf',
-        [true],
-        `${config.label || config.name} is required`,
-      ]);
+      validation.push(['oneOf', [true], `Please tick the box`]);
 
     return validation;
   },
