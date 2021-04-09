@@ -1,89 +1,45 @@
-import { lazy } from 'react';
+import _find from 'lodash/find';
+import _get from 'lodash/get';
+import { IFieldConfig } from '../types';
 
-import TextField from './TextField';
-import Heading from '../Heading';
-import Description from '../Description';
+import ShortText from './ShortText';
+import Paragraph from './Paragraph';
+import RichText from './RichText';
+import Date from './Date';
+import DateTime from './DateTime';
+import Checkbox from './Checkbox';
+import Radio from './Radio';
+import SingleSelect from './SingleSelect';
+import MultiSelect from './MultiSelect';
+import Slider from './Slider';
+import List from './List';
+import Color from './Color';
 
-const SingleSelect = lazy(() =>
-  import('./SingleSelect' /* webpackChunkName: "Form/SingleSelect" */)
-);
-const MultiSelect = lazy(() =>
-  import('./MultiSelect' /* webpackChunkName: "Form/MultiSelect" */)
-);
-const DatePicker = lazy(() =>
-  import('./DatePicker' /* webpackChunkName: "Form/DatePicker" */)
-);
-const DateTimePicker = lazy(() =>
-  import('./DateTimePicker' /* webpackChunkName: "Form/DateTimePicker" */)
-);
-const Checkbox = lazy(() =>
-  import('./Checkbox' /* webpackChunkName: "Form/Checkbox" */)
-);
-const Radio = lazy(() =>
-  import('./Radio' /* webpackChunkName: "Form/Radio" */)
-);
-const Slider = lazy(() =>
-  import('./Slider' /* webpackChunkName: "Form/Slider" */)
-);
-const TextMulti = lazy(() =>
-  import('./TextMulti' /* webpackChunkName: "Form/TextMulti" */)
-);
-const RichText = lazy(() =>
-  import('./RichText' /* webpackChunkName: "Form/RichText" */)
-);
-const Color = lazy(() =>
-  import('./Color' /* webpackChunkName: "Form/Color" */)
-);
+import ContentHeader from './ContentHeader';
+import ContentSubHeader from './ContentSubHeader';
+import ContentParagraph from './ContentParagraph';
 
-export enum FIELDS {
-  text = 'text',
-  singleSelect = 'singleSelect',
-  multiSelect = 'multiSelect',
-  date = 'date',
-  dateTime = 'dateTime',
-  checkbox = 'checkbox',
-  radio = 'radio',
-  slider = 'slider',
-  textMulti = 'textMulti',
-  richText = 'richText',
-  color = 'color',
+export const FieldConfigs = [
+  ShortText,
+  Paragraph,
+  RichText,
+  Date,
+  DateTime,
+  Checkbox,
+  Radio,
+  SingleSelect,
+  MultiSelect,
+  Slider,
+  List,
+  Color,
 
-  heading = 'heading',
-  description = 'description',
-}
+  ContentHeader,
+  ContentSubHeader,
+  ContentParagraph,
+];
 
-export const FIELD_COMPONENTS: Record<
-  FIELDS,
-  React.FC<any> | React.LazyExoticComponent<React.FC<any>>
-> = {
-  text: TextField,
-  singleSelect: SingleSelect,
-  multiSelect: MultiSelect,
-  date: DatePicker,
-  dateTime: DateTimePicker,
-  checkbox: Checkbox,
-  radio: Radio,
-  slider: Slider,
-  textMulti: TextMulti,
-  richText: RichText,
-  color: Color,
-
-  heading: Heading,
-  description: Description,
-};
-
-export const DEFAULT_VALUES: Record<FIELDS, any> = {
-  text: '',
-  singleSelect: null,
-  multiSelect: [],
-  date: null,
-  dateTime: null,
-  checkbox: false,
-  radio: '',
-  slider: 0,
-  textMulti: [],
-  richText: '',
-  color: null,
-  heading: undefined,
-  description: undefined,
+/** Returns specific property of field config */
+export const getFieldProp = (prop: keyof IFieldConfig, fieldType: string) => {
+  const field = _find(FieldConfigs, { type: fieldType });
+  return _get(field, prop);
 };

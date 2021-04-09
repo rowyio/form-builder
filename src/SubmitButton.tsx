@@ -5,10 +5,10 @@ import { makeStyles, Button, ButtonProps } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: theme.spacing(6, 0),
-    padding: theme.spacing(1, 5),
+    display: 'flex',
+    margin: theme.spacing(3, 'auto'),
+    minWidth: 120,
   },
-  endIcon: { marginRight: -theme.spacing(3) },
 }));
 
 export interface ISubmitButtonProps extends ButtonProps {
@@ -25,7 +25,6 @@ export default function SubmitButton({
     <Button
       variant="contained"
       color="primary"
-      size="large"
       type="submit"
       {...buttonProps}
       classes={{

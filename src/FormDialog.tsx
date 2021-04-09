@@ -23,13 +23,8 @@ import { fade } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 
 import FormFields from './FormFields';
-import {
-  Values,
-  Fields,
-  CustomComponents,
-  getDefaultValues,
-  getValidationSchema,
-} from './utils';
+import { getDefaultValues, getValidationSchema } from './utils';
+import { Values, Fields, CustomComponents } from './types';
 import { SlideTransitionMui } from './SlideTransition';
 
 const useStyles = makeStyles(theme =>
@@ -158,9 +153,9 @@ export default function FormDialog({
   const methods = useForm({
     mode: 'onBlur',
     defaultValues,
-    resolver: yupResolver(getValidationSchema(fields)),
+    resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
-  const { register, handleSubmit, control, errors, formState, reset } = methods;
+  const { handleSubmit, control, errors, formState, reset } = methods;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
@@ -223,7 +218,6 @@ export default function FormDialog({
           {formHeader}
           <FormFields
             fields={fields}
-            register={register}
             control={control}
             errors={errors}
             customComponents={customComponents}
