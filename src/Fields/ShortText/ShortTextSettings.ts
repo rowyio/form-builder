@@ -21,6 +21,7 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
     label: 'Format',
     defaultValue: '',
     options: [
+      { value: '', label: 'None' },
       { value: 'email', label: 'Email' },
       { value: 'phone', label: 'Phone' },
       { value: 'number', label: 'Number' },
@@ -35,6 +36,7 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
     label: 'Autocomplete Suggestion',
     defaultValue: '',
     options: [
+      { value: '', label: 'None' },
       { value: 'name', label: 'Name' },
       { value: 'email', label: 'Email' },
       { value: 'organization', label: 'Organisation' },
