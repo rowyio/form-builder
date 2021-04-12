@@ -6,6 +6,7 @@ export const RichTextSettings: IFieldConfig['settings'] = [
     type: FieldType.shortText,
     name: 'maxCharacters',
     label: 'Max Characters',
+    conditional: 'check',
     defaultValue: undefined,
     format: 'number',
   },

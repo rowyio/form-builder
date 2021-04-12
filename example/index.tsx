@@ -72,6 +72,7 @@ const fields = [
     format: 'number',
     name: 'number',
     label: 'Number',
+    conditional: 'check',
   },
   // : null,
   {
