@@ -116,14 +116,6 @@ export * from './fields/Radio/RadioSettings';
 
 export * from './fields/Radio';
 
-export { default as RichTextComponent } from './fields/RichText/RichTextComponent';
-export * from './fields/RichText/RichTextComponent';
-
-export { default as RichTextSettings } from './fields/RichText/RichTextSettings';
-export * from './fields/RichText/RichTextSettings';
-
-export * from './fields/RichText';
-
 export { default as ShortTextComponent } from './fields/ShortText/ShortTextComponent';
 export * from './fields/ShortText/ShortTextComponent';
 
