@@ -4,7 +4,7 @@ import { IFieldConfig } from '../types';
 
 import ShortText from './ShortText';
 import Paragraph from './Paragraph';
-import RichText from './RichText';
+// import RichText from './RichText';
 import Date from './Date';
 import DateTime from './DateTime';
 import Checkbox from './Checkbox';
@@ -22,7 +22,7 @@ import ContentParagraph from './ContentParagraph';
 export const FieldConfigs = [
   ShortText,
   Paragraph,
-  RichText,
+  // RichText,
   Date,
   DateTime,
   Checkbox,
