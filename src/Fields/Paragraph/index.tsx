@@ -20,6 +20,7 @@ export const ParagraphConfig: IFieldConfig = {
       <path d={mdiFormTextarea} />
     </SvgIcon>
   ),
+  dataType: 'string',
   defaultValue: '',
   component: Component,
   settings: Settings,

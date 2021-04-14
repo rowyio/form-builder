@@ -19,6 +19,7 @@ export const SliderConfig: IFieldConfig = {
       <path d={mdiGestureSwipeHorizontal} />
     </SvgIcon>
   ),
+  dataType: 'number',
   defaultValue: 0,
   component: Component,
   settings: Settings,

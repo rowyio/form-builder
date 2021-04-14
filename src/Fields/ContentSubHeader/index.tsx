@@ -22,6 +22,7 @@ export const ContentSubHeaderConfig: IFieldConfig = {
       <path d={mdiFormatHeader2} />
     </SvgIcon>
   ),
+  dataType: 'undefined',
   defaultValue: undefined,
   component: Component,
   settings: Settings,

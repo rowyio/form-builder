@@ -22,6 +22,7 @@ export const SingleSelectConfig: IFieldConfig = {
       <path d={mdiOrderBoolDescending} />
     </SvgIcon>
   ),
+  dataType: 'string',
   defaultValue: '',
   component: Component as any,
   settings: Settings,

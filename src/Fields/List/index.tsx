@@ -20,6 +20,7 @@ export const ListConfig: IFieldConfig = {
       <path d={mdiFormatListNumbered} />
     </SvgIcon>
   ),
+  dataType: 'string[]',
   defaultValue: [],
   component: Component,
   settings: Settings,

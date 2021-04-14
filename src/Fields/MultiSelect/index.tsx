@@ -23,6 +23,7 @@ export const MultiSelectConfig: IFieldConfig = {
       <path d={mdiOrderBoolAscendingVariant} />
     </SvgIcon>
   ),
+  dataType: 'string[]',
   defaultValue: [],
   component: Component as any,
   settings: Settings,

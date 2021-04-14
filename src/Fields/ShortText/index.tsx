@@ -21,6 +21,7 @@ export const ShortTextConfig: IFieldConfig = {
       <path d={mdiFormTextbox} />
     </SvgIcon>
   ),
+  dataType: 'string',
   defaultValue: '',
   component: Component,
   settings: Settings,

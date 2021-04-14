@@ -18,6 +18,7 @@ export const DateConfig: IFieldConfig = {
       <path d={mdiCalendar} />
     </SvgIcon>
   ),
+  dataType: 'Date | null',
   defaultValue: null,
   component: Component,
   settings: [],

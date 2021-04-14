@@ -22,6 +22,7 @@ export const ContentParagraphConfig: IFieldConfig = {
       <path d={mdiText} />
     </SvgIcon>
   ),
+  dataType: 'undefined',
   defaultValue: undefined,
   component: Component,
   settings: Settings,

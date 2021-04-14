@@ -59,6 +59,7 @@ export interface IFieldConfig {
   name: string;
   group: 'input' | 'content';
   icon: React.ReactNode;
+  dataType: string;
   defaultValue: any;
   component: CustomComponent;
   settings: Fields;

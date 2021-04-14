@@ -19,6 +19,7 @@ export const CheckboxConfig: IFieldConfig = {
       <path d={mdiCheckboxMarked} />
     </SvgIcon>
   ),
+  dataType: 'boolean',
   defaultValue: false,
   component: Component,
   settings: [],

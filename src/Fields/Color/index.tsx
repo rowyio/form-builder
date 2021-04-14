@@ -19,6 +19,7 @@ export const ColorConfig: IFieldConfig = {
       <path d={mdiPalette} />
     </SvgIcon>
   ),
+  dataType: 'Record<string, any>',
   defaultValue: null,
   component: Component,
   settings: Settings,

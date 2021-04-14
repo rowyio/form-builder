@@ -19,6 +19,7 @@ export const RadioConfig: IFieldConfig = {
       <path d={mdiRadioboxMarked} />
     </SvgIcon>
   ),
+  dataType: 'string',
   defaultValue: '',
   component: Component as any,
   settings: Settings,
