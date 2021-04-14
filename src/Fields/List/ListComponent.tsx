@@ -1,5 +1,4 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import arrayMove from 'array-move';
@@ -36,103 +35,104 @@ export interface IListComponentProps extends IFieldComponentProps {
   placeholder?: string;
 }
 
-export default function ListComponent({
-  control,
-  name,
-  useFormMethods,
+export const ListComponent = React.forwardRef(function ListComponent(
+  {
+    onChange,
+    onBlur,
+    value: valueProp,
 
-  label,
-  errorMessage,
-  assistiveText,
+    name,
+    useFormMethods,
 
-  required,
-  disabled,
+    label,
+    errorMessage,
+    assistiveText,
 
-  itemLabel = 'Item',
-  placeholder,
-}: IListComponentProps) {
+    required,
+    disabled,
+
+    itemLabel = 'Item',
+    placeholder,
+  }: IListComponentProps,
+  ref
+) {
   const classes = useStyles();
 
+  const value: string[] = valueProp ?? [];
+  const add = () => onChange([...value, '']);
+
+  const edit = (index: number) => (item: string) => {
+    const newValue = [...useFormMethods.getValues(name)];
+    newValue[index] = item;
+    onChange(newValue);
+  };
+
+  const swap = (fromIndex: number, toIndex: number) => {
+    const newValue = arrayMove(
+      useFormMethods.getValues(name),
+      fromIndex,
+      toIndex
+    );
+    onChange(newValue);
+  };
+
+  const remove = (index: number) => () => {
+    const newValue = [...useFormMethods.getValues(name)];
+    newValue.splice(index, 1);
+    onChange(newValue);
+  };
+
   return (
-    <Controller
-      name={name}
-      control={control}
-      render={({ onChange, ...renderProps }) => {
-        const value: string[] = renderProps.value ?? [];
-        const add = () => onChange([...value, '']);
+    <FormControl
+      component="fieldset"
+      className={classes.root}
+      data-type="text-list"
+      data-label={label ?? ''}
+      error={!!errorMessage}
+      disabled={disabled}
+      ref={ref as any}
+    >
+      <FieldLabel
+        error={!!errorMessage}
+        disabled={!!disabled}
+        required={!!required}
+      >
+        {label}
+      </FieldLabel>
 
-        const edit = (index: number) => (item: string) => {
-          const newValue = [...useFormMethods.getValues(name)];
-          newValue[index] = item;
-          onChange(newValue);
-        };
+      <DndProvider backend={HTML5Backend}>
+        {value.map((item, index) => (
+          <ListItem
+            key={index}
+            name={name}
+            index={index}
+            item={item}
+            edit={edit(index)}
+            swap={swap}
+            remove={remove(index)}
+            itemLabel={itemLabel}
+            placeholder={placeholder}
+          />
+        ))}
+      </DndProvider>
 
-        const swap = (fromIndex: number, toIndex: number) => {
-          const newValue = arrayMove(
-            useFormMethods.getValues(name),
-            fromIndex,
-            toIndex
-          );
-          onChange(newValue);
-        };
+      <div>
+        <Button
+          startIcon={<AddCircleIcon className={classes.addIcon} />}
+          color="secondary"
+          onClick={add}
+          className={classes.addButton}
+        >
+          Add {itemLabel}
+        </Button>
+      </div>
 
-        const remove = (index: number) => () => {
-          const newValue = [...useFormMethods.getValues(name)];
-          newValue.splice(index, 1);
-          onChange(newValue);
-        };
-
-        return (
-          <FormControl
-            component="fieldset"
-            className={classes.root}
-            data-type="text-list"
-            data-label={label ?? ''}
-            error={!!errorMessage}
-            disabled={disabled}
-          >
-            <FieldLabel
-              error={!!errorMessage}
-              disabled={!!disabled}
-              required={!!required}
-            >
-              {label}
-            </FieldLabel>
-
-            <DndProvider backend={HTML5Backend}>
-              {value.map((item, index) => (
-                <ListItem
-                  key={index}
-                  name={name}
-                  index={index}
-                  item={item}
-                  edit={edit(index)}
-                  swap={swap}
-                  remove={remove(index)}
-                  itemLabel={itemLabel}
-                  placeholder={placeholder}
-                />
-              ))}
-            </DndProvider>
-
-            <div>
-              <Button
-                startIcon={<AddCircleIcon className={classes.addIcon} />}
-                color="secondary"
-                onClick={add}
-                className={classes.addButton}
-              >
-                Add {itemLabel}
-              </Button>
-            </div>
-
-            <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
-            <FieldAssistiveText disabled={!!disabled}>
-              {assistiveText}
-            </FieldAssistiveText>
-          </FormControl>
-        );
-      }}
-    />
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+      <FieldAssistiveText disabled={!!disabled}>
+        {assistiveText}
+      </FieldAssistiveText>
+    </FormControl>
   );
-}
+});
+
+export default ListComponent;

@@ -8,9 +8,6 @@ import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
 import { FieldType } from '../src';
 
-import 'tinymce/skins/ui/oxide/skin.min.css';
-import 'tinymce/skins/ui/oxide/content.min.css';
-
 const theme = createMuiTheme({
   typography: { fontFamily: 'system-ui' },
   props: { MuiTextField: { variant: 'filled' } },
@@ -18,10 +15,15 @@ const theme = createMuiTheme({
 
 const fields = [
   {
+    type: FieldType.contentHeader,
+    label: 'Header',
+    name: '_contentHeader_1',
+  },
+  {
     type: FieldType.richText,
     name: 'desc',
     label: 'Description',
-    required: true,
+    // required: true,
     maxCharacters: 20,
   },
   {
@@ -30,8 +32,8 @@ const fields = [
     name: 'link',
     label: 'Link',
     defaultValue: 'https://',
-    required: true,
-    displayCondition: 'return values.desc.length > 0',
+    // required: true,
+    displayCondition: 'return values.email.length > 0',
   },
   {
     type: FieldType.shortText,
@@ -69,12 +71,11 @@ const fields = [
   },
   {
     type: FieldType.shortText,
-    format: 'number',
     name: 'number',
+    format: 'number',
     label: 'Number',
     conditional: 'check',
   },
-  // : null,
   {
     type: FieldType.shortText,
     name: 'header',
@@ -87,6 +88,11 @@ const fields = [
     type: FieldType.paragraph,
     name: 'textarea',
     label: 'Tell me more',
+  },
+  {
+    type: FieldType.contentSubHeader,
+    label: 'Sub-Header',
+    name: '_contentSubHeader_1',
   },
   {
     type: FieldType.singleSelect,
@@ -106,6 +112,16 @@ const fields = [
     label: 'Who is CEO of Facebook?',
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
     multiple: false,
+  },
+  {
+    type: FieldType.contentSubHeader,
+    label: 'Sub-Header 2',
+    name: '_contentSubHeader_2',
+  },
+  {
+    type: FieldType.contentParagraph,
+    label: 'Paragraph text',
+    name: '_contentParagraph_1',
   },
   {
     type: FieldType.checkbox,
@@ -151,9 +167,10 @@ const App = () => {
       <CssBaseline />
       <FormDialog
         open
-        onClose={() => alert('Check console for values')}
+        onClose={() => {}}
         title="Form Dialog"
         fields={fields}
+        values={{ number: 123 }}
         onSubmit={data => console.log(data)}
         // customActions={
         //   <>

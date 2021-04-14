@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme =>
 
 export interface IContentParagraphComponentProps
   extends IFieldComponentProps,
-    Partial<Omit<TypographyProps, 'title'>> {}
+    Partial<Omit<TypographyProps, 'title' | 'onChange' | 'onBlur' | 'ref'>> {}
 
 export default function ContentParagraphComponent({
   index,
@@ -32,7 +32,6 @@ export default function ContentParagraphComponent({
   children,
   className,
 
-  control,
   disabled,
   errorMessage,
   name,

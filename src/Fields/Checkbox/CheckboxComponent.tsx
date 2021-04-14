@@ -1,5 +1,4 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
 import { IFieldComponentProps } from '../../types';
 
 import {
@@ -33,63 +32,67 @@ const useStyles = makeStyles(theme =>
 
 export interface ICheckboxComponentProps
   extends IFieldComponentProps,
-    Omit<CheckboxProps, 'name' | 'onChange' | 'checked'> {}
+    Omit<
+      CheckboxProps,
+      'name' | 'onChange' | 'checked' | 'ref' | 'value' | 'onBlur'
+    > {}
 
-export default function CheckboxComponent({
-  control,
-  name,
-  useFormMethods,
+export const CheckboxComponent = React.forwardRef(function CheckboxComponent(
+  {
+    onChange,
+    onBlur,
+    value,
 
-  label,
-  errorMessage,
-  assistiveText,
+    name,
+    useFormMethods,
 
-  required,
+    label,
+    errorMessage,
+    assistiveText,
 
-  ...props
-}: ICheckboxComponentProps) {
+    required,
+
+    ...props
+  }: ICheckboxComponentProps,
+  ref
+) {
   const classes = useStyles();
 
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ onChange, onBlur, value }) => (
+    <FormControlLabel
+      control={
+        <Checkbox
+          {...props}
+          checked={value}
+          onChange={e => {
+            onChange(e.target.checked);
+            onBlur();
+          }}
+          inputProps={
+            {
+              'data-type': 'checkbox',
+              'data-label': label ?? '',
+            } as any
+          }
+          className={classes.checkbox}
+          inputRef={ref as React.MutableRefObject<any>}
+        />
+      }
+      onBlur={onBlur}
+      label={
         <>
-          <FormControlLabel
-            control={
-              <Checkbox
-                {...props}
-                checked={value}
-                onChange={e => {
-                  onChange(e.target.checked);
-                  onBlur();
-                }}
-                inputProps={
-                  {
-                    'data-type': 'checkbox',
-                    'data-label': label ?? '',
-                  } as any
-                }
-                className={classes.checkbox}
-              />
-            }
-            onBlur={onBlur}
-            label={
-              <>
-                {label}
-                {required && <>&nbsp;*</>}
+          {label}
+          {required && <>&nbsp;*</>}
 
-                <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
-                <FieldAssistiveText disabled={!!props.disabled}>
-                  {assistiveText}
-                </FieldAssistiveText>
-              </>
-            }
-            classes={{ root: classes.root }}
-          />
+          <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+          <FieldAssistiveText disabled={!!props.disabled}>
+            {assistiveText}
+          </FieldAssistiveText>
         </>
-      )}
+      }
+      classes={{ root: classes.root }}
     />
   );
-}
+});
+
+export default CheckboxComponent;

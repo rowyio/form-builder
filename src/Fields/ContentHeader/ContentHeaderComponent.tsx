@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme =>
 
 export interface IContentHeaderComponentProps
   extends IFieldComponentProps,
-    Partial<Omit<TypographyProps, 'title'>> {}
+    Partial<Omit<TypographyProps, 'title' | 'onChange' | 'onBlur' | 'ref'>> {}
 
 export default function ContentHeaderComponent({
   index,
@@ -37,7 +37,6 @@ export default function ContentHeaderComponent({
   children,
   className,
 
-  control,
   disabled,
   errorMessage,
   name,

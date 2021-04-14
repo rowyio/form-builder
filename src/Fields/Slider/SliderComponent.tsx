@@ -1,5 +1,4 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
 import { IFieldComponentProps } from '../../types';
 
 import {
@@ -26,7 +25,7 @@ const useStyles = makeStyles(theme =>
 
 export interface ISliderComponentProps
   extends IFieldComponentProps,
-    Omit<SliderProps, 'name'> {
+    Omit<SliderProps, 'name' | 'onBlur' | 'onChange' | 'ref' | 'value'> {
   units?: string;
   unitsPlural?: string;
   minLabel?: React.ReactNode;
@@ -36,107 +35,100 @@ export interface ISliderComponentProps
 const valueWithUnits = (value: number, units?: string, unitsPlural?: string) =>
   `${value} ${(value !== 1 ? unitsPlural || '' : units) || ''}`.trim();
 
-export default function SliderComponent({
-  control,
-  name,
-  useFormMethods,
+export const SliderComponent = React.forwardRef(function SliderComponent(
+  {
+    onChange,
+    onBlur,
+    value,
 
-  label,
-  errorMessage,
-  assistiveText,
+    name,
+    useFormMethods,
 
-  required,
+    label,
+    errorMessage,
+    assistiveText,
 
-  units,
-  unitsPlural,
-  minLabel,
-  maxLabel,
-  min = 0,
-  max = 100,
-  ...props
-}: ISliderComponentProps) {
+    required,
+
+    units,
+    unitsPlural,
+    minLabel,
+    maxLabel,
+    min = 0,
+    max = 100,
+    ...props
+  }: ISliderComponentProps,
+  ref
+) {
   const classes = useStyles();
 
+  const handleChange = (_: any, value: number | number[]) => {
+    onChange(value);
+    onBlur();
+  };
+
+  const getAriaValueText = (value: number) =>
+    valueWithUnits(value, units, unitsPlural);
+  const getValueLabelFormat = getAriaValueText;
+
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ onChange, onBlur, value }) => {
-        const handleChange = (_: any, value: number | number[]) => {
-          onChange(value);
-          onBlur();
-        };
+    <FormControl
+      className={classes.root}
+      error={!!errorMessage}
+      disabled={!!props.disabled}
+      required={!!required}
+    >
+      <FieldLabel
+        error={!!errorMessage}
+        disabled={!!props.disabled}
+        required={!!required}
+      >
+        {label}
+      </FieldLabel>
 
-        const getAriaValueText = (value: number) =>
-          valueWithUnits(value, units, unitsPlural);
-        const getValueLabelFormat = getAriaValueText;
+      <Grid
+        container
+        spacing={2}
+        alignItems="center"
+        className={classes.sliderGrid}
+      >
+        <Grid item>
+          <Typography variant="caption" component="span" color="textSecondary">
+            {minLabel || valueWithUnits(min, units, unitsPlural)}
+          </Typography>
+        </Grid>
 
-        return (
-          <FormControl
-            className={classes.root}
-            error={!!errorMessage}
-            disabled={!!props.disabled}
-            required={!!required}
-          >
-            <FieldLabel
-              error={!!errorMessage}
-              disabled={!!props.disabled}
-              required={!!required}
-            >
-              {label}
-            </FieldLabel>
+        <Grid item xs>
+          <Slider
+            valueLabelDisplay="on"
+            min={min}
+            max={max}
+            getAriaValueText={getAriaValueText}
+            valueLabelFormat={getValueLabelFormat}
+            {...props}
+            value={value ?? min}
+            onClick={onBlur}
+            onChange={handleChange}
+            classes={{ root: classes.slider }}
+            data-type="slider"
+            data-label={label ?? ''}
+            ref={ref as any}
+          />
+        </Grid>
 
-            <Grid
-              container
-              spacing={2}
-              alignItems="center"
-              className={classes.sliderGrid}
-            >
-              <Grid item>
-                <Typography
-                  variant="caption"
-                  component="span"
-                  color="textSecondary"
-                >
-                  {minLabel || valueWithUnits(min, units, unitsPlural)}
-                </Typography>
-              </Grid>
+        <Grid item>
+          <Typography variant="caption" component="span" color="textSecondary">
+            {maxLabel || valueWithUnits(max, units, unitsPlural)}
+          </Typography>
+        </Grid>
+      </Grid>
 
-              <Grid item xs>
-                <Slider
-                  valueLabelDisplay="on"
-                  min={min}
-                  max={max}
-                  getAriaValueText={getAriaValueText}
-                  valueLabelFormat={getValueLabelFormat}
-                  {...props}
-                  value={value ?? min}
-                  onClick={onBlur}
-                  onChange={handleChange}
-                  classes={{ root: classes.slider }}
-                  data-type="slider"
-                  data-label={label ?? ''}
-                />
-              </Grid>
-
-              <Grid item>
-                <Typography
-                  variant="caption"
-                  component="span"
-                  color="textSecondary"
-                >
-                  {maxLabel || valueWithUnits(max, units, unitsPlural)}
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
-            <FieldAssistiveText disabled={!!props.disabled}>
-              {assistiveText}
-            </FieldAssistiveText>
-          </FormControl>
-        );
-      }}
-    />
+      <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
+      <FieldAssistiveText disabled={!!props.disabled}>
+        {assistiveText}
+      </FieldAssistiveText>
+    </FormControl>
   );
-}
+});
+
+export default SliderComponent;

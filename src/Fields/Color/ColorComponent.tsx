@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import clsx from 'clsx';
-import { Controller } from 'react-hook-form';
 import { IFieldComponentProps } from '../../types';
 import { ChromePicker } from 'react-color';
 
@@ -69,19 +68,25 @@ export interface IColorComponentProps extends IFieldComponentProps {
   enableAlpha?: boolean;
 }
 
-export default function ColorComponent({
-  control,
-  name,
+export const ColorComponent = React.forwardRef(function ColorComponent(
+  {
+    onChange,
+    onBlur,
+    value,
 
-  label,
-  errorMessage,
-  assistiveText,
+    name,
 
-  required,
-  disabled,
+    label,
+    errorMessage,
+    assistiveText,
 
-  enableAlpha,
-}: IColorComponentProps) {
+    required,
+    disabled,
+
+    enableAlpha,
+  }: IColorComponentProps,
+  ref
+) {
   const classes = useStyles();
 
   const anchorEl = useRef<HTMLButtonElement>(null);
@@ -89,104 +94,101 @@ export default function ColorComponent({
   const toggleOpen = () => setOpen(s => !s);
 
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ onChange, onBlur, value }) => (
-        <FormControl
-          className={classes.wrapper}
-          error={!!errorMessage}
-          disabled={disabled}
-        >
-          <Grid
-            container
-            alignItems="center"
-            wrap="nowrap"
-            spacing={2}
-            className={clsx(
-              classes.root,
-              'MuiInputBase-root',
-              'MuiFilledInput-root',
-              errorMessage && 'Mui-error'
-            )}
-            onClick={toggleOpen}
-            component={ButtonBase}
-            focusRipple
-            data-type="color"
-            data-label={label ?? ''}
+    <FormControl
+      className={classes.wrapper}
+      error={!!errorMessage}
+      disabled={disabled}
+      ref={ref as any}
+    >
+      <Grid
+        container
+        alignItems="center"
+        wrap="nowrap"
+        spacing={2}
+        className={clsx(
+          classes.root,
+          'MuiInputBase-root',
+          'MuiFilledInput-root',
+          errorMessage && 'Mui-error'
+        )}
+        onClick={toggleOpen}
+        component={ButtonBase}
+        focusRipple
+        data-type="color"
+        data-label={label ?? ''}
+        disabled={disabled}
+        ref={anchorEl}
+      >
+        <Grid item>
+          <div
+            className={classes.colorIndicator}
+            style={{ backgroundColor: value?.hex }}
+          />
+        </Grid>
+
+        <Grid item xs>
+          <InputLabel
+            className={classes.label}
+            error={!!errorMessage}
             disabled={disabled}
-            ref={anchorEl}
+            required={required}
           >
-            <Grid item>
-              <div
-                className={classes.colorIndicator}
-                style={{ backgroundColor: value?.hex }}
-              />
-            </Grid>
+            {label}
+          </InputLabel>
+          <Typography
+            variant="body1"
+            className={clsx(!value || disabled ? classes.placeholder : '')}
+          >
+            {value?.hex ?? 'Choose a color…'}
+          </Typography>
+        </Grid>
 
-            <Grid item xs>
-              <InputLabel
-                className={classes.label}
-                error={!!errorMessage}
-                disabled={disabled}
-                required={required}
-              >
-                {label}
-              </InputLabel>
-              <Typography
-                variant="body1"
-                className={clsx(!value || disabled ? classes.placeholder : '')}
-              >
-                {value?.hex ?? 'Choose a color…'}
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              {open ? (
-                <ArrowDropUpIcon
-                  aria-label="Hide color picker"
-                  color={disabled ? 'disabled' : 'inherit'}
-                  className={classes.arrow}
-                />
-              ) : (
-                <ArrowDropDownIcon
-                  aria-label="Show color picker"
-                  color={disabled ? 'disabled' : 'inherit'}
-                  className={classes.arrow}
-                />
-              )}
-            </Grid>
-          </Grid>
-
-          {anchorEl.current && (
-            <Popover
-              open={open}
-              anchorEl={anchorEl.current}
-              onClose={() => {
-                setOpen(false);
-                onBlur();
-              }}
-              PaperProps={
-                { 'data-type': 'color-picker', variant: 'outlined' } as any
-              }
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-              transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-              <ChromePicker
-                color={value?.rgb}
-                onChangeComplete={onChange}
-                disableAlpha={!enableAlpha}
-                className={classes.picker}
-              />
-            </Popover>
+        <Grid item>
+          {open ? (
+            <ArrowDropUpIcon
+              aria-label="Hide color picker"
+              color={disabled ? 'disabled' : 'inherit'}
+              className={classes.arrow}
+            />
+          ) : (
+            <ArrowDropDownIcon
+              aria-label="Show color picker"
+              color={disabled ? 'disabled' : 'inherit'}
+              className={classes.arrow}
+            />
           )}
+        </Grid>
+      </Grid>
 
-          <FieldErrorMessage variant="filled">{errorMessage}</FieldErrorMessage>
-          <FieldAssistiveText disabled={!!disabled} variant="filled">
-            {assistiveText}
-          </FieldAssistiveText>
-        </FormControl>
+      {anchorEl.current && (
+        <Popover
+          open={open}
+          anchorEl={anchorEl.current}
+          onClose={() => {
+            setOpen(false);
+            onBlur();
+          }}
+          PaperProps={
+            { 'data-type': 'color-picker', variant: 'outlined' } as any
+          }
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <ChromePicker
+            color={value?.rgb}
+            onChangeComplete={onChange}
+            disableAlpha={!enableAlpha}
+            className={classes.picker}
+          />
+        </Popover>
       )}
-    />
+
+      <FieldErrorMessage variant="filled">{errorMessage}</FieldErrorMessage>
+      <FieldAssistiveText disabled={!!disabled} variant="filled">
+        {assistiveText}
+      </FieldAssistiveText>
+    </FormControl>
   );
-}
+});
+
+export default ColorComponent;

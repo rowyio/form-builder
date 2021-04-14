@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UseFormMethods, useWatch } from 'react-hook-form';
 
-import { Grid } from '@material-ui/core';
+import { useTheme, Grid, Checkbox } from '@material-ui/core';
 
 import { Fields, CustomComponents } from './types';
 import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';
@@ -29,6 +29,10 @@ export default function FormFields({ fields, ...props }: IFormFieldsProps) {
         // Otherwise, just use the field object
         // If we intentionally hide this field due to form values, don’t render
         if (!field) return null;
+
+        // Conditional field
+        if (field.conditional === 'check')
+          return <ConditionalField key={i} index={i} {...field} {...props} />;
 
         return (
           <FieldWrapper key={field.name ?? i} index={i} {...field} {...props} />
@@ -62,4 +66,40 @@ function DependentField({ displayCondition, ...props }: IFieldWrapperProps) {
     console.error(e);
     return null;
   }
+}
+
+/**
+ * Wrap the field declaration around this component so we can access
+ * `useWatch` to get the initial conditional checkbox state.
+ * `getValues` does not seem to work.
+ */
+function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
+  const theme = useTheme();
+
+  const value = useWatch({ control: props.control, name: props.name! });
+  const [conditionalState, setConditionalState] = useState(value !== undefined);
+
+  return (
+    <Grid item key={props.name!} id={`conditionalField-${props.name}`} xs={12}>
+      <Grid container wrap="nowrap" alignItems="flex-start">
+        <Grid item>
+          <Checkbox
+            checked={conditionalState}
+            onChange={e => {
+              setConditionalState(e.target.checked);
+            }}
+            inputProps={{ 'aria-label': `Enable field ${props.label}` }}
+            style={{ margin: theme.spacing(1, 2, 1, -1.5) }}
+          />
+        </Grid>
+
+        <FieldWrapper
+          {...props}
+          disabledConditional={!conditionalState}
+          gridCols={true}
+          value={undefined}
+        />
+      </Grid>
+    </Grid>
+  );
 }

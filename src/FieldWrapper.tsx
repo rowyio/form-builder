@@ -1,6 +1,7 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useRef } from 'react';
+import { Controller } from 'react-hook-form';
 
-import { useTheme, Grid, Checkbox } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import FieldSkeleton from './FieldSkeleton';
 
 import { getFieldProp } from './fields';
@@ -12,26 +13,31 @@ export interface IFieldWrapperProps
   extends Field,
     Omit<IFormFieldsProps, 'fields'> {
   index: number;
+  disabledConditional?: boolean;
 }
 
+/**
+ * Finds the corresponding component for the field type and wraps it with
+ * Controller.
+ */
 export default function FieldWrapper({
   control,
   errors,
+  name,
+  label,
   type,
   customComponents,
-  conditional,
   gridCols = 12,
+  disabledConditional,
   ...props
 }: IFieldWrapperProps) {
-  const theme = useTheme();
-  const [conditionalState, setConditionalState] = useState(false);
+  const ref = useRef<any>(null);
 
   if (!type) {
     console.error(`Invalid field type: ${type}`, props);
     return null;
   }
 
-  let renderedField: React.ReactNode = null;
   let fieldComponent: CustomComponent;
 
   // Try to get fieldComponent from customComponents list
@@ -53,48 +59,76 @@ export default function FieldWrapper({
     }
   }
 
-  if (!props.name) return null;
+  if (!name) return null;
 
-  renderedField = React.createElement(fieldComponent, {
-    ...props,
-    name: props.name!,
-    label: props.label!,
-    control,
-    errorMessage: errors[props.name!]?.message,
-    disabled: conditional ? !conditionalState : props.disabled,
-    defaultValue: undefined, // Prevent field being both controlled and uncontrolled
-  });
-
-  if (conditional === 'check')
+  // If it’s a content field, don’t wrap with Controller
+  if (getFieldProp('group', type) === 'content')
     return (
-      <Grid item key={props.name!} id={`fieldWrapper-${props.name}`} xs={12}>
-        <Grid container wrap="nowrap" alignItems="flex-start">
-          <Grid item>
-            <Checkbox
-              checked={conditionalState}
-              onChange={e => {
-                setConditionalState(e.target.checked);
-                props.useFormMethods.setValue(props.name!, undefined);
-              }}
-              inputProps={{ 'aria-label': `Enable field ${props.label}` }}
-              style={{ margin: theme.spacing(1, 2, 1, -1.5) }}
-            />
-          </Grid>
-          <Grid item xs key={`${props.name}-${conditionalState}`}>
-            <Suspense fallback={<FieldSkeleton />}>{renderedField}</Suspense>
-          </Grid>
-        </Grid>
+      <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+        <Suspense fallback={<FieldSkeleton />}>
+          {React.createElement(fieldComponent, {
+            ...props,
+            // Stub Controller render props
+            onChange: () => {},
+            value: undefined,
+            onBlur: () => {},
+            disabled: true,
+            ref: undefined as any,
+            name: name!, // Fix TypeScript error
+            label: label!, // Fix TypeScript error
+          })}
+        </Suspense>
+      </Grid>
+    );
+
+  // If it’s a conditional field and the user hasn’t ticked, make sure the
+  // Controller doesn’t register the field and there is no value for this field
+  if (disabledConditional)
+    return (
+      <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+        <Suspense fallback={<FieldSkeleton />}>
+          {React.createElement(fieldComponent, {
+            ...props,
+            // Stub Controller render props
+            onChange: () => {},
+            value: undefined,
+            onBlur: () => {},
+            disabled: true,
+            ref: undefined as any,
+            name: name!, // Fix TypeScript error
+            label: label!, // Fix TypeScript error
+            errorMessage: errors[name!]?.message,
+            defaultValue: undefined, // Prevent field being both controlled and uncontrolled
+          })}
+        </Suspense>
       </Grid>
     );
 
   return (
-    <Grid
-      item
-      key={props.name!}
-      id={`fieldWrapper-${props.name}`}
-      xs={gridCols}
-    >
-      <Suspense fallback={<FieldSkeleton />}>{renderedField}</Suspense>
+    <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+      <Suspense fallback={<FieldSkeleton />}>
+        <Controller
+          control={control}
+          name={name!}
+          render={renderProps =>
+            React.createElement(fieldComponent, {
+              ...props,
+              ...renderProps,
+              ref,
+              name: name!, // Fix TypeScript error
+              label: label!, // Fix TypeScript error
+              errorMessage: errors[name!]?.message,
+              defaultValue: undefined, // Prevent field being both controlled and uncontrolled
+            })
+          }
+          onFocus={() => {
+            if (ref.current) {
+              ref.current.scrollIntoView({ behavior: 'smooth' });
+              ref.current.focus();
+            }
+          }}
+        />
+      </Suspense>
     </Grid>
   );
 }
