@@ -51,6 +51,7 @@ export type CustomComponents<
   [type: string]: {
     component: CustomComponent<P>;
     defaultValue?: any;
+    validation?: any[][];
   };
 };
 

@@ -53,11 +53,11 @@ export const getValidationSchema = (
 
       let validation: any[][] = [];
 
-      // Get default validation from customComponents
       if (!!customComponents && field.type in customComponents) {
-        validation = customComponents[field.type].defaultValue;
-        // Get default validation from built-in components
+        // Get default validation from customComponents
+        validation = customComponents[field.type].validation ?? [];
       } else {
+        // Get default validation from built-in components
         const validationFunction = getFieldProp('validation', field.type);
         if (validationFunction) validation = validationFunction(field);
       }
