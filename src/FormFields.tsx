@@ -60,6 +60,9 @@ function DependentField({ displayCondition, ...props }: IFieldWrapperProps) {
     // If we intentionally hide this field due to form values, don’t render
     if (!displayConditionResult) return null;
 
+    // Conditional field
+    if (props.conditional === 'check') return <ConditionalField {...props} />;
+
     return <FieldWrapper {...props} />;
   } catch (e) {
     console.error('Failed to evaluate displayCondition function');
