@@ -29,6 +29,7 @@ export default function FieldWrapper({
   customComponents,
   gridCols = 12,
   disabledConditional,
+  defaultValue: defaultValueProp,
   ...props
 }: IFieldWrapperProps) {
   if (!type) {
@@ -37,6 +38,8 @@ export default function FieldWrapper({
   }
 
   let fieldComponent: CustomComponent;
+  // Pass defaultValue into the Controller for conditionally displayed fields
+  let defaultValue: any = defaultValueProp;
 
   // Try to get fieldComponent from customComponents list
   if (
@@ -45,10 +48,16 @@ export default function FieldWrapper({
     type in customComponents
   ) {
     fieldComponent = customComponents[type].component;
+
+    if (defaultValue === undefined)
+      defaultValue = customComponents[type].defaultValue;
   }
   // If not found in customComponents, try to get it from the built-in components
   else {
     fieldComponent = getFieldProp('component', type);
+
+    if (defaultValue === undefined)
+      defaultValue = getFieldProp('defaultValue', type);
 
     // If not found in either, don’t display anything
     if (!fieldComponent) {
@@ -89,7 +98,6 @@ export default function FieldWrapper({
             disabled: true,
             name: name!, // Fix TypeScript error
             label: label!, // Fix TypeScript error
-            defaultValue: undefined, // Prevent field being both controlled and uncontrolled
           })}
         </Suspense>
       </Grid>
@@ -108,15 +116,9 @@ export default function FieldWrapper({
               name: name!, // Fix TypeScript error
               label: label!, // Fix TypeScript error
               errorMessage: renderProps.fieldState.error?.message,
-              defaultValue: undefined, // Prevent field being both controlled and uncontrolled
             })
           }
-          // onFocus={() => {
-          //   if (ref.current) {
-          //     ref.current.scrollIntoView({ behavior: 'smooth' });
-          //     ref.current.focus();
-          //   }
-          // }}
+          defaultValue={defaultValue}
         />
       </Suspense>
     </Grid>

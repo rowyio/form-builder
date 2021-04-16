@@ -33,6 +33,10 @@ export const getDefaultValues = (
         defaultValue = getFieldProp('defaultValue', field.type);
       }
 
+      // If undefined, do not add to defaultValues
+      // Prevents content fields returning a value
+      if (defaultValue === undefined) return acc;
+
       return { ...acc, [field.name]: defaultValue };
     }
 

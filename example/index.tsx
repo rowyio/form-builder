@@ -1,10 +1,9 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as yup from 'yup';
 
 import { createMuiTheme } from '@material-ui/core/styles';
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider, CssBaseline, Button } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
 import { FieldType } from '../src';
 
@@ -31,8 +30,6 @@ const fields = [
     format: 'url',
     name: 'link',
     label: 'Link',
-    defaultValue: 'https://',
-    // required: true,
     displayCondition: 'return values.email.length > 0',
   },
   {
@@ -138,7 +135,6 @@ const fields = [
     type: FieldType.slider,
     name: 'slider',
     label: 'Your age',
-    required: true,
   },
   {
     type: FieldType.list,
@@ -162,7 +158,26 @@ const fields = [
   },
 ];
 
+const additionalFields = [
+  {
+    type: FieldType.shortText,
+    name: 'shortTextWithDefaultValue',
+    label: 'Short Text with Default Value',
+    defaultValue: 'DEFAULT VALUE',
+  },
+  {
+    type: FieldType.checkbox,
+    name: 'checkboxWithDefaultValue',
+    label: 'Checkbox with Default Value',
+    defaultValue: true,
+    required: true,
+  },
+];
+
 const App = () => {
+  const [values, setValues] = React.useState<any>({ number: 123 });
+  const [showAdditionalFields, setShowAdditionalFields] = React.useState(false);
+
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
@@ -170,14 +185,29 @@ const App = () => {
         open
         onClose={() => {}}
         title="Form Dialog"
-        fields={fields}
-        values={{ number: 123 }}
-        onSubmit={data => console.log(data)}
+        fields={
+          showAdditionalFields ? [...additionalFields, ...fields] : fields
+        }
+        values={values}
+        onSubmit={data => {
+          console.log(data);
+          setValues(data);
+        }}
         // customActions={
         //   <>
         //     <button type="submit">SUBMIT</button>
         //   </>
         // }
+        formHeader={
+          <Button
+            onClick={() => setShowAdditionalFields(x => !x)}
+            color="primary"
+            variant="outlined"
+            style={{ marginBottom: 24 }}
+          >
+            {showAdditionalFields ? 'Hide' : 'Show'} Additional Fields
+          </Button>
+        }
       />
     </MuiThemeProvider>
   );
