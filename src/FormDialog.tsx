@@ -155,7 +155,12 @@ export default function FormDialog({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
-  const { handleSubmit, control, formState, reset } = methods;
+  const {
+    handleSubmit,
+    control,
+    formState: { isDirty },
+    reset,
+  } = methods;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
@@ -164,7 +169,7 @@ export default function FormDialog({
     reset();
   };
   const confirmClose = () => {
-    if (formState.isDirty) setCloseConfirmation(true);
+    if (isDirty) setCloseConfirmation(true);
     else handleClose();
   };
 
