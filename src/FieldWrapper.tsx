@@ -1,4 +1,4 @@
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Grid } from '@material-ui/core';
@@ -8,6 +8,7 @@ import { getFieldProp } from './fields';
 
 import { IFormFieldsProps } from './FormFields';
 import { Field, CustomComponent } from './types';
+import { controllerRenderPropsStub } from './utils';
 
 export interface IFieldWrapperProps
   extends Field,
@@ -22,7 +23,6 @@ export interface IFieldWrapperProps
  */
 export default function FieldWrapper({
   control,
-  errors,
   name,
   label,
   type,
@@ -31,8 +31,6 @@ export default function FieldWrapper({
   disabledConditional,
   ...props
 }: IFieldWrapperProps) {
-  const ref = useRef<any>(null);
-
   if (!type) {
     console.error(`Invalid field type: ${type}`, props);
     return null;
@@ -69,11 +67,8 @@ export default function FieldWrapper({
           {React.createElement(fieldComponent, {
             ...props,
             // Stub Controller render props
-            onChange: () => {},
-            value: undefined,
-            onBlur: () => {},
+            ...controllerRenderPropsStub,
             disabled: true,
-            ref: undefined as any,
             name: name!, // Fix TypeScript error
             label: label!, // Fix TypeScript error
           })}
@@ -90,14 +85,10 @@ export default function FieldWrapper({
           {React.createElement(fieldComponent, {
             ...props,
             // Stub Controller render props
-            onChange: () => {},
-            value: undefined,
-            onBlur: () => {},
+            ...controllerRenderPropsStub,
             disabled: true,
-            ref: undefined as any,
             name: name!, // Fix TypeScript error
             label: label!, // Fix TypeScript error
-            errorMessage: errors[name!]?.message,
             defaultValue: undefined, // Prevent field being both controlled and uncontrolled
           })}
         </Suspense>
@@ -114,19 +105,18 @@ export default function FieldWrapper({
             React.createElement(fieldComponent, {
               ...props,
               ...renderProps,
-              ref,
               name: name!, // Fix TypeScript error
               label: label!, // Fix TypeScript error
-              errorMessage: errors[name!]?.message,
+              errorMessage: renderProps.fieldState.error?.message,
               defaultValue: undefined, // Prevent field being both controlled and uncontrolled
             })
           }
-          onFocus={() => {
-            if (ref.current) {
-              ref.current.scrollIntoView({ behavior: 'smooth' });
-              ref.current.focus();
-            }
-          }}
+          // onFocus={() => {
+          //   if (ref.current) {
+          //     ref.current.scrollIntoView({ behavior: 'smooth' });
+          //     ref.current.focus();
+          //   }
+          // }}
         />
       </Suspense>
     </Grid>

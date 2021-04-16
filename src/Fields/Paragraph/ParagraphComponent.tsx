@@ -17,24 +17,22 @@ export interface IParagraphComponentProps
   maxCharacters?: number;
 }
 
-export const ParagraphComponent = React.forwardRef(function ParagraphComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function ParagraphComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
-    useFormMethods,
+  fieldState,
+  formState,
 
-    errorMessage,
-    assistiveText,
+  name,
+  useFormMethods,
 
-    hiddenLabel = false,
-    maxCharacters,
-    ...props
-  }: IParagraphComponentProps,
-  ref
-) {
+  errorMessage,
+  assistiveText,
+
+  hiddenLabel = false,
+  maxCharacters,
+  ...props
+}: IParagraphComponentProps) {
   return (
     <TextField
       onChange={onChange}
@@ -90,6 +88,4 @@ export const ParagraphComponent = React.forwardRef(function ParagraphComponent(
       inputRef={ref}
     />
   );
-});
-
-export default ParagraphComponent;
+}

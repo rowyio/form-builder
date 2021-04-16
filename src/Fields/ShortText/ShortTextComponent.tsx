@@ -25,25 +25,22 @@ export interface IShortTextComponentProps
   maxCharacters?: number;
 }
 
-export const ShortTextComponent = React.forwardRef(function ShortTextComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function ShortTextComponent({
+  field: { onChange, onBlur, value, ref },
+  fieldState,
+  formState,
 
-    name,
-    useFormMethods,
+  name,
+  useFormMethods,
 
-    errorMessage,
-    assistiveText,
+  errorMessage,
+  assistiveText,
 
-    format,
-    hiddenLabel = false,
-    maxCharacters,
-    ...props
-  }: IShortTextComponentProps,
-  ref
-) {
+  format,
+  hiddenLabel = false,
+  maxCharacters,
+  ...props
+}: IShortTextComponentProps) {
   let variantProps: any = {};
   switch (format) {
     case 'email':
@@ -168,6 +165,4 @@ export const ShortTextComponent = React.forwardRef(function ShortTextComponent(
       inputRef={ref}
     />
   );
-});
-
-export default ShortTextComponent;
+}

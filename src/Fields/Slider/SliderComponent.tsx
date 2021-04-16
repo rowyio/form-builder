@@ -35,31 +35,29 @@ export interface ISliderComponentProps
 const valueWithUnits = (value: number, units?: string, unitsPlural?: string) =>
   `${value} ${(value !== 1 ? unitsPlural || '' : units) || ''}`.trim();
 
-export const SliderComponent = React.forwardRef(function SliderComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function SliderComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
-    useFormMethods,
+  fieldState,
+  formState,
 
-    label,
-    errorMessage,
-    assistiveText,
+  name,
+  useFormMethods,
 
-    required,
+  label,
+  errorMessage,
+  assistiveText,
 
-    units,
-    unitsPlural,
-    minLabel,
-    maxLabel,
-    min = 0,
-    max = 100,
-    ...props
-  }: ISliderComponentProps,
-  ref
-) {
+  required,
+
+  units,
+  unitsPlural,
+  minLabel,
+  maxLabel,
+  min = 0,
+  max = 100,
+  ...props
+}: ISliderComponentProps) {
   const classes = useStyles();
 
   const handleChange = (_: any, value: number | number[]) => {
@@ -105,6 +103,7 @@ export const SliderComponent = React.forwardRef(function SliderComponent(
             max={max}
             getAriaValueText={getAriaValueText}
             valueLabelFormat={getValueLabelFormat}
+            ThumbComponent={props => <span {...props} ref={ref as any} />}
             {...props}
             value={value ?? min}
             onClick={onBlur}
@@ -112,7 +111,6 @@ export const SliderComponent = React.forwardRef(function SliderComponent(
             classes={{ root: classes.slider }}
             data-type="slider"
             data-label={label ?? ''}
-            ref={ref as any}
           />
         </Grid>
 
@@ -129,6 +127,4 @@ export const SliderComponent = React.forwardRef(function SliderComponent(
       </FieldAssistiveText>
     </FormControl>
   );
-});
-
-export default SliderComponent;
+}

@@ -35,27 +35,24 @@ export interface IListComponentProps extends IFieldComponentProps {
   placeholder?: string;
 }
 
-export const ListComponent = React.forwardRef(function ListComponent(
-  {
-    onChange,
-    onBlur,
-    value: valueProp,
+export default function ListComponent({
+  field: { onChange, onBlur, value: valueProp, ref },
+  fieldState,
+  formState,
 
-    name,
-    useFormMethods,
+  name,
+  useFormMethods,
 
-    label,
-    errorMessage,
-    assistiveText,
+  label,
+  errorMessage,
+  assistiveText,
 
-    required,
-    disabled,
+  required,
+  disabled,
 
-    itemLabel = 'Item',
-    placeholder,
-  }: IListComponentProps,
-  ref
-) {
+  itemLabel = 'Item',
+  placeholder,
+}: IListComponentProps) {
   const classes = useStyles();
 
   const value: string[] = valueProp ?? [];
@@ -90,7 +87,6 @@ export const ListComponent = React.forwardRef(function ListComponent(
       data-label={label ?? ''}
       error={!!errorMessage}
       disabled={disabled}
-      ref={ref as any}
     >
       <FieldLabel
         error={!!errorMessage}
@@ -122,6 +118,7 @@ export const ListComponent = React.forwardRef(function ListComponent(
           color="secondary"
           onClick={add}
           className={classes.addButton}
+          ref={ref as any}
         >
           Add {itemLabel}
         </Button>
@@ -133,6 +130,4 @@ export const ListComponent = React.forwardRef(function ListComponent(
       </FieldAssistiveText>
     </FormControl>
   );
-});
-
-export default ListComponent;
+}

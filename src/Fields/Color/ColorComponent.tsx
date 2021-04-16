@@ -68,37 +68,38 @@ export interface IColorComponentProps extends IFieldComponentProps {
   enableAlpha?: boolean;
 }
 
-export const ColorComponent = React.forwardRef(function ColorComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function ColorComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
+  fieldState,
+  formState,
 
-    label,
-    errorMessage,
-    assistiveText,
+  name,
 
-    required,
-    disabled,
+  label,
+  errorMessage,
+  assistiveText,
 
-    enableAlpha,
-  }: IColorComponentProps,
-  ref
-) {
+  required,
+  disabled,
+
+  enableAlpha,
+}: IColorComponentProps) {
   const classes = useStyles();
 
-  const anchorEl = useRef<HTMLButtonElement>(null);
+  const anchorEl = useRef<HTMLButtonElement>();
   const [open, setOpen] = useState(false);
-  const toggleOpen = () => setOpen(s => !s);
+  const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = e => {
+    if (!anchorEl.current)
+      anchorEl.current = e.currentTarget as HTMLButtonElement;
+    setOpen(s => !s);
+  };
 
   return (
     <FormControl
       className={classes.wrapper}
       error={!!errorMessage}
       disabled={disabled}
-      ref={ref as any}
     >
       <Grid
         container
@@ -117,7 +118,7 @@ export const ColorComponent = React.forwardRef(function ColorComponent(
         data-type="color"
         data-label={label ?? ''}
         disabled={disabled}
-        ref={anchorEl}
+        ref={ref as any}
       >
         <Grid item>
           <div
@@ -189,6 +190,4 @@ export const ColorComponent = React.forwardRef(function ColorComponent(
       </FieldAssistiveText>
     </FormControl>
   );
-});
-
-export default ColorComponent;
+}

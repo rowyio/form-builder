@@ -18,7 +18,7 @@ export const SingleSelectSettings: IFieldConfig['settings'] = [
   {
     type: FieldType.shortText,
     name: 'labelPlural',
-    label: 'Plural Label (if searchable)',
+    label: 'Plural Label',
     defaultValue: undefined,
     displayCondition: 'return values.searchable === true',
   },

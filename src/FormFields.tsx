@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UseFormMethods, useWatch } from 'react-hook-form';
+import { Control, UseFormReturn, useWatch } from 'react-hook-form';
 
 import { useTheme, Grid, Checkbox } from '@material-ui/core';
 
@@ -9,10 +9,9 @@ import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';
 export interface IFormFieldsProps {
   fields: Fields;
 
-  control: UseFormMethods['control'];
-  errors: UseFormMethods['errors'];
+  control: Control;
   customComponents?: CustomComponents;
-  useFormMethods: UseFormMethods;
+  useFormMethods: UseFormReturn;
 }
 
 export default function FormFields({ fields, ...props }: IFormFieldsProps) {

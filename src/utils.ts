@@ -4,7 +4,8 @@ import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
 import { getFieldProp } from './fields';
 
-import { Fields, CustomComponents, Values } from './types';
+import { FieldValues } from 'react-hook-form';
+import { Fields, CustomComponents } from './types';
 
 /**
  * Creates a single object with all default values of the fields
@@ -14,7 +15,7 @@ import { Fields, CustomComponents, Values } from './types';
 export const getDefaultValues = (
   fields: Fields,
   customComponents?: CustomComponents
-): Values =>
+): FieldValues =>
   fields.reduce((acc, field) => {
     if (!!field && field.name && field.type) {
       let defaultValue: any;
@@ -100,4 +101,17 @@ export const diffChanges = (
   changed: { [key: string]: any }
 ) => {
   return _pickBy(changed, (val, key) => !_isEqual(val, current[key]));
+};
+
+/**
+ * Stubs Controller render props
+ */
+export const controllerRenderPropsStub: any = {
+  field: {
+    onChange: () => {},
+    onBlur: () => {},
+    ref: undefined as any,
+  },
+  fieldState: {},
+  formState: {},
 };

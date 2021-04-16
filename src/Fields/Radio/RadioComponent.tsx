@@ -48,26 +48,24 @@ export interface IRadioComponentProps
   options: (string | { value: string; label: React.ReactNode })[];
 }
 
-export const RadioComponent = React.forwardRef(function RadioComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function RadioComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
-    useFormMethods,
+  fieldState,
+  formState,
 
-    label,
-    errorMessage,
-    assistiveText,
+  name,
+  useFormMethods,
 
-    required,
+  label,
+  errorMessage,
+  assistiveText,
 
-    options,
-    ...props
-  }: IRadioComponentProps,
-  ref
-) {
+  required,
+
+  options,
+  ...props
+}: IRadioComponentProps) {
   const classes = useStyles();
 
   return (
@@ -76,7 +74,6 @@ export const RadioComponent = React.forwardRef(function RadioComponent(
       error={!!errorMessage}
       disabled={props.disabled}
       className={classes.root}
-      ref={ref as any}
     >
       <FieldLabel
         {...({ component: 'legend' } as any)}
@@ -104,7 +101,6 @@ export const RadioComponent = React.forwardRef(function RadioComponent(
                 label={option.label}
                 control={
                   <Radio
-                    //disabled={isSubmitting}
                     inputProps={
                       {
                         'data-type': 'radio',
@@ -113,13 +109,13 @@ export const RadioComponent = React.forwardRef(function RadioComponent(
                       } as any
                     }
                     className={classes.radio}
+                    inputRef={ref}
                   />
                 }
                 classes={{
                   root: classes.formControl,
                   label: classes.formControlLabel,
                 }}
-                //disabled={isSubmitting}
               />
               <Divider className={classes.divider} />
             </React.Fragment>
@@ -135,6 +131,4 @@ export const RadioComponent = React.forwardRef(function RadioComponent(
       </div>
     </FormControl>
   );
-});
-
-export default RadioComponent;
+}

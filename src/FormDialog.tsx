@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
@@ -24,7 +24,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import FormFields from './FormFields';
 import { getDefaultValues, getValidationSchema } from './utils';
-import { Values, Fields, CustomComponents } from './types';
+import { Fields, CustomComponents } from './types';
 import { SlideTransitionMui } from './SlideTransition';
 
 const useStyles = makeStyles(theme =>
@@ -108,8 +108,8 @@ const useStyles = makeStyles(theme =>
 
 export interface IFormDialogProps {
   fields: Fields;
-  values?: Values;
-  onSubmit: (values: Values) => void;
+  values?: FieldValues;
+  onSubmit: (values: FieldValues) => void;
   customComponents?: CustomComponents;
 
   open: boolean;
@@ -155,7 +155,7 @@ export default function FormDialog({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
-  const { handleSubmit, control, errors, formState, reset } = methods;
+  const { handleSubmit, control, formState, reset } = methods;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
@@ -219,7 +219,6 @@ export default function FormDialog({
           <FormFields
             fields={fields}
             control={control}
-            errors={errors}
             customComponents={customComponents}
             useFormMethods={methods}
           />

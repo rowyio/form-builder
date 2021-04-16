@@ -28,6 +28,10 @@ export interface IContentSubHeaderComponentProps
     Partial<Omit<TypographyProps, 'title' | 'onChange' | 'onBlur' | 'ref'>> {}
 
 export default function ContentSubHeaderComponent({
+  field,
+  fieldState,
+  formState,
+
   index,
   label,
   children,

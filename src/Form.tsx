@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -8,12 +8,12 @@ import AutoSave from './AutoSave';
 import SubmitButton, { ISubmitButtonProps } from './SubmitButton';
 
 import { getDefaultValues, getValidationSchema } from './utils';
-import { Values, Fields, CustomComponents } from './types';
+import { Fields, CustomComponents } from './types';
 
 export interface IFormProps {
   fields: Fields;
-  values?: Values;
-  onSubmit: (values: Values) => void;
+  values?: FieldValues;
+  onSubmit: (values: FieldValues) => void;
   customComponents?: CustomComponents;
 
   autoSave?: boolean;
@@ -47,7 +47,11 @@ export default function Form({
     defaultValues,
     resolver: yupResolver(getValidationSchema(fields, customComponents)),
   });
-  const { handleSubmit, control, errors } = methods;
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = methods;
 
   const hasErrors = errors
     ? Object.values(errors).reduce((a, c) => !!(a || !_isEmpty(c)), false)
@@ -60,7 +64,6 @@ export default function Form({
         <AutoSave
           control={control}
           defaultValues={defaultValues}
-          errors={errors}
           onSubmit={onSubmit}
         />
       )}
@@ -70,7 +73,6 @@ export default function Form({
       <FormFields
         fields={fields}
         control={control}
-        errors={errors}
         customComponents={customComponents}
         useFormMethods={methods}
       />

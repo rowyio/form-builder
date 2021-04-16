@@ -17,21 +17,19 @@ export interface IDateComponentProps
       'label' | 'name' | 'onChange' | 'value' | 'onBlur' | 'ref'
     > {}
 
-export const DateComponent = React.forwardRef(function DateComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function DateComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
-    useFormMethods,
+  fieldState,
+  formState,
 
-    errorMessage,
-    assistiveText,
-    ...props
-  }: IDateComponentProps,
-  ref
-) {
+  name,
+  useFormMethods,
+
+  errorMessage,
+  assistiveText,
+  ...props
+}: IDateComponentProps) {
   let transformedValue = null;
   if (value && 'toDate' in value) transformedValue = value.toDate();
   else if (value !== undefined) transformedValue = value;
@@ -71,6 +69,4 @@ export const DateComponent = React.forwardRef(function DateComponent(
       />
     </MuiPickersUtilsProvider>
   );
-});
-
-export default DateComponent;
+}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useWatch, UseFormMethods } from 'react-hook-form';
+import { Control, useWatch, useFormState } from 'react-hook-form';
 import { useDebounce } from 'use-debounce';
 import _isEqual from 'lodash/isEqual';
 import _omitBy from 'lodash/omitBy';
@@ -9,19 +9,18 @@ import { diffChanges } from './utils';
 import { IFormProps } from './Form';
 
 export interface IAutoSaveProps {
-  control: UseFormMethods['control'];
+  control: Control;
   defaultValues: NonNullable<IFormProps['values']>;
-  errors: UseFormMethods['errors'];
   onSubmit: IFormProps['onSubmit'];
 }
 
 export default function AutoSave({
   control,
   defaultValues,
-  errors,
   onSubmit,
 }: IAutoSaveProps) {
   const values = useWatch({ control });
+  const { errors } = useFormState({ control });
 
   const [debouncedValues] = useDebounce(values, 1000, {
     equalityFn: _isEqual,

@@ -1,8 +1,6 @@
-import { UseFormMethods, ControllerRenderProps } from 'react-hook-form';
+import { UseFormReturn, UseControllerReturn } from 'react-hook-form';
 import { FieldType } from './constants/fields';
 import { GridProps } from '@material-ui/core';
-
-export type Values = { [key: string]: any };
 
 export type Field = {
   type: FieldType | string;
@@ -24,10 +22,10 @@ export type Field = {
 };
 export type Fields = Field[];
 
-export interface IFieldComponentProps extends ControllerRenderProps<any> {
+export interface IFieldComponentProps extends UseControllerReturn {
   index: number;
   name: string;
-  useFormMethods: UseFormMethods;
+  useFormMethods: UseFormReturn;
 
   label: string;
   errorMessage?: string;
@@ -41,9 +39,7 @@ export interface IFieldComponentProps extends ControllerRenderProps<any> {
 
 export type CustomComponent<
   P extends IFieldComponentProps = IFieldComponentProps
-> =
-  | React.ForwardRefExoticComponent<P>
-  | React.LazyExoticComponent<React.ForwardRefExoticComponent<P>>;
+> = React.ComponentType<P> | React.LazyExoticComponent<React.ComponentType<P>>;
 
 export type CustomComponents<
   P extends IFieldComponentProps = IFieldComponentProps

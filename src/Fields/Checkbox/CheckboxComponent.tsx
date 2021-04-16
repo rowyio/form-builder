@@ -37,25 +37,23 @@ export interface ICheckboxComponentProps
       'name' | 'onChange' | 'checked' | 'ref' | 'value' | 'onBlur'
     > {}
 
-export const CheckboxComponent = React.forwardRef(function CheckboxComponent(
-  {
-    onChange,
-    onBlur,
-    value,
+export default function CheckboxComponent({
+  field: { onChange, onBlur, value, ref },
 
-    name,
-    useFormMethods,
+  fieldState,
+  formState,
 
-    label,
-    errorMessage,
-    assistiveText,
+  name,
+  useFormMethods,
 
-    required,
+  label,
+  errorMessage,
+  assistiveText,
 
-    ...props
-  }: ICheckboxComponentProps,
-  ref
-) {
+  required,
+
+  ...props
+}: ICheckboxComponentProps) {
   const classes = useStyles();
 
   return (
@@ -93,6 +91,4 @@ export const CheckboxComponent = React.forwardRef(function CheckboxComponent(
       classes={{ root: classes.root }}
     />
   );
-});
-
-export default CheckboxComponent;
+}

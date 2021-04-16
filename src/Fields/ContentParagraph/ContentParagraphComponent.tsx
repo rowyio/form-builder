@@ -27,6 +27,10 @@ export interface IContentParagraphComponentProps
     Partial<Omit<TypographyProps, 'title' | 'onChange' | 'onBlur' | 'ref'>> {}
 
 export default function ContentParagraphComponent({
+  field,
+  fieldState,
+  formState,
+
   index,
   label,
   children,

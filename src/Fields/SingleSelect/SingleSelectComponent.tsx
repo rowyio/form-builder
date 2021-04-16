@@ -21,77 +21,45 @@ export interface ISingleSelectComponentProps
   options: (string | { value: string; label: React.ReactNode })[];
 }
 
-export const SingleSelectComponent = React.forwardRef(
-  function SingleSelectComponent(
-    {
-      onChange,
-      onBlur,
-      value,
+export default function SingleSelectComponent({
+  field: { onChange, onBlur, value, ref },
 
-      name,
-      useFormMethods,
+  fieldState,
+  formState,
 
-      errorMessage,
-      assistiveText,
+  name,
+  useFormMethods,
 
-      options = [],
-      ...props
-    }: ISingleSelectComponentProps,
-    ref
-  ) {
-    const sanitisedValue = (Array.isArray(value) ? value[0] : value) ?? '';
+  errorMessage,
+  assistiveText,
 
-    // Render MultiSelect if one of the following props is defined
-    if (
-      [
-        props.searchable,
-        props.labelPlural,
-        props.freeText,
-        props.clearable,
-      ].reduce((a, c) => a || c !== undefined, false)
-    )
-      return (
-        <MultiSelect
-          {...(props as any)}
-          multiple={false}
-          options={options}
-          value={sanitisedValue ?? null}
-          onChange={value => onChange(value ?? '')}
-          onBlur={onBlur}
-          TextFieldProps={{
-            error: !!errorMessage,
-            InputLabelProps: { required: props.required },
-            FormHelperTextProps: { component: 'div' },
-            helperText: (errorMessage || assistiveText) && (
-              <>
-                {errorMessage}
+  options = [],
+  ...props
+}: ISingleSelectComponentProps) {
+  const sanitisedValue = (Array.isArray(value) ? value[0] : value) ?? '';
 
-                <FormHelperText
-                  style={{ margin: 0, whiteSpace: 'pre-line' }}
-                  error={false}
-                >
-                  {assistiveText}
-                </FormHelperText>
-              </>
-            ),
-            onBlur,
-            'data-type': 'multi-select-single',
-            'data-label': props.label ?? '',
-            inputRef: ref,
-          }}
-          clearable={props.clearable === true}
-        />
-      );
-
-    // Render basic Material-UI select
+  // Render MultiSelect if one of the following props is defined
+  if (
+    [
+      props.searchable,
+      props.labelPlural,
+      props.freeText,
+      props.clearable,
+    ].reduce((a, c) => a || c !== undefined, false)
+  )
     return (
-      <TextField
-        fullWidth
-        select
-        error={!!errorMessage}
-        FormHelperTextProps={{ component: 'div' } as any}
-        helperText={
-          (errorMessage || assistiveText) && (
+      <MultiSelect
+        {...(props as any)}
+        multiple={false}
+        options={options}
+        value={sanitisedValue ?? null}
+        onChange={value => onChange(value ?? '')}
+        onBlur={onBlur}
+        TextFieldProps={{
+          error: !!errorMessage,
+          InputLabelProps: { required: props.required },
+          FormHelperTextProps: { component: 'div' },
+          helperText: (errorMessage || assistiveText) && (
             <>
               {errorMessage}
 
@@ -102,34 +70,60 @@ export const SingleSelectComponent = React.forwardRef(
                 {assistiveText}
               </FormHelperText>
             </>
-          )
-        }
-        {...props}
-        onChange={onChange}
-        onBlur={onBlur}
-        // Convert string[] value to string
-        // And remove MUI error when `undefined` or `null` is passed
-        value={(Array.isArray(value) ? value[0] : value) ?? ''}
-        data-label={props.label ?? ''}
-        data-type={'single-select'}
-        inputRef={ref}
-      >
-        {options.map(option => {
-          if (typeof option === 'object')
-            return (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            );
+          ),
+          onBlur,
+          'data-type': 'multi-select-single',
+          'data-label': props.label ?? '',
+          inputRef: ref,
+        }}
+        clearable={props.clearable === true}
+      />
+    );
+
+  // Render basic Material-UI select
+  return (
+    <TextField
+      fullWidth
+      select
+      error={!!errorMessage}
+      FormHelperTextProps={{ component: 'div' } as any}
+      helperText={
+        (errorMessage || assistiveText) && (
+          <>
+            {errorMessage}
+
+            <FormHelperText
+              style={{ margin: 0, whiteSpace: 'pre-line' }}
+              error={false}
+            >
+              {assistiveText}
+            </FormHelperText>
+          </>
+        )
+      }
+      {...props}
+      onChange={onChange}
+      onBlur={onBlur}
+      // Convert string[] value to string
+      // And remove MUI error when `undefined` or `null` is passed
+      value={(Array.isArray(value) ? value[0] : value) ?? ''}
+      data-label={props.label ?? ''}
+      data-type={'single-select'}
+      inputRef={ref}
+    >
+      {options.map(option => {
+        if (typeof option === 'object')
           return (
-            <MenuItem key={option} value={option}>
-              {option}
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
             </MenuItem>
           );
-        })}
-      </TextField>
-    );
-  }
-);
-
-export default SingleSelectComponent;
+        return (
+          <MenuItem key={option} value={option}>
+            {option}
+          </MenuItem>
+        );
+      })}
+    </TextField>
+  );
+}

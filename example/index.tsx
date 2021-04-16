@@ -19,13 +19,13 @@ const fields = [
     label: 'Header',
     name: '_contentHeader_1',
   },
-  {
-    type: FieldType.richText,
-    name: 'desc',
-    label: 'Description',
-    // required: true,
-    maxCharacters: 20,
-  },
+  // {
+  //   type: FieldType.richText,
+  //   name: 'desc',
+  //   label: 'Description',
+  //   required: true,
+  //   maxCharacters: 20,
+  // },
   {
     type: FieldType.shortText,
     format: 'url',
@@ -82,7 +82,7 @@ const fields = [
     label: 'Unique page header',
     placeholder: 'Selected startups for...',
     maxCharacters: 100,
-    required: true,
+    // required: true,
   },
   {
     type: FieldType.paragraph,
@@ -138,6 +138,7 @@ const fields = [
     type: FieldType.slider,
     name: 'slider',
     label: 'Your age',
+    required: true,
   },
   {
     type: FieldType.list,

@@ -10,56 +10,50 @@ export interface IMultiSelectComponentProps
   options: (string | { value: string; label: React.ReactNode })[];
 }
 
-export const MultiSelectComponent = React.forwardRef(
-  function MultiSelectComponent(
-    {
-      onChange,
-      onBlur,
-      value,
+export default function MultiSelectComponent({
+  field: { onChange, onBlur, value, ref },
 
-      name,
-      useFormMethods,
+  fieldState,
+  formState,
 
-      errorMessage,
-      assistiveText,
+  name,
+  useFormMethods,
 
-      options = [],
-      ...props
-    }: IMultiSelectComponentProps,
-    ref
-  ) {
-    return (
-      <MultiSelect
-        {...(props as any)}
-        multiple={true}
-        options={options}
-        value={Array.isArray(value) ? value : []}
-        onChange={onChange}
-        onBlur={onBlur}
-        TextFieldProps={{
-          error: !!errorMessage,
-          InputLabelProps: { required: props.required },
-          FormHelperTextProps: { component: 'div' },
-          helperText: (errorMessage || assistiveText) && (
-            <>
-              {errorMessage}
+  errorMessage,
+  assistiveText,
 
-              <FormHelperText
-                style={{ margin: 0, whiteSpace: 'pre-line' }}
-                error={false}
-              >
-                {assistiveText}
-              </FormHelperText>
-            </>
-          ),
-          onBlur,
-          'data-type': 'multi-select',
-          'data-label': props.label ?? '',
-          inputRef: ref,
-        }}
-      />
-    );
-  }
-);
+  options = [],
+  ...props
+}: IMultiSelectComponentProps) {
+  return (
+    <MultiSelect
+      {...(props as any)}
+      multiple={true}
+      options={options}
+      value={Array.isArray(value) ? value : []}
+      onChange={onChange}
+      onBlur={onBlur}
+      TextFieldProps={{
+        error: !!errorMessage,
+        InputLabelProps: { required: props.required },
+        FormHelperTextProps: { component: 'div' },
+        helperText: (errorMessage || assistiveText) && (
+          <>
+            {errorMessage}
 
-export default MultiSelectComponent;
+            <FormHelperText
+              style={{ margin: 0, whiteSpace: 'pre-line' }}
+              error={false}
+            >
+              {assistiveText}
+            </FormHelperText>
+          </>
+        ),
+        onBlur,
+        'data-type': 'multi-select',
+        'data-label': props.label ?? '',
+        inputRef: ref,
+      }}
+    />
+  );
+}
