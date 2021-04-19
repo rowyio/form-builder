@@ -24,12 +24,15 @@ const useStyles = makeStyles(theme =>
       marginLeft: 0,
       marginRight: 0,
     },
+    disabled: {},
 
     radio: {
       padding: theme.spacing(1.5),
       margin: theme.spacing(0, -0.5, 0, -1.5),
 
-      '$formControl:hover &': { backgroundColor: theme.palette.action.hover },
+      '$formControl:not($disabled):hover &': {
+        backgroundColor: theme.palette.action.hover,
+      },
     },
 
     formControlLabel: {
@@ -113,6 +116,7 @@ export default function RadioComponent({
                 }
                 classes={{
                   root: classes.formControl,
+                  disabled: classes.disabled,
                   label: classes.formControlLabel,
                 }}
               />

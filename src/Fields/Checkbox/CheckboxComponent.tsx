@@ -20,12 +20,15 @@ const useStyles = makeStyles(theme =>
       marginLeft: 0,
       marginRight: 0,
     },
+    disabled: {},
 
     checkbox: {
       padding: theme.spacing(1.5),
       margin: theme.spacing(-1.5, 0.5, -1.5, -1.5),
 
-      '$root:hover &': { backgroundColor: theme.palette.action.hover },
+      '$root:not($disabled):hover &': {
+        backgroundColor: theme.palette.action.hover,
+      },
     },
   })
 );
@@ -87,7 +90,7 @@ export default function CheckboxComponent({
           </FieldAssistiveText>
         </>
       }
-      classes={{ root: classes.root }}
+      classes={{ root: classes.root, disabled: classes.disabled }}
     />
   );
 }
