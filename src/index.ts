@@ -147,4 +147,7 @@ export * from './fields';
 
 export * from './types';
 
+export { default as useFormSettings } from './useFormSettings';
+export * from './useFormSettings';
+
 export * from './utils';

@@ -45,10 +45,7 @@ export default function useFormSettings({
   values,
   customComponents,
 }: IUseFormSettingsProps) {
-  const defaultValues: FieldValues = {
-    ...getDefaultValues(fields, customComponents),
-    ...(values ?? {}),
-  };
+  const defaultValues = getDefaultValues(fields, customComponents, values);
 
   const [omittedFields, setOmittedFields] = useReducer(reducer, []);
 

@@ -1,7 +1,11 @@
 import * as yup from 'yup';
+import { ObjectShape } from 'yup/lib/object';
+import _merge from 'lodash/merge';
 import _isFunction from 'lodash/isFunction';
 import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
+import _set from 'lodash/set';
+import _mapValues from 'lodash/mapValues';
 import { getFieldProp } from './fields';
 
 import { FieldValues } from 'react-hook-form';
@@ -14,34 +18,39 @@ import { Fields, CustomComponents } from './types';
  */
 export const getDefaultValues = (
   fields: Fields,
-  customComponents?: CustomComponents
-): FieldValues =>
-  fields.reduce((acc, field) => {
-    if (!!field && field.name && field.type) {
-      let defaultValue: any;
+  customComponents?: CustomComponents,
+  mergeValues?: FieldValues
+): FieldValues => {
+  const defaultValues: FieldValues = {};
 
-      // Get default value if specified in field declaration
-      if (field.defaultValue !== undefined) {
-        defaultValue = field.defaultValue;
-      }
-      // Get default value from customComponents
-      else if (!!customComponents && field.type in customComponents) {
-        defaultValue = customComponents[field.type].defaultValue;
-      }
-      // Get default value from built-in components
-      else {
-        defaultValue = getFieldProp('defaultValue', field.type);
-      }
+  for (const field of fields) {
+    if (!field || !field.name || !field.type) continue;
 
-      // If undefined, do not add to defaultValues
-      // Prevents content fields returning a value
-      if (defaultValue === undefined) return acc;
+    let defaultValue: any;
 
-      return { ...acc, [field.name]: defaultValue };
+    // Get default value if specified in field declaration
+    if (field.defaultValue !== undefined) {
+      defaultValue = field.defaultValue;
+    }
+    // Get default value from customComponents
+    else if (!!customComponents && field.type in customComponents) {
+      defaultValue = customComponents[field.type].defaultValue;
+    }
+    // Get default value from built-in components
+    else {
+      defaultValue = getFieldProp('defaultValue', field.type);
     }
 
-    return acc;
-  }, {});
+    // If undefined, do not add to defaultValues
+    // Prevents content fields returning a value
+    if (defaultValue === undefined) continue;
+
+    // Use lodash set to support nested fields, e.g. `cloudBuild.branch`
+    _set(defaultValues, field.name, defaultValue);
+  }
+
+  return _merge(defaultValues, mergeValues);
+};
 
 /**
  * Creates a Yup object schema to validate the entire form
@@ -51,48 +60,57 @@ export const getDefaultValues = (
 export const getValidationSchema = (
   fields: Fields,
   customComponents?: CustomComponents
-) =>
-  yup.object().shape(
-    fields.reduce((acc, field) => {
-      if (!field || !field.name) return acc;
+) => {
+  const objectShape: ObjectShape = {};
 
-      let validation: any[][] = [];
+  for (const field of fields) {
+    if (!field || !field.name) continue;
 
-      if (!!customComponents && field.type in customComponents) {
-        // Get default validation from customComponents
-        validation = customComponents[field.type].validation ?? [];
-      } else {
-        // Get default validation from built-in components
-        const validationFunction = getFieldProp('validation', field.type);
-        if (validationFunction) validation = validationFunction(field);
-      }
+    let validation: any[][] = [];
 
-      // If we intentionally don’t validate this field, e.g. content fields:
-      if (validation.length === 0) return acc;
+    if (!!customComponents && field.type in customComponents) {
+      // Get default validation from customComponents
+      validation = customComponents[field.type].validation ?? [];
+    } else {
+      // Get default validation from built-in components
+      const validationFunction = getFieldProp('validation', field.type);
+      if (validationFunction) validation = validationFunction(field);
+    }
 
-      // Add the required validation message for all field types
-      if (field.required === true)
-        validation.splice(1, 0, [
-          'required',
-          `${field.label || field.name} is required`,
-        ]);
+    // If we intentionally don’t validate this field, e.g. content fields:
+    if (validation.length === 0) continue;
 
-      // Append custom validation from the form’s field config to the default validation
-      if (Array.isArray(field.validation))
-        validation = [...validation, ...field.validation];
+    // Add the required validation message for all field types
+    if (field.required === true)
+      validation.splice(1, 0, [
+        'required',
+        `${field.label || field.name} is required`,
+      ]);
 
-      // Reduce the array of arrays to the Yup schema for this field
-      const schema = validation.reduce((a, c) => {
-        const [type, ...args] = c;
-        // Check the method exists in Yup & call with args
-        if (type in a) return (a[type as keyof typeof a] as any)(...args);
-        // Otherwise, return the current schema
-        return a;
-      }, yup);
+    // Append custom validation from the form’s field config to the default validation
+    if (Array.isArray(field.validation))
+      validation = [...validation, ...field.validation];
 
-      return { ...acc, [field.name]: schema };
-    }, {}) as any
-  );
+    // Reduce the array of arrays to the Yup schema for this field
+    const schema = validation.reduce((a, c) => {
+      const [type, ...args] = c;
+      // Check the method exists in Yup & call with args
+      if (type in a) return (a[type as keyof typeof a] as any)(...args);
+      // Otherwise, return the current schema
+      return a;
+    }, yup);
+
+    // Use lodash set to support nested fields, e.g. `cloudBuild.branch`
+    _set(objectShape, field.name, schema);
+  }
+
+  const objectShapeWithNesting = _mapValues(objectShape, value => {
+    if (yup.BaseSchema.prototype.isPrototypeOf(value)) return value;
+    return yup.object().shape(value as any);
+  });
+
+  return yup.object().shape(objectShapeWithNesting);
+};
 
 /**
  * Gets the form values that have changed

@@ -64,15 +64,16 @@ const fields = [
   {
     type: FieldType.shortText,
     format: 'linkedin',
-    name: 'linkedin',
+    name: 'linkedin.text',
     label: 'LinkedIn',
   },
   {
     type: FieldType.shortText,
-    name: 'number',
+    name: 'linkedin.number',
     format: 'number',
     label: 'Number',
     conditional: 'check',
+    defaultValue: 1,
   },
   {
     type: FieldType.shortText,
@@ -80,7 +81,7 @@ const fields = [
     label: 'Unique page header',
     placeholder: 'Selected startups for...',
     maxCharacters: 100,
-    // required: true,
+    required: true,
   },
   {
     type: FieldType.paragraph,
