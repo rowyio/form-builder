@@ -16,7 +16,7 @@ export const HiddenSettings: IFieldConfig['settings'] = [
     name: 'disablePadding',
     label: 'Disable padding',
     defaultValue: true,
-    disabled: true,
+    required: true,
   },
 ];
 
