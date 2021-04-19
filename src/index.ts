@@ -81,6 +81,14 @@ export * from './fields/DateTime/DateTimeComponent';
 
 export * from './fields/DateTime';
 
+export { default as HiddenComponent } from './fields/Hidden/HiddenComponent';
+export * from './fields/Hidden/HiddenComponent';
+
+export { default as HiddenSettings } from './fields/Hidden/HiddenSettings';
+export * from './fields/Hidden/HiddenSettings';
+
+export * from './fields/Hidden';
+
 export { default as ListComponent } from './fields/List/ListComponent';
 export * from './fields/List/ListComponent';
 
