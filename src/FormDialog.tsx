@@ -6,6 +6,7 @@ import {
   createStyles,
   useTheme,
   useMediaQuery,
+  Portal,
   Dialog,
   DialogProps as MuiDialogProps,
   DialogTitle,
@@ -170,119 +171,121 @@ export default function FormDialog({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(values => {
-        onSubmit(values);
-        handleClose();
-      })}
-    >
-      <Dialog
-        open={open}
-        onClose={confirmClose}
-        fullScreen={isMobile}
-        fullWidth
-        TransitionComponent={SlideTransitionMui}
-        // Must disablePortal so the dialog can be wrapped in FormikForm
-        disablePortal
-        aria-labelledby="form-dialog-title"
-        {...DialogProps}
-        classes={{
-          root: classes.root,
-          paper: classes.paper,
-          ...DialogProps?.classes,
-        }}
+    <Portal>
+      <form
+        onSubmit={handleSubmit(values => {
+          onSubmit(values);
+          handleClose();
+        })}
       >
-        <DialogTitle
-          id="modal-title"
-          className={classes.titleRow}
-          disableTypography
+        <Dialog
+          open={open}
+          onClose={confirmClose}
+          fullScreen={isMobile}
+          fullWidth
+          TransitionComponent={SlideTransitionMui}
+          // Must disablePortal so the dialog can be wrapped in FormikForm
+          disablePortal
+          aria-labelledby="form-dialog-title"
+          {...DialogProps}
+          classes={{
+            root: classes.root,
+            paper: classes.paper,
+            ...DialogProps?.classes,
+          }}
         >
-          <Typography
-            className={classes.title}
-            component="h2"
-            color="textPrimary"
+          <DialogTitle
+            id="modal-title"
+            className={classes.titleRow}
+            disableTypography
           >
-            {title}
-          </Typography>
+            <Typography
+              className={classes.title}
+              component="h2"
+              color="textPrimary"
+            >
+              {title}
+            </Typography>
 
-          <IconButton
-            onClick={confirmClose}
-            className={classes.closeButton}
-            aria-label="Close"
-            color="secondary"
+            <IconButton
+              onClick={confirmClose}
+              className={classes.closeButton}
+              aria-label="Close"
+              color="secondary"
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+
+          <DialogContent className={classes.content}>
+            {formHeader}
+            <FormFields
+              fields={fields}
+              control={control}
+              customComponents={customComponents}
+              useFormMethods={methods}
+              setOmittedFields={setOmittedFields}
+            />
+            {formFooter}
+          </DialogContent>
+
+          <Grid
+            container
+            spacing={2}
+            justify="center"
+            alignItems="center"
+            className={classes.actions}
           >
-            <CloseIcon />
-          </IconButton>
-        </DialogTitle>
+            {customActions ?? (
+              <>
+                <Grid item>
+                  <Button
+                    color="primary"
+                    onClick={confirmClose}
+                    {...(CancelButtonProps ?? {})}
+                    children={CancelButtonProps?.children || 'Cancel'}
+                  />
+                </Grid>
+                <Grid item>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    {...(SubmitButtonProps ?? {})}
+                    children={SubmitButtonProps?.children || 'Submit'}
+                  />
+                </Grid>
+              </>
+            )}
+          </Grid>
+        </Dialog>
 
-        <DialogContent className={classes.content}>
-          {formHeader}
-          <FormFields
-            fields={fields}
-            control={control}
-            customComponents={customComponents}
-            useFormMethods={methods}
-            setOmittedFields={setOmittedFields}
-          />
-          {formFooter}
-        </DialogContent>
-
-        <Grid
-          container
-          spacing={2}
-          justify="center"
-          alignItems="center"
-          className={classes.actions}
+        <Dialog
+          open={open && closeConfirmation}
+          disableBackdropClick
+          disableEscapeKeyDown
+          TransitionComponent={SlideTransitionMui}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
         >
-          {customActions ?? (
-            <>
-              <Grid item>
-                <Button
-                  color="primary"
-                  onClick={confirmClose}
-                  {...(CancelButtonProps ?? {})}
-                  children={CancelButtonProps?.children || 'Cancel'}
-                />
-              </Grid>
-              <Grid item>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  type="submit"
-                  {...(SubmitButtonProps ?? {})}
-                  children={SubmitButtonProps?.children || 'Submit'}
-                />
-              </Grid>
-            </>
-          )}
-        </Grid>
-      </Dialog>
+          <DialogTitle id="alert-dialog-title">Close form?</DialogTitle>
 
-      <Dialog
-        open={open && closeConfirmation}
-        disableBackdropClick
-        disableEscapeKeyDown
-        TransitionComponent={SlideTransitionMui}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">Close form?</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              You entered data in this form that will be lost.
+            </DialogContentText>
+          </DialogContent>
 
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            You entered data in this form that will be lost.
-          </DialogContentText>
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={() => setCloseConfirmation(false)} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </form>
+          <DialogActions>
+            <Button onClick={() => setCloseConfirmation(false)} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleClose} color="primary" autoFocus>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </form>
+    </Portal>
   );
 }
