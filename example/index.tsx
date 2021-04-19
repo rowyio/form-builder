@@ -31,6 +31,7 @@ const fields = [
     name: 'link',
     label: 'Link',
     displayCondition: 'return values.email.length > 0',
+    required: true,
   },
   {
     type: FieldType.shortText,
