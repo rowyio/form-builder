@@ -13,6 +13,7 @@ import MultiSelect from './MultiSelect';
 import Slider from './Slider';
 import List from './List';
 import Color from './Color';
+import Hidden from './Hidden';
 
 import ContentHeader from './ContentHeader';
 import ContentSubHeader from './ContentSubHeader';
@@ -30,6 +31,7 @@ export const FieldConfigs = [
   Slider,
   List,
   Color,
+  Hidden,
 
   ContentHeader,
   ContentSubHeader,

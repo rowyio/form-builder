@@ -158,6 +158,12 @@ const fields = [
     name: 'dateTime',
     label: 'Book a time',
   },
+  {
+    type: FieldType.hidden,
+    name: 'hidden',
+    defaultValue: 'PERSISTENT VALUE',
+    disablePadding: true,
+  },
 ];
 
 const additionalFields = [

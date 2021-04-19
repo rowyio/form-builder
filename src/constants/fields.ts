@@ -11,6 +11,7 @@ export enum FieldType {
   slider = 'slider',
   list = 'list',
   color = 'color',
+  hidden = 'hidden',
 
   contentHeader = 'contentHeader',
   contentSubHeader = 'contentSubHeader',

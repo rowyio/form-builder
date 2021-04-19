@@ -17,6 +17,7 @@ export type Field = {
 
   defaultValue?: any;
   gridCols?: GridProps['xs'];
+  disablePadding?: boolean;
 
   [key: string]: any;
 };

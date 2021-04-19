@@ -28,6 +28,7 @@ export default function FieldWrapper({
   type,
   customComponents,
   gridCols = 12,
+  disablePadding,
   disabledConditional,
   defaultValue: defaultValueProp,
   setOmittedFields,
@@ -72,7 +73,13 @@ export default function FieldWrapper({
   // If it’s a content field, don’t wrap with Controller
   if (getFieldProp('group', type) === 'content')
     return (
-      <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+      <Grid
+        item
+        key={name!}
+        id={`fieldWrapper-${name}`}
+        xs={gridCols}
+        style={disablePadding ? { padding: 0 } : {}}
+      >
         <Suspense fallback={<FieldSkeleton />}>
           {React.createElement(fieldComponent, {
             ...props,
@@ -90,7 +97,13 @@ export default function FieldWrapper({
   // Controller doesn’t register the field and there is no value for this field
   if (disabledConditional)
     return (
-      <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+      <Grid
+        item
+        key={name!}
+        id={`fieldWrapper-${name}`}
+        xs={gridCols}
+        style={disablePadding ? { padding: 0 } : {}}
+      >
         <Suspense fallback={<FieldSkeleton />}>
           {React.createElement(fieldComponent, {
             ...props,
@@ -105,7 +118,13 @@ export default function FieldWrapper({
     );
 
   return (
-    <Grid item key={name!} id={`fieldWrapper-${name}`} xs={gridCols}>
+    <Grid
+      item
+      key={name!}
+      id={`fieldWrapper-${name}`}
+      xs={gridCols}
+      style={disablePadding ? { padding: 0 } : {}}
+    >
       <Suspense fallback={<FieldSkeleton />}>
         <Controller
           control={control}
