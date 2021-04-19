@@ -6,9 +6,10 @@ export const HiddenSettings: IFieldConfig['settings'] = [
     type: FieldType.shortText,
     name: 'defaultValue',
     label: 'Persistent Value',
+    required: true,
     defaultValue: '',
     assistiveText:
-      'This value cannot be edited by the user and will always be submitted as part of the form.',
+      'This value will always be submitted as part of the form. It cannot be edited by the user.',
   },
   {
     type: FieldType.checkbox,
