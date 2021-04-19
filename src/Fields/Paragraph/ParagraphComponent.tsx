@@ -19,7 +19,6 @@ export interface IParagraphComponentProps
 
 export default function ParagraphComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

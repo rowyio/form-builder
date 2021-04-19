@@ -70,7 +70,6 @@ export interface IColorComponentProps extends IFieldComponentProps {
 
 export default function ColorComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

@@ -21,7 +21,6 @@ export interface IDateTimeComponentProps
 
 export default function DateTimeComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

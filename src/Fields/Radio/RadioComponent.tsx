@@ -50,7 +50,6 @@ export interface IRadioComponentProps
 
 export default function RadioComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

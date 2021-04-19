@@ -37,7 +37,6 @@ const valueWithUnits = (value: number, units?: string, unitsPlural?: string) =>
 
 export default function SliderComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

@@ -23,7 +23,6 @@ export interface ISingleSelectComponentProps
 
 export default function SingleSelectComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

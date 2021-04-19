@@ -39,7 +39,6 @@ export interface ICheckboxComponentProps
 
 export default function CheckboxComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 

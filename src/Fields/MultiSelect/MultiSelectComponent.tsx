@@ -12,7 +12,6 @@ export interface IMultiSelectComponentProps
 
 export default function MultiSelectComponent({
   field: { onChange, onBlur, value, ref },
-
   fieldState,
   formState,
 
