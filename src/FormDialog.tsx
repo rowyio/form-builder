@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
   makeStyles,
@@ -22,8 +21,8 @@ import {
 import { fade } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 
+import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';
-import { getDefaultValues, getValidationSchema } from './utils';
 import { Fields, CustomComponents } from './types';
 import { SlideTransitionMui } from './SlideTransition';
 
@@ -145,20 +144,17 @@ export default function FormDialog({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
-  const defaultValues = {
-    ...getDefaultValues(fields, customComponents),
-    ...(values ?? {}),
-  };
-
-  const methods = useForm({
-    mode: 'onBlur',
-    defaultValues,
-    resolver: yupResolver(getValidationSchema(fields, customComponents)),
+  const { defaultValues, resolver, setOmittedFields } = useFormSettings({
+    fields,
+    values,
+    customComponents,
   });
+
+  const methods = useForm({ mode: 'onBlur', defaultValues, resolver });
   const {
     handleSubmit,
     control,
-    formState: { isDirty },
+    formState: { isDirty, errors },
     reset,
   } = methods;
 
@@ -226,6 +222,7 @@ export default function FormDialog({
             control={control}
             customComponents={customComponents}
             useFormMethods={methods}
+            setOmittedFields={setOmittedFields}
           />
           {formFooter}
         </DialogContent>

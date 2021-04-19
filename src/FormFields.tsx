@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Control, UseFormReturn, useWatch } from 'react-hook-form';
+import useFormSettings from './useFormSettings';
 
 import { useTheme, Grid, Checkbox } from '@material-ui/core';
 
@@ -12,6 +13,7 @@ export interface IFormFieldsProps {
   control: Control;
   customComponents?: CustomComponents;
   useFormMethods: UseFormReturn;
+  setOmittedFields: ReturnType<typeof useFormSettings>['setOmittedFields'];
 }
 
 export default function FormFields({ fields, ...props }: IFormFieldsProps) {
@@ -48,26 +50,38 @@ export default function FormFields({ fields, ...props }: IFormFieldsProps) {
 function DependentField({ displayCondition, ...props }: IFieldWrapperProps) {
   const values = useWatch({ control: props.control });
 
-  try {
-    // eslint-disable-next-line no-new-func
-    const displayConditionFunction = new Function(
-      'values',
-      '"use strict";\n' + displayCondition!
-    );
-    const displayConditionResult = displayConditionFunction(values);
+  const [display, setDisplay] = useState(false);
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line no-new-func
+      const displayConditionFunction = new Function(
+        'values',
+        '"use strict";\n' + displayCondition!
+      );
+      const display = displayConditionFunction(values);
+      setDisplay(display);
 
-    // If we intentionally hide this field due to form values, don’t render
-    if (!displayConditionResult) return null;
+      props.setOmittedFields({
+        name: props.name!,
+        type: display ? 'unOmit' : 'omit',
+      });
 
-    // Conditional field
-    if (props.conditional === 'check') return <ConditionalField {...props} />;
+      if (!display) {
+        props.useFormMethods.clearErrors(props.name!);
+      }
+    } catch (e) {
+      console.error('Failed to evaluate displayCondition function');
+      console.error(e);
+      setDisplay(false);
+    }
+  }, [values]);
 
-    return <FieldWrapper {...props} />;
-  } catch (e) {
-    console.error('Failed to evaluate displayCondition function');
-    console.error(e);
-    return null;
-  }
+  if (!display) return null;
+
+  // Conditional field
+  if (props.conditional === 'check') return <ConditionalField {...props} />;
+
+  return <FieldWrapper {...props} />;
 }
 
 /**
@@ -80,6 +94,17 @@ function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
 
   const value = useWatch({ control: props.control, name: props.name! });
   const [conditionalState, setConditionalState] = useState(value !== undefined);
+
+  useEffect(() => {
+    props.setOmittedFields({
+      name: props.name!,
+      type: conditionalState ? 'unOmit' : 'omit',
+    });
+
+    if (!conditionalState) {
+      props.useFormMethods.clearErrors(props.name!);
+    }
+  }, [conditionalState]);
 
   return (
     <Grid item key={props.name!} id={`conditionalField-${props.name}`} xs={12}>

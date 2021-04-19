@@ -30,6 +30,7 @@ export default function FieldWrapper({
   gridCols = 12,
   disabledConditional,
   defaultValue: defaultValueProp,
+  setOmittedFields,
   ...props
 }: IFieldWrapperProps) {
   if (!type) {
