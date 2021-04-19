@@ -154,7 +154,7 @@ export default function FormDialog({
   const {
     handleSubmit,
     control,
-    formState: { isDirty, errors },
+    formState: { isDirty },
     reset,
   } = methods;
 

@@ -56,7 +56,6 @@ export default function useFormSettings({
     () => fields.filter(({ name }) => omittedFields.indexOf(name ?? '') === -1),
     [omittedFields, fields]
   );
-  console.log(omittedFields, fieldsWithOmissions);
 
   const resolver = yupResolver(
     getValidationSchema(fieldsWithOmissions, customComponents)
