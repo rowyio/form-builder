@@ -36,6 +36,8 @@ export default function ShortTextComponent({
   errorMessage,
   assistiveText,
 
+  disabled,
+
   format,
   hiddenLabel = false,
   maxCharacters,
@@ -155,7 +157,12 @@ export default function ShortTextComponent({
       {...variantProps}
       {...props}
       {...hiddenLabelOverrideProps}
+      disabled={disabled}
       inputProps={{
+        // https://github.com/react-hook-form/react-hook-form/issues/4485
+        disabled: false,
+        readOnly: disabled,
+        style: disabled ? { cursor: 'default' } : undefined,
         maxLength: maxCharacters ?? undefined,
         ...variantProps.inputProps,
         // Required for form-filler

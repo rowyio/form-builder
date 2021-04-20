@@ -28,6 +28,8 @@ export default function ParagraphComponent({
   errorMessage,
   assistiveText,
 
+  disabled,
+
   hiddenLabel = false,
   maxCharacters,
   ...props
@@ -76,7 +78,12 @@ export default function ParagraphComponent({
       id={`field-${name}`}
       multiline
       {...props}
+      disabled={disabled}
       inputProps={{
+        // https://github.com/react-hook-form/react-hook-form/issues/4485
+        disabled: false,
+        readOnly: disabled,
+        style: disabled ? { cursor: 'default' } : undefined,
         rowsMin: 5,
         maxLength: maxCharacters ?? undefined,
         // Required for form-filler

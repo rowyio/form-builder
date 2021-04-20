@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import clsx from 'clsx';
 import { useDrag, useDrop } from 'react-dnd';
 
 import {
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme =>
       margin: theme.spacing((56 - 24) / 2 / 8, 0),
       marginRight: theme.spacing(3),
     },
+    disabled: { color: theme.palette.text.disabled },
 
     removeButton: {
       marginLeft: theme.spacing(1.5),
@@ -51,6 +53,7 @@ export interface IListItemProps {
 
   itemLabel?: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export const MemoizedListItem = memo(
@@ -65,6 +68,7 @@ export const MemoizedListItem = memo(
 
     itemLabel,
     placeholder,
+    disabled,
   }: IListItemProps) {
     const classes = useStyles();
 
@@ -94,10 +98,14 @@ export const MemoizedListItem = memo(
         className={classes.root}
       >
         <Grid container alignItems="center" wrap="nowrap" ref={dragPreview}>
-          <Grid item ref={drag} style={{ cursor: 'grab' }}>
+          <Grid
+            item
+            ref={disabled ? null : drag}
+            style={disabled ? {} : { cursor: 'grab' }}
+          >
             <DragHandleIcon
               aria-label="Drag to reorder this field"
-              className={classes.dragHandle}
+              className={clsx(classes.dragHandle, disabled && classes.disabled)}
             />
           </Grid>
 
@@ -109,6 +117,7 @@ export const MemoizedListItem = memo(
               fullWidth
               value={item}
               onChange={e => edit(e.target.value)}
+              disabled={disabled}
             />
           </Grid>
 
@@ -117,6 +126,7 @@ export const MemoizedListItem = memo(
               aria-label={`Remove item ${index}`}
               className={classes.removeButton}
               onClick={remove}
+              disabled={disabled}
             >
               <RemoveCircleIcon />
             </IconButton>

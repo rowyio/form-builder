@@ -87,6 +87,8 @@ export default function ListComponent({
       data-label={label ?? ''}
       error={!!errorMessage}
       disabled={disabled}
+      ref={ref as any}
+      tabIndex={-1}
     >
       <FieldLabel
         error={!!errorMessage}
@@ -108,6 +110,7 @@ export default function ListComponent({
             remove={remove(index)}
             itemLabel={itemLabel}
             placeholder={placeholder}
+            disabled={disabled}
           />
         ))}
       </DndProvider>
@@ -118,7 +121,7 @@ export default function ListComponent({
           color="secondary"
           onClick={add}
           className={classes.addButton}
-          ref={ref as any}
+          disabled={disabled}
         >
           Add {itemLabel}
         </Button>

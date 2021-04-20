@@ -86,19 +86,18 @@ export default function ColorComponent({
 }: IColorComponentProps) {
   const classes = useStyles();
 
-  const anchorEl = useRef<HTMLButtonElement>();
+  const anchorEl = useRef<HTMLButtonElement>(null);
   const [open, setOpen] = useState(false);
-  const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = e => {
-    if (!anchorEl.current)
-      anchorEl.current = e.currentTarget as HTMLButtonElement;
+  const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = () =>
     setOpen(s => !s);
-  };
 
   return (
     <FormControl
       className={classes.wrapper}
       error={!!errorMessage}
       disabled={disabled}
+      ref={ref as any}
+      tabIndex={-1}
     >
       <Grid
         container
@@ -117,7 +116,7 @@ export default function ColorComponent({
         data-type="color"
         data-label={label ?? ''}
         disabled={disabled}
-        ref={ref as any}
+        ref={anchorEl}
       >
         <Grid item>
           <div
