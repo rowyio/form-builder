@@ -6,6 +6,7 @@ import { useTheme, Grid, Checkbox } from '@material-ui/core';
 
 import { Fields, CustomComponents } from './types';
 import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';
+import { getFieldProp } from './fields';
 
 export interface IFormFieldsProps {
   fields: Fields;
@@ -92,8 +93,12 @@ function DependentField({ displayCondition, ...props }: IFieldWrapperProps) {
 function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
   const theme = useTheme();
 
+  const defaultValue = getFieldProp('defaultValue', props.type);
+
   const value = useWatch({ control: props.control, name: props.name! });
-  const [conditionalState, setConditionalState] = useState(value !== undefined);
+  const [conditionalState, setConditionalState] = useState(
+    value !== undefined && value !== defaultValue
+  );
 
   useEffect(() => {
     props.setOmittedFields({
