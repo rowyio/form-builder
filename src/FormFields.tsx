@@ -97,8 +97,9 @@ function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
 
   const value = useWatch({ control: props.control, name: props.name! });
   const [conditionalState, setConditionalState] = useState(
-    value !== undefined && value !== defaultValue
+    value !== undefined && value !== null && value !== defaultValue
   );
+  console.log(props.name, defaultValue, value);
 
   useEffect(() => {
     props.setOmittedFields({
