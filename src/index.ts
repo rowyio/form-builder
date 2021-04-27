@@ -31,6 +31,9 @@ export * from './SlideTransition';
 export { default as SubmitButton } from './SubmitButton';
 export * from './SubmitButton';
 
+export { default as SubmitError } from './SubmitError';
+export * from './SubmitError';
+
 export { default as fields } from './constants/fields';
 export * from './constants/fields';
 
