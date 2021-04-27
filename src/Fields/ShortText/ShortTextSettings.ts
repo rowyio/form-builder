@@ -38,7 +38,10 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
     defaultValue: '',
     options: [
       { value: '', label: 'None' },
-      { value: 'name', label: 'Name' },
+      { value: 'name', label: 'Full Name' },
+      { value: 'given-name', label: 'Given Name' },
+      { value: 'family-name', label: 'Family Name' },
+      { value: 'additional-name', label: 'Middle Name' },
       { value: 'email', label: 'Email' },
       { value: 'organization', label: 'Organisation' },
       { value: 'organization-title', label: 'Organisation title' },
@@ -49,7 +52,8 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
       { value: 'url', label: 'URL' },
     ],
     assistiveText:
-      'Phones will suggest this value when the user clicks on this field',
+      'Phones will suggest this value when the user clicks on this field. See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete for all available values.',
+    freeText: true,
   },
 ];
 
