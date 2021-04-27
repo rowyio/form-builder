@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
+import DOMPurify from 'dompurify';
 
 import {
   makeStyles,
@@ -44,15 +45,43 @@ export default function ContentParagraphComponent({
 }: IContentParagraphComponentProps) {
   const classes = useStyles();
 
+  if (children)
+    return (
+      <Typography
+        variant="body1"
+        color="textSecondary"
+        className={clsx(classes.root, className)}
+        {...({ component: 'div' } as any)}
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+
+  const renderedLabel =
+    typeof label === 'string' ? DOMPurify.sanitize(label) : null;
+
+  if (renderedLabel)
+    return (
+      <Typography
+        variant="body1"
+        color="textSecondary"
+        className={clsx(classes.root, className)}
+        {...({ component: 'div' } as any)}
+        {...props}
+        dangerouslySetInnerHTML={{ __html: renderedLabel }}
+      />
+    );
+
   return (
     <Typography
       variant="body1"
       color="textSecondary"
       className={clsx(classes.root, className)}
-      {...({ component: children ? 'div' : 'p' } as any)}
+      {...({ component: 'div' } as any)}
       {...props}
     >
-      {children ?? label}
+      {label}
     </Typography>
   );
 }

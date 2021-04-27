@@ -14,17 +14,25 @@ export default function FieldAssistiveText({
 }: IFieldAssistiveTextProps) {
   if (!children) return null;
 
+  const sanitizedChildren =
+    typeof children === 'string' ? DOMPurify.sanitize(children) : null;
+
+  if (sanitizedChildren)
+    return (
+      <FormHelperText
+        {...props}
+        style={{ whiteSpace: 'pre-line', display: 'flex', ...props.style }}
+        error={false}
+        dangerouslySetInnerHTML={{ __html: sanitizedChildren }}
+      />
+    );
+
   return (
     <FormHelperText
       {...props}
       style={{ whiteSpace: 'pre-line', display: 'flex', ...props.style }}
       error={false}
-      dangerouslySetInnerHTML={
-        typeof children === 'string'
-          ? { __html: DOMPurify.sanitize(children) }
-          : undefined
-      }
-      children={typeof children !== 'string' ? children : undefined}
+      children={children}
     />
   );
 }

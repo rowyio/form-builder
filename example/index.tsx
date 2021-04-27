@@ -18,6 +18,11 @@ const fields = [
     label: 'Header',
     name: '_contentHeader_1',
   },
+  {
+    type: FieldType.contentParagraph,
+    label: '<a href="#">This is a link!</a>',
+    name: '_contentParagraph_0',
+  },
   // {
   //   type: FieldType.richText,
   //   name: 'desc',
