@@ -116,6 +116,7 @@ const fields = [
     name: 'singleSelect',
     label: 'Who is the CEO of Antler?',
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+    required: true,
   },
   {
     type: FieldType.multiSelect,
@@ -234,6 +235,7 @@ const App = () => {
             {showAdditionalFields ? 'Hide' : 'Show'} Additional Fields
           </Button>
         }
+        UseFormProps={{ mode: 'onTouched' }}
       />
     </MuiThemeProvider>
   );

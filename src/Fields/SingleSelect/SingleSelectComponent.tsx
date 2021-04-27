@@ -107,6 +107,7 @@ export default function SingleSelectComponent({
       value={(Array.isArray(value) ? value[0] : value) ?? ''}
       data-label={props.label ?? ''}
       data-type={'single-select'}
+      inputProps={{ required: false }}
       inputRef={ref}
     >
       {options.map(option => {

@@ -61,6 +61,7 @@ export default function DateComponent({
         }
         data-type="date"
         data-label={props.label ?? ''}
+        inputProps={{ required: false }}
         inputRef={ref}
       />
     </MuiPickersUtilsProvider>

@@ -158,6 +158,7 @@ export default function ShortTextComponent({
       {...hiddenLabelOverrideProps}
       disabled={disabled}
       inputProps={{
+        required: false,
         // https://github.com/react-hook-form/react-hook-form/issues/4485
         disabled: false,
         readOnly: disabled,
