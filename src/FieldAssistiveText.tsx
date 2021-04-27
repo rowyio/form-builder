@@ -1,4 +1,5 @@
 import React from 'react';
+import DOMPurify from 'dompurify';
 
 import { FormHelperText, FormHelperTextProps } from '@material-ui/core';
 
@@ -7,14 +8,23 @@ export interface IFieldAssistiveTextProps
   disabled: boolean;
 }
 
-export default function FieldAssistiveText(props: IFieldAssistiveTextProps) {
-  if (!props.children) return null;
+export default function FieldAssistiveText({
+  children,
+  ...props
+}: IFieldAssistiveTextProps) {
+  if (!children) return null;
 
   return (
     <FormHelperText
       {...props}
-      style={{ whiteSpace: 'pre-line', ...props.style }}
+      style={{ whiteSpace: 'pre-line', display: 'flex', ...props.style }}
       error={false}
+      dangerouslySetInnerHTML={
+        typeof children === 'string'
+          ? { __html: DOMPurify.sanitize(children) }
+          : undefined
+      }
+      children={typeof children !== 'string' ? children : undefined}
     />
   );
 }

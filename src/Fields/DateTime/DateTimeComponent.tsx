@@ -4,11 +4,11 @@ import { IFieldComponentProps } from '../../types';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { FormHelperText } from '@material-ui/core';
 import {
   KeyboardDateTimePicker,
   KeyboardDateTimePickerProps,
 } from '@material-ui/pickers';
+import FieldAssistiveText from '../../FieldAssistiveText';
 
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 
@@ -56,12 +56,9 @@ export default function DateTimeComponent({
             <>
               {errorMessage}
 
-              <FormHelperText
-                style={{ margin: 0, whiteSpace: 'pre-line' }}
-                error={false}
-              >
+              <FieldAssistiveText disabled={!!props.disabled}>
                 {assistiveText}
-              </FormHelperText>
+              </FieldAssistiveText>
             </>
           )
         }

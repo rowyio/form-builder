@@ -2,7 +2,7 @@ import React from 'react';
 import { IFieldComponentProps } from '../../types';
 import MultiSelect, { MultiSelectProps } from '@antlerengineering/multiselect';
 
-import { FormHelperText } from '@material-ui/core';
+import FieldAssistiveText from '../../FieldAssistiveText';
 
 export interface IMultiSelectComponentProps
   extends IFieldComponentProps,
@@ -40,12 +40,9 @@ export default function MultiSelectComponent({
           <>
             {errorMessage}
 
-            <FormHelperText
-              style={{ margin: 0, whiteSpace: 'pre-line' }}
-              error={false}
-            >
+            <FieldAssistiveText disabled={!!props.disabled}>
               {assistiveText}
-            </FormHelperText>
+            </FieldAssistiveText>
           </>
         ),
         onBlur,

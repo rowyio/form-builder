@@ -8,6 +8,8 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 
+import FieldAssistiveText from '../../FieldAssistiveText';
+
 export interface IParagraphComponentProps
   extends IFieldComponentProps,
     Omit<
@@ -48,12 +50,9 @@ export default function ParagraphComponent({
             <Grid item xs>
               {errorMessage}
 
-              <FormHelperText
-                style={{ margin: 0, whiteSpace: 'pre-line' }}
-                error={false}
-              >
+              <FieldAssistiveText disabled={!!disabled}>
                 {assistiveText}
-              </FormHelperText>
+              </FieldAssistiveText>
             </Grid>
 
             {maxCharacters && (

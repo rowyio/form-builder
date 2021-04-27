@@ -9,6 +9,8 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 
+import FieldAssistiveText from '../../FieldAssistiveText';
+
 export interface ISingleSelectComponentProps
   extends IFieldComponentProps,
     Omit<
@@ -91,12 +93,9 @@ export default function SingleSelectComponent({
           <>
             {errorMessage}
 
-            <FormHelperText
-              style={{ margin: 0, whiteSpace: 'pre-line' }}
-              error={false}
-            >
+            <FieldAssistiveText disabled={!!props.disabled}>
               {assistiveText}
-            </FormHelperText>
+            </FieldAssistiveText>
           </>
         )
       }

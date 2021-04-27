@@ -28,6 +28,19 @@ const fields = [
   {
     type: FieldType.shortText,
     format: 'url',
+    name: 'meetingLink',
+    label: 'Meeting Link',
+    assistiveText: `
+    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1">
+      <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true">What is my meeting link?</div>
+      <div class="MuiGrid-root MuiGrid-item"><a href="#" class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary">Google</a></div>
+      <div class="MuiGrid-root MuiGrid-item"><a href="#" class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary">Something else</a></div>
+    </div>
+    `,
+  },
+  {
+    type: FieldType.shortText,
+    format: 'url',
     name: 'link',
     label: 'Link',
     displayCondition: 'return values.email.length > 0',

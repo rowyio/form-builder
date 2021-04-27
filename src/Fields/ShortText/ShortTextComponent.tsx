@@ -8,6 +8,8 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 
+import FieldAssistiveText from '../../FieldAssistiveText';
+
 export interface IShortTextComponentProps
   extends IFieldComponentProps,
     Omit<
@@ -126,12 +128,9 @@ export default function ShortTextComponent({
             <Grid item xs>
               {errorMessage}
 
-              <FormHelperText
-                style={{ margin: 0, whiteSpace: 'pre-line' }}
-                error={false}
-              >
+              <FieldAssistiveText style={{ margin: 0 }} disabled={!!disabled}>
                 {assistiveText}
-              </FormHelperText>
+              </FieldAssistiveText>
             </Grid>
 
             {maxCharacters && (
