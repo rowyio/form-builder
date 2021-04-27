@@ -83,7 +83,6 @@
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
     "react-hook-form": "^7.1.1",
-    "string-strip-html": "^8.2.6",
     "use-debounce": "^3.4.3",
     "yup": "^0.32.9"
   }
