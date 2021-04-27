@@ -20,7 +20,6 @@ import {
   Button,
   ButtonProps,
 } from '@material-ui/core';
-import { fade } from '@material-ui/core/styles';
 import CloseIcon from '@material-ui/icons/Close';
 
 import useFormSettings from './useFormSettings';
@@ -28,6 +27,7 @@ import FormFields from './FormFields';
 import { Fields, CustomComponents } from './types';
 import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
+import ScrollableDialogContent from './ScrollableDialogContent';
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -76,29 +76,9 @@ const useStyles = makeStyles(theme =>
       margin: '0 calc(var(--spacing-modal) * -1)',
 
       ...theme.typography.body1,
-
-      // https://codepen.io/evank/pen/wWbRNO
-      background: `
-        linear-gradient(
-          var(--bg-paper) 50%,
-          ${fade(theme.palette.background.paper, 0)}
-        ),
-        linear-gradient(
-          ${fade(theme.palette.background.paper, 0)},
-          var(--bg-paper) 50%
-        ) 0 100%,
-        linear-gradient(
-          to top, ${theme.palette.divider} 1px,
-          ${fade(theme.palette.divider, 0)}
-        ),
-        linear-gradient(to top,
-          ${theme.palette.divider} 1px,
-          ${fade(theme.palette.divider, 0)}
-        ) 0 calc(100% - 0.5px)`,
-      backgroundRepeat: 'no-repeat',
-      backgroundColor: 'var(--bg-paper)',
-      backgroundSize: '100% 2px, 100% 3px, 100% 1px, 100% 1px',
-      backgroundAttachment: 'local, local, scroll, scroll',
+    },
+    contentDividers: {
+      margin: '0 calc(var(--spacing-modal) * -1)',
     },
 
     actions: {
@@ -238,7 +218,10 @@ export default function FormDialog({
             </IconButton>
           </DialogTitle>
 
-          <DialogContent className={classes.content}>
+          <ScrollableDialogContent
+            className={classes.content}
+            dividersClasses={{ root: classes.contentDividers }}
+          >
             {formHeader}
             <FormFields
               fields={fields}
@@ -248,7 +231,7 @@ export default function FormDialog({
               setOmittedFields={setOmittedFields}
             />
             {formFooter}
-          </DialogContent>
+          </ScrollableDialogContent>
 
           <Grid
             container

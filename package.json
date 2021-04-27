@@ -71,7 +71,6 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "@antlerengineering/components": "^2.4.1",
     "@antlerengineering/multiselect": "^0.9.6",
     "@date-io/date-fns": "1.x",
     "@hookform/resolvers": "^2.4.0",
@@ -85,6 +84,7 @@
     "react-color": "^2.19.3",
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
+    "react-element-scroll-hook": "^1.1.0",
     "react-hook-form": "^7.3.4",
     "use-debounce": "^3.4.3",
     "yup": "^0.32.9"
