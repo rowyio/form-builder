@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
 import {
@@ -113,6 +113,7 @@ export interface IFormDialogProps {
   values?: FieldValues;
   onSubmit: (values: FieldValues) => void;
   customComponents?: CustomComponents;
+  UseFormProps?: UseFormProps;
 
   open: boolean;
   onClose: () => void;
@@ -133,6 +134,7 @@ export default function FormDialog({
   values,
   onSubmit,
   customComponents,
+  UseFormProps = {},
 
   open,
   onClose,
@@ -157,7 +159,12 @@ export default function FormDialog({
     customComponents,
   });
 
-  const methods = useForm({ mode: 'onBlur', defaultValues, resolver });
+  const methods = useForm({
+    mode: 'onBlur',
+    defaultValues,
+    resolver,
+    ...UseFormProps,
+  });
   const {
     handleSubmit,
     control,

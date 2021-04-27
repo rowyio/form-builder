@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm, FieldValues } from 'react-hook-form';
+import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
 import useFormSettings from './useFormSettings';
@@ -15,6 +15,7 @@ export interface IFormProps {
   values?: FieldValues;
   onSubmit: (values: FieldValues) => void;
   customComponents?: CustomComponents;
+  UseFormProps?: UseFormProps;
 
   autoSave?: boolean;
   hideSubmit?: boolean;
@@ -31,6 +32,7 @@ export default function Form({
   values,
   onSubmit,
   customComponents,
+  UseFormProps = {},
 
   autoSave = false,
   hideSubmit = autoSave,
@@ -51,6 +53,7 @@ export default function Form({
     mode: autoSave ? 'all' : 'onBlur',
     defaultValues,
     resolver,
+    ...UseFormProps,
   });
   const {
     handleSubmit,
