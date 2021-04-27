@@ -6,6 +6,7 @@ import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';
 import AutoSave from './AutoSave';
 import SubmitButton, { ISubmitButtonProps } from './SubmitButton';
+import SubmitError, { ISubmitErrorProps } from './SubmitError';
 
 import { Fields, CustomComponents } from './types';
 
@@ -18,6 +19,8 @@ export interface IFormProps {
   autoSave?: boolean;
   hideSubmit?: boolean;
   SubmitButtonProps?: Partial<ISubmitButtonProps>;
+  hideSubmitError?: boolean;
+  SubmitErrorProps?: Partial<ISubmitErrorProps>;
 
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
@@ -32,6 +35,8 @@ export default function Form({
   autoSave = false,
   hideSubmit = autoSave,
   SubmitButtonProps = {},
+  hideSubmitError = false,
+  SubmitErrorProps = {},
 
   formHeader,
   formFooter,
@@ -59,7 +64,6 @@ export default function Form({
         false
       ) as boolean)
     : false;
-  const isSubmitDisabled = hasErrors;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -84,8 +88,10 @@ export default function Form({
       {formFooter}
 
       {!hideSubmit && (
-        <SubmitButton disabled={isSubmitDisabled} {...SubmitButtonProps} />
+        <SubmitButton disabled={hasErrors} {...SubmitButtonProps} />
       )}
+
+      {!hideSubmitError && hasErrors && <SubmitError {...SubmitErrorProps} />}
     </form>
   );
 }

@@ -6,7 +6,7 @@ import { makeStyles, Button, ButtonProps } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    margin: theme.spacing(3, 'auto'),
+    margin: theme.spacing(3, 'auto', 0),
     minWidth: 120,
   },
 }));

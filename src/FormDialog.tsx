@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
+import _isEmpty from 'lodash/isEmpty';
 
 import {
   makeStyles,
@@ -25,6 +26,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';
 import { Fields, CustomComponents } from './types';
+import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
 
 const useStyles = makeStyles(theme =>
@@ -122,6 +124,8 @@ export interface IFormDialogProps {
   SubmitButtonProps?: Partial<ButtonProps>;
   CancelButtonProps?: Partial<ButtonProps>;
   DialogProps?: Partial<MuiDialogProps>;
+  hideSubmitError?: boolean;
+  SubmitErrorProps?: Partial<ISubmitErrorProps>;
 }
 
 export default function FormDialog({
@@ -140,6 +144,8 @@ export default function FormDialog({
   SubmitButtonProps,
   CancelButtonProps,
   DialogProps,
+  hideSubmitError = false,
+  SubmitErrorProps = {},
 }: IFormDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
@@ -155,9 +161,16 @@ export default function FormDialog({
   const {
     handleSubmit,
     control,
-    formState: { isDirty },
+    formState: { isDirty, errors },
     reset,
   } = methods;
+
+  const hasErrors = errors
+    ? (Object.values(errors).reduce(
+        (a, c) => !!(a || !_isEmpty(c)),
+        false
+      ) as boolean)
+    : false;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
@@ -251,11 +264,19 @@ export default function FormDialog({
                     color="primary"
                     variant="contained"
                     type="submit"
+                    disabled={hasErrors}
                     {...(SubmitButtonProps ?? {})}
                     children={SubmitButtonProps?.children || 'Submit'}
                   />
                 </Grid>
               </>
+            )}
+
+            {!hideSubmitError && hasErrors && (
+              <SubmitError
+                {...SubmitErrorProps}
+                style={{ marginTop: 0, ...SubmitErrorProps.style }}
+              />
             )}
           </Grid>
         </Dialog>
