@@ -2127,10 +2127,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@hookform/resolvers@^2.3.1":
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.3.1.tgz#010a65544cfe366cfac6d42d997db2234e2f5fad"
-  integrity sha512-0S9NdY2dgP8/mp8h15PyX1VtX4GVktZjADjwB1Aa3tPAHCdhG4o3lcaUMD6a5WROuuy715F+4wOgnkNxcztgOg==
+"@hookform/resolvers@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.4.0.tgz#3b454463fbb5e7a0de4da029fa34e677f32d8d8d"
+  integrity sha512-KiHc7Uwd2IJMvPTMQ9vQxfss2ulq2gRYL/HYZ90qiTs+07UgGWCikiIvE2pKjjGVltEYjq5eR8x0ITmoyEjGxQ==
 
 "@icons/material@^0.2.4":
   version "0.2.4"
@@ -11724,10 +11724,10 @@ react-helmet-async@^1.0.2:
     react-fast-compare "^3.0.1"
     shallowequal "^1.1.0"
 
-react-hook-form@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.1.1.tgz#b0e2990d4dfa153c4ff2f27fe72ff73d2fbe6a26"
-  integrity sha512-d+tE+8FKLXioxemPnMnBOniMgmbCmAhBkP6EdOaJbqVpeRxfCfySMmg6EU9oruwnJbYpjx+IHTgheADqE8ruGA==
+react-hook-form@^7.3.4:
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.3.4.tgz#6a246cea3ff8669168a56dd166b462d28aa2f076"
+  integrity sha512-xreG3NHFlbKFrN1Fs+rZUT5RN9zkx4qn0vyY+6tO1xNfhOkfgwkTYU1/PkktYsWw6GerMw16vX5CPdIZVfyB1A==
 
 react-hotkeys@2.0.0:
   version "2.0.0"

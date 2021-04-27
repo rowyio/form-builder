@@ -163,6 +163,7 @@ export default function FormDialog({
     mode: 'onBlur',
     defaultValues,
     resolver,
+    shouldUnregister: true,
     ...UseFormProps,
   });
   const {

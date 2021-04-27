@@ -53,6 +53,7 @@ export default function Form({
     mode: autoSave ? 'all' : 'onBlur',
     defaultValues,
     resolver,
+    shouldUnregister: true,
     ...UseFormProps,
   });
   const {
