@@ -167,9 +167,7 @@ export default function ColorComponent({
             setOpen(false);
             onBlur();
           }}
-          PaperProps={
-            { 'data-type': 'color-picker', variant: 'outlined' } as any
-          }
+          PaperProps={{ 'data-type': 'color-picker' } as any}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
