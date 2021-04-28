@@ -7,7 +7,6 @@ export const MultiSelectSettings: IFieldConfig['settings'] = [
     name: 'options',
     label: 'Options',
     defaultValue: [],
-    required: true,
   },
   {
     type: FieldType.checkbox,

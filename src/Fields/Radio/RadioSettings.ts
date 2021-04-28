@@ -7,7 +7,6 @@ export const RadioSettings: IFieldConfig['settings'] = [
     name: 'options',
     label: 'Options',
     defaultValue: [],
-    required: true,
   },
 ];
 
