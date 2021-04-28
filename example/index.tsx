@@ -35,13 +35,18 @@ const fields = [
     format: 'url',
     name: 'meetingLink',
     label: 'Meeting Link',
-    assistiveText: `
-    <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1">
-      <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true">What is my meeting link?</div>
-      <div class="MuiGrid-root MuiGrid-item"><a href="#" class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary">Google</a></div>
-      <div class="MuiGrid-root MuiGrid-item"><a href="#" class="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary">Something else</a></div>
+    assistiveText: `<div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-1" style="white-space: normal">
+    <div class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-true">
+        What is my meeting link?
     </div>
-    `,
+    <div class="MuiGrid-root MuiGrid-item"><a href="https://help.calendly.com/hc/en-us/articles/223193448-Sharing-your-scheduling-link">
+        Calendly
+    </a></div>
+    <div class="MuiGrid-root MuiGrid-item"><a href="https://knowledge.hubspot.com/meetings-tool/create-a-meetings-link">
+        Hubspot
+    </a></div>
+    </div>
+        `,
   },
   {
     type: FieldType.shortText,

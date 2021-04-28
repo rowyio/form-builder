@@ -40,7 +40,10 @@ export default function MultiSelectComponent({
           <>
             {errorMessage}
 
-            <FieldAssistiveText disabled={!!props.disabled}>
+            <FieldAssistiveText
+              style={{ margin: 0 }}
+              disabled={!!props.disabled}
+            >
               {assistiveText}
             </FieldAssistiveText>
           </>

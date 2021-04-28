@@ -50,7 +50,7 @@ export default function ParagraphComponent({
             <Grid item xs>
               {errorMessage}
 
-              <FieldAssistiveText disabled={!!disabled}>
+              <FieldAssistiveText style={{ margin: 0 }} disabled={!!disabled}>
                 {assistiveText}
               </FieldAssistiveText>
             </Grid>
