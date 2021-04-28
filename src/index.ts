@@ -25,6 +25,9 @@ export * from './FormDialog';
 export { default as FormFields } from './FormFields';
 export * from './FormFields';
 
+export { default as ScrollableDialogContent } from './ScrollableDialogContent';
+export * from './ScrollableDialogContent';
+
 export { default as SlideTransition } from './SlideTransition';
 export * from './SlideTransition';
 
