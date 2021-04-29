@@ -55,7 +55,7 @@ export default function ListComponent({
 }: IListComponentProps) {
   const classes = useStyles();
 
-  const value: string[] = valueProp ?? [];
+  const value: string[] = Array.isArray(valueProp) ? valueProp : [];
   const add = () => onChange([...value, '']);
 
   const edit = (index: number) => (item: string) => {
