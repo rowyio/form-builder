@@ -5,6 +5,7 @@ import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
 import _set from 'lodash/set';
 import _mapValues from 'lodash/mapValues';
+import _values from 'lodash/values';
 import { getFieldProp } from './fields';
 
 import { FieldValues } from 'react-hook-form';
@@ -87,8 +88,9 @@ export const getValidationSchema = (
       ]);
 
     // Append custom validation from the form’s field config to the default validation
+    // Wrap in lodash values function to support { 0: [], 1: [] } object for Firestore
     if (Array.isArray(field.validation))
-      validation = [...validation, ...field.validation];
+      validation = [...validation, ..._values(field.validation)];
 
     // Reduce the array of arrays to the Yup schema for this field
     const schema = validation.reduce((a, c) => {
