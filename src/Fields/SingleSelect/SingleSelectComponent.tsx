@@ -2,12 +2,7 @@ import React from 'react';
 import { IFieldComponentProps } from '../../types';
 import MultiSelect, { MultiSelectProps } from '@antlerengineering/multiselect';
 
-import {
-  TextField,
-  FilledTextFieldProps,
-  MenuItem,
-  FormHelperText,
-} from '@material-ui/core';
+import { TextField, FilledTextFieldProps, MenuItem } from '@material-ui/core';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
@@ -64,12 +59,12 @@ export default function SingleSelectComponent({
             <>
               {errorMessage}
 
-              <FormHelperText
-                style={{ margin: 0, whiteSpace: 'pre-line' }}
-                error={false}
+              <FieldAssistiveText
+                style={{ margin: 0 }}
+                disabled={!!props.disabled}
               >
                 {assistiveText}
-              </FormHelperText>
+              </FieldAssistiveText>
             </>
           ),
           onBlur,

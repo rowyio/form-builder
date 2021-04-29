@@ -52,7 +52,7 @@ export const ShortTextSettings: IFieldConfig['settings'] = [
       { value: 'url', label: 'URL' },
     ],
     assistiveText:
-      'Phones will suggest this value when the user clicks on this field. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete" target="_blank" rel="noopener" style="font: inherit">See all available values</a>',
+      'Phones will suggest this value when the user clicks on this field. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete" target="_blank" rel="noopener">See all available values</a>',
     freeText: true,
   },
 ];
