@@ -66,16 +66,16 @@ function DependentField({ displayCondition, ...props }: IFieldWrapperProps) {
         name: props.name!,
         type: display ? 'unOmit' : 'omit',
       });
-
-      if (!display) {
-        props.useFormMethods.clearErrors(props.name!);
-      }
     } catch (e) {
       console.error('Failed to evaluate displayCondition function');
       console.error(e);
       setDisplay(false);
     }
   }, [values]);
+
+  useEffect(() => {
+    if (!display) props.useFormMethods.clearErrors(props.name!);
+  }, [display]);
 
   if (!display) return null;
 
@@ -99,7 +99,6 @@ function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
   const [conditionalState, setConditionalState] = useState(
     value !== undefined && value !== null && value !== defaultValue
   );
-  console.log(props.name, defaultValue, value);
 
   useEffect(() => {
     props.setOmittedFields({
