@@ -40,7 +40,7 @@ export interface IUseFormSettingsProps {
   customComponents?: CustomComponents;
 }
 
-export default function useFormSettings({
+export function useFormSettings({
   fields,
   values,
   customComponents,
@@ -60,3 +60,5 @@ export default function useFormSettings({
 
   return { defaultValues, resolver, setOmittedFields };
 }
+
+export default useFormSettings;
