@@ -2,13 +2,14 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-
 import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider, CssBaseline, Button } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
 import { FieldType } from '../src';
+
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+(window as any).HTML5Backend = HTML5Backend;
 
 const theme = createMuiTheme({
   typography: { fontFamily: 'system-ui' },
@@ -219,7 +220,7 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={(window as any).HTML5Backend}>
         <FormDialog
           open
           onClose={() => {}}

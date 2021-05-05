@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
-import _merge from 'lodash/merge';
 import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
 import _set from 'lodash/set';
