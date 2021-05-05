@@ -210,7 +210,10 @@ const additionalFields = [
 ];
 
 const App = () => {
-  const [values, setValues] = React.useState<any>({ number: 123 });
+  const [values, setValues] = React.useState<any>({
+    number: 123,
+    multiSelect: ['Option 2'],
+  });
   const [showAdditionalFields, setShowAdditionalFields] = React.useState(false);
 
   return (

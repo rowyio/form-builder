@@ -49,7 +49,7 @@ export const getDefaultValues = (
     _set(defaultValues, field.name, defaultValue);
   }
 
-  return _merge(defaultValues, mergeValues);
+  return { ...defaultValues, ...mergeValues };
 };
 
 /**
