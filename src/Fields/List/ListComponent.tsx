@@ -2,6 +2,7 @@ import React from 'react';
 import arrayMove from 'array-move';
 import { IFieldComponentProps } from '../../types';
 import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import {
   makeStyles,
@@ -97,7 +98,7 @@ export default function ListComponent({
         {label}
       </FieldLabel>
 
-      <DndProvider backend={(window as any).HTML5Backend}>
+      <DndProvider backend={HTML5Backend} context={window}>
         {value.map((item, index) => (
           <ListItem
             key={index}

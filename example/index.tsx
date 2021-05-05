@@ -9,7 +9,6 @@ import { FieldType } from '../src';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-(window as any).HTML5Backend = HTML5Backend;
 
 const theme = createMuiTheme({
   typography: { fontFamily: 'system-ui' },
@@ -220,7 +219,7 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <DndProvider backend={(window as any).HTML5Backend}>
+      <DndProvider backend={HTML5Backend} context={window}>
         <FormDialog
           open
           onClose={() => {}}
