@@ -2,6 +2,9 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { MuiThemeProvider, CssBaseline, Button } from '@material-ui/core';
 import FormDialog from '../src/FormDialog';
@@ -213,35 +216,37 @@ const App = () => {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <FormDialog
-        open
-        onClose={() => {}}
-        title="Form Dialog"
-        fields={
-          showAdditionalFields ? [...additionalFields, ...fields] : fields
-        }
-        values={values}
-        onSubmit={data => {
-          console.log(data);
-          setValues(data);
-        }}
-        // customActions={
-        //   <>
-        //     <button type="submit">SUBMIT</button>
-        //   </>
-        // }
-        formHeader={
-          <Button
-            onClick={() => setShowAdditionalFields(x => !x)}
-            color="primary"
-            variant="outlined"
-            style={{ marginBottom: 24 }}
-          >
-            {showAdditionalFields ? 'Hide' : 'Show'} Additional Fields
-          </Button>
-        }
-        UseFormProps={{ mode: 'onTouched' }}
-      />
+      <DndProvider backend={HTML5Backend}>
+        <FormDialog
+          open
+          onClose={() => {}}
+          title="Form Dialog"
+          fields={
+            showAdditionalFields ? [...additionalFields, ...fields] : fields
+          }
+          values={values}
+          onSubmit={data => {
+            console.log(data);
+            setValues(data);
+          }}
+          // customActions={
+          //   <>
+          //     <button type="submit">SUBMIT</button>
+          //   </>
+          // }
+          formHeader={
+            <Button
+              onClick={() => setShowAdditionalFields(x => !x)}
+              color="primary"
+              variant="outlined"
+              style={{ marginBottom: 24 }}
+            >
+              {showAdditionalFields ? 'Hide' : 'Show'} Additional Fields
+            </Button>
+          }
+          UseFormProps={{ mode: 'onTouched' }}
+        />
+      </DndProvider>
     </MuiThemeProvider>
   );
 };
