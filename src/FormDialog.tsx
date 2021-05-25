@@ -107,6 +107,12 @@ export interface IFormDialogProps {
   DialogProps?: Partial<MuiDialogProps>;
   hideSubmitError?: boolean;
   SubmitErrorProps?: Partial<ISubmitErrorProps>;
+  CloseConfirmProps?: Partial<{
+    title: React.ReactNode;
+    body: React.ReactNode;
+    confirmButtonProps: Partial<ButtonProps>;
+    cancelButtonProps: Partial<ButtonProps>;
+  }>;
 }
 
 export default function FormDialog({
@@ -128,6 +134,7 @@ export default function FormDialog({
   DialogProps,
   hideSubmitError = false,
   SubmitErrorProps = {},
+  CloseConfirmProps = {},
 }: IFormDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
@@ -280,21 +287,31 @@ export default function FormDialog({
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Close form?</DialogTitle>
+          <DialogTitle id="alert-dialog-title">
+            {CloseConfirmProps.title || 'Close form?'}
+          </DialogTitle>
 
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              You entered data in this form that will be lost.
+              {CloseConfirmProps.body ||
+                'You entered data in this form that will be lost.'}
             </DialogContentText>
           </DialogContent>
 
           <DialogActions>
-            <Button onClick={() => setCloseConfirmation(false)} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              Close
-            </Button>
+            <Button
+              onClick={() => setCloseConfirmation(false)}
+              color="primary"
+              children="Cancel"
+              {...(CloseConfirmProps.cancelButtonProps || {})}
+            />
+            <Button
+              onClick={handleClose}
+              color="primary"
+              autoFocus
+              children="Close"
+              {...(CloseConfirmProps.confirmButtonProps || {})}
+            />
           </DialogActions>
         </Dialog>
       </form>
