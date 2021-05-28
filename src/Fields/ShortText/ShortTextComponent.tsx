@@ -73,10 +73,10 @@ export default function ShortTextComponent({
 
     case 'number':
       variantProps = {
+        placeholder: '1234567890',
         inputProps: {
           inputMode: 'numeric',
           pattern: '\\d*',
-          placeholder: '1234567890',
         },
       };
       break;
