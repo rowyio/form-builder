@@ -14,8 +14,6 @@ import {
   Typography,
   IconButton,
   DialogContent,
-  DialogContentText,
-  DialogActions,
   Grid,
   Button,
   ButtonProps,
@@ -253,8 +251,8 @@ export default function FormDialog({
                   <Button
                     color="primary"
                     onClick={confirmClose}
+                    children="Cancel"
                     {...(CancelButtonProps ?? {})}
-                    children={CancelButtonProps?.children || 'Cancel'}
                   />
                 </Grid>
                 <Grid item>
@@ -263,8 +261,8 @@ export default function FormDialog({
                     variant="contained"
                     type="submit"
                     disabled={hasErrors}
+                    children="Submit"
                     {...(SubmitButtonProps ?? {})}
-                    children={SubmitButtonProps?.children || 'Submit'}
                   />
                 </Grid>
               </>
@@ -286,33 +284,59 @@ export default function FormDialog({
           TransitionComponent={SlideTransitionMui}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
+          classes={{
+            root: classes.root,
+            paper: classes.paper,
+          }}
         >
-          <DialogTitle id="alert-dialog-title">
-            {CloseConfirmProps.title || 'Close form?'}
+          <DialogTitle
+            id="alert-dialog-title"
+            className={classes.titleRow}
+            disableTypography
+          >
+            <Typography
+              className={classes.title}
+              component="h2"
+              color="textPrimary"
+            >
+              {CloseConfirmProps.title || 'Close form?'}
+            </Typography>
           </DialogTitle>
 
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {CloseConfirmProps.body ||
-                'You entered data in this form that will be lost.'}
-            </DialogContentText>
+          <DialogContent
+            id="alert-dialog-description"
+            className={classes.content}
+          >
+            {CloseConfirmProps.body ||
+              'You will lose all the data you entered in this form.'}
           </DialogContent>
 
-          <DialogActions>
-            <Button
-              onClick={() => setCloseConfirmation(false)}
-              color="primary"
-              children="Cancel"
-              {...(CloseConfirmProps.cancelButtonProps || {})}
-            />
-            <Button
-              onClick={handleClose}
-              color="primary"
-              autoFocus
-              children="Close"
-              {...(CloseConfirmProps.confirmButtonProps || {})}
-            />
-          </DialogActions>
+          <Grid
+            container
+            spacing={2}
+            justify="center"
+            alignItems="center"
+            className={classes.actions}
+          >
+            <Grid item>
+              <Button
+                onClick={() => setCloseConfirmation(false)}
+                color="primary"
+                children="Cancel"
+                {...(CloseConfirmProps.cancelButtonProps ?? {})}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={handleClose}
+                color="primary"
+                variant="contained"
+                autoFocus
+                children="Close"
+                {...(CloseConfirmProps.confirmButtonProps ?? {})}
+              />
+            </Grid>
+          </Grid>
         </Dialog>
       </form>
     </Portal>
