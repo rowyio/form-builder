@@ -1,23 +1,22 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-
 import {
-  KeyboardDateTimePicker,
-  KeyboardDateTimePickerProps,
-} from '@material-ui/pickers';
-import FieldAssistiveText from '../../FieldAssistiveText';
-
+  LocalizationProvider,
+  DateTimePicker,
+  DateTimePickerProps,
+} from '@material-ui/lab';
+import { TextField, TextFieldProps } from '@material-ui/core';
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+
+import FieldAssistiveText from '../../FieldAssistiveText';
 
 export interface IDateTimeComponentProps
   extends IFieldComponentProps,
-    Omit<
-      KeyboardDateTimePickerProps,
-      'label' | 'name' | 'onChange' | 'value' | 'onBlur' | 'ref'
-    > {}
+    Omit<DateTimePickerProps, 'label' | 'name' | 'onChange' | 'value' | 'ref'> {
+  TextFieldProps: TextFieldProps;
+}
 
 export default function DateTimeComponent({
   field: { onChange, onBlur, value, ref },
@@ -29,47 +28,57 @@ export default function DateTimeComponent({
 
   errorMessage,
   assistiveText,
+
+  TextFieldProps,
   ...props
 }: IDateTimeComponentProps) {
-  let transformedValue = null;
+  let transformedValue: any = null;
   if (value && 'toDate' in value) transformedValue = value.toDate();
   else if (value !== undefined) transformedValue = value;
 
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <KeyboardDateTimePicker
-        variant="inline"
-        fullWidth
-        format="yyyy/MM/dd hh:mm a"
-        placeholder="yyyy/MM/dd h:mm a"
-        keyboardIcon={<AccessTimeIcon />}
-        InputLabelProps={{ shrink: transformedValue !== null }}
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DateTimePicker
+        inputFormat="yyyy-MM-dd hh:mm a"
+        mask="____-__-__ __:__ __"
         {...props}
         value={transformedValue}
         onChange={onChange}
-        onBlur={onBlur}
         onClose={onBlur}
-        error={!!errorMessage}
-        FormHelperTextProps={{ component: 'div' } as any}
-        helperText={
-          (errorMessage || assistiveText) && (
-            <>
-              {errorMessage}
-
-              <FieldAssistiveText
-                style={{ margin: 0 }}
-                disabled={!!props.disabled}
-              >
-                {assistiveText}
-              </FieldAssistiveText>
-            </>
-          )
-        }
-        data-type="date"
-        data-label={props.label ?? ''}
-        inputProps={{ required: false }}
         inputRef={ref}
+        components={{ OpenPickerIcon: AccessTimeIcon }}
+        renderInput={(props) => (
+          <TextField
+            {...props}
+            {...TextFieldProps}
+            fullWidth
+            // InputLabelProps={{ shrink: transformedValue !== null }}
+            onBlur={onBlur}
+            error={props.error || !!errorMessage}
+            FormHelperTextProps={{ component: 'div' } as any}
+            helperText={
+              (errorMessage || assistiveText) && (
+                <>
+                  {errorMessage}
+
+                  <FieldAssistiveText
+                    style={{ margin: 0 }}
+                    disabled={!!props.disabled}
+                  >
+                    {assistiveText}
+                  </FieldAssistiveText>
+                </>
+              )
+            }
+            data-type="date-time"
+            data-label={props.label ?? ''}
+            inputProps={{
+              ...props.inputProps,
+              required: false,
+            }}
+          />
+        )}
       />
-    </MuiPickersUtilsProvider>
+    </LocalizationProvider>
   );
 }

@@ -2,13 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
-import {
-  makeStyles,
-  createStyles,
-  Typography,
-  TypographyProps,
-  Divider,
-} from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Typography, TypographyProps, Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme =>
   createStyles({

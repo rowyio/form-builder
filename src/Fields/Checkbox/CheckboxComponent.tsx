@@ -1,13 +1,8 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import {
-  makeStyles,
-  createStyles,
-  FormControlLabel,
-  Checkbox,
-  CheckboxProps,
-} from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { FormControlLabel, Checkbox, CheckboxProps } from '@material-ui/core';
 
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
@@ -75,7 +70,7 @@ export default function CheckboxComponent({
             } as any
           }
           className={classes.checkbox}
-          inputRef={ref as React.MutableRefObject<any>}
+          inputRef={ref}
         />
       }
       onBlur={onBlur}

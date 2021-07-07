@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
+import {makeStyles,createStyles} from '@material-ui/styles';
 import {
-  makeStyles,
-  createStyles,
   useTheme,
   useMediaQuery,
   Portal,
@@ -203,7 +202,6 @@ export default function FormDialog({
           <DialogTitle
             id="modal-title"
             className={classes.titleRow}
-            disableTypography
           >
             <Typography
               className={classes.title}
@@ -241,7 +239,7 @@ export default function FormDialog({
           <Grid
             container
             spacing={2}
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             className={classes.actions}
           >
@@ -279,7 +277,7 @@ export default function FormDialog({
 
         <Dialog
           open={open && closeConfirmation}
-          disableBackdropClick
+          onClose={() => {}}
           disableEscapeKeyDown
           TransitionComponent={SlideTransitionMui}
           aria-labelledby="alert-dialog-title"
@@ -292,7 +290,6 @@ export default function FormDialog({
           <DialogTitle
             id="alert-dialog-title"
             className={classes.titleRow}
-            disableTypography
           >
             <Typography
               className={classes.title}
@@ -314,7 +311,7 @@ export default function FormDialog({
           <Grid
             container
             spacing={2}
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             className={classes.actions}
           >

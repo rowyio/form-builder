@@ -76,6 +76,7 @@ export default function ParagraphComponent({
       name={name}
       id={`field-${name}`}
       multiline
+      minRows={5}
       {...props}
       disabled={disabled}
       inputProps={{
@@ -84,7 +85,6 @@ export default function ParagraphComponent({
         disabled: false,
         readOnly: disabled,
         style: disabled ? { cursor: 'default' } : undefined,
-        rowsMin: 5,
         maxLength: maxCharacters ?? undefined,
         // Required for form-filler
         'data-type': 'textarea',

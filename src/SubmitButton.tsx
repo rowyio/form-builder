@@ -1,15 +1,18 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { makeStyles, Button, ButtonProps } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Button, ButtonProps } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    margin: theme.spacing(3, 'auto', 0),
-    minWidth: 120,
-  },
-}));
+const useStyles = makeStyles(theme =>
+  createStyles({
+    root: {
+      display: 'flex',
+      margin: theme.spacing(3, 'auto', 0),
+      minWidth: 120,
+    },
+  })
+);
 
 export interface ISubmitButtonProps extends ButtonProps {
   label?: React.ReactNode;

@@ -2,18 +2,12 @@ import React, { memo } from 'react';
 import clsx from 'clsx';
 import { useDrag, useDrop } from 'react-dnd';
 
-import {
-  makeStyles,
-  createStyles,
-  Grid,
-  TextField,
-  IconButton,
-} from '@material-ui/core';
-import { fade } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Grid, TextField, IconButton } from '@material-ui/core';
 import DragHandleIcon from '@material-ui/icons/DragHandle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       margin: theme.spacing(0, 0, 2),
@@ -30,14 +24,6 @@ const useStyles = makeStyles(theme =>
     removeButton: {
       marginLeft: theme.spacing(1.5),
       marginRight: theme.spacing(-1.5),
-      color: theme.palette.error.main,
-
-      '&:hover': {
-        backgroundColor: fade(
-          theme.palette.error.main,
-          theme.palette.action.hoverOpacity
-        ),
-      },
     },
   })
 );
@@ -75,7 +61,7 @@ export const MemoizedListItem = memo(
     const [, drag, dragPreview] = useDrag(() => ({
       type: name,
       item: { index },
-      collect: monitor => ({
+      collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
       }),
     }));
@@ -84,7 +70,7 @@ export const MemoizedListItem = memo(
       () => ({
         accept: name,
         drop: ({ index: fromIndex }: any) => swap(fromIndex, index),
-        collect: monitor => ({
+        collect: (monitor) => ({
           isOver: !!monitor.isOver(),
         }),
       }),
@@ -116,7 +102,7 @@ export const MemoizedListItem = memo(
               autoFocus
               fullWidth
               value={item}
-              onChange={e => edit(e.target.value)}
+              onChange={(e) => edit(e.target.value)}
               disabled={disabled}
             />
           </Grid>
@@ -127,6 +113,7 @@ export const MemoizedListItem = memo(
               className={classes.removeButton}
               onClick={remove}
               disabled={disabled}
+              color="error"
             >
               <RemoveCircleIcon />
             </IconButton>

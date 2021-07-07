@@ -2,26 +2,16 @@ import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
 import {
-  makeStyles,
-  createStyles,
   FormControl,
+  Stack,
   Slider,
   SliderProps,
-  Grid,
   Typography,
 } from '@material-ui/core';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: { display: 'flex' },
-    sliderGrid: { marginTop: theme.spacing(3) },
-    slider: { display: 'block' },
-  })
-);
 
 export interface ISliderComponentProps
   extends IFieldComponentProps,
@@ -57,8 +47,6 @@ export default function SliderComponent({
   max = 100,
   ...props
 }: ISliderComponentProps) {
-  const classes = useStyles();
-
   const handleChange = (_: any, value: number | number[]) => {
     onChange(value);
     onBlur();
@@ -70,7 +58,7 @@ export default function SliderComponent({
 
   return (
     <FormControl
-      className={classes.root}
+      style={{ display: 'flex' }}
       error={!!errorMessage}
       disabled={!!props.disabled}
       required={!!required}
@@ -83,42 +71,30 @@ export default function SliderComponent({
         {label}
       </FieldLabel>
 
-      <Grid
-        container
-        spacing={2}
-        alignItems="center"
-        className={classes.sliderGrid}
-      >
-        <Grid item>
-          <Typography variant="caption" component="span" color="textSecondary">
-            {minLabel || valueWithUnits(min, units, unitsPlural)}
-          </Typography>
-        </Grid>
+      <Stack direction="row" spacing={2} mt={2.5} alignItems="center">
+        <Typography variant="caption" component="span" color="textSecondary">
+          {minLabel || valueWithUnits(min, units, unitsPlural)}
+        </Typography>
 
-        <Grid item xs>
-          <Slider
-            valueLabelDisplay="on"
-            min={min}
-            max={max}
-            getAriaValueText={getAriaValueText}
-            valueLabelFormat={getValueLabelFormat}
-            ThumbComponent={props => <span {...props} ref={ref as any} />}
-            {...props}
-            value={value ?? min}
-            onClick={onBlur}
-            onChange={handleChange}
-            classes={{ root: classes.slider }}
-            data-type="slider"
-            data-label={label ?? ''}
-          />
-        </Grid>
+        <Slider
+          valueLabelDisplay="on"
+          min={min}
+          max={max}
+          getAriaValueText={getAriaValueText}
+          valueLabelFormat={getValueLabelFormat}
+          {...props}
+          style={{ display: 'block', ...props.style }}
+          value={value ?? min}
+          onClick={onBlur}
+          onChange={handleChange}
+          data-type="slider"
+          data-label={label ?? ''}
+        />
 
-        <Grid item>
-          <Typography variant="caption" component="span" color="textSecondary">
-            {maxLabel || valueWithUnits(max, units, unitsPlural)}
-          </Typography>
-        </Grid>
-      </Grid>
+        <Typography variant="caption" component="span" color="textSecondary">
+          {maxLabel || valueWithUnits(max, units, unitsPlural)}
+        </Typography>
+      </Stack>
 
       <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <FieldAssistiveText disabled={!!props.disabled}>

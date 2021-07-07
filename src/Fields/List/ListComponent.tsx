@@ -1,15 +1,12 @@
 import React from 'react';
+import clsx from 'clsx';
 import arrayMove from 'array-move';
 import { IFieldComponentProps } from '../../types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import {
-  makeStyles,
-  createStyles,
-  FormControl,
-  Button,
-} from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { FormControl, Button, ButtonProps } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import ListItem from './ListItem';
@@ -18,7 +15,7 @@ import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: { display: 'flex' },
 
@@ -33,12 +30,11 @@ const useStyles = makeStyles(theme =>
 export interface IListComponentProps extends IFieldComponentProps {
   itemLabel?: string;
   placeholder?: string;
+  addButtonProps?: Partial<ButtonProps>;
 }
 
 export default function ListComponent({
-  field: { onChange, onBlur, value: valueProp, ref },
-  fieldState,
-  formState,
+  field: { onChange, value: valueProp, ref },
 
   name,
   useFormMethods,
@@ -52,6 +48,7 @@ export default function ListComponent({
 
   itemLabel = 'Item',
   placeholder,
+  addButtonProps = {},
 }: IListComponentProps) {
   const classes = useStyles();
 
@@ -119,8 +116,9 @@ export default function ListComponent({
         <Button
           startIcon={<AddCircleIcon className={classes.addIcon} />}
           color="secondary"
+          {...addButtonProps}
           onClick={add}
-          className={classes.addButton}
+          className={clsx(classes.addButton, addButtonProps.className)}
           disabled={disabled}
         >
           Add {itemLabel}

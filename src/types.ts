@@ -52,14 +52,16 @@ export type CustomComponents<
   };
 };
 
-export interface IFieldConfig {
+export interface IFieldConfig<
+  P extends IFieldComponentProps = IFieldComponentProps
+> {
   type: string;
   name: string;
   group: 'input' | 'content';
   icon: React.ReactNode;
   dataType: string;
   defaultValue: any;
-  component: CustomComponent;
+  component: CustomComponent<P>;
   settings: Fields;
   validation: (config: Record<string, any>) => any[][];
 }

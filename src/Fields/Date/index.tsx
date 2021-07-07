@@ -20,7 +20,7 @@ export const DateConfig: IFieldConfig = {
   ),
   dataType: 'Date | null',
   defaultValue: null,
-  component: Component,
+  component: Component as any,
   settings: [],
   validation: () => [
     ['date'],

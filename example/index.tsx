@@ -2,15 +2,17 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { createMuiTheme } from '@material-ui/core/styles';
-import { MuiThemeProvider, CssBaseline, Button } from '@material-ui/core';
-import FormDialog from '../src/FormDialog';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+// import { ThemeProvider, CssBaseline, Button } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
+import Form from '../src/Form';
 import { FieldType } from '../src';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const theme = createMuiTheme({
+const theme = createTheme({
   typography: { fontFamily: 'system-ui' },
   props: { MuiTextField: { variant: 'filled' } },
 });
@@ -217,10 +219,10 @@ const App = () => {
   const [showAdditionalFields, setShowAdditionalFields] = React.useState(false);
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <DndProvider backend={HTML5Backend} context={window}>
-        <FormDialog
+        <Form
           open
           onClose={() => {}}
           title="Form Dialog"
@@ -228,7 +230,7 @@ const App = () => {
             showAdditionalFields ? [...additionalFields, ...fields] : fields
           }
           values={values}
-          onSubmit={data => {
+          onSubmit={(data) => {
             console.log(data);
             setValues(data);
           }}
@@ -239,7 +241,7 @@ const App = () => {
           // }
           formHeader={
             <Button
-              onClick={() => setShowAdditionalFields(x => !x)}
+              onClick={() => setShowAdditionalFields((x) => !x)}
               color="primary"
               variant="outlined"
               style={{ marginBottom: 24 }}
@@ -250,7 +252,7 @@ const App = () => {
           UseFormProps={{ mode: 'onTouched' }}
         />
       </DndProvider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 

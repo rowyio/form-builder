@@ -1,12 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import {
-  makeStyles,
-  createStyles,
-  FormLabel,
-  FormLabelProps,
-} from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { FormLabel, FormLabelProps } from '@material-ui/core';
 
 const useStyles = makeStyles(theme =>
   createStyles({
