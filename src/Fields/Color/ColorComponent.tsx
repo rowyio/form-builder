@@ -1,47 +1,22 @@
 import React, { useRef, useState } from 'react';
-import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 import { ChromePicker } from 'react-color';
 
 import {
   makeStyles,
   createStyles,
-  FormControl,
-  ButtonBase,
-  Grid,
-  InputLabel,
-  Typography,
+  TextField,
+  TextFieldProps,
+  InputAdornment,
+  IconButton,
   Popover,
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import PaletteIcon from '@material-ui/icons/Palette';
 
-import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    wrapper: { display: 'flex' },
-
-    root: {
-      height: 56,
-      textAlign: 'left',
-
-      margin: 0,
-      width: '100%',
-      padding: theme.spacing(0, 1),
-
-      cursor: 'pointer',
-    },
-
-    label: {
-      position: 'relative',
-      transform: 'scale(0.875)',
-      top: 2,
-      margin: '1px 0',
-      cursor: 'inherit',
-    },
-
     colorIndicator: {
       width: 20,
       height: 20,
@@ -49,11 +24,6 @@ const useStyles = makeStyles(theme =>
       boxShadow: `0 0 0 1px ${theme.palette.action.disabled} inset`,
       borderRadius: '50%',
     },
-
-    placeholder: { color: theme.palette.text.disabled },
-    value: { color: theme.palette.text.secondary },
-
-    arrow: { marginRight: theme.spacing(-0.5) },
 
     picker: {
       boxShadow: 'none !important',
@@ -66,14 +36,11 @@ const useStyles = makeStyles(theme =>
 
 export interface IColorComponentProps extends IFieldComponentProps {
   enableAlpha?: boolean;
+  TextFieldProps?: Partial<TextFieldProps>;
 }
 
 export default function ColorComponent({
   field: { onChange, onBlur, value, ref },
-  fieldState,
-  formState,
-
-  name,
 
   label,
   errorMessage,
@@ -83,83 +50,62 @@ export default function ColorComponent({
   disabled,
 
   enableAlpha,
+  TextFieldProps,
 }: IColorComponentProps) {
   const classes = useStyles();
 
-  const anchorEl = useRef<HTMLButtonElement>(null);
+  const anchorEl = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const toggleOpen: React.MouseEventHandler<HTMLButtonElement> = () =>
-    setOpen(s => !s);
+  const handleOpen = () => setOpen(true);
 
   return (
-    <FormControl
-      className={classes.wrapper}
-      error={!!errorMessage}
-      disabled={disabled}
-      ref={ref as any}
-      tabIndex={-1}
-    >
-      <Grid
-        container
-        alignItems="center"
-        wrap="nowrap"
-        spacing={2}
-        className={clsx(
-          classes.root,
-          'MuiInputBase-root',
-          'MuiFilledInput-root',
-          errorMessage && 'Mui-error'
-        )}
-        onClick={toggleOpen}
-        component={ButtonBase}
-        focusRipple
-        data-type="color"
-        data-label={label ?? ''}
+    <>
+      <TextField
+        fullWidth
+        InputProps={{
+          startAdornment: value?.hex && (
+            <InputAdornment position="start">
+              <div
+                className={classes.colorIndicator}
+                style={{ backgroundColor: value.hex }}
+              />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleOpen}
+                aria-label="Open color picker"
+                disabled={disabled}
+              >
+                <PaletteIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        onClick={handleOpen}
+        {...TextFieldProps}
+        value={value?.hex}
+        label={label}
+        inputProps={{ readOnly: true, required: false }}
+        error={!!errorMessage}
+        helperText={
+          (errorMessage || assistiveText) && (
+            <>
+              {errorMessage}
+
+              <FieldAssistiveText style={{ margin: 0 }} disabled={!!disabled}>
+                {assistiveText}
+              </FieldAssistiveText>
+            </>
+          )
+        }
+        required={required}
         disabled={disabled}
         ref={anchorEl}
-      >
-        <Grid item>
-          <div
-            className={classes.colorIndicator}
-            style={{ backgroundColor: value?.hex }}
-          />
-        </Grid>
-
-        <Grid item xs>
-          <InputLabel
-            className={classes.label}
-            error={!!errorMessage}
-            disabled={disabled}
-            required={required}
-          >
-            {label}
-          </InputLabel>
-          <Typography
-            variant="body1"
-            className={clsx(!value || disabled ? classes.placeholder : '')}
-          >
-            {value?.hex ?? 'Choose a color…'}
-          </Typography>
-        </Grid>
-
-        <Grid item>
-          {open ? (
-            <ArrowDropUpIcon
-              aria-label="Hide color picker"
-              color={disabled ? 'disabled' : 'inherit'}
-              className={classes.arrow}
-            />
-          ) : (
-            <ArrowDropDownIcon
-              aria-label="Show color picker"
-              color={disabled ? 'disabled' : 'inherit'}
-              className={classes.arrow}
-            />
-          )}
-        </Grid>
-      </Grid>
-
-      {anchorEl.current && (
+        inputRef={ref}
+      />
+      {!disabled && anchorEl.current && (
         <Popover
           open={open}
           anchorEl={anchorEl.current}
@@ -179,11 +125,6 @@ export default function ColorComponent({
           />
         </Popover>
       )}
-
-      <FieldErrorMessage variant="filled">{errorMessage}</FieldErrorMessage>
-      <FieldAssistiveText disabled={!!disabled} variant="filled">
-        {assistiveText}
-      </FieldAssistiveText>
-    </FormControl>
+    </>
   );
 }
