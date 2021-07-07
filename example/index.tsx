@@ -186,6 +186,13 @@ const fields = [
     label: 'Book a time',
   },
   {
+    type: FieldType.score,
+    name: 'score',
+    label: 'How likely are you to recommend us to a friend or a colleague?',
+    minLabel: 'Not at all likely',
+    maxLabel: 'Likely',
+  },
+  {
     type: FieldType.hidden,
     name: 'hidden',
     defaultValue: 'PERSISTENT VALUE',
@@ -228,7 +235,7 @@ const App = () => {
             showAdditionalFields ? [...additionalFields, ...fields] : fields
           }
           values={values}
-          onSubmit={data => {
+          onSubmit={(data) => {
             console.log(data);
             setValues(data);
           }}
@@ -239,7 +246,7 @@ const App = () => {
           // }
           formHeader={
             <Button
-              onClick={() => setShowAdditionalFields(x => !x)}
+              onClick={() => setShowAdditionalFields((x) => !x)}
               color="primary"
               variant="outlined"
               style={{ marginBottom: 24 }}

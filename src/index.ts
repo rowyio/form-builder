@@ -136,6 +136,14 @@ export * from './fields/Radio/RadioSettings';
 
 export * from './fields/Radio';
 
+export { default as ScoreComponent } from './fields/Score/ScoreComponent';
+export * from './fields/Score/ScoreComponent';
+
+export { default as ScoreSettings } from './fields/Score/ScoreSettings';
+export * from './fields/Score/ScoreSettings';
+
+export * from './fields/Score';
+
 export { default as ShortTextComponent } from './fields/ShortText/ShortTextComponent';
 export * from './fields/ShortText/ShortTextComponent';
 
