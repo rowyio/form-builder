@@ -10,9 +10,6 @@ import SubmitError, { ISubmitErrorProps } from './SubmitError';
 
 import { Fields, CustomComponents } from './types';
 
-import { createTheme, ThemeProvider } from '@material-ui/core';
-const theme = createTheme();
-
 export interface IFormProps {
   fields: Fields;
   values?: FieldValues;
@@ -73,34 +70,32 @@ export default function Form({
     : false;
 
   return (
-    <ThemeProvider theme={theme}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {autoSave && (
-          <AutoSave
-            control={control}
-            defaultValues={defaultValues}
-            onSubmit={onSubmit}
-          />
-        )}
-
-        {formHeader}
-
-        <FormFields
-          fields={fields}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {autoSave && (
+        <AutoSave
           control={control}
-          customComponents={customComponents}
-          useFormMethods={methods}
-          setOmittedFields={setOmittedFields}
+          defaultValues={defaultValues}
+          onSubmit={onSubmit}
         />
+      )}
 
-        {formFooter}
+      {formHeader}
 
-        {!hideSubmit && (
-          <SubmitButton disabled={hasErrors} {...SubmitButtonProps} />
-        )}
+      <FormFields
+        fields={fields}
+        control={control}
+        customComponents={customComponents}
+        useFormMethods={methods}
+        setOmittedFields={setOmittedFields}
+      />
 
-        {!hideSubmitError && hasErrors && <SubmitError {...SubmitErrorProps} />}
-      </form>
-    </ThemeProvider>
+      {formFooter}
+
+      {!hideSubmit && (
+        <SubmitButton disabled={hasErrors} {...SubmitButtonProps} />
+      )}
+
+      {!hideSubmitError && hasErrors && <SubmitError {...SubmitErrorProps} />}
+    </form>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
-import {makeStyles,createStyles} from '@material-ui/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
 import {
   useTheme,
   useMediaQuery,
@@ -26,7 +26,7 @@ import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
 import ScrollableDialogContent from './ScrollableDialogContent';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       '--spacing-modal': theme.spacing(3) + 'px',
@@ -178,7 +178,7 @@ export default function FormDialog({
   return (
     <Portal>
       <form
-        onSubmit={handleSubmit(values => {
+        onSubmit={handleSubmit((values) => {
           onSubmit(values);
           handleClose();
         })}
@@ -199,10 +199,7 @@ export default function FormDialog({
             ...DialogProps?.classes,
           }}
         >
-          <DialogTitle
-            id="modal-title"
-            className={classes.titleRow}
-          >
+          <DialogTitle id="modal-title" className={classes.titleRow}>
             <Typography
               className={classes.title}
               component="h2"
@@ -287,10 +284,7 @@ export default function FormDialog({
             paper: classes.paper,
           }}
         >
-          <DialogTitle
-            id="alert-dialog-title"
-            className={classes.titleRow}
-          >
+          <DialogTitle id="alert-dialog-title" className={classes.titleRow}>
             <Typography
               className={classes.title}
               component="h2"
