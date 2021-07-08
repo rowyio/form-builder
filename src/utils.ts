@@ -3,7 +3,6 @@ import { ObjectShape } from 'yup/lib/object';
 import _pickBy from 'lodash/pickBy';
 import _isEqual from 'lodash/isEqual';
 import _set from 'lodash/set';
-import _mapValues from 'lodash/mapValues';
 import _values from 'lodash/values';
 import { getFieldProp } from './fields';
 
@@ -104,12 +103,17 @@ export const getValidationSchema = (
     _set(objectShape, field.name, schema);
   }
 
-  const objectShapeWithNesting = _mapValues(objectShape, value => {
-    if (yup.BaseSchema.prototype.isPrototypeOf(value)) return value;
-    return yup.object().shape(value as any);
-  });
+  // Recursively ensure all nested fields are Yup schemas
+  // wrapped in Yup object schemas
+  const recursiveObjectShape = (object: Record<string, any>) => {
+    for (const [key, value] of Object.entries(object)) {
+      if (yup.BaseSchema.prototype.isPrototypeOf(value)) continue;
+      object[key] = yup.object().shape(recursiveObjectShape(value) as any);
+    }
+    return object;
+  };
 
-  return yup.object().shape(objectShapeWithNesting);
+  return yup.object().shape(recursiveObjectShape(objectShape));
 };
 
 /**
