@@ -16,32 +16,36 @@ import FieldAssistiveText from '../../FieldAssistiveText';
 
 const useStyles = makeStyles(theme =>
   createStyles({
-    label: {
-      textTransform: 'none',
-      marginBottom: theme.spacing(2),
-    },
-
-    buttonWrapper: {
+    grid: {
       display: 'grid',
-      gridTemplateRows: 'repeat(3, auto)',
-      rowGap: theme.spacing(2) + 'px',
+      gridTemplateRows: 'repeat(4, auto)',
+      rowGap: `${theme.spacing(2)}px`,
       gridTemplateColumns: 'repeat(2, min-content)',
 
       [theme.breakpoints.down('xs')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
     },
-    minLabel: {
+
+    label: {
+      marginBottom: 0,
+      textTransform: 'none',
+
       gridRow: 1,
+      gridColumn: '1 / -1',
+    },
+
+    minLabel: {
+      gridRow: 2,
       gridColumn: 1,
     },
     maxLabel: {
-      gridRow: 1,
+      gridRow: 2,
       gridColumn: 2,
 
-      [theme.breakpoints.down('xs')]: { gridRow: 3 },
+      [theme.breakpoints.down('xs')]: { gridRow: 4 },
     },
 
     toggleButtonGroup: {
-      gridRow: 2,
+      gridRow: 3,
       gridColumn: '1 / -1',
 
       display: 'flex',
@@ -127,6 +131,7 @@ export default function ScoreComponent({
       disabled={disabled}
       required={!!required}
       ref={ref}
+      className={classes.grid}
     >
       <FieldLabel
         error={!!errorMessage}
@@ -139,43 +144,41 @@ export default function ScoreComponent({
         </Typography>
       </FieldLabel>
 
-      <div className={classes.buttonWrapper}>
-        {minLabel && (
-          <Typography
-            variant="overline"
-            color="textSecondary"
-            className={classes.minLabel}
-          >
-            {minLabel}
-          </Typography>
-        )}
-
-        <ToggleButtonGroup
-          value={value}
-          onChange={(_, v) => {
-            if (v !== null) onChange(v);
-          }}
-          exclusive
-          aria-label="Score"
-          classes={{
-            root: classes.toggleButtonGroup,
-            grouped: classes.toggleButton,
-          }}
+      {minLabel && (
+        <Typography
+          variant="overline"
+          color="textSecondary"
+          className={classes.minLabel}
         >
-          {buttons}
-        </ToggleButtonGroup>
+          {minLabel}
+        </Typography>
+      )}
 
-        {maxLabel && (
-          <Typography
-            variant="overline"
-            color="textSecondary"
-            align="right"
-            className={classes.maxLabel}
-          >
-            {maxLabel}
-          </Typography>
-        )}
-      </div>
+      <ToggleButtonGroup
+        value={value}
+        onChange={(_, v) => {
+          if (v !== null) onChange(v);
+        }}
+        exclusive
+        aria-label="Score"
+        classes={{
+          root: classes.toggleButtonGroup,
+          grouped: classes.toggleButton,
+        }}
+      >
+        {buttons}
+      </ToggleButtonGroup>
+
+      {maxLabel && (
+        <Typography
+          variant="overline"
+          color="textSecondary"
+          align="right"
+          className={classes.maxLabel}
+        >
+          {maxLabel}
+        </Typography>
+      )}
 
       <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <FieldAssistiveText disabled={!!disabled}>
