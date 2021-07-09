@@ -67,6 +67,14 @@ export * from './fields/ContentHeader/ContentHeaderSettings';
 
 export * from './fields/ContentHeader';
 
+export { default as ContentImageComponent } from './fields/ContentImage/ContentImageComponent';
+export * from './fields/ContentImage/ContentImageComponent';
+
+export { default as ContentImageSettings } from './fields/ContentImage/ContentImageSettings';
+export * from './fields/ContentImage/ContentImageSettings';
+
+export * from './fields/ContentImage';
+
 export { default as ContentParagraphComponent } from './fields/ContentParagraph/ContentParagraphComponent';
 export * from './fields/ContentParagraph/ContentParagraphComponent';
 
