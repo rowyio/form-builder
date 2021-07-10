@@ -29,13 +29,13 @@ import ScrollableDialogContent from './ScrollableDialogContent';
 const useStyles = makeStyles(theme =>
   createStyles({
     root: {
-      '--spacing-modal': theme.spacing(3) + 'px',
-      '--spacing-modal-contents': theme.spacing(3) + 'px',
+      '--spacing-modal': theme.spacing(3),
+      '--spacing-modal-contents': theme.spacing(3),
       '--spacing-card': 'var(--spacing-modal-contents)',
       '--bg-paper': theme.palette.background.paper,
 
       [theme.breakpoints.down('sm')]: {
-        '--spacing-modal': theme.spacing(2) + 'px',
+        '--spacing-modal': theme.spacing(2),
       },
     },
 
