@@ -14,7 +14,7 @@ import PaletteIcon from '@material-ui/icons/Palette';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     colorIndicator: {
       width: 20,

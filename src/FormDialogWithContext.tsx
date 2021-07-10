@@ -7,9 +7,8 @@ import {
 } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
-import {makeStyles,createStyles} from '@material-ui/styles';
+import { makeStyles, createStyles } from '@material-ui/styles';
 import {
-  
   useTheme,
   useMediaQuery,
   Portal,
@@ -206,10 +205,7 @@ export default function FormDialogWithContext({
               ...DialogProps?.classes,
             }}
           >
-            <DialogTitle
-              id="modal-title"
-              className={classes.titleRow}
-            >
+            <DialogTitle id="modal-title" className={classes.titleRow}>
               <Typography
                 className={classes.title}
                 component="h2"
@@ -284,7 +280,7 @@ export default function FormDialogWithContext({
 
           <Dialog
             open={open && closeConfirmation}
-            onClose={()=>{}}
+            onClose={() => {}}
             disableEscapeKeyDown
             TransitionComponent={SlideTransitionMui}
             aria-labelledby="alert-dialog-title"
@@ -294,10 +290,7 @@ export default function FormDialogWithContext({
               paper: classes.paper,
             }}
           >
-            <DialogTitle
-              id="alert-dialog-title"
-              className={classes.titleRow}
-            >
+            <DialogTitle id="alert-dialog-title" className={classes.titleRow}>
               <Typography
                 className={classes.title}
                 component="h2"

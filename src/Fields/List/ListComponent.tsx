@@ -15,7 +15,7 @@ import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: { display: 'flex' },
 

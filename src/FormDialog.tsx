@@ -26,7 +26,7 @@ import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
 import ScrollableDialogContent from './ScrollableDialogContent';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: {
       '--spacing-modal': theme.spacing(3) + 'px',
@@ -101,6 +101,7 @@ export interface IFormDialogProps {
   customActions?: React.ReactNode;
   SubmitButtonProps?: Partial<ButtonProps>;
   CancelButtonProps?: Partial<ButtonProps>;
+  hideCancelButton?: boolean;
   DialogProps?: Partial<MuiDialogProps>;
   hideSubmitError?: boolean;
   SubmitErrorProps?: Partial<ISubmitErrorProps>;
@@ -128,6 +129,7 @@ export default function FormDialog({
   customActions,
   SubmitButtonProps,
   CancelButtonProps,
+  hideCancelButton = false,
   DialogProps,
   hideSubmitError = false,
   SubmitErrorProps = {},
@@ -178,7 +180,7 @@ export default function FormDialog({
   return (
     <Portal>
       <form
-        onSubmit={handleSubmit((values) => {
+        onSubmit={handleSubmit(values => {
           onSubmit(values);
           handleClose();
         })}
@@ -242,22 +244,24 @@ export default function FormDialog({
           >
             {customActions ?? (
               <>
-                <Grid item>
-                  <Button
-                    color="primary"
-                    onClick={confirmClose}
-                    children="Cancel"
-                    {...(CancelButtonProps ?? {})}
-                  />
-                </Grid>
+                {!hideCancelButton && (
+                  <Grid item>
+                    <Button
+                      color="primary"
+                      onClick={confirmClose}
+                      {...(CancelButtonProps ?? {})}
+                      children={CancelButtonProps?.children || 'Cancel'}
+                    />
+                  </Grid>
+                )}
                 <Grid item>
                   <Button
                     color="primary"
                     variant="contained"
                     type="submit"
                     disabled={hasErrors}
-                    children="Submit"
                     {...(SubmitButtonProps ?? {})}
+                    children={SubmitButtonProps?.children || 'Submit'}
                   />
                 </Grid>
               </>
@@ -266,7 +270,7 @@ export default function FormDialog({
             {!hideSubmitError && hasErrors && (
               <SubmitError
                 {...SubmitErrorProps}
-                style={{ marginTop: 0, ...SubmitErrorProps.style }}
+                style={{ marginTop: 0, ...SubmitErrorProps?.style }}
               />
             )}
           </Grid>
@@ -313,8 +317,10 @@ export default function FormDialog({
               <Button
                 onClick={() => setCloseConfirmation(false)}
                 color="primary"
-                children="Cancel"
                 {...(CloseConfirmProps.cancelButtonProps ?? {})}
+                children={
+                  CloseConfirmProps.cancelButtonProps?.children || 'Cancel'
+                }
               />
             </Grid>
             <Grid item>
@@ -323,8 +329,10 @@ export default function FormDialog({
                 color="primary"
                 variant="contained"
                 autoFocus
-                children="Close"
                 {...(CloseConfirmProps.confirmButtonProps ?? {})}
+                children={
+                  CloseConfirmProps.confirmButtonProps?.children || 'Close'
+                }
               />
             </Grid>
           </Grid>

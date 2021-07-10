@@ -188,6 +188,13 @@ const fields = [
     label: 'Book a time',
   },
   {
+    type: FieldType.score,
+    name: 'score',
+    label: 'How likely are you to recommend us to a friend or a colleague?',
+    minLabel: 'Not at all likely',
+    maxLabel: 'Likely',
+  },
+  {
     type: FieldType.hidden,
     name: 'hidden',
     defaultValue: 'PERSISTENT VALUE',

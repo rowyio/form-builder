@@ -15,7 +15,7 @@ import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(theme =>
   createStyles({
     root: { display: 'flex' },
 
@@ -86,7 +86,7 @@ export default function RadioComponent({
       </FieldLabel>
 
       <RadioGroup {...props} onChange={onChange} onBlur={onBlur} value={value}>
-        {options.map((item) => {
+        {options.map(item => {
           let option: { label: React.ReactNode; value: string } = {
             label: '',
             value: '',

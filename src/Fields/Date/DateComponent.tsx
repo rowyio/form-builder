@@ -45,7 +45,7 @@ export default function DateComponent({
         onChange={onChange}
         onClose={onBlur}
         inputRef={ref}
-        renderInput={(props) => (
+        renderInput={props => (
           <TextField
             {...props}
             {...TextFieldProps}
