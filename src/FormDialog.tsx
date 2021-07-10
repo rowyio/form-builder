@@ -92,7 +92,6 @@ export interface IFormDialogProps {
   customComponents?: CustomComponents;
   UseFormProps?: UseFormProps;
 
-  open: boolean;
   onClose: () => void;
   title: React.ReactNode;
   formHeader?: React.ReactNode;
@@ -120,7 +119,6 @@ export default function FormDialog({
   customComponents,
   UseFormProps = {},
 
-  open,
   onClose,
   title,
   formHeader,
@@ -166,11 +164,15 @@ export default function FormDialog({
       ) as boolean)
     : false;
 
+  const [open, setOpen] = useState(true);
   const [closeConfirmation, setCloseConfirmation] = useState(false);
   const handleClose = () => {
     setCloseConfirmation(false);
-    onClose();
-    reset();
+    setOpen(false);
+    setTimeout(() => {
+      onClose();
+      reset();
+    }, 300);
   };
   const confirmClose = () => {
     if (isDirty) setCloseConfirmation(true);
