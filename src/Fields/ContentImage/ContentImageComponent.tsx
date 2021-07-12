@@ -3,7 +3,9 @@ import { IFieldComponentProps } from '../../types';
 
 export interface IContentImageComponentProps
   extends IFieldComponentProps,
-    React.ImgHTMLAttributes<HTMLImageElement> {}
+    Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  src: string | { downloadURL: string }[];
+}
 
 export default function ContentImageComponent({
   field,
@@ -18,13 +20,19 @@ export default function ContentImageComponent({
   errorMessage,
   name,
   useFormMethods,
+
+  src,
+  alt,
   ...props
 }: IContentImageComponentProps) {
-  if (!props.src) return null;
+  if (!src || (Array.isArray(src) && (src.length === 0 || !src[0].downloadURL)))
+    return null;
 
   return (
     <img
       {...props}
+      src={typeof src === 'string' ? src : src?.[0]?.downloadURL}
+      alt={alt}
       style={{
         maxWidth: '100%',
         height: 'auto',
