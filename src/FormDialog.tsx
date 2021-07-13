@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme =>
       '--spacing-card': 'var(--spacing-modal-contents)',
       '--bg-paper': theme.palette.background.paper,
 
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         '--spacing-modal': theme.spacing(2),
       },
     },
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme =>
     },
     title: {
       ...theme.typography.h5,
-      [theme.breakpoints.down('sm')]: theme.typography.h6,
+      [theme.breakpoints.down('md')]: theme.typography.h6,
     },
     closeButton: {
       margin: theme.spacing(-1.5),
@@ -135,7 +135,7 @@ export default function FormDialog({
 }: IFormDialogProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { defaultValues, resolver, setOmittedFields } = useFormSettings({
     fields,

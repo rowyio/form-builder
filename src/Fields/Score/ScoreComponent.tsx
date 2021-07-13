@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme =>
       rowGap: theme.spacing(2),
       gridTemplateColumns: 'repeat(2, min-content)',
 
-      [theme.breakpoints.down('xs')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
+      [theme.breakpoints.down('sm')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
     },
 
     label: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme =>
       gridRow: 2,
       gridColumn: 2,
 
-      [theme.breakpoints.down('xs')]: { gridRow: 4 },
+      [theme.breakpoints.down('sm')]: { gridRow: 4 },
     },
 
     toggleButtonGroup: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme =>
 
       margin: theme.spacing(-0.5),
 
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         flexWrap: 'wrap',
         margin: theme.spacing(-1),
       },
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme =>
       width: 32,
       height: 32,
       margin: theme.spacing(0.5),
-      [theme.breakpoints.down('xs')]: { margin: theme.spacing(1) },
+      [theme.breakpoints.down('sm')]: { margin: theme.spacing(1) },
 
       '&:not(:last-child), &:not(:first-child)': {
         borderRadius: theme.shape.borderRadius,
@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme =>
         borderLeftColor: theme.palette.divider,
         marginLeft: theme.spacing(0.5),
 
-        [theme.breakpoints.down('xs')]: { marginLeft: theme.spacing(1) },
+        [theme.breakpoints.down('sm')]: { marginLeft: theme.spacing(1) },
       },
     },
   })
