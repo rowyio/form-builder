@@ -99,7 +99,7 @@ export interface IFormDialogWithContextProps {
   UseFormProps?: UseFormProps;
 
   open: boolean;
-  onClose: () => void;
+  onClose: (reason: 'submit' | 'cancel') => void;
   title: React.ReactNode;
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
@@ -173,14 +173,14 @@ export default function FormDialogWithContext({
     : false;
 
   const [closeConfirmation, setCloseConfirmation] = useState(false);
-  const handleClose = () => {
+  const handleClose = (reason: 'submit' | 'cancel') => {
     setCloseConfirmation(false);
-    onClose();
+    onClose(reason);
     reset();
   };
   const confirmClose = () => {
     if (isDirty) setCloseConfirmation(true);
-    else handleClose();
+    else handleClose('cancel');
   };
 
   return (
@@ -189,7 +189,7 @@ export default function FormDialogWithContext({
         <form
           onSubmit={handleSubmit(values => {
             onSubmit(values);
-            handleClose();
+            handleClose('submit');
           })}
         >
           <Dialog
@@ -340,7 +340,7 @@ export default function FormDialogWithContext({
               </Grid>
               <Grid item>
                 <Button
-                  onClick={handleClose}
+                  onClick={() => handleClose('cancel')}
                   color="primary"
                   variant="contained"
                   autoFocus
