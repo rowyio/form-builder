@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme =>
       gridTemplateColumns: 'repeat(2, min-content)',
 
       [theme.breakpoints.down('xs')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
+
+      '& > *': { gridColumn: '1 / -1' },
     },
 
     label: {
@@ -30,7 +32,6 @@ const useStyles = makeStyles(theme =>
       textTransform: 'none',
 
       gridRow: 1,
-      gridColumn: '1 / -1',
     },
 
     minLabel: {
@@ -46,7 +47,6 @@ const useStyles = makeStyles(theme =>
 
     toggleButtonGroup: {
       gridRow: 3,
-      gridColumn: '1 / -1',
 
       display: 'flex',
       justifyContent: 'center',
