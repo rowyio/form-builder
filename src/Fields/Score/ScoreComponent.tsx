@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
 import {
@@ -16,6 +17,13 @@ import FieldAssistiveText from '../../FieldAssistiveText';
 
 const useStyles = makeStyles(theme =>
   createStyles({
+    label: {
+      ...theme.typography.body1,
+      marginBottom: 0,
+      textTransform: 'none',
+    },
+    labelExtraMargin: { marginBottom: theme.spacing(2) },
+
     grid: {
       display: 'grid',
       gridTemplateRows: 'repeat(3, auto)',
@@ -23,12 +31,6 @@ const useStyles = makeStyles(theme =>
       gridTemplateColumns: 'repeat(2, min-content)',
 
       [theme.breakpoints.down('xs')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
-    },
-
-    label: {
-      ...theme.typography.body1,
-      marginBottom: 0,
-      textTransform: 'none',
     },
 
     minLabel: {
@@ -134,7 +136,10 @@ export default function ScoreComponent({
         error={!!errorMessage}
         disabled={!!disabled}
         required={!!required}
-        className={classes.label}
+        className={clsx(
+          classes.label,
+          (minLabel || maxLabel) && classes.labelExtraMargin
+        )}
       >
         {label}
       </FieldLabel>
