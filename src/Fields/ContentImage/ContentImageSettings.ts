@@ -7,7 +7,7 @@ export const ContentImageSettings: IFieldConfig['settings'] = [
     label: 'Image Source',
     type: 'image',
     required: true,
-    defaultValue: '',
+    defaultValue: undefined,
   },
   {
     name: 'alt',

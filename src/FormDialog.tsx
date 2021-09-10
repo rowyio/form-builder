@@ -92,7 +92,7 @@ export interface IFormDialogProps {
   customComponents?: CustomComponents;
   UseFormProps?: UseFormProps;
 
-  onClose: () => void;
+  onClose: (reason: 'submit' | 'cancel') => void;
   title: React.ReactNode;
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
@@ -166,17 +166,17 @@ export default function FormDialog({
 
   const [open, setOpen] = useState(true);
   const [closeConfirmation, setCloseConfirmation] = useState(false);
-  const handleClose = () => {
+  const handleClose = (reason: 'submit' | 'cancel') => {
     setCloseConfirmation(false);
     setOpen(false);
     setTimeout(() => {
-      onClose();
+      onClose(reason);
       reset();
     }, 300);
   };
   const confirmClose = () => {
     if (isDirty) setCloseConfirmation(true);
-    else handleClose();
+    else handleClose('cancel');
   };
 
   return (
@@ -184,7 +184,7 @@ export default function FormDialog({
       <form
         onSubmit={handleSubmit(values => {
           onSubmit(values);
-          handleClose();
+          handleClose('submit');
         })}
       >
         <Dialog
@@ -327,7 +327,7 @@ export default function FormDialog({
             </Grid>
             <Grid item>
               <Button
-                onClick={handleClose}
+                onClick={() => handleClose('cancel')}
                 color="primary"
                 variant="contained"
                 autoFocus

@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
 import { makeStyles, createStyles } from '@material-ui/styles';
@@ -10,38 +11,37 @@ import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
+    label: {
+      ...theme.typography.body1,
+      marginBottom: 0,
+      textTransform: 'none',
+    },
+    labelExtraMargin: { marginBottom: theme.spacing(2) },
+
     grid: {
       display: 'grid',
-      gridTemplateRows: 'repeat(4, auto)',
+      gridTemplateRows: 'repeat(3, auto)',
       rowGap: theme.spacing(2),
       gridTemplateColumns: 'repeat(2, min-content)',
 
       [theme.breakpoints.down('sm')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
     },
 
-    label: {
-      marginBottom: 0,
-      textTransform: 'none',
-
-      gridRow: 1,
-      gridColumn: '1 / -1',
-    },
-
     minLabel: {
-      gridRow: 2,
+      gridRow: 1,
       gridColumn: 1,
     },
     maxLabel: {
-      gridRow: 2,
+      gridRow: 1,
       gridColumn: 2,
 
-      [theme.breakpoints.down('sm')]: { gridRow: 4 },
+      [theme.breakpoints.down('xs')]: { gridRow: 3 },
     },
 
     toggleButtonGroup: {
-      gridRow: 3,
+      gridRow: 2,
       gridColumn: '1 / -1',
 
       display: 'flex',
@@ -127,54 +127,56 @@ export default function ScoreComponent({
       disabled={disabled}
       required={!!required}
       ref={ref}
-      className={classes.grid}
     >
       <FieldLabel
         error={!!errorMessage}
         disabled={!!disabled}
         required={!!required}
-        className={classes.label}
+        className={clsx(
+          classes.label,
+          (minLabel || maxLabel) && classes.labelExtraMargin
+        )}
       >
-        <Typography variant="body1" color="inherit" component="span">
-          {label}
-        </Typography>
+        {label}
       </FieldLabel>
 
-      {minLabel && (
-        <Typography
-          variant="overline"
-          color="textSecondary"
-          className={classes.minLabel}
-        >
-          {minLabel}
-        </Typography>
-      )}
+      <div className={classes.grid}>
+        {minLabel && (
+          <Typography
+            variant="overline"
+            color="textSecondary"
+            className={classes.minLabel}
+          >
+            {minLabel}
+          </Typography>
+        )}
 
-      <ToggleButtonGroup
-        value={value}
-        onChange={(_, v) => {
-          if (v !== null) onChange(v);
-        }}
-        exclusive
-        aria-label="Score"
-        classes={{
-          root: classes.toggleButtonGroup,
-          grouped: classes.toggleButton,
-        }}
-      >
-        {buttons}
-      </ToggleButtonGroup>
-
-      {maxLabel && (
-        <Typography
-          variant="overline"
-          color="textSecondary"
-          align="right"
-          className={classes.maxLabel}
+        <ToggleButtonGroup
+          value={value}
+          onChange={(_, v) => {
+            if (v !== null) onChange(v);
+          }}
+          exclusive
+          aria-label="Score"
+          classes={{
+            root: classes.toggleButtonGroup,
+            grouped: classes.toggleButton,
+          }}
         >
-          {maxLabel}
-        </Typography>
-      )}
+          {buttons}
+        </ToggleButtonGroup>
+
+        {maxLabel && (
+          <Typography
+            variant="overline"
+            color="textSecondary"
+            align="right"
+            className={classes.maxLabel}
+          >
+            {maxLabel}
+          </Typography>
+        )}
+      </div>
 
       <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <FieldAssistiveText disabled={!!disabled}>

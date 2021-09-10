@@ -19,6 +19,7 @@ import Hidden from './Hidden';
 import ContentHeader from './ContentHeader';
 import ContentSubHeader from './ContentSubHeader';
 import ContentParagraph from './ContentParagraph';
+import ContentImage from './ContentImage';
 
 export const FieldConfigs = [
   ShortText,
@@ -38,6 +39,7 @@ export const FieldConfigs = [
   ContentHeader,
   ContentSubHeader,
   ContentParagraph,
+  ContentImage,
 ];
 
 /** Returns specific property of field config */

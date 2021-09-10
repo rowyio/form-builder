@@ -31,7 +31,7 @@ import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
 import ScrollableDialogContent from './ScrollableDialogContent';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       '--spacing-modal': theme.spacing(3),
@@ -97,7 +97,7 @@ export interface IFormDialogWithContextProps {
   customComponents?: CustomComponents;
   UseFormProps?: UseFormProps;
 
-  onClose: () => void;
+  onClose: (reason: 'submit' | 'cancel') => void;
   title: React.ReactNode;
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
@@ -105,6 +105,7 @@ export interface IFormDialogWithContextProps {
   customActions?: React.ReactNode;
   SubmitButtonProps?: Partial<ButtonProps>;
   CancelButtonProps?: Partial<ButtonProps>;
+  hideCancelButton?: boolean;
   DialogProps?: Partial<MuiDialogProps>;
   hideSubmitError?: boolean;
   SubmitErrorProps?: Partial<ISubmitErrorProps>;
@@ -131,6 +132,7 @@ export default function FormDialogWithContext({
   customActions,
   SubmitButtonProps,
   CancelButtonProps,
+  hideCancelButton = false,
   DialogProps,
   hideSubmitError = false,
   SubmitErrorProps = {},
@@ -169,26 +171,26 @@ export default function FormDialogWithContext({
 
   const [open, setOpen] = useState(true);
   const [closeConfirmation, setCloseConfirmation] = useState(false);
-  const handleClose = () => {
+  const handleClose = (reason: 'submit' | 'cancel') => {
     setCloseConfirmation(false);
     setOpen(false);
     setTimeout(() => {
-      onClose();
+      onClose(reason);
       reset();
     }, 300);
   };
   const confirmClose = () => {
     if (isDirty) setCloseConfirmation(true);
-    else handleClose();
+    else handleClose('cancel');
   };
 
   return (
     <FormProvider {...methods}>
       <Portal>
         <form
-          onSubmit={handleSubmit(values => {
+          onSubmit={handleSubmit((values) => {
             onSubmit(values);
-            handleClose();
+            handleClose('submit');
           })}
         >
           <Dialog
@@ -250,22 +252,24 @@ export default function FormDialogWithContext({
             >
               {customActions ?? (
                 <>
-                  <Grid item>
-                    <Button
-                      color="primary"
-                      onClick={confirmClose}
-                      children="Cancel"
-                      {...(CancelButtonProps ?? {})}
-                    />
-                  </Grid>
+                  {!hideCancelButton && (
+                    <Grid item>
+                      <Button
+                        color="primary"
+                        onClick={confirmClose}
+                        {...(CancelButtonProps ?? {})}
+                        children={CancelButtonProps?.children || 'Cancel'}
+                      />
+                    </Grid>
+                  )}
                   <Grid item>
                     <Button
                       color="primary"
                       variant="contained"
                       type="submit"
                       disabled={hasErrors}
-                      children="Submit"
                       {...(SubmitButtonProps ?? {})}
+                      children={SubmitButtonProps?.children || 'Submit'}
                     />
                   </Grid>
                 </>
@@ -274,7 +278,7 @@ export default function FormDialogWithContext({
               {!hideSubmitError && hasErrors && (
                 <SubmitError
                   {...SubmitErrorProps}
-                  style={{ marginTop: 0, ...SubmitErrorProps.style }}
+                  style={{ marginTop: 0, ...SubmitErrorProps?.style }}
                 />
               )}
             </Grid>
@@ -321,18 +325,22 @@ export default function FormDialogWithContext({
                 <Button
                   onClick={() => setCloseConfirmation(false)}
                   color="primary"
-                  children="Cancel"
                   {...(CloseConfirmProps.cancelButtonProps ?? {})}
+                  children={
+                    CloseConfirmProps.cancelButtonProps?.children || 'Cancel'
+                  }
                 />
               </Grid>
               <Grid item>
                 <Button
-                  onClick={handleClose}
+                  onClick={() => handleClose('cancel')}
                   color="primary"
                   variant="contained"
                   autoFocus
-                  children="Close"
                   {...(CloseConfirmProps.confirmButtonProps ?? {})}
+                  children={
+                    CloseConfirmProps.confirmButtonProps?.children || 'Close'
+                  }
                 />
               </Grid>
             </Grid>
