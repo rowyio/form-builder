@@ -2,15 +2,15 @@ import React, { useRef, useState } from 'react';
 import { IFieldComponentProps } from '../../types';
 import { ChromePicker } from 'react-color';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
   TextField,
   TextFieldProps,
   InputAdornment,
   IconButton,
   Popover,
-} from '@material-ui/core';
-import PaletteIcon from '@material-ui/icons/Palette';
+} from '@mui/material';
+import PaletteIcon from '@mui/icons-material/Palette';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 

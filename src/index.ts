@@ -22,9 +22,6 @@ export * from './Form';
 export { default as FormDialog } from './FormDialog';
 export * from './FormDialog';
 
-export { default as FormDialogWithContext } from './FormDialogWithContext';
-export * from './FormDialogWithContext';
-
 export { default as FormFields } from './FormFields';
 export * from './FormFields';
 

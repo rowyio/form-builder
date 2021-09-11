@@ -5,9 +5,9 @@ import {
   LocalizationProvider,
   DatePicker,
   DatePickerProps,
-} from '@material-ui/lab';
-import { TextField, TextFieldProps } from '@material-ui/core';
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+} from '@mui/lab';
+import { TextField, TextFieldProps } from '@mui/material';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 

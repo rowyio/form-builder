@@ -5,10 +5,10 @@ import {
   LocalizationProvider,
   DateTimePicker,
   DateTimePickerProps,
-} from '@material-ui/lab';
-import { TextField, TextFieldProps } from '@material-ui/core';
-import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
+} from '@mui/lab';
+import { TextField, TextFieldProps } from '@mui/material';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 

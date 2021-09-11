@@ -3,7 +3,7 @@ import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 import * as yup from 'yup';
 
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 import { mdiFormatListNumbered } from '@mdi/js';
 
 import Settings from './ListSettings';

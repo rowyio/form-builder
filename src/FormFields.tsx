@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Control, UseFormReturn, useWatch } from 'react-hook-form';
 import useFormSettings from './useFormSettings';
 
-import { useTheme, Grid, Checkbox } from '@material-ui/core';
+import { useTheme, Grid, Checkbox } from '@mui/material';
 
 import { Fields, CustomComponents } from './types';
 import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';

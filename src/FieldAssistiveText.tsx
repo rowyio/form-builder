@@ -1,7 +1,7 @@
 import React from 'react';
 import DOMPurify from 'dompurify';
 
-import { FormHelperText, FormHelperTextProps } from '@material-ui/core';
+import { FormHelperText, FormHelperTextProps } from '@mui/material';
 
 export interface IFieldAssistiveTextProps
   extends Omit<FormHelperTextProps, 'error' | 'disabled'> {

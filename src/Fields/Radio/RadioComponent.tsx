@@ -1,7 +1,7 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
   FormControl,
   FormControlLabel,
@@ -9,7 +9,7 @@ import {
   RadioGroupProps,
   Radio,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';

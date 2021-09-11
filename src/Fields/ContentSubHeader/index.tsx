@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 import { mdiFormatHeader2 } from '@mdi/js';
 
 import Settings from './ContentSubHeaderSettings';

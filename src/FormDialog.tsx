@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
 import {
   useTheme,
   useMediaQuery,
   Portal,
   Dialog,
   DialogProps as MuiDialogProps,
+  Stack,
   DialogTitle,
-  Typography,
   IconButton,
   DialogContent,
-  Grid,
+  DialogActions,
   Button,
   ButtonProps,
-} from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';
@@ -25,65 +24,6 @@ import { Fields, CustomComponents } from './types';
 import SubmitError, { ISubmitErrorProps } from './SubmitError';
 import { SlideTransitionMui } from './SlideTransition';
 import ScrollableDialogContent from './ScrollableDialogContent';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: {
-      '--spacing-modal': theme.spacing(3),
-      '--spacing-modal-contents': theme.spacing(3),
-      '--spacing-card': 'var(--spacing-modal-contents)',
-      '--bg-paper': theme.palette.background.paper,
-
-      [theme.breakpoints.down('md')]: {
-        '--spacing-modal': theme.spacing(2),
-      },
-    },
-
-    paper: {
-      userSelect: 'none',
-      overflowX: 'hidden',
-
-      padding: 'var(--spacing-modal)',
-      paddingBottom: 'var(--spacing-modal-contents)',
-
-      backgroundColor: 'var(--bg-paper)',
-    },
-
-    titleRow: {
-      padding: 0,
-      paddingBottom: 'var(--spacing-modal)',
-
-      display: 'flex',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
-    },
-    title: {
-      ...theme.typography.h5,
-      [theme.breakpoints.down('md')]: theme.typography.h6,
-    },
-    closeButton: {
-      margin: theme.spacing(-1.5),
-      marginLeft: 'var(--spacing-modal)',
-    },
-
-    content: {
-      overflowX: 'hidden',
-
-      padding: '0 var(--spacing-modal)',
-      margin: '0 calc(var(--spacing-modal) * -1)',
-
-      ...theme.typography.body1,
-    },
-    contentDividers: {
-      margin: '0 calc(var(--spacing-modal) * -1)',
-    },
-
-    actions: {
-      paddingTop: 'var(--spacing-modal-contents)',
-      '& button': { minWidth: 100 },
-    },
-  })
-);
 
 export interface IFormDialogProps {
   fields: Fields;
@@ -133,7 +73,6 @@ export default function FormDialog({
   SubmitErrorProps = {},
   CloseConfirmProps = {},
 }: IFormDialogProps) {
-  const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -182,7 +121,7 @@ export default function FormDialog({
   return (
     <Portal>
       <form
-        onSubmit={handleSubmit(values => {
+        onSubmit={handleSubmit((values) => {
           onSubmit(values);
           handleClose('submit');
         })}
@@ -197,35 +136,29 @@ export default function FormDialog({
           disablePortal
           aria-labelledby="form-dialog-title"
           {...DialogProps}
-          classes={{
-            root: classes.root,
-            paper: classes.paper,
-            ...DialogProps?.classes,
-          }}
         >
-          <DialogTitle id="modal-title" className={classes.titleRow}>
-            <Typography
-              className={classes.title}
-              component="h2"
-              color="textPrimary"
+          <Stack direction="row" alignItems="flex-start">
+            <DialogTitle
+              id="form-dialog-title"
+              style={{ flexGrow: 1, userSelect: 'none' }}
             >
               {title}
-            </Typography>
+            </DialogTitle>
 
             <IconButton
               onClick={confirmClose}
-              className={classes.closeButton}
               aria-label="Close"
-              color="secondary"
+              className="dialog-close"
+              sx={{
+                m: { xs: 1, sm: 1.5 },
+                ml: { xs: -1, sm: -1 },
+              }}
             >
               <CloseIcon />
             </IconButton>
-          </DialogTitle>
+          </Stack>
 
-          <ScrollableDialogContent
-            className={classes.content}
-            dividersClasses={{ root: classes.contentDividers }}
-          >
+          <ScrollableDialogContent>
             {formHeader}
             <FormFields
               fields={fields}
@@ -237,45 +170,31 @@ export default function FormDialog({
             {formFooter}
           </ScrollableDialogContent>
 
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            className={classes.actions}
-          >
+          <DialogActions style={{ flexWrap: 'wrap' }}>
             {customActions ?? (
               <>
                 {!hideCancelButton && (
-                  <Grid item>
-                    <Button
-                      color="primary"
-                      onClick={confirmClose}
-                      {...(CancelButtonProps ?? {})}
-                      children={CancelButtonProps?.children || 'Cancel'}
-                    />
-                  </Grid>
-                )}
-                <Grid item>
                   <Button
-                    color="primary"
-                    variant="contained"
-                    type="submit"
-                    disabled={hasErrors}
-                    {...(SubmitButtonProps ?? {})}
-                    children={SubmitButtonProps?.children || 'Submit'}
+                    onClick={confirmClose}
+                    {...(CancelButtonProps ?? {})}
+                    children={CancelButtonProps?.children || 'Cancel'}
                   />
-                </Grid>
+                )}
+
+                <Button
+                  color="primary"
+                  variant="contained"
+                  type="submit"
+                  {...(SubmitButtonProps ?? {})}
+                  children={SubmitButtonProps?.children || 'Submit'}
+                />
               </>
             )}
 
             {!hideSubmitError && hasErrors && (
-              <SubmitError
-                {...SubmitErrorProps}
-                style={{ marginTop: 0, ...SubmitErrorProps?.style }}
-              />
+              <SubmitError {...SubmitErrorProps} />
             )}
-          </Grid>
+          </DialogActions>
         </Dialog>
 
         <Dialog
@@ -285,59 +204,36 @@ export default function FormDialog({
           TransitionComponent={SlideTransitionMui}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          classes={{
-            root: classes.root,
-            paper: classes.paper,
-          }}
         >
-          <DialogTitle id="alert-dialog-title" className={classes.titleRow}>
-            <Typography
-              className={classes.title}
-              component="h2"
-              color="textPrimary"
-            >
-              {CloseConfirmProps.title || 'Close form?'}
-            </Typography>
+          <DialogTitle id="alert-dialog-title">
+            {CloseConfirmProps.title || 'Close form?'}
           </DialogTitle>
 
-          <DialogContent
-            id="alert-dialog-description"
-            className={classes.content}
-          >
+          <DialogContent id="alert-dialog-description">
             {CloseConfirmProps.body ||
               'You will lose all the data you entered in this form.'}
           </DialogContent>
 
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            alignItems="center"
-            className={classes.actions}
-          >
-            <Grid item>
-              <Button
-                onClick={() => setCloseConfirmation(false)}
-                color="primary"
-                {...(CloseConfirmProps.cancelButtonProps ?? {})}
-                children={
-                  CloseConfirmProps.cancelButtonProps?.children || 'Cancel'
-                }
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={() => handleClose('cancel')}
-                color="primary"
-                variant="contained"
-                autoFocus
-                {...(CloseConfirmProps.confirmButtonProps ?? {})}
-                children={
-                  CloseConfirmProps.confirmButtonProps?.children || 'Close'
-                }
-              />
-            </Grid>
-          </Grid>
+          <DialogActions>
+            <Button
+              onClick={() => setCloseConfirmation(false)}
+              {...(CloseConfirmProps.cancelButtonProps ?? {})}
+              children={
+                CloseConfirmProps.cancelButtonProps?.children || 'Cancel'
+              }
+            />
+
+            <Button
+              onClick={() => handleClose('cancel')}
+              color="primary"
+              variant="contained"
+              autoFocus
+              {...(CloseConfirmProps.confirmButtonProps ?? {})}
+              children={
+                CloseConfirmProps.confirmButtonProps?.children || 'Close'
+              }
+            />
+          </DialogActions>
         </Dialog>
       </form>
     </Portal>

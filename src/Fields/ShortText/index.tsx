@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 import { mdiFormTextbox } from '@mdi/js';
 
 import Settings from './ShortTextSettings';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { FormControlLabel, Checkbox, CheckboxProps } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { FormControlLabel, Checkbox, CheckboxProps } from '@mui/material';
 
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';

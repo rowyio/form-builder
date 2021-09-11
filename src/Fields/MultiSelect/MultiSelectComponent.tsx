@@ -1,6 +1,6 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
-import MultiSelect, { MultiSelectProps } from '@antlerengineering/multiselect';
+import MultiSelect, { MultiSelectProps } from '@rowy/multiselect';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 

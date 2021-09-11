@@ -5,9 +5,9 @@ import { IFieldComponentProps } from '../../types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { FormControl, Button, ButtonProps } from '@material-ui/core';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { makeStyles, createStyles } from '@mui/styles';
+import { FormControl, Button, ButtonProps } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import ListItem from './ListItem';
 

@@ -7,7 +7,7 @@ import {
   Slider,
   SliderProps,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';

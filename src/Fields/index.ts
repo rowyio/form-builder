@@ -4,8 +4,8 @@ import { IFieldConfig } from '../types';
 
 import ShortText from './ShortText';
 import Paragraph from './Paragraph';
-import Date from './Date';
-import DateTime from './DateTime';
+// import Date from './Date';
+// import DateTime from './DateTime';
 import Checkbox from './Checkbox';
 import Radio from './Radio';
 import SingleSelect from './SingleSelect';
@@ -24,8 +24,8 @@ import ContentImage from './ContentImage';
 export const FieldConfigs = [
   ShortText,
   Paragraph,
-  Date,
-  DateTime,
+  // Date,
+  // DateTime,
   Checkbox,
   Radio,
   SingleSelect,

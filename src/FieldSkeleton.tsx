@@ -1,5 +1,5 @@
 import React from 'react';
-import { Skeleton, SkeletonProps } from '@material-ui/core';
+import { Skeleton, SkeletonProps } from '@mui/material';
 
 export default function FieldSkeleton(props: SkeletonProps) {
   return (

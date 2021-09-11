@@ -1,9 +1,12 @@
 import React from 'react';
-import clsx from 'clsx';
 import useScrollInfo from 'react-element-scroll-hook';
 
-import { Divider, DialogContent, DialogContentProps } from '@material-ui/core';
-import { ClassNameMap } from '@material-ui/styles';
+import {
+  Divider,
+  DividerProps,
+  DialogContent,
+  DialogContentProps,
+} from '@mui/material';
 
 const MemoizedDialogContent = React.memo(function MemoizedDialogContent({
   setRef,
@@ -13,15 +16,19 @@ const MemoizedDialogContent = React.memo(function MemoizedDialogContent({
 });
 
 export interface IScrollableDialogContentProps extends DialogContentProps {
-  dividersClasses?: Partial<ClassNameMap<'root' | 'top' | 'bottom'>>;
   disableTopDivider?: boolean;
   disableBottomDivider?: boolean;
+  dividerSx?: DividerProps['sx'];
+  topDividerSx?: DividerProps['sx'];
+  bottomDividerSx?: DividerProps['sx'];
 }
 
 export default function ScrollableDialogContent({
-  dividersClasses = {},
   disableTopDivider = false,
   disableBottomDivider = false,
+  dividerSx,
+  topDividerSx,
+  bottomDividerSx,
   ...props
 }: IScrollableDialogContentProps) {
   const [scrollInfo, setRef] = useScrollInfo();
@@ -31,9 +38,7 @@ export default function ScrollableDialogContent({
       {!disableTopDivider &&
         scrollInfo.y.percentage !== null &&
         scrollInfo.y.percentage > 0 && (
-          <Divider
-            className={clsx(dividersClasses.root, dividersClasses.top)}
-          />
+          <Divider sx={{ ...dividerSx, ...topDividerSx }} />
         )}
 
       <MemoizedDialogContent {...props} setRef={setRef} />
@@ -41,9 +46,7 @@ export default function ScrollableDialogContent({
       {!disableBottomDivider &&
         scrollInfo.y.percentage !== null &&
         scrollInfo.y.percentage < 1 && (
-          <Divider
-            className={clsx(dividersClasses.root, dividersClasses.bottom)}
-          />
+          <Divider sx={{ ...dividerSx, ...bottomDividerSx }} />
         )}
     </>
   );

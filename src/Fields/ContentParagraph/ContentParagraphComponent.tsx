@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 import DOMPurify from 'dompurify';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Typography, TypographyProps } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Typography, TypographyProps } from '@mui/material';
 
 const useStyles = makeStyles(theme =>
   createStyles({

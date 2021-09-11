@@ -2,10 +2,10 @@ import React, { memo } from 'react';
 import clsx from 'clsx';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Grid, TextField, IconButton } from '@material-ui/core';
-import DragHandleIcon from '@material-ui/icons/DragHandle';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Grid, TextField, IconButton } from '@mui/material';
+import DragHandleIcon from '@mui/icons-material/DragHandle';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 const useStyles = makeStyles(theme =>
   createStyles({

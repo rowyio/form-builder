@@ -1,6 +1,6 @@
 import { UseFormReturn, UseControllerReturn } from 'react-hook-form';
 import { FieldType } from './constants/fields';
-import { GridProps } from '@material-ui/core';
+import { GridProps } from '@mui/material';
 
 export type Field = {
   type: FieldType | string;

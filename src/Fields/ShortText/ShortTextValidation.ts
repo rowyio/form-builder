@@ -49,7 +49,7 @@ export const ShortTextValidation = (config: Record<string, any>) => {
     case 'url':
       validation.push([
         'url',
-        'Please enter the URL in the format: https://antler.co',
+        'Please enter the URL in the format: https://example.com',
       ]);
       break;
 
@@ -58,8 +58,7 @@ export const ShortTextValidation = (config: Record<string, any>) => {
         'matches',
         /^@?(\w){1,15}$/, //https://stackoverflow.com/a/8650024
         {
-          message:
-            'Please enter the Twitter account in the format: @AntlerGlobal',
+          message: 'Please enter the Twitter account in the format: @username',
           excludeEmptyString: true,
         },
       ]);

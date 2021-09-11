@@ -2,10 +2,10 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
-// import { ThemeProvider, CssBaseline, Button } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
+import createTheme from '@mui/material/styles/createTheme';
+import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import CssBaseline from '@mui/material/CssBaseline';
+import Button from '@mui/material/Button';
 import Form from '../src/Form';
 import { FieldType } from '../src';
 

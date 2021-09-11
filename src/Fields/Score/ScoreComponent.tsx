@@ -2,10 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { FormControl, Typography } from '@material-ui/core';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import ToggleButton from '@material-ui/lab/ToggleButton';
+import { makeStyles, createStyles } from '@mui/styles';
+import { FormControl, Typography } from '@mui/material';
+import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
+import ToggleButton from '@mui/lab/ToggleButton';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';

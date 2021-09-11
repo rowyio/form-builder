@@ -6,7 +6,7 @@ import {
   TextFieldProps,
   Grid,
   FormHelperText,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
@@ -84,13 +84,13 @@ export default function ShortTextComponent({
     case 'url':
       variantProps = {
         type: 'url',
-        placeholder: 'https://antler.co',
+        placeholder: 'https://example.com',
         autoComplete: 'url',
       };
       break;
 
     case 'twitter':
-      variantProps = { placeholder: '@AntlerGlobal' };
+      variantProps = { placeholder: '@username' };
       break;
 
     case 'linkedin':

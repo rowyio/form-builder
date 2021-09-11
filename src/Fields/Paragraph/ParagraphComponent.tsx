@@ -6,7 +6,7 @@ import {
   FilledTextFieldProps,
   Grid,
   FormHelperText,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 

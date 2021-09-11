@@ -1,15 +1,13 @@
 import React from 'react';
 
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@mui/material';
 import { Transition } from 'react-transition-group';
 import { TransitionProps } from 'react-transition-group/Transition';
-import { TransitionProps as MuiTransitionProps } from '@material-ui/core/transitions';
+import { TransitionProps as MuiTransitionProps } from '@mui/material/transitions';
 
-export const SlideTransition: React.ForwardRefExoticComponent<Pick<
-  TransitionProps,
-  React.ReactText
-> &
-  React.RefAttributes<any>> = React.forwardRef(
+export const SlideTransition: React.ForwardRefExoticComponent<
+  Pick<TransitionProps, React.ReactText> & React.RefAttributes<any>
+> = React.forwardRef(
   ({ children, ...props }: TransitionProps, ref: React.Ref<any>) => {
     const theme = useTheme();
 
@@ -17,11 +15,11 @@ export const SlideTransition: React.ForwardRefExoticComponent<Pick<
 
     const defaultStyle = {
       opacity: 0,
-      transform: 'translateY(16px)',
+      transform: 'translateY(40px)',
 
       transition: theme.transitions.create(['transform', 'opacity'], {
         duration: '300ms',
-        easing: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+        easing: 'cubic-bezier(0.1, 0.8, 0.1, 1)',
       }),
     };
 
@@ -59,7 +57,7 @@ export const SlideTransition: React.ForwardRefExoticComponent<Pick<
         timeout={{ enter: 0, exit: theme.transitions.duration.leavingScreen }}
         {...props}
       >
-        {state =>
+        {(state) =>
           React.cloneElement(children as any, {
             style: { ...defaultStyle, ...transitionStyles[state] },
             ref,

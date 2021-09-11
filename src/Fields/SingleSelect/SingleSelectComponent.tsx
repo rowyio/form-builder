@@ -1,8 +1,8 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
-import MultiSelect, { MultiSelectProps } from '@antlerengineering/multiselect';
+import MultiSelect, { MultiSelectProps } from '@rowy/multiselect';
 
-import { TextField, FilledTextFieldProps, MenuItem } from '@material-ui/core';
+import { TextField, FilledTextFieldProps, MenuItem } from '@mui/material';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
@@ -49,7 +49,7 @@ export default function SingleSelectComponent({
         multiple={false}
         options={options}
         value={sanitisedValue ?? null}
-        onChange={value => onChange(value ?? '')}
+        onChange={(value) => onChange(value ?? '')}
         onBlur={onBlur}
         TextFieldProps={{
           error: !!errorMessage,
@@ -108,7 +108,7 @@ export default function SingleSelectComponent({
       inputProps={{ required: false }}
       inputRef={ref}
     >
-      {options.map(option => {
+      {options.map((option) => {
         if (typeof option === 'object')
           return (
             <MenuItem key={option.value} value={option.value}>
