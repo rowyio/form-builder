@@ -15,6 +15,7 @@ import {
   DialogActions,
   Button,
   ButtonProps,
+  Slide,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -129,9 +130,10 @@ export default function FormDialog({
         <Dialog
           open={open}
           onClose={confirmClose}
-          fullScreen={isMobile}
           fullWidth
-          TransitionComponent={SlideTransitionMui}
+          fullScreen={isMobile}
+          TransitionComponent={isMobile ? Slide : SlideTransitionMui}
+          TransitionProps={isMobile ? ({ direction: 'up' } as any) : undefined}
           // Must disablePortal so the dialog can be wrapped in FormikForm
           disablePortal
           aria-labelledby="form-dialog-title"
