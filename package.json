@@ -25,11 +25,11 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "@mui/icons-material": "^5.0.0-rc.1",
-    "@mui/lab": "^5.0.0-alpha.46",
-    "@mui/material": "^5.0.0-rc.1",
-    "@mui/styles": "^5.0.0-rc.1",
-    "@rowy/multiselect": "^0.1.2",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/lab": "^5.0.0-alpha.47",
+    "@mui/material": "^5.0.0",
+    "@mui/styles": "^5.0.0",
+    "@rowy/multiselect": "^0.1.6",
     "react": "^17.0.2"
   },
   "husky": {
@@ -48,11 +48,11 @@
     "@babel/core": "^7.14.6",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.0-rc.1",
-    "@mui/lab": "^5.0.0-alpha.46",
-    "@mui/material": "^5.0.0-rc.1",
-    "@mui/styles": "^5.0.0-rc.1",
-    "@rowy/multiselect": "^0.1.2",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/lab": "^5.0.0-alpha.47",
+    "@mui/material": "^5.0.0",
+    "@mui/styles": "^5.0.0",
+    "@rowy/multiselect": "^0.1.6",
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-docs": "^6.3.8",
     "@storybook/addon-info": "^5.3.21",
