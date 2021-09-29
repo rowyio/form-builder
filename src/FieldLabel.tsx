@@ -1,34 +1,19 @@
 import React from 'react';
-import clsx from 'clsx';
 
-import { makeStyles, createStyles } from '@mui/styles';
-import { FormLabel, FormLabelProps } from '@mui/material';
-
-const useStyles = makeStyles(theme =>
-  createStyles({
-    root: {
-      display: 'block',
-
-      ...theme.typography.overline,
-      color: theme.palette.text.secondary,
-
-      marginBottom: theme.spacing(1),
-      whiteSpace: 'pre-line',
-    },
-  })
-);
+import { InputLabel, InputLabelProps } from '@mui/material';
 
 export interface IFieldLabelProps
-  extends Omit<FormLabelProps, 'error' | 'disabled'> {
+  extends Omit<InputLabelProps, 'error' | 'disabled'> {
   error: boolean;
   disabled: boolean;
   required: boolean;
 }
 
 export default function FieldLabel(props: IFieldLabelProps) {
-  const classes = useStyles();
-
   return (
-    <FormLabel {...props} className={clsx(classes.root, props.className)} />
+    <InputLabel
+      {...props}
+      sx={{ display: 'block', mb: 1, whiteSpace: 'pre-line', ...props.sx }}
+    />
   );
 }
