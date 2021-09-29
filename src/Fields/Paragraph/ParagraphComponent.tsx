@@ -76,7 +76,7 @@ export default function ParagraphComponent({
       name={name}
       id={`field-${name}`}
       multiline
-      minRows={5}
+      minRows={3}
       {...props}
       disabled={disabled}
       inputProps={{
