@@ -7,12 +7,9 @@ import { Grid, TextField, IconButton } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
-    root: {
-      margin: theme.spacing(0, 0, 2),
-      '&:first-of-type': { marginTop: theme.spacing(1) },
-    },
+    root: {},
 
     dragHandle: {
       display: 'block',
@@ -61,7 +58,7 @@ export const MemoizedListItem = memo(
     const [, drag, dragPreview] = useDrag(() => ({
       type: name,
       item: { index },
-      collect: monitor => ({
+      collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
       }),
     }));
@@ -70,7 +67,7 @@ export const MemoizedListItem = memo(
       () => ({
         accept: name,
         drop: ({ index: fromIndex }: any) => swap(fromIndex, index),
-        collect: monitor => ({
+        collect: (monitor) => ({
           isOver: !!monitor.isOver(),
         }),
       }),
@@ -102,8 +99,9 @@ export const MemoizedListItem = memo(
               autoFocus
               fullWidth
               value={item}
-              onChange={e => edit(e.target.value)}
+              onChange={(e) => edit(e.target.value)}
               disabled={disabled}
+              helperText=" "
             />
           </Grid>
 

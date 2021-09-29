@@ -13,7 +13,14 @@ export default function FieldLabel(props: IFieldLabelProps) {
   return (
     <InputLabel
       {...props}
-      sx={{ display: 'block', mb: 1, whiteSpace: 'pre-line', ...props.sx }}
+      sx={{
+        display: 'block',
+        mb: 2 / 8,
+        whiteSpace: 'pre-line',
+        position: 'relative',
+        transform: 'none',
+        ...props.sx,
+      }}
     />
   );
 }

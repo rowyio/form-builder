@@ -71,7 +71,7 @@ export default function SliderComponent({
         {label}
       </FieldLabel>
 
-      <Stack direction="row" spacing={2} mt={2.5} alignItems="center">
+      <Stack direction="row" spacing={2} mt={4} alignItems="center">
         <Typography variant="caption" component="span" color="textSecondary">
           {minLabel || valueWithUnits(min, units, unitsPlural)}
         </Typography>
