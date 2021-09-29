@@ -52,9 +52,16 @@ export default function SingleSelectComponent({
         onChange={(value) => onChange(value ?? '')}
         onBlur={onBlur}
         TextFieldProps={{
+          ...props.TextFieldProps,
           error: !!errorMessage,
-          InputLabelProps: { required: props.required },
-          FormHelperTextProps: { component: 'div' },
+          InputLabelProps: {
+            required: props.required,
+            ...props.TextFieldProps?.InputLabelProps,
+          },
+          FormHelperTextProps: {
+            component: 'div',
+            ...props.TextFieldProps?.FormHelperTextProps,
+          },
           helperText: (errorMessage || assistiveText) && (
             <>
               {errorMessage}
@@ -105,7 +112,7 @@ export default function SingleSelectComponent({
       value={(Array.isArray(value) ? value[0] : value) ?? ''}
       data-label={props.label ?? ''}
       data-type={'single-select'}
-      inputProps={{ required: false }}
+      inputProps={{ required: false, ...props.inputProps }}
       inputRef={ref}
     >
       {options.map((option) => {

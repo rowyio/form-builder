@@ -33,9 +33,16 @@ export default function MultiSelectComponent({
       onChange={onChange}
       onBlur={onBlur}
       TextFieldProps={{
+        ...props.TextFieldProps,
         error: !!errorMessage,
-        InputLabelProps: { required: props.required },
-        FormHelperTextProps: { component: 'div' },
+        InputLabelProps: {
+          required: props.required,
+          ...props.TextFieldProps?.InputLabelProps,
+        },
+        FormHelperTextProps: {
+          component: 'div',
+          ...props.TextFieldProps?.FormHelperTextProps,
+        },
         helperText: (errorMessage || assistiveText) && (
           <>
             {errorMessage}
