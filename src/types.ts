@@ -16,7 +16,9 @@ export type Field = {
   validation?: any[][];
 
   defaultValue?: any;
-  gridCols?: GridProps['xs'];
+  gridCols?:
+    | GridProps['xs']
+    | Pick<GridProps, 'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
   disablePadding?: boolean;
 
   [key: string]: any;

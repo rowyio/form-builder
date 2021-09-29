@@ -70,6 +70,13 @@ export default function FieldWrapper({
 
   if (!name) return null;
 
+  const gridProps =
+    typeof gridCols === 'number' ||
+    typeof gridCols === 'string' ||
+    typeof gridCols === 'boolean'
+      ? { xs: gridCols }
+      : gridCols;
+
   // If it’s a content field, don’t wrap with Controller
   if (getFieldProp('group', type) === 'content')
     return (
@@ -77,7 +84,7 @@ export default function FieldWrapper({
         item
         key={name!}
         id={`fieldWrapper-${name}`}
-        xs={gridCols}
+        {...gridProps}
         style={disablePadding ? { padding: 0 } : {}}
       >
         <Suspense fallback={<FieldSkeleton />}>
@@ -101,7 +108,7 @@ export default function FieldWrapper({
         item
         key={name!}
         id={`fieldWrapper-${name}`}
-        xs={gridCols}
+        {...gridProps}
         style={disablePadding ? { padding: 0 } : {}}
       >
         <Suspense fallback={<FieldSkeleton />}>
@@ -122,14 +129,14 @@ export default function FieldWrapper({
       item
       key={name!}
       id={`fieldWrapper-${name}`}
-      xs={gridCols}
+      {...gridProps}
       style={disablePadding ? { padding: 0 } : {}}
     >
       <Suspense fallback={<FieldSkeleton />}>
         <Controller
           control={control}
           name={name!}
-          render={renderProps =>
+          render={(renderProps) =>
             React.createElement(fieldComponent, {
               ...props,
               ...renderProps,
