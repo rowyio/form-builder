@@ -5,11 +5,11 @@ import { IFieldComponentProps } from '../../types';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Typography, TypographyProps } from '@mui/material';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(2),
-      marginBottom: -theme.spacing(1.5),
+      marginBottom: theme.spacing(-1.5),
 
       whiteSpace: 'pre-line',
       cursor: 'default',
@@ -43,7 +43,7 @@ export default function ContentSubHeaderComponent({
 
   return (
     <Typography
-      variant="overline"
+      variant="subtitle2"
       className={clsx(
         classes.root,
         index === 0 && classes.firstField,

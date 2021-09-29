@@ -5,11 +5,11 @@ import { IFieldComponentProps } from '../../types';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Typography, TypographyProps, Divider } from '@mui/material';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       marginTop: theme.spacing(3),
-      marginBottom: -theme.spacing(1),
+      marginBottom: theme.spacing(-1),
       width: '100%',
 
       whiteSpace: 'pre-line',
@@ -53,8 +53,7 @@ export default function ContentHeaderComponent({
       )}
     >
       <Typography
-        variant="h6"
-        color="textSecondary"
+        variant="subtitle1"
         {...({ component: 'h3' } as any)}
         {...props}
       >

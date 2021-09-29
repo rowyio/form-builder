@@ -6,10 +6,10 @@ import DOMPurify from 'dompurify';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Typography, TypographyProps } from '@mui/material';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      marginBottom: -theme.spacing(1.5),
+      marginBottom: theme.spacing(-1.5),
 
       whiteSpace: 'pre-line',
       cursor: 'default',
@@ -44,8 +44,6 @@ export default function ContentParagraphComponent({
   if (children)
     return (
       <Typography
-        variant="body1"
-        color="textSecondary"
         className={clsx(classes.root, className)}
         {...({ component: 'div' } as any)}
         {...props}
@@ -60,8 +58,6 @@ export default function ContentParagraphComponent({
   if (renderedLabel)
     return (
       <Typography
-        variant="body1"
-        color="textSecondary"
         className={clsx(classes.root, className)}
         {...({ component: 'div' } as any)}
         {...props}
@@ -71,8 +67,6 @@ export default function ContentParagraphComponent({
 
   return (
     <Typography
-      variant="body1"
-      color="textSecondary"
       className={clsx(classes.root, className)}
       {...({ component: 'div' } as any)}
       {...props}
