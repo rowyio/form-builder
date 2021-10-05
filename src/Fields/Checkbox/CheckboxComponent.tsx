@@ -7,20 +7,15 @@ import { FormControlLabel, Checkbox, CheckboxProps } from '@mui/material';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       alignItems: 'flex-start',
-
-      marginLeft: 0,
       marginRight: 0,
     },
     disabled: {},
 
     checkbox: {
-      padding: theme.spacing(1.5),
-      margin: theme.spacing(-1.5, 0.5, -1.5, -1.5),
-
       '$root:not($disabled):hover &': {
         backgroundColor: theme.palette.action.hover,
       },
@@ -59,7 +54,7 @@ export default function CheckboxComponent({
         <Checkbox
           {...props}
           checked={value}
-          onChange={e => {
+          onChange={(e) => {
             onChange(e.target.checked);
             onBlur();
           }}
