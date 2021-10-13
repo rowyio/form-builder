@@ -20,6 +20,7 @@ export type Field = {
     | GridProps['xs']
     | Pick<GridProps, 'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
   disablePadding?: boolean;
+  disablePaddingTop?: boolean;
 
   [key: string]: any;
 };

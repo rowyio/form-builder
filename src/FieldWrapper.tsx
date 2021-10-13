@@ -29,6 +29,7 @@ export default function FieldWrapper({
   customComponents,
   gridCols = 12,
   disablePadding,
+  disablePaddingTop,
   disabledConditional,
   defaultValue: defaultValueProp,
   setOmittedFields,
@@ -77,6 +78,12 @@ export default function FieldWrapper({
       ? { xs: gridCols }
       : gridCols;
 
+  const styleOverrides = disablePadding
+    ? { padding: 0 }
+    : disablePaddingTop
+    ? { paddingTop: 0 }
+    : {};
+
   // If it’s a content field, don’t wrap with Controller
   if (getFieldProp('group', type) === 'content')
     return (
@@ -85,7 +92,7 @@ export default function FieldWrapper({
         key={name!}
         id={`fieldWrapper-${name}`}
         {...gridProps}
-        style={disablePadding ? { padding: 0 } : {}}
+        style={styleOverrides}
       >
         <Suspense fallback={<FieldSkeleton />}>
           {React.createElement(fieldComponent, {
@@ -109,7 +116,7 @@ export default function FieldWrapper({
         key={name!}
         id={`fieldWrapper-${name}`}
         {...gridProps}
-        style={disablePadding ? { padding: 0 } : {}}
+        style={styleOverrides}
       >
         <Suspense fallback={<FieldSkeleton />}>
           {React.createElement(fieldComponent, {
