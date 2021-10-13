@@ -137,7 +137,7 @@ export default function FieldWrapper({
       key={name!}
       id={`fieldWrapper-${name}`}
       {...gridProps}
-      style={disablePadding ? { padding: 0 } : {}}
+      style={styleOverrides}
     >
       <Suspense fallback={<FieldSkeleton />}>
         <Controller
