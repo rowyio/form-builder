@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "name": "@rowy/form-builder",
   "publishConfig": {
     "access": "public"
