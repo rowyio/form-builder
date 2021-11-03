@@ -1,4 +1,3 @@
-import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -234,9 +233,21 @@ const App = () => {
           onClose={() => {}}
           title="Form Dialog"
           fields={
-            showAdditionalFields ? [...additionalFields, ...fields] : fields
+            [{
+
+
+              label: "Scheduling Date/Time",
+
+              name: "deliveryTime",
+
+              required: true,
+
+              type: "dateTime",
+
+            }
+            ]
           }
-          values={values}
+          // values={values}
           onSubmit={(data) => {
             console.log(data);
             setValues(data);
