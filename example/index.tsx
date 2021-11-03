@@ -5,7 +5,7 @@ import createTheme from '@mui/material/styles/createTheme';
 import ThemeProvider from '@mui/material/styles/ThemeProvider';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
-import Form from '../src/Form';
+import FormDialog from '../src/FormDialog';
 import { FieldType } from '../src';
 
 import { DndProvider } from 'react-dnd';
@@ -31,7 +31,6 @@ const fields = [
   //   type: FieldType.richText,
   //   name: 'desc',
   //   label: 'Description',
-  //   required: true,
   //   maxCharacters: 20,
   // },
   {
@@ -51,6 +50,7 @@ const fields = [
     </a></div>
     </div>
         `,
+    required: true,
   },
   {
     type: FieldType.shortText,
@@ -58,7 +58,16 @@ const fields = [
     name: 'link',
     label: 'Link',
     displayCondition: 'return values.email.length > 0',
-    required: true,
+  },
+  {
+    type: FieldType.date,
+    name: 'date',
+    label: 'Your birthday',
+  },
+  {
+    type: FieldType.dateTime,
+    name: 'dateTime',
+    label: 'Book a time',
   },
   {
     type: FieldType.shortText,
@@ -108,7 +117,6 @@ const fields = [
     label: 'Unique page header',
     placeholder: 'Selected startups for...',
     maxCharacters: 100,
-    required: true,
   },
   {
     type: FieldType.paragraph,
@@ -125,7 +133,6 @@ const fields = [
     name: 'singleSelect',
     label: 'Who is the CEO of Antler?',
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
-    required: true,
   },
   {
     type: FieldType.multiSelect,
@@ -177,16 +184,6 @@ const fields = [
     label: 'Preferred color for your Antler shirt?',
   },
   {
-    type: FieldType.date,
-    name: 'date',
-    label: 'Your birthday',
-  },
-  {
-    type: FieldType.dateTime,
-    name: 'dateTime',
-    label: 'Book a time',
-  },
-  {
     type: FieldType.score,
     name: 'score',
     label: 'How likely are you to recommend us to a friend or a colleague?',
@@ -213,7 +210,6 @@ const additionalFields = [
     name: 'checkboxWithDefaultValue',
     label: 'Checkbox with Default Value',
     defaultValue: true,
-    required: true,
   },
 ];
 
@@ -221,6 +217,7 @@ const App = () => {
   const [values, setValues] = React.useState<any>({
     number: 123,
     multiSelect: ['Option 2'],
+    meetingLink: "https://example.com"
   });
   const [showAdditionalFields, setShowAdditionalFields] = React.useState(false);
 
@@ -228,28 +225,16 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <DndProvider backend={HTML5Backend} context={window}>
-        <Form
+        <FormDialog
           open
           onClose={() => {}}
           title="Form Dialog"
           fields={
-            [{
-
-
-              label: "Scheduling Date/Time",
-
-              name: "deliveryTime",
-
-              required: true,
-
-              type: "dateTime",
-
-            }
-            ]
+              showAdditionalFields ? [...additionalFields, ...fields] : fields
           }
-          // values={values}
+          values={values}
           onSubmit={(data) => {
-            console.log(data);
+            console.log("data", data);
             setValues(data);
           }}
           // customActions={

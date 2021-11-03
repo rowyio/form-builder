@@ -2555,14 +2555,14 @@
     prop-types "^15.7.2"
     react-is "^17.0.2"
 
-"@mui/icons-material@^5.0.0-rc.1":
+"@mui/icons-material@^5.0.5":
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.0.5.tgz#7af61046da4e54de2da7fcf4bdeb3e439e7c10a7"
   integrity sha512-beJo4kmgZwr+2x0ppgHcqqdNQYX4WKddJyMn4eHJAh9dNAGyeY1AJ/8Po+TJKyoSr3C2ZqnW7WrSonAJr2HrUw==
   dependencies:
     "@babel/runtime" "^7.15.4"
 
-"@mui/lab@^5.0.0-alpha.46":
+"@mui/lab@^5.0.0-alpha.53":
   version "5.0.0-alpha.53"
   resolved "https://registry.yarnpkg.com/@mui/lab/-/lab-5.0.0-alpha.53.tgz#ee3bae46fc61e2274d3001583b7d0ca92abbe2c4"
   integrity sha512-fUyGCuxj8Wdwvyc9v0X3YTNshItFWp6DtuCPjhPy6yhKjUAa0u0XKI4FcM5z/wPWUR56nJceNz9WwNZ72vkwWw==
@@ -2581,7 +2581,7 @@
     react-transition-group "^4.4.2"
     rifm "^0.12.0"
 
-"@mui/material@^5.0.0-rc.1":
+"@mui/material@^5.0.6":
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/@mui/material/-/material-5.0.6.tgz#0e688c918fd88a07f59385614c65fce937077a9f"
   integrity sha512-1NmLel2Q+PnSfhFhdrhTbZFLfGpGKcPbu8onwGJu+vbD3YMTjr8gXvQ/sYZC0Motfu8jLnQdlq4FD4fRhqndnw==
@@ -2617,7 +2617,7 @@
     "@emotion/cache" "^11.5.0"
     prop-types "^15.7.2"
 
-"@mui/styles@^5.0.0-rc.1":
+"@mui/styles@^5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@mui/styles/-/styles-5.0.2.tgz#236b834cd07a07de0c17b104eedb810453f3839c"
   integrity sha512-ANYnMHpiWHcV0dMrzrdCzYm+kNU0f7Gc5nFLRDWF+8fWZ40K2Cg5eMRkOW/nmM5M0wtmDI+GFVsCXgZkNq89uw==
@@ -2808,10 +2808,10 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@rowy/multiselect@^0.1.2":
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/@rowy/multiselect/-/multiselect-0.1.12.tgz#03380ceaaed9f6847c59b6ccae6d216ce149d95a"
-  integrity sha512-1JmH5EDt0OSxcUWjQXfqGwp4w2xDJ5OjfS1uV9pXv7AcTw++RqwQKsF15llKYyatvpZohSyaVQIogPh7Zzpe/g==
+"@rowy/multiselect@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@rowy/multiselect/-/multiselect-0.2.3.tgz#caf5ee769a6c3ce5a4124120d38820caf1f411a1"
+  integrity sha512-FiESN3VE2Rz++y6cZXzkA4RJmRZ0r3/1Hy6oAfJtroJ/H/r0xjJYGA5qwpmQKNI08W0KCfkBC7JM0OtRiD3GVA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
