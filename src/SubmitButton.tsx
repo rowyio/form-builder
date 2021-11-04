@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Button, ButtonProps } from '@mui/material';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       display: 'flex',

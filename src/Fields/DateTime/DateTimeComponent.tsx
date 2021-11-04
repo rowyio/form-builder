@@ -47,12 +47,13 @@ export default function DateTimeComponent({
         onClose={onBlur}
         inputRef={ref}
         components={{ OpenPickerIcon: AccessTimeIcon }}
+        // https://github.com/mui-org/material-ui/issues/10341#issuecomment-770784016
+        PopperProps={{ disablePortal: true }}
         renderInput={(props) => (
           <TextField
             {...props}
             {...TextFieldProps}
             fullWidth
-            // InputLabelProps={{ shrink: transformedValue !== null }}
             onBlur={onBlur}
             error={props.error || !!errorMessage}
             FormHelperTextProps={{ component: 'div' } as any}
@@ -75,6 +76,10 @@ export default function DateTimeComponent({
             inputProps={{
               ...props.inputProps,
               required: false,
+            }}
+            sx={{
+              '& .MuiInputBase-input': { fontVariantNumeric: 'tabular-nums' },
+              ...TextFieldProps?.sx,
             }}
           />
         )}

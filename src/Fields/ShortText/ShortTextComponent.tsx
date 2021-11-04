@@ -1,12 +1,7 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import {
-  TextField,
-  TextFieldProps,
-  Grid,
-  FormHelperText,
-} from '@mui/material';
+import { TextField, TextFieldProps, Grid, FormHelperText } from '@mui/material';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
@@ -109,7 +104,7 @@ export default function ShortTextComponent({
     ? { label: '', 'aria-label': props.label as string, hiddenLabel: true }
     : {};
 
-  const handleChange: TextFieldProps['onChange'] = e =>
+  const handleChange: TextFieldProps['onChange'] = (e) =>
     format === 'number'
       ? onChange(e.target.value === '' ? '' : Number(e.target.value))
       : onChange(e.target.value);

@@ -24,7 +24,7 @@ export const ParagraphConfig: IFieldConfig = {
   defaultValue: '',
   component: Component,
   settings: Settings,
-  validation: config => {
+  validation: (config) => {
     const validation: any[][] = [['string'], ['trim']];
 
     if (typeof config.maxCharacters === 'number')

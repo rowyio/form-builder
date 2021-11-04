@@ -117,7 +117,7 @@ function ConditionalField({ conditional, ...props }: IFieldWrapperProps) {
         <Grid item>
           <Checkbox
             checked={conditionalState}
-            onChange={e => {
+            onChange={(e) => {
               setConditionalState(e.target.checked);
             }}
             inputProps={{ 'aria-label': `Enable field ${props.label}` }}

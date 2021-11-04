@@ -25,16 +25,16 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "@mui/icons-material": "^5.0.5",
-    "@mui/lab": "^5.0.0-alpha.53",
-    "@mui/material": "^5.0.6",
-    "@mui/styles": "^5.0.2",
+    "@mui/icons-material": "^5.0.0",
+    "@mui/lab": "^5.0.0-alpha.50",
+    "@mui/material": "^5.0.0",
+    "@mui/styles": "^5.0.0",
     "@rowy/multiselect": "^0.2.3",
     "react": "^17.0.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "pretty-quick --staged; tsdx lint"
     }
   },
   "prettier": {
@@ -66,6 +66,7 @@
     "@types/react-dom": "^17.0.8",
     "@types/yup": "^0.29.12",
     "babel-loader": "^8.2.2",
+    "eslint-plugin-prettier": "^3",
     "husky": "^4.2.5",
     "react": "^17",
     "react-docgen-typescript-loader": "^3.7.2",

@@ -14,7 +14,7 @@ import PaletteIcon from '@mui/icons-material/Palette';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     colorIndicator: {
       width: 20,
