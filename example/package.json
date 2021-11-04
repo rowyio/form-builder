@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
+    "start:cacheless": "rm -rf .parcel-cache && yarn start",
     "build": "parcel build index.html"
   },
   "dependencies": {

@@ -136,6 +136,9 @@ export default function FormDialog({
           TransitionProps={isMobile ? ({ direction: 'up' } as any) : undefined}
           // Must disablePortal so the dialog can be wrapped in FormikForm
           disablePortal
+          // disableEnforceFocus fixes mui date/datetime picker console errors
+          // https://stackoverflow.com/a/54133377/12208834
+          disableEnforceFocus
           aria-labelledby="form-dialog-title"
           {...DialogProps}
         >

@@ -47,7 +47,7 @@ export default function DateTimeComponent({
         onClose={onBlur}
         inputRef={ref}
         components={{ OpenPickerIcon: AccessTimeIcon }}
-        renderInput={props => (
+        renderInput={(props) => (
           <TextField
             {...props}
             {...TextFieldProps}
