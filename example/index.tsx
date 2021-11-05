@@ -68,6 +68,9 @@ const fields = [
     type: FieldType.dateTime,
     name: 'dateTime',
     label: 'Book a time',
+
+    // disable past date time
+    minDateTime: new Date()
   },
   {
     type: FieldType.shortText,
