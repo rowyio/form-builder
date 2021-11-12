@@ -70,7 +70,7 @@ const fields = [
     label: 'Book a time',
 
     // disable past date time
-    minDateTime: new Date()
+    minDateTime: new Date(),
   },
   {
     type: FieldType.shortText,
@@ -99,6 +99,11 @@ const fields = [
     name: 'twitter',
     label: 'Twitter',
     gridCols: 6,
+    maxCharacters: 15,
+    validation: {
+      '0': { 0: 'notOneOf', 1: ['admin'], 2: 'Reserved username' },
+      1: ['min', 3, 'Must be at least 3 characters'],
+    },
   },
   {
     type: FieldType.shortText,
@@ -220,7 +225,7 @@ const App = () => {
   const [values, setValues] = React.useState<any>({
     number: 123,
     multiSelect: ['Option 2'],
-    meetingLink: "https://example.com"
+    meetingLink: 'https://example.com',
   });
   const [showAdditionalFields, setShowAdditionalFields] = React.useState(false);
 
@@ -233,11 +238,11 @@ const App = () => {
           onClose={() => {}}
           title="Form Dialog"
           fields={
-              showAdditionalFields ? [...additionalFields, ...fields] : fields
+            showAdditionalFields ? [...additionalFields, ...fields] : fields
           }
           values={values}
           onSubmit={(data) => {
-            console.log("data", data);
+            console.log('data', data);
             setValues(data);
           }}
           // customActions={
