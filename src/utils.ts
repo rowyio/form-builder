@@ -87,7 +87,7 @@ export const getValidationSchema = (
 
     // Append custom validation from the form’s field config to the default validation
     // Wrap in lodash values function to support { 0: [], 1: [] } object for Firestore
-    if (Array.isArray(field.validation))
+    if (Array.isArray(_values(field.validation)))
       validation = [...validation, ..._values(field.validation)];
 
     // Reduce the array of arrays to the Yup schema for this field
