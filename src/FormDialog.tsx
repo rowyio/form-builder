@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { useForm, UseFormProps, FieldValues } from 'react-hook-form';
+import { useForm, UseFormProps } from 'react-hook-form';
+import type { FieldValues, Control, UseFormReturn } from 'react-hook-form';
 import _isEmpty from 'lodash/isEmpty';
+import _isFunction from 'lodash/isFunction';
 
 import {
   useTheme,
@@ -38,6 +40,11 @@ export interface IFormDialogProps {
   formHeader?: React.ReactNode;
   formFooter?: React.ReactNode;
 
+  customBody?: (props: {
+    control: Control<FieldValues>;
+    useFormMethods: UseFormReturn<FieldValues>;
+    setOmittedFields: ReturnType<typeof useFormSettings>['setOmittedFields'];
+  }) => React.ReactNode;
   customActions?: React.ReactNode;
   SubmitButtonProps?: Partial<ButtonProps>;
   CancelButtonProps?: Partial<ButtonProps>;
@@ -65,6 +72,7 @@ export default function FormDialog({
   formHeader,
   formFooter,
 
+  customBody,
   customActions,
   SubmitButtonProps,
   CancelButtonProps,
@@ -160,17 +168,21 @@ export default function FormDialog({
             </IconButton>
           </Stack>
 
-          <ScrollableDialogContent>
-            {formHeader}
-            <FormFields
-              fields={fields}
-              control={control}
-              customComponents={customComponents}
-              useFormMethods={methods}
-              setOmittedFields={setOmittedFields}
-            />
-            {formFooter}
-          </ScrollableDialogContent>
+          {_isFunction(customBody) ? (
+            customBody({ control, useFormMethods: methods, setOmittedFields })
+          ) : (
+            <ScrollableDialogContent>
+              {formHeader}
+              <FormFields
+                fields={fields}
+                control={control}
+                customComponents={customComponents}
+                useFormMethods={methods}
+                setOmittedFields={setOmittedFields}
+              />
+              {formFooter}
+            </ScrollableDialogContent>
+          )}
 
           <DialogActions style={{ flexWrap: 'wrap' }}>
             {customActions ?? (
