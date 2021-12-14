@@ -168,11 +168,15 @@ export default function FormDialog({
             </IconButton>
           </Stack>
 
-          {_isFunction(customBody) ? (
-            customBody({ control, useFormMethods: methods, setOmittedFields })
-          ) : (
-            <ScrollableDialogContent>
-              {formHeader}
+          <ScrollableDialogContent>
+            {formHeader}
+            {_isFunction(customBody) ? (
+              customBody({
+                control,
+                useFormMethods: methods,
+                setOmittedFields,
+              })
+            ) : (
               <FormFields
                 fields={fields}
                 control={control}
@@ -180,9 +184,9 @@ export default function FormDialog({
                 useFormMethods={methods}
                 setOmittedFields={setOmittedFields}
               />
-              {formFooter}
-            </ScrollableDialogContent>
-          )}
+            )}
+            {formFooter}
+          </ScrollableDialogContent>
 
           <DialogActions style={{ flexWrap: 'wrap' }}>
             {customActions ?? (
