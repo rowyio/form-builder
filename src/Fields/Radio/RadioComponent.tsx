@@ -35,8 +35,9 @@ const useStyles = makeStyles((theme) =>
     },
 
     formControlLabel: {
-      padding: theme.spacing(1.25, 0),
+      padding: theme.spacing(14 / 8, 0),
       marginLeft: theme.spacing(1),
+      marginTop: '0 !important',
     },
 
     divider: { marginLeft: theme.spacing(3 + 2) },
