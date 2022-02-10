@@ -7,7 +7,6 @@ import _isFunction from 'lodash/isFunction';
 import {
   useTheme,
   useMediaQuery,
-  Portal,
   Dialog,
   DialogProps as MuiDialogProps,
   Stack,
@@ -19,6 +18,7 @@ import {
   ButtonProps,
   Slide,
 } from '@mui/material';
+import Portal from '@mui/material/Portal';
 import CloseIcon from '@mui/icons-material/Close';
 
 import useFormSettings from './useFormSettings';

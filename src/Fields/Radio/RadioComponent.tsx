@@ -100,7 +100,7 @@ export default function RadioComponent({
               <FormControlLabel
                 key={option.value}
                 value={option.value}
-                label={option.label}
+                label={option.label as any}
                 control={
                   <Radio
                     inputProps={
