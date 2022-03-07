@@ -13,7 +13,10 @@ import { Fields, CustomComponents } from './types';
 export interface IFormProps {
   fields: Fields;
   values?: FieldValues;
-  onSubmit: (values: FieldValues) => void;
+  onSubmit: (
+    values: FieldValues,
+    event?: React.BaseSyntheticEvent<object, any, any>
+  ) => void;
   customComponents?: CustomComponents;
   UseFormProps?: UseFormProps;
 

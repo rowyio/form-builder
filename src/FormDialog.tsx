@@ -31,7 +31,10 @@ import ScrollableDialogContent from './ScrollableDialogContent';
 export interface IFormDialogProps {
   fields: Fields;
   values?: FieldValues;
-  onSubmit: (values: FieldValues) => void;
+  onSubmit: (
+    values: FieldValues,
+    event?: React.BaseSyntheticEvent<object, any, any>
+  ) => void;
   customComponents?: CustomComponents;
   UseFormProps?: UseFormProps;
 
@@ -130,8 +133,8 @@ export default function FormDialog({
   return (
     <Portal>
       <form
-        onSubmit={handleSubmit((values) => {
-          onSubmit(values);
+        onSubmit={handleSubmit((values, event) => {
+          onSubmit(values, event);
           handleClose('submit');
         })}
       >
