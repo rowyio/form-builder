@@ -46,7 +46,7 @@ export default function ParagraphComponent({
       FormHelperTextProps={{ component: 'div' } as any}
       helperText={
         (errorMessage || assistiveText || maxCharacters) && (
-          <Grid container spacing={1} wrap="nowrap" alignItems="baseline">
+          <Grid container spacing={2} wrap="nowrap" alignItems="baseline">
             <Grid item xs>
               {errorMessage}
 
@@ -58,7 +58,7 @@ export default function ParagraphComponent({
             {maxCharacters && (
               <Grid item>
                 <FormHelperText
-                  style={{ margin: 0 }}
+                  style={{ margin: 0, fontVariantNumeric: 'lining-nums' }}
                   error={
                     (typeof value === 'string' ? value.length : 0) >
                     maxCharacters
