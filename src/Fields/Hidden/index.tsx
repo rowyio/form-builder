@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiEyeOff } from '@mdi/js';
+import EyeOff from 'mdi-material-ui/EyeOff';
 
 import Settings from './HiddenSettings';
 const Component = lazy(
@@ -14,11 +13,7 @@ export const HiddenConfig: IFieldConfig = {
   type: FieldType.hidden,
   name: 'Hidden',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiEyeOff} />
-    </SvgIcon>
-  ),
+  icon: <EyeOff />,
   dataType: 'string',
   defaultValue: '',
   component: Component,

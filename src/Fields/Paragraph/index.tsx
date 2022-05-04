@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiFormTextarea } from '@mdi/js';
+import FormTextarea from 'mdi-material-ui/FormTextarea';
 
 import Settings from './ParagraphSettings';
 const Component = lazy(
@@ -15,11 +14,7 @@ export const ParagraphConfig: IFieldConfig = {
   type: FieldType.paragraph,
   name: 'Paragraph',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiFormTextarea} />
-    </SvgIcon>
-  ),
+  icon: <FormTextarea />,
   dataType: 'string',
   defaultValue: '',
   component: Component,

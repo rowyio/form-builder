@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiFormatHeader1 } from '@mdi/js';
+import FormatHeader1 from 'mdi-material-ui/FormatHeader1';
 
 import Settings from './ContentHeaderSettings';
 const Component = lazy(
@@ -17,11 +16,7 @@ export const ContentHeaderConfig: IFieldConfig = {
   type: FieldType.contentHeader,
   name: 'Header',
   group: 'content',
-  icon: (
-    <SvgIcon>
-      <path d={mdiFormatHeader1} />
-    </SvgIcon>
-  ),
+  icon: <FormatHeader1 />,
   dataType: 'undefined',
   defaultValue: undefined,
   component: Component,

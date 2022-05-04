@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiImage } from '@mdi/js';
+import Image from 'mdi-material-ui/Image';
 
 import Settings from './ContentImageSettings';
 const Component = lazy(
@@ -17,11 +16,7 @@ export const ContentImageConfig: IFieldConfig = {
   type: FieldType.contentImage,
   name: 'Image',
   group: 'content',
-  icon: (
-    <SvgIcon>
-      <path d={mdiImage} />
-    </SvgIcon>
-  ),
+  icon: <Image />,
   dataType: 'undefined',
   defaultValue: undefined,
   component: Component as any,

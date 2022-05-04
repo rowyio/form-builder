@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiPalette } from '@mdi/js';
+import Palette from 'mdi-material-ui/Palette';
 
 import Settings from './ColorSettings';
 const Component = lazy(
@@ -14,11 +13,7 @@ export const ColorConfig: IFieldConfig = {
   type: FieldType.color,
   name: 'Color',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiPalette} />
-    </SvgIcon>
-  ),
+  icon: <Palette />,
   dataType: 'Record<string, any>',
   defaultValue: null,
   component: Component,

@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiFormTextbox } from '@mdi/js';
+import FormTextbox from 'mdi-material-ui/FormTextbox';
 
 import Settings from './ShortTextSettings';
 import validation from './ShortTextValidation';
@@ -16,11 +15,7 @@ export const ShortTextConfig: IFieldConfig = {
   type: FieldType.shortText,
   name: 'Short Text',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiFormTextbox} />
-    </SvgIcon>
-  ),
+  icon: <FormTextbox />,
   dataType: 'string',
   defaultValue: '',
   component: Component,

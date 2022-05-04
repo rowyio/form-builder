@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiCalendarClock } from '@mdi/js';
+import CalendarClock from 'mdi-material-ui/CalendarClock';
 
 const Component = lazy(
   () =>
@@ -14,11 +13,7 @@ export const DateTimeConfig: IFieldConfig = {
   type: FieldType.dateTime,
   name: 'Time & Date',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiCalendarClock} />
-    </SvgIcon>
-  ),
+  icon: <CalendarClock />,
   dataType: 'Date | null',
   defaultValue: null,
   component: Component as any,

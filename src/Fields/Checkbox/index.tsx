@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiCheckboxMarked } from '@mdi/js';
+import CheckboxMarked from 'mdi-material-ui/CheckboxMarked';
 
 const Component = lazy(
   () =>
@@ -14,11 +13,7 @@ export const CheckboxConfig: IFieldConfig = {
   type: FieldType.checkbox,
   name: 'Checkbox',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiCheckboxMarked} />
-    </SvgIcon>
-  ),
+  icon: <CheckboxMarked />,
   dataType: 'boolean',
   defaultValue: false,
   component: Component,

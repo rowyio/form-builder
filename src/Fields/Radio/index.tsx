@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiRadioboxMarked } from '@mdi/js';
+import RadioboxMarked from 'mdi-material-ui/RadioboxMarked';
 
 import Settings from './RadioSettings';
 const Component = lazy(
@@ -14,11 +13,7 @@ export const RadioConfig: IFieldConfig = {
   type: FieldType.radio,
   name: 'Radio',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiRadioboxMarked} />
-    </SvgIcon>
-  ),
+  icon: <RadioboxMarked />,
   dataType: 'string',
   defaultValue: '',
   component: Component as any,

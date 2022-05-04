@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiText } from '@mdi/js';
+import Text from 'mdi-material-ui/Text';
 
 import Settings from './ContentParagraphSettings';
 const Component = lazy(
@@ -17,11 +16,7 @@ export const ContentParagraphConfig: IFieldConfig = {
   type: FieldType.contentParagraph,
   name: 'Paragraph',
   group: 'content',
-  icon: (
-    <SvgIcon>
-      <path d={mdiText} />
-    </SvgIcon>
-  ),
+  icon: <Text />,
   dataType: 'undefined',
   defaultValue: undefined,
   component: Component,

@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiGestureSwipeHorizontal } from '@mdi/js';
+import GestureSwipeHorizontal from 'mdi-material-ui/GestureSwipeHorizontal';
 
 import Settings from './SliderSettings';
 const Component = lazy(
@@ -14,11 +13,7 @@ export const SliderConfig: IFieldConfig = {
   type: FieldType.slider,
   name: 'Slider',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiGestureSwipeHorizontal} />
-    </SvgIcon>
-  ),
+  icon: <GestureSwipeHorizontal />,
   dataType: 'number',
   defaultValue: 0,
   component: Component,

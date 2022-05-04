@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiCalendar } from '@mdi/js';
+import Calendar from 'mdi-material-ui/Calendar';
 
 const Component = lazy(
   () => import('./DateComponent') /* webpackChunkName: FormBuilder-Date */
@@ -13,11 +12,7 @@ export const DateConfig: IFieldConfig = {
   type: FieldType.date,
   name: 'Date',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiCalendar} />
-    </SvgIcon>
-  ),
+  icon: <Calendar />,
   dataType: 'Date | null',
   defaultValue: null,
   component: Component as any,

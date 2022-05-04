@@ -3,8 +3,7 @@ import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 import * as yup from 'yup';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiOrderBoolAscendingVariant } from '@mdi/js';
+import OrderBoolAscendingVariant from 'mdi-material-ui/OrderBoolAscendingVariant';
 
 import Settings from './MultiSelectSettings';
 const Component = lazy(
@@ -18,11 +17,7 @@ export const MultiSelectConfig: IFieldConfig = {
   type: FieldType.multiSelect,
   name: 'Multi Select',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiOrderBoolAscendingVariant} />
-    </SvgIcon>
-  ),
+  icon: <OrderBoolAscendingVariant />,
   dataType: 'string[]',
   defaultValue: [],
   component: Component as any,

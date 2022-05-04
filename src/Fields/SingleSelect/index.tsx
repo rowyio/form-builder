@@ -2,8 +2,7 @@ import React, { lazy } from 'react';
 import { IFieldConfig } from '../../types';
 import { FieldType } from '../../constants/fields';
 
-import SvgIcon from '@mui/material/SvgIcon';
-import { mdiOrderBoolDescending } from '@mdi/js';
+import OrderBoolDescending from 'mdi-material-ui/OrderBoolDescending';
 
 import Settings from './SingleSelectSettings';
 const Component = lazy(
@@ -17,11 +16,7 @@ export const SingleSelectConfig: IFieldConfig = {
   type: FieldType.singleSelect,
   name: 'Single Select',
   group: 'input',
-  icon: (
-    <SvgIcon>
-      <path d={mdiOrderBoolDescending} />
-    </SvgIcon>
-  ),
+  icon: <OrderBoolDescending />,
   dataType: 'string',
   defaultValue: '',
   component: Component as any,
