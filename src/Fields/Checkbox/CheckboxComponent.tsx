@@ -1,27 +1,10 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import { FormControlLabel, Checkbox, CheckboxProps } from '@mui/material';
 
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      alignItems: 'flex-start',
-      marginRight: 0,
-    },
-    disabled: {},
-
-    checkbox: {
-      '$root:not($disabled):hover &': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  })
-);
 
 export interface ICheckboxComponentProps
   extends IFieldComponentProps,
@@ -46,8 +29,6 @@ export default function CheckboxComponent({
 
   ...props
 }: ICheckboxComponentProps) {
-  const classes = useStyles();
-
   return (
     <FormControlLabel
       control={
@@ -64,7 +45,18 @@ export default function CheckboxComponent({
               'data-label': label ?? '',
             } as any
           }
-          className={classes.checkbox}
+          sx={[
+            {
+              '.MuiFormControlLabel-root:not(.Mui-disabled):hover &': {
+                bgcolor: 'action.hover',
+              },
+            },
+            ...(Array.isArray(props.sx)
+              ? props.sx
+              : props.sx
+              ? [props.sx]
+              : []),
+          ]}
           inputRef={ref}
         />
       }
@@ -80,7 +72,7 @@ export default function CheckboxComponent({
           </FieldAssistiveText>
         </>
       }
-      classes={{ root: classes.root, disabled: classes.disabled }}
+      sx={{ mr: 0, display: 'flex' }}
     />
   );
 }

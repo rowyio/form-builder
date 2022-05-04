@@ -1,23 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 import DOMPurify from 'dompurify';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import { Typography, TypographyProps } from '@mui/material';
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      marginBottom: theme.spacing(-1.5),
-
-      whiteSpace: 'pre-line',
-      cursor: 'default',
-    },
-
-    firstField: { marginTop: 0 },
-  })
-);
+const rootStyles = { mb: -1.5, whiteSpace: 'pre-line', cursor: 'default' };
 
 export interface IContentParagraphComponentProps
   extends IFieldComponentProps,
@@ -39,14 +26,16 @@ export default function ContentParagraphComponent({
   useFormMethods,
   ...props
 }: IContentParagraphComponentProps) {
-  const classes = useStyles();
-
   if (children)
     return (
       <Typography
-        className={clsx(classes.root, className)}
+        className={className}
         {...({ component: 'div' } as any)}
         {...props}
+        sx={[
+          rootStyles,
+          ...(Array.isArray(props.sx) ? props.sx : props.sx ? [props.sx] : []),
+        ]}
       >
         {children}
       </Typography>
@@ -58,18 +47,26 @@ export default function ContentParagraphComponent({
   if (renderedLabel)
     return (
       <Typography
-        className={clsx(classes.root, className)}
+        className={className}
         {...({ component: 'div' } as any)}
         {...props}
+        sx={[
+          rootStyles,
+          ...(Array.isArray(props.sx) ? props.sx : props.sx ? [props.sx] : []),
+        ]}
         dangerouslySetInnerHTML={{ __html: renderedLabel }}
       />
     );
 
   return (
     <Typography
-      className={clsx(classes.root, className)}
+      className={className}
       {...({ component: 'div' } as any)}
       {...props}
+      sx={[
+        rootStyles,
+        ...(Array.isArray(props.sx) ? props.sx : props.sx ? [props.sx] : []),
+      ]}
     >
       {label}
     </Typography>

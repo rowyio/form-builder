@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import useScrollInfo from 'react-element-scroll-hook';
 
 import {
@@ -8,7 +8,7 @@ import {
   DialogContentProps,
 } from '@mui/material';
 
-const MemoizedDialogContent = React.memo(function MemoizedDialogContent({
+const MemoizedDialogContent = memo(function MemoizedDialogContent_({
   setRef,
   ...props
 }: DialogContentProps & { setRef: any }) {
@@ -26,28 +26,42 @@ export interface IScrollableDialogContentProps extends DialogContentProps {
 export default function ScrollableDialogContent({
   disableTopDivider = false,
   disableBottomDivider = false,
-  dividerSx,
-  topDividerSx,
-  bottomDividerSx,
+  dividerSx = [],
+  topDividerSx = [],
+  bottomDividerSx = [],
   ...props
 }: IScrollableDialogContentProps) {
   const [scrollInfo, setRef] = useScrollInfo();
 
   return (
     <>
-      {!disableTopDivider &&
-        scrollInfo.y.percentage !== null &&
-        scrollInfo.y.percentage > 0 && (
-          <Divider sx={{ ...dividerSx, ...topDividerSx }} />
-        )}
+      {!disableTopDivider && scrollInfo.y.percentage !== null && (
+        <Divider
+          style={{
+            visibility: scrollInfo.y.percentage > 0 ? 'visible' : 'hidden',
+          }}
+          sx={[
+            ...(Array.isArray(dividerSx) ? dividerSx : [dividerSx]),
+            ...(Array.isArray(topDividerSx) ? topDividerSx : [topDividerSx]),
+          ]}
+        />
+      )}
 
       <MemoizedDialogContent {...props} setRef={setRef} />
 
-      {!disableBottomDivider &&
-        scrollInfo.y.percentage !== null &&
-        scrollInfo.y.percentage < 1 && (
-          <Divider sx={{ ...dividerSx, ...bottomDividerSx }} />
-        )}
+      {!disableBottomDivider && scrollInfo.y.percentage !== null && (
+        <Divider
+          style={{
+            visibility: scrollInfo.y.percentage < 1 ? 'visible' : 'hidden',
+          }}
+          sx={[
+            ...(Array.isArray(dividerSx) ? dividerSx : [dividerSx]),
+            ...(Array.isArray(bottomDividerSx)
+              ? bottomDividerSx
+              : [bottomDividerSx]),
+          ]}
+        />
+      )}
     </>
   );
 }

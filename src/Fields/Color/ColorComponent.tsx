@@ -3,36 +3,17 @@ import { IFieldComponentProps } from '../../types';
 import { ColorPicker, toColor } from 'react-color-palette';
 import 'react-color-palette/lib/css/styles.css';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   TextField,
   TextFieldProps,
   InputAdornment,
+  Box,
   IconButton,
   Popover,
 } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    colorIndicator: {
-      width: 20,
-      height: 20,
-
-      boxShadow: `0 0 0 1px ${theme.palette.action.disabled} inset`,
-      borderRadius: '50%',
-    },
-
-    picker: {
-      boxShadow: 'none !important',
-      borderRadius: '0 !important',
-
-      '& > div': { borderRadius: '0 !important' },
-    },
-  })
-);
 
 export interface IColorComponentProps extends IFieldComponentProps {
   enableAlpha?: boolean;
@@ -52,8 +33,6 @@ export default function ColorComponent({
   enableAlpha,
   TextFieldProps,
 }: IColorComponentProps) {
-  const classes = useStyles();
-
   const anchorEl = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -65,9 +44,17 @@ export default function ColorComponent({
         InputProps={{
           startAdornment: value?.hex && (
             <InputAdornment position="start">
-              <div
-                className={classes.colorIndicator}
-                style={{ backgroundColor: value.hex }}
+              <Box
+                sx={{
+                  width: 20,
+                  height: 20,
+
+                  boxShadow: (theme) =>
+                    `0 0 0 1px ${theme.palette.action.disabled} inset`,
+                  borderRadius: '50%',
+
+                  backgroundColor: value.hex,
+                }}
               />
             </InputAdornment>
           ),

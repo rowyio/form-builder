@@ -139,13 +139,13 @@ const fields = [
   {
     type: FieldType.singleSelect,
     name: 'singleSelect',
-    label: 'Who is the CEO of Antler?',
+    label: 'Who is the CEO?',
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
   },
   {
     type: FieldType.multiSelect,
     name: 'multiSelect',
-    label: 'Who are Antler Engineering team members?',
+    label: 'Who are team members?',
     options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
   },
   {
@@ -189,7 +189,7 @@ const fields = [
   {
     type: FieldType.color,
     name: 'color',
-    label: 'Preferred color for your Antler shirt?',
+    label: 'Preferred color for your shirt?',
   },
   {
     type: FieldType.score,

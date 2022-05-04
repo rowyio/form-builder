@@ -1,11 +1,9 @@
 import React from 'react';
-import clsx from 'clsx';
 import arrayMove from 'array-move';
 import { IFieldComponentProps } from '../../types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import { FormControl, Button, ButtonProps } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
@@ -14,18 +12,6 @@ import ListItem from './ListItem';
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: { display: 'flex' },
-
-    addButton: { margin: theme.spacing(0, 0, 0, -0.5) },
-    addIcon: {
-      marginRight: theme.spacing(2),
-      '&:first-child': { fontSize: '1.5rem' },
-    },
-  })
-);
 
 export interface IListComponentProps extends IFieldComponentProps {
   itemLabel?: string;
@@ -50,8 +36,6 @@ export default function ListComponent({
   placeholder,
   addButtonProps = {},
 }: IListComponentProps) {
-  const classes = useStyles();
-
   const value: string[] = Array.isArray(valueProp) ? valueProp : [];
   const add = () => onChange([...value, '']);
 
@@ -79,7 +63,7 @@ export default function ListComponent({
   return (
     <FormControl
       component="fieldset"
-      className={classes.root}
+      style={{ display: 'flex' }}
       data-type="text-list"
       data-label={label ?? ''}
       error={!!errorMessage}
@@ -114,11 +98,22 @@ export default function ListComponent({
 
       <div>
         <Button
-          startIcon={<AddCircleIcon className={classes.addIcon} />}
+          startIcon={
+            <AddCircleIcon
+              sx={{ mr: 2, '&:first-child': { fontSize: '1.5rem' } }}
+            />
+          }
           color="secondary"
           {...addButtonProps}
           onClick={add}
-          className={clsx(classes.addButton, addButtonProps.className)}
+          sx={[
+            { m: 0, ml: -0.5 },
+            ...(Array.isArray(addButtonProps.sx)
+              ? addButtonProps.sx
+              : addButtonProps.sx
+              ? [addButtonProps.sx]
+              : []),
+          ]}
           disabled={disabled}
         >
           Add {itemLabel}

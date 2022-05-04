@@ -1,29 +1,9 @@
 import React, { memo } from 'react';
-import clsx from 'clsx';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import { Grid, TextField, IconButton } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {},
-
-    dragHandle: {
-      display: 'block',
-      margin: theme.spacing((56 - 24) / 2 / 8, 0),
-      marginRight: theme.spacing(3),
-    },
-    disabled: { color: theme.palette.text.disabled },
-
-    removeButton: {
-      marginLeft: theme.spacing(1.5),
-      marginRight: theme.spacing(-1.5),
-    },
-  })
-);
 
 export interface IListItemProps {
   name: string;
@@ -53,8 +33,6 @@ export const MemoizedListItem = memo(
     placeholder,
     disabled,
   }: IListItemProps) {
-    const classes = useStyles();
-
     const [, drag, dragPreview] = useDrag(() => ({
       type: name,
       item: { index },
@@ -75,20 +53,24 @@ export const MemoizedListItem = memo(
     );
 
     return (
-      <div
-        ref={drop}
-        style={isOver ? { opacity: 0.1 } : undefined}
-        className={classes.root}
-      >
+      <div ref={drop} style={isOver ? { opacity: 0.1 } : undefined}>
         <Grid container alignItems="center" wrap="nowrap" ref={dragPreview}>
           <Grid
             item
             ref={disabled ? null : drag}
             style={disabled ? {} : { cursor: 'grab' }}
+            sx={{
+              '.drag-handle': {
+                display: 'block',
+                my: (56 - 24) / 2 / 8,
+                mr: 3,
+                color: disabled ? 'text.disabled' : undefined,
+              },
+            }}
           >
             <DragHandleIcon
               aria-label="Drag to reorder this field"
-              className={clsx(classes.dragHandle, disabled && classes.disabled)}
+              className="drag-handle"
             />
           </Grid>
 
@@ -108,7 +90,7 @@ export const MemoizedListItem = memo(
           <Grid item>
             <IconButton
               aria-label={`Remove item ${index}`}
-              className={classes.removeButton}
+              sx={{ ml: 1.5, mr: -1.5 }}
               onClick={remove}
               disabled={disabled}
               color="error"

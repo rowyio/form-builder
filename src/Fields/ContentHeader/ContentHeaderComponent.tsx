@@ -1,26 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@mui/styles';
-import { Typography, TypographyProps, Divider } from '@mui/material';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(-1),
-      width: '100%',
-
-      whiteSpace: 'pre-line',
-      cursor: 'default',
-    },
-
-    firstField: { marginTop: 0 },
-
-    divider: { marginTop: theme.spacing(0.5) },
-  })
-);
+import { Box, Typography, TypographyProps, Divider } from '@mui/material';
 
 export interface IContentHeaderComponentProps
   extends IFieldComponentProps,
@@ -42,15 +23,20 @@ export default function ContentHeaderComponent({
   useFormMethods,
   ...props
 }: IContentHeaderComponentProps) {
-  const classes = useStyles();
-
   return (
-    <div
-      className={clsx(
-        classes.root,
-        index === 0 && classes.firstField,
-        className
-      )}
+    <Box
+      className={className}
+      sx={[
+        {
+          mt: 3,
+          mb: -1,
+          width: '100%',
+
+          whiteSpace: 'pre-line',
+          cursor: 'default',
+        },
+        index === 0 && { mt: 0 },
+      ]}
     >
       <Typography
         variant="subtitle1"
@@ -60,7 +46,7 @@ export default function ContentHeaderComponent({
         {children ?? label}
       </Typography>
 
-      <Divider className={classes.divider} />
-    </div>
+      <Divider sx={{ mt: 0.5 }} />
+    </Box>
   );
 }

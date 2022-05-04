@@ -1,23 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import { Typography, TypographyProps } from '@mui/material';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(-1.5),
-
-      whiteSpace: 'pre-line',
-      cursor: 'default',
-    },
-
-    firstField: { marginTop: 0 },
-  })
-);
 
 export interface IContentSubHeaderComponentProps
   extends IFieldComponentProps,
@@ -39,18 +23,17 @@ export default function ContentSubHeaderComponent({
   useFormMethods,
   ...props
 }: IContentSubHeaderComponentProps) {
-  const classes = useStyles();
-
   return (
     <Typography
       variant="subtitle2"
-      className={clsx(
-        classes.root,
-        index === 0 && classes.firstField,
-        className
-      )}
+      className={className}
       {...({ component: 'h4' } as any)}
       {...props}
+      sx={[
+        { mt: 2, mb: -1.5, whiteSpace: 'pre-line', cursor: 'default' },
+        index === 0 && { mt: 0 },
+        ...(Array.isArray(props.sx) ? props.sx : props.sx ? [props.sx] : []),
+      ]}
     >
       {children ?? label}
     </Typography>

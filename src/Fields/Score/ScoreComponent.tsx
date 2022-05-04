@@ -1,80 +1,13 @@
 import React from 'react';
-import clsx from 'clsx';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@mui/styles';
-import { FormControl, Typography } from '@mui/material';
+import { FormControl, Box, Typography } from '@mui/material';
 import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
 import ToggleButton from '@mui/lab/ToggleButton';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    label: {
-      ...theme.typography.body1,
-      marginBottom: 0,
-      textTransform: 'none',
-    },
-    labelExtraMargin: { marginBottom: theme.spacing(2) },
-
-    grid: {
-      display: 'grid',
-      gridTemplateRows: 'repeat(3, auto)',
-      rowGap: theme.spacing(2),
-      gridTemplateColumns: 'repeat(2, min-content)',
-
-      [theme.breakpoints.down('sm')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
-    },
-
-    minLabel: {
-      gridRow: 1,
-      gridColumn: 1,
-    },
-    maxLabel: {
-      gridRow: 1,
-      gridColumn: 2,
-
-      [theme.breakpoints.down('xs')]: { gridRow: 3 },
-    },
-
-    toggleButtonGroup: {
-      gridRow: 2,
-      gridColumn: '1 / -1',
-
-      display: 'flex',
-      justifyContent: 'center',
-
-      margin: theme.spacing(-0.5),
-
-      [theme.breakpoints.down('sm')]: {
-        flexWrap: 'wrap',
-        margin: theme.spacing(-1),
-      },
-    },
-
-    toggleButton: {
-      color: theme.palette.text.secondary,
-
-      width: 32,
-      height: 32,
-      margin: theme.spacing(0.5),
-      [theme.breakpoints.down('sm')]: { margin: theme.spacing(1) },
-
-      '&:not(:last-child), &:not(:first-child)': {
-        borderRadius: theme.shape.borderRadius,
-      },
-      '&:not(:first-child)': {
-        borderLeftColor: theme.palette.divider,
-        marginLeft: theme.spacing(0.5),
-
-        [theme.breakpoints.down('sm')]: { marginLeft: theme.spacing(1) },
-      },
-    },
-  })
-);
 
 export interface IScoreComponentProps extends IFieldComponentProps {
   min?: number;
@@ -100,8 +33,6 @@ export default function ScoreComponent({
   maxLabel,
   step = 1,
 }: IScoreComponentProps) {
-  const classes = useStyles();
-
   const buttons: React.ReactNodeArray = [];
   for (let i = min; i <= max; i += step)
     buttons.push(
@@ -116,6 +47,19 @@ export default function ScoreComponent({
             ? ` (${maxLabel})`
             : ''
         }`}
+        sx={{
+          color: 'text.secondary',
+
+          width: 32,
+          height: 32,
+          margin: { xs: 1, md: 0.5 },
+
+          '&:not(:last-child), &:not(:first-child)': { borderRadius: 1 },
+          '&:not(:first-child)': {
+            borderLeftColor: 'palette.divider',
+            marginLeft: { xs: 1, md: 0.5 },
+          },
+        }}
       >
         {i}
       </ToggleButton>
@@ -132,20 +76,34 @@ export default function ScoreComponent({
         error={!!errorMessage}
         disabled={!!disabled}
         required={!!required}
-        className={clsx(
-          classes.label,
-          (minLabel || maxLabel) && classes.labelExtraMargin
-        )}
+        sx={[
+          {
+            typography: 'body1',
+            mb: 0,
+            textTransform: 'none',
+          },
+          minLabel || maxLabel ? { mb: 2 } : {},
+        ]}
       >
         {label}
       </FieldLabel>
 
-      <div className={classes.grid}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateRows: 'repeat(3, auto)',
+          rowGap: 2,
+          gridTemplateColumns: {
+            xs: 'repeat(2, 1fr)',
+            md: 'repeat(2, min-content)',
+          },
+        }}
+      >
         {minLabel && (
           <Typography
             variant="overline"
             color="textSecondary"
-            className={classes.minLabel}
+            style={{ gridRow: 1, gridColumn: 1 }}
           >
             {minLabel}
           </Typography>
@@ -158,9 +116,15 @@ export default function ScoreComponent({
           }}
           exclusive
           aria-label="Score"
-          classes={{
-            root: classes.toggleButtonGroup,
-            grouped: classes.toggleButton,
+          sx={{
+            gridRow: 2,
+            gridColumn: '1 / -1',
+
+            display: 'flex',
+            justifyContent: 'center',
+
+            m: { xs: -1, md: -0.5 },
+            flexWrap: { xs: 'wrap', md: 'nowrap' },
           }}
         >
           {buttons}
@@ -171,12 +135,12 @@ export default function ScoreComponent({
             variant="overline"
             color="textSecondary"
             align="right"
-            className={classes.maxLabel}
+            sx={{ gridRow: 1, gridColumn: { xs: 3, md: 2 } }}
           >
             {maxLabel}
           </Typography>
         )}
-      </div>
+      </Box>
 
       <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
       <FieldAssistiveText disabled={!!disabled}>

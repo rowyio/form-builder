@@ -28,7 +28,6 @@
     "@mui/icons-material": "^5.0.0",
     "@mui/lab": "^5.0.0-alpha.50",
     "@mui/material": "^5.0.0",
-    "@mui/styles": "^5.0.0",
     "@rowy/multiselect": "^0.2.3",
     "react": "^17.0.2"
   },
@@ -51,7 +50,6 @@
     "@mui/icons-material": "^5.4.1",
     "@mui/lab": "^5.0.0-alpha.68",
     "@mui/material": "^5.4.1",
-    "@mui/styles": "^5.4.1",
     "@rowy/multiselect": "^0.2.3",
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-docs": "^6.3.8",

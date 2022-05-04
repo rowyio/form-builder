@@ -1,7 +1,6 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   FormControl,
   FormControlLabel,
@@ -9,41 +8,12 @@ import {
   RadioGroupProps,
   Radio,
   Divider,
+  Box,
 } from '@mui/material';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';
 import FieldAssistiveText from '../../FieldAssistiveText';
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: { display: 'flex' },
-
-    formControl: {
-      marginLeft: 0,
-      marginRight: 0,
-    },
-    disabled: {},
-
-    radio: {
-      padding: theme.spacing(1.5),
-      margin: theme.spacing(0, -0.5, 0, -1.5),
-
-      '$formControl:not($disabled):hover &': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-
-    formControlLabel: {
-      padding: theme.spacing(14 / 8, 0),
-      marginLeft: theme.spacing(1),
-      marginTop: '0 !important',
-    },
-
-    divider: { marginLeft: theme.spacing(3 + 2) },
-    assistiveText: { margin: theme.spacing(1, 0, 0, 3 + 2) },
-  })
-);
 
 export interface IRadioComponentProps
   extends IFieldComponentProps,
@@ -68,14 +38,12 @@ export default function RadioComponent({
   options,
   ...props
 }: IRadioComponentProps) {
-  const classes = useStyles();
-
   return (
     <FormControl
       component="fieldset"
       error={!!errorMessage}
       disabled={props.disabled}
-      className={classes.root}
+      style={{ display: 'flex' }}
     >
       <FieldLabel
         {...({ component: 'legend' } as any)}
@@ -110,28 +78,40 @@ export default function RadioComponent({
                         'data-label-option': option.label ?? '',
                       } as any
                     }
-                    className={classes.radio}
+                    sx={{
+                      p: 1.5,
+                      my: 0,
+                      ml: -1.5,
+                      mr: -0.5,
+
+                      '.MuiFormControlLabel-root:not(.Mui-disabled):hover &': {
+                        bgcolor: 'action.hover',
+                      },
+                    }}
                     inputRef={ref}
                   />
                 }
-                classes={{
-                  root: classes.formControl,
-                  disabled: classes.disabled,
-                  label: classes.formControlLabel,
+                sx={{
+                  mx: 0,
+                  '& .MuiFormControlLabel-label': {
+                    py: 14 / 8,
+                    ml: 1,
+                    marginTop: '0 !important',
+                  },
                 }}
               />
-              <Divider className={classes.divider} />
+              <Divider sx={{ ml: 3 + 2 }} />
             </React.Fragment>
           );
         })}
       </RadioGroup>
 
-      <div className={classes.assistiveText}>
+      <Box sx={{ mt: 1, mr: 0, mb: 0, ml: 3 + 2 }}>
         <FieldErrorMessage>{errorMessage}</FieldErrorMessage>
         <FieldAssistiveText disabled={!!props.disabled}>
           {assistiveText}
         </FieldAssistiveText>
-      </div>
+      </Box>
     </FormControl>
   );
 }
