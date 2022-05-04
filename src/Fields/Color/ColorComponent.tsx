@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { IFieldComponentProps } from '../../types';
-import { ChromePicker } from 'react-color';
+import { ColorPicker, toColor } from 'react-color-palette';
+import 'react-color-palette/lib/css/styles.css';
 
 import { makeStyles, createStyles } from '@mui/styles';
 import {
@@ -117,11 +118,12 @@ export default function ColorComponent({
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
-          <ChromePicker
-            color={value?.rgb}
-            onChangeComplete={onChange}
-            disableAlpha={!enableAlpha}
-            className={classes.picker}
+          <ColorPicker
+            width={240}
+            height={180}
+            color={value?.hex ? value : toColor('hex', '#fff')}
+            onChange={onChange}
+            alpha={enableAlpha}
           />
         </Popover>
       )}
