@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm, UseFormProps } from 'react-hook-form';
 import type { FieldValues, Control, UseFormReturn } from 'react-hook-form';
-import _isEmpty from 'lodash/isEmpty';
-import _isFunction from 'lodash/isFunction';
+import _isEmpty from 'lodash-es/isEmpty';
+import _isFunction from 'lodash-es/isFunction';
 
 import {
   useTheme,

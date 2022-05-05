@@ -5,7 +5,7 @@ import {
   FieldValues,
   FormProvider,
 } from 'react-hook-form';
-import _isEmpty from 'lodash/isEmpty';
+import _isEmpty from 'lodash-es/isEmpty';
 
 import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';

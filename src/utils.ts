@@ -1,10 +1,10 @@
 import * as yup from 'yup';
 import { ObjectShape } from 'yup/lib/object';
-import _pickBy from 'lodash/pickBy';
-import _isEqual from 'lodash/isEqual';
-import _set from 'lodash/set';
-import _values from 'lodash/values';
-import _mapValues from 'lodash/mapValues';
+import _pickBy from 'lodash-es/pickBy';
+import _isEqual from 'lodash-es/isEqual';
+import _set from 'lodash-es/set';
+import _values from 'lodash-es/values';
+import _mapValues from 'lodash-es/mapValues';
 import { getFieldProp } from './fields';
 
 import { FieldValues } from 'react-hook-form';

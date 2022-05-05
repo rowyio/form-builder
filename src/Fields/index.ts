@@ -1,5 +1,5 @@
-import _find from 'lodash/find';
-import _get from 'lodash/get';
+import _find from 'lodash-es/find';
+import _get from 'lodash-es/get';
 import { IFieldConfig } from '../types';
 
 import ShortText from './ShortText';

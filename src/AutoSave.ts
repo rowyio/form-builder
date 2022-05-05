@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { Control, useWatch, useFormState } from 'react-hook-form';
 import { useDebounce } from 'use-debounce';
-import _isEqual from 'lodash/isEqual';
-import _omitBy from 'lodash/omitBy';
-import _isUndefined from 'lodash/isUndefined';
+import _isEqual from 'lodash-es/isEqual';
+import _omitBy from 'lodash-es/omitBy';
+import _isUndefined from 'lodash-es/isUndefined';
 import { diffChanges } from './utils';
 
 import { IFormProps } from './Form';
