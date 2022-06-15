@@ -140,6 +140,7 @@ export default function FormDialog({
       >
         <Dialog
           open={open}
+          data-open={open}
           onClose={confirmClose}
           fullWidth
           fullScreen={isMobile}
