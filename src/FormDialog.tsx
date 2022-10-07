@@ -25,7 +25,6 @@ import useFormSettings from './useFormSettings';
 import FormFields from './FormFields';
 import { Fields, CustomComponents } from './types';
 import SubmitError, { ISubmitErrorProps } from './SubmitError';
-import { SlideTransitionMui } from './SlideTransition';
 import ScrollableDialogContent from './ScrollableDialogContent';
 
 export interface IFormDialogProps {
@@ -144,8 +143,6 @@ export default function FormDialog({
           onClose={confirmClose}
           fullWidth
           fullScreen={isMobile}
-          TransitionComponent={isMobile ? Slide : SlideTransitionMui}
-          TransitionProps={isMobile ? ({ direction: 'up' } as any) : undefined}
           // Must disablePortal so the dialog can be wrapped in FormikForm
           disablePortal
           aria-labelledby="form-dialog-title"
@@ -223,7 +220,6 @@ export default function FormDialog({
           open={open && closeConfirmation}
           onClose={() => {}}
           disableEscapeKeyDown
-          TransitionComponent={SlideTransitionMui}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
