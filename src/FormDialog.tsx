@@ -224,12 +224,11 @@ export default function FormDialog({
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {CloseConfirmProps.title || 'Close form?'}
+            {CloseConfirmProps.title}
           </DialogTitle>
 
           <DialogContent id="alert-dialog-description">
-            {CloseConfirmProps.body ||
-              'You will lose all the data you entered in this form.'}
+            {CloseConfirmProps.body || 'Discard changes?'}
           </DialogContent>
 
           <DialogActions>
@@ -248,7 +247,7 @@ export default function FormDialog({
               autoFocus
               {...(CloseConfirmProps.confirmButtonProps ?? {})}
               children={
-                CloseConfirmProps.confirmButtonProps?.children || 'Close'
+                CloseConfirmProps.confirmButtonProps?.children || 'Discard'
               }
             />
           </DialogActions>
