@@ -25,9 +25,9 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "@mui/icons-material": "^5.0.0",
-    "@mui/lab": "^5.0.0-alpha.50",
-    "@mui/material": "^5.0.0",
+    "@mui/icons-material": "^5.4.1",
+    "@mui/material": "^5.4.1",
+    "@mui/x-date-pickers": "^5.0.9",
     "@rowy/multiselect": "^0.2.3",
     "react": "^17.0.2"
   },
@@ -48,9 +48,9 @@
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.4.1",
-    "@mui/lab": "^5.0.0-alpha.68",
     "@mui/material": "^5.4.1",
-    "@rowy/multiselect": "^0.2.3",
+    "@mui/x-date-pickers": "^5.0.9",
+    "@rowy/multiselect": "^0.4.1",
     "@storybook/addon-actions": "^6.3.8",
     "@storybook/addon-docs": "^6.3.8",
     "@storybook/addon-info": "^5.3.21",

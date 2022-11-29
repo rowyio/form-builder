@@ -1,15 +1,22 @@
 import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
-import { LocalizationProvider, DatePicker, DatePickerProps } from '@mui/lab';
+import {
+  LocalizationProvider,
+  DatePicker,
+  DatePickerProps,
+} from '@mui/x-date-pickers';
 import { TextField, TextFieldProps } from '@mui/material';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
 export interface IDateComponentProps
   extends IFieldComponentProps,
-    Omit<DatePickerProps, 'label' | 'name' | 'onChange' | 'value' | 'ref'> {
+    Omit<
+      DatePickerProps<Date, Date>,
+      'label' | 'name' | 'onChange' | 'value' | 'ref'
+    > {
   TextFieldProps: TextFieldProps;
 }
 

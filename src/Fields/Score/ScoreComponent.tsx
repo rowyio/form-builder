@@ -2,8 +2,7 @@ import React from 'react';
 import { IFieldComponentProps } from '../../types';
 
 import { FormControl, Box, Typography } from '@mui/material';
-import ToggleButtonGroup from '@mui/lab/ToggleButtonGroup';
-import ToggleButton from '@mui/lab/ToggleButton';
+import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 
 import FieldLabel from '../../FieldLabel';
 import FieldErrorMessage from '../../FieldErrorMessage';

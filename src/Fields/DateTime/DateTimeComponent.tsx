@@ -5,16 +5,19 @@ import {
   LocalizationProvider,
   DateTimePicker,
   DateTimePickerProps,
-} from '@mui/lab';
+} from '@mui/x-date-pickers';
 import { TextField, TextFieldProps } from '@mui/material';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 import FieldAssistiveText from '../../FieldAssistiveText';
 
 export interface IDateTimeComponentProps
   extends IFieldComponentProps,
-    Omit<DateTimePickerProps, 'label' | 'name' | 'onChange' | 'value' | 'ref'> {
+    Omit<
+      DateTimePickerProps<Date, Date>,
+      'label' | 'name' | 'onChange' | 'value' | 'ref'
+    > {
   TextFieldProps: TextFieldProps;
 }
 
