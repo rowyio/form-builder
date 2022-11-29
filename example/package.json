@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel index.html",
     "start:cacheless": "rm -rf .parcel-cache && yarn start",
-    "build": "parcel build index.html"
+    "build": "parcel index.html --dist-dir ../docs"
   },
   "dependencies": {
     "@types/hoist-non-react-statics": ">= 3.3.1",
