@@ -18,9 +18,9 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "node generate-exports && git add src/index.ts && tsdx build --format esm --tsconfig ./tsconfig.json",
-    "prepublishOnly": "node generate-exports && git add src/index.ts && tsdx build",
+    "prepublishOnly": "node generate-exports && git add src/index.ts && tsdx build --format esm --tsconfig ./tsconfig.json",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "prepare": "tsdx build --format esm --tsconfig ./tsconfig.json",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
