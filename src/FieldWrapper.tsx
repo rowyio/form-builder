@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 import { Grid } from '@mui/material';
 import FieldSkeleton from './FieldSkeleton';
 
-import { getFieldProp } from './fields';
+import { getFieldProp } from './Fields';
 
 import { IFormFieldsProps } from './FormFields';
 import { Field, CustomComponent } from './types';

@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "node generate-exports && git add src/index.ts && tsdx build",
+    "build": "node generate-exports && git add src/index.ts && tsdx build --format esm --tsconfig ./tsconfig.json",
     "prepublishOnly": "node generate-exports && git add src/index.ts && tsdx build",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -42,7 +42,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "module": "dist/form-builder.esm.js",
+  "exports": {
+    "import": "./dist/index.js"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@emotion/react": "^11.4.0",
@@ -87,8 +89,8 @@
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
     "react-element-scroll-hook": "^1.1.0",
-    "react-hook-form": "^7.10.0",
-    "use-debounce": "^8.0.0",
+    "react-hook-form": "7.39.7",
+    "use-debounce": "^9.0.4",
     "yup": "^0.32.9"
   }
 }
