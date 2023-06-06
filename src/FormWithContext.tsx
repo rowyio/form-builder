@@ -71,10 +71,9 @@ export default function FormWithContext({
   } = methods;
 
   const hasErrors = errors
-    ? (Object.values(errors).reduce(
-        (a, c) => !!(a || !_isEmpty(c)),
-        false
-      ) as boolean)
+    ? Boolean(
+        Object.values(errors).reduce((a, c) => !!(a || !_isEmpty(c)), false)
+      )
     : false;
 
   return (
