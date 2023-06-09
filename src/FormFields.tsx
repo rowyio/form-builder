@@ -6,7 +6,7 @@ import { useTheme, Grid, Checkbox } from '@mui/material';
 
 import { Fields, CustomComponents } from './types';
 import FieldWrapper, { IFieldWrapperProps } from './FieldWrapper';
-import { getFieldProp } from './fields';
+import { getFieldProp } from './Fields';
 
 export interface IFormFieldsProps {
   fields: Fields;

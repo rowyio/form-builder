@@ -107,10 +107,9 @@ export default function FormDialog({
   } = methods;
 
   const hasErrors = errors
-    ? (Object.values(errors).reduce(
-        (a, c) => !!(a || !_isEmpty(c)),
-        false
-      ) as boolean)
+    ? Boolean(
+        Object.values(errors).reduce((a, c) => !!(a || !_isEmpty(c)), false)
+      )
     : false;
 
   const [open, setOpen] = useState(true);

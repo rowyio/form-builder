@@ -5,7 +5,7 @@ import _isEqual from 'lodash-es/isEqual';
 import _set from 'lodash-es/set';
 import _values from 'lodash-es/values';
 import _mapValues from 'lodash-es/mapValues';
-import { getFieldProp } from './fields';
+import { getFieldProp } from './Fields';
 
 import { FieldValues } from 'react-hook-form';
 import { Fields, CustomComponents } from './types';
